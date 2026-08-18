@@ -93,7 +93,7 @@ deepreal/
 
 DeepReal is developed in the open. We are interested in collaboration around open hardware, embedded security, confidential computing, privacy-preserving AI, cryptography, and trustworthy sensing.
 
-Contact: adam@sourceovcourse.com
+To get involved, open an issue or see the [project page](https://sourceovcourse.com/deepreal).
 
 ## License
 
