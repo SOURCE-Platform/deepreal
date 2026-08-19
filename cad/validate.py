@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-Phase 1 + Phase 2 validation.
+Phase 1 + Phase 2 + Phase 2.5 + Phase 3 validation.
 
 Rebuilds the geometry in memory with perturbed parameters and checks that
 the resulting bounding boxes respond correctly, then reopens the saved
 deepreal.FCStd and verifies its structure and injected view state.
 
 Coordinate convention under test: -Y = FRONT/USER side (screen/pixels,
-seated user, sensor heads); +Y = REAR/MOUNT side (back of lid; future arm
-and magnetic mount).
+seated user, sensor heads); +Y = REAR/MOUNT side (back of lid; rear arm
+integrated into the housing as one extruded side profile, forming the
+laptop-lid pocket; future magnetic mount).
 
 Run headless from the repository root (after cad/build.py):
 
@@ -22,6 +23,7 @@ import this module.
 """
 
 import importlib
+import math
 import os
 import shutil
 import sys
@@ -39,6 +41,7 @@ if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
 import FreeCAD as App  # noqa: E402
+import Part  # noqa: E402
 
 import document  # noqa: E402
 import parameters  # noqa: E402
@@ -103,6 +106,29 @@ def cylinder_axis_along_x(obj):
     return False
 
 
+def slab_bb(shape_obj, z_low, z_high):
+    """Bounding box of an object's material between two Z heights."""
+    probe = Part.makeBox(400.0, 400.0, z_high - z_low,
+                         App.Vector(-200.0, -200.0, z_low))
+    return shape_obj.Shape.common(probe).BoundBox
+
+
+def planar_mount_faces(arm_obj, face_y):
+    """Planar arm faces normal to Y sitting exactly on the mount plane."""
+    return [f for f in arm_obj.Shape.Faces
+            if f.Surface.TypeId == "Part::GeomPlane"
+            and f.BoundBox.YLength < 1e-9
+            and abs(f.CenterOfMass.y - face_y) < 1e-6]
+
+
+def x_axis_cylindrical_faces(arm_obj):
+    """Cylindrical arm faces whose axis runs along X (the arc sweep)."""
+    x_axis = App.Vector(1, 0, 0)
+    return [f for f in arm_obj.Shape.Faces
+            if f.Surface.TypeId == "Part::GeomCylinder"
+            and abs(abs(f.Surface.Axis * x_axis) - 1.0) < 1e-9]
+
+
 def main():
     base = parameters.resolve(parameters.get_params())
 
@@ -112,12 +138,23 @@ def main():
           extents(o[HOUSING])[0], base["MAIN_BODY_WIDTH"])
     check("housing depth == MAIN_BODY_DEPTH",
           extents(o[HOUSING])[1], base["MAIN_BODY_DEPTH"])
-    check("housing height == MAIN_BODY_HEIGHT",
-          extents(o[HOUSING])[2], base["MAIN_BODY_HEIGHT"])
+    # The housing solid carries the integrated rear arm (Phase 3): verify
+    # the rectangular body with a thin slab above the arm's reach.
+    body_mid_z = (base["MAIN_BODY_DISPLAY_OFFSET_Z"]
+                  + base["MAIN_BODY_HEIGHT"] * 0.75)
+    body = slab_bb(o[HOUSING], body_mid_z - 0.25, body_mid_z + 0.25)
+    check("rectangular body width == MAIN_BODY_WIDTH",
+          body.XLength, base["MAIN_BODY_WIDTH"])
+    check("rectangular body depth == MAIN_BODY_DEPTH",
+          body.YLength, base["MAIN_BODY_DEPTH"])
+    check("housing top == bottom + MAIN_BODY_HEIGHT",
+          o[HOUSING].Shape.BoundBox.ZMax,
+          base["MAIN_BODY_DISPLAY_OFFSET_Z"] + base["MAIN_BODY_HEIGHT"])
     check("display thickness == DISPLAY_LID_THICKNESS",
           extents(o[DISPLAY])[1], base["DISPLAY_LID_THICKNESS"])
-    check("housing bottom flush with display top edge (Z=0)",
-          o[HOUSING].Shape.BoundBox.ZMin, base["MAIN_BODY_DISPLAY_OFFSET_Z"])
+    check("housing bottom derives from MAIN_BODY_LID_TOP_CLEARANCE",
+          base["MAIN_BODY_DISPLAY_OFFSET_Z"],
+          base["MAIN_BODY_LID_TOP_CLEARANCE"])
     check("display top edge at Z=0", o[DISPLAY].Shape.BoundBox.ZMax, 0.0)
 
     print("--- Phase 1 regression: MAIN_BODY_WIDTH regenerates ---")
@@ -129,8 +166,10 @@ def main():
 
     print("--- Phase 1 regression: MAIN_BODY_HEIGHT regenerates ---")
     _, o = build_with(MAIN_BODY_HEIGHT=base["MAIN_BODY_HEIGHT"] + 10.0)
-    check("housing height follows MAIN_BODY_HEIGHT",
-          extents(o[HOUSING])[2], base["MAIN_BODY_HEIGHT"] + 10.0)
+    check("housing top follows MAIN_BODY_HEIGHT",
+          o[HOUSING].Shape.BoundBox.ZMax,
+          base["MAIN_BODY_DISPLAY_OFFSET_Z"]
+          + base["MAIN_BODY_HEIGHT"] + 10.0)
 
     print("--- Phase 1 regression: MAIN_BODY_DEPTH regenerates ---")
     _, o = build_with(MAIN_BODY_DEPTH=base["MAIN_BODY_DEPTH"] + 3.0)
@@ -188,7 +227,9 @@ def main():
           axis_center_y(o[FACE]),
           front_face_y - base["SENSOR_HEAD_AXIS_Y_OFFSET_FROM_FRONT_FACE"])
     check("face head axis at housing vertical centre (Z)",
-          axis_center_z(o[FACE]), base["MAIN_BODY_HEIGHT"] / 2.0)
+          axis_center_z(o[FACE]),
+          base["MAIN_BODY_DISPLAY_OFFSET_Z"] + base["MAIN_BODY_HEIGHT"] / 2.0
+          + base["SENSOR_HEAD_AXIS_Z_OFFSET_FROM_BODY_CENTER"])
     check("face head protrudes toward the user past the front face",
           front_face_y - o[FACE].Shape.BoundBox.YMin,
           base["SENSOR_HEAD_AXIS_Y_OFFSET_FROM_FRONT_FACE"]
@@ -245,6 +286,13 @@ def main():
     print("--- Phase 2: orientation marks (flush debug strips) ---")
     mark_t = base["ORIENTATION_MARK_THICKNESS"]
     mark_w = base["ORIENTATION_MARK_WIDTH"]
+
+    def mark_extents_yz(rot_deg):
+        """(Y, Z) bounding extents of a mark pitched rot_deg about X."""
+        c = abs(math.cos(math.radians(rot_deg)))
+        s = abs(math.sin(math.radians(rot_deg)))
+        return mark_t * c + mark_w * s, mark_t * s + mark_w * c
+
     _, o = build_with()
     check("baseline face mark thin in Y (flush strip)",
           extents(o[FACE_MARK])[1], mark_t)
@@ -258,6 +306,16 @@ def main():
                o[FACE_MARK].Shape.BoundBox.YMax <= front_face_y + 1e-6)
     check_true("interaction mark sits on the user side of the housing front face",
                o[INTERACTION_MARK].Shape.BoundBox.YMax <= front_face_y + 1e-6)
+    # Nominal orientations per the geometry specification: face drum
+    # forward, interaction drum pitched down (provisional angle).
+    int_base_y, int_base_z = mark_extents_yz(
+        base["INTERACTION_HEAD_ROTATION_DEG"])
+    check("baseline interaction mark Y extent matches the nominal pitch",
+          extents(o[INTERACTION_MARK])[1], int_base_y)
+    check("baseline interaction mark Z extent matches the nominal pitch",
+          extents(o[INTERACTION_MARK])[2], int_base_z)
+    check_true("interaction drum is nominally pitched (not flush-Y)",
+               int_base_y > mark_t + 0.1)
 
     print("--- Phase 2: independent rotation about X ---")
     _, o = build_with(FACE_HEAD_ROTATION_DEG=90.0)
@@ -268,10 +326,10 @@ def main():
     check("face mark X extent unchanged (rotation about X)",
           extents(o[FACE_MARK])[0],
           base["FACE_HEAD_LENGTH"] * base["ORIENTATION_MARK_LENGTH_FRACTION"])
-    check("interaction mark unaffected by face rotation (Y)",
-          extents(o[INTERACTION_MARK])[1], mark_t)
-    check("interaction mark unaffected by face rotation (Z)",
-          extents(o[INTERACTION_MARK])[2], mark_w)
+    check("interaction mark keeps its baseline pitch (Y)",
+          extents(o[INTERACTION_MARK])[1], int_base_y)
+    check("interaction mark keeps its baseline pitch (Z)",
+          extents(o[INTERACTION_MARK])[2], int_base_z)
     check("face barrel envelope unchanged by its own rotation (Y)",
           extents(o[FACE])[1], base["FACE_HEAD_DIAMETER"])
     check("interaction barrel envelope unchanged by face rotation (Y)",
@@ -284,10 +342,12 @@ def main():
           extents(o[INTERACTION_MARK])[1], mark_w)
     check("rotated interaction mark Z extent collapses to thickness",
           extents(o[INTERACTION_MARK])[2], mark_t)
-    check("face mark unaffected by interaction rotation (Y)",
-          extents(o[FACE_MARK])[1], mark_t)
-    check("face mark unaffected by interaction rotation (Z)",
-          extents(o[FACE_MARK])[2], mark_w)
+    face_base_y, face_base_z = mark_extents_yz(
+        base["FACE_HEAD_ROTATION_DEG"])
+    check("face mark keeps its baseline pitch (Y)",
+          extents(o[FACE_MARK])[1], face_base_y)
+    check("face mark keeps its baseline pitch (Z)",
+          extents(o[FACE_MARK])[2], face_base_z)
 
     print("--- Phase 2: model structure / no later-phase geometry ---")
     doc, o = build_with()
@@ -312,13 +372,311 @@ def main():
     check_true("interaction head is in Product group",
                product is not None and o[INTERACTION] in product.Group)
 
+    print("--- Phase 3: single-profile housing + arm, laptop-lid pocket ---")
+    doc, o = build_with()
+    housing = o[HOUSING]
+    housing_bb = housing.Shape.BoundBox
+    display_bb = o[DISPLAY].Shape.BoundBox
+    face_y = base["REAR_ARM_MOUNT_FACE_Y"]
+    arc_cz = base["REAR_ARM_ARC_CENTER_Z"]
+    radius = base["REAR_ARM_RADIUS"]
+    bottom_z = base["REAR_ARM_BOTTOM_Z"]
+    rear_y = base["REAR_ARM_REAR_Y"]
+    housing_front_y = (base["MAIN_BODY_DISPLAY_OFFSET_Y"]
+                       - base["MAIN_BODY_DEPTH"] / 2.0)
+    housing_rear_y = (base["MAIN_BODY_DISPLAY_OFFSET_Y"]
+                      + base["MAIN_BODY_DEPTH"] / 2.0)
+    housing_bot_z = base["MAIN_BODY_DISPLAY_OFFSET_Z"]
+    housing_top_z = housing_bot_z + base["MAIN_BODY_HEIGHT"]
+    lid_front_y = display_bb.YMin
+    lid_rear_y = display_bb.YMax
+
+    # One coherent extruded side profile: a single connected solid,
+    # never a separate arm object.
+    check("Main_Housing is exactly one connected solid",
+          len(housing.Shape.Solids), 1)
+    check_true("Main_Housing solid is valid", housing.Shape.isValid())
+    check_true("no separate Rear_Arm object remains",
+               doc.getObject("Rear_Arm") is None)
+    product = doc.getObject(document.GROUP_PRODUCT)
+    check("Product group holds exactly the housing and two heads",
+          len(product.Group), 3)
+    check_true("arm volume is inside Main_Housing (interior probe)",
+               housing.Shape.isInside(
+                   App.Vector(0.0, face_y + 0.4 * radius,
+                              arc_cz - 0.4 * radius), 1e-6, True))
+    check("single-profile housing spans the full device width",
+          housing_bb.XLength, base["MAIN_BODY_WIDTH"])
+    check("single-profile solid has exactly 8 faces (no splitter "
+          "debris)", len(housing.Shape.Faces), 8)
+
+    # The arm in its corrected LOWER position: a true circular
+    # quarter-profile hanging below the body, tangent to the rear face
+    # exactly at the bottom-rear corner (the GREEN annotation target).
+    arc_faces = x_axis_cylindrical_faces(housing)
+    check_true("housing carries one true cylindrical arc face",
+               len(arc_faces) == 1)
+    if arc_faces:
+        surf = arc_faces[0].Surface
+        check("arc face radius == resolved REAR_ARM_RADIUS",
+              surf.Radius, radius)
+        check("arc face centre Y == MOUNT_FACE_Y", surf.Center.y, face_y)
+        check("arc centre Z == housing bottom plane (lower position)",
+              surf.Center.z, housing_bot_z)
+        check("arc face spans the full device width",
+              arc_faces[0].BoundBox.XLength, base["MAIN_BODY_WIDTH"])
+        check("arc top endpoint lands exactly on the housing rear plane",
+              arc_faces[0].BoundBox.YMax, housing_rear_y)
+        check("arc top endpoint lands exactly on the housing bottom "
+              "plane", arc_faces[0].BoundBox.ZMax, housing_bot_z)
+        check("arc bottom endpoint at the mounting-face tip",
+              arc_faces[0].BoundBox.ZMin, bottom_z)
+    mount_faces = planar_mount_faces(housing, face_y)
+    check_true("housing carries the planar vertical mounting face",
+               len(mount_faces) == 1)
+    if mount_faces:
+        mf_bb = mount_faces[0].BoundBox
+        check("mounting face spans the full device width",
+              mf_bb.XLength, base["MAIN_BODY_WIDTH"])
+        check("mounting face bottom at the arm tip",
+              mf_bb.ZMin, bottom_z)
+        check("mounting face top at the housing bottom face",
+              mf_bb.ZMax, housing_bot_z)
+    check("derived radius lands the arc exactly on the rear plane",
+          rear_y, housing_rear_y)
+    check("arc centre sits on the housing bottom plane (parameter)",
+          arc_cz, housing_bot_z)
+
+    # The corrected lower connection: rear face and arc meet at the
+    # bottom-rear corner with a shared tangent -- one continuous
+    # silhouette, no lower band, no subdivision seam.
+    rear_faces = [f for f in housing.Shape.Faces
+                  if f.Surface.TypeId == "Part::GeomPlane"
+                  and f.BoundBox.YLength < 1e-9
+                  and abs(f.CenterOfMass.y - housing_rear_y) < 1e-6]
+    check_true("exactly one planar rear face (no lower band)",
+               len(rear_faces) == 1)
+    if rear_faces:
+        rf_bb = rear_faces[0].BoundBox
+        check("rear face spans the full housing height",
+              rf_bb.ZLength, base["MAIN_BODY_HEIGHT"])
+        check("rear face bottom == housing bottom plane",
+              rf_bb.ZMin, housing_bot_z)
+        check_true("rear face unsubdivided (4 boundary edges)",
+                   len(rear_faces[0].Edges) == 4)
+    # Regression for the reported artifact: the old embedded-arm
+    # construction left a full-width horizontal seam on the rear face at
+    # the arc tangent height (housing bottom + 6 mm). That edge must not
+    # exist.
+    old_crossover_z = housing_bot_z + 6.0
+    seam_edges = [e for e in housing.Shape.Edges
+                  if e.BoundBox.XLength > 0.9 * base["MAIN_BODY_WIDTH"]
+                  and e.BoundBox.ZLength < 1e-9
+                  and abs(e.BoundBox.ZMin - old_crossover_z) < 1e-6]
+    check_true("no full-width seam at the old crossover height "
+               "(Z = housing bottom + 6)", not seam_edges)
+
+    # Silhouette sanity.
+    check("profile silhouette bottom == arm bottom tip",
+          housing_bb.ZMin, bottom_z)
+    check("profile silhouette top == rectangular body top",
+          housing_bb.ZMax, housing_top_z)
+    check("profile silhouette rear == housing rear face",
+          housing_bb.YMax, housing_rear_y)
+
+    # The intentional laptop-lid pocket: the slot bounded above by the
+    # housing bottom face (ceiling) and at the rear by the arm's
+    # mounting face (wall). With the single-profile construction the
+    # ceiling is a real standalone face, not a boolean leftover.
+    check("pocket width == LAPTOP_LID_POCKET_CLEARANCE",
+          face_y - lid_rear_y, base["LAPTOP_LID_POCKET_CLEARANCE"])
+    check("pocket ceiling height == MAIN_BODY_LID_TOP_CLEARANCE",
+          housing_bot_z, base["MAIN_BODY_LID_TOP_CLEARANCE"])
+    ceilings = [f for f in housing.Shape.Faces
+                if f.Surface.TypeId == "Part::GeomPlane"
+                and f.BoundBox.ZLength < 1e-9
+                and abs(f.BoundBox.ZMax - housing_bot_z) < 1e-6]
+    check_true("exactly one horizontal face at the housing bottom (the "
+               "pocket ceiling; no residual lower strip)",
+               len(ceilings) == 1)
+    if ceilings:
+        c_bb = ceilings[0].BoundBox
+        check("pocket ceiling spans the lid front plane to the mounting "
+              "face", c_bb.YLength, face_y - housing_front_y)
+        check("pocket ceiling front == housing front plane",
+              c_bb.YMin, housing_front_y)
+        check("pocket ceiling rear == mounting face", c_bb.YMax, face_y)
+        check("pocket ceiling spans the full device width",
+              c_bb.XLength, base["MAIN_BODY_WIDTH"])
+    # Pocket ceiling rays: the first device material directly above the
+    # lid's top edge (and above the clearance slot behind it) must be the
+    # housing bottom face at exactly housing_bot_z -- nothing hangs down
+    # into the pocket.
+    ray_over_lid = Part.makeBox(1.0, 1.0, housing_top_z,
+                                App.Vector(-0.5, -0.5, 0.0))
+    check("first material above the lid top edge is the pocket ceiling",
+          housing.Shape.common(ray_over_lid).BoundBox.ZMin,
+          housing_bot_z)
+    slot_mid_y = (lid_rear_y + face_y) / 2.0
+    ray_over_slot = Part.makeBox(1.0, 1.0, housing_top_z,
+                                 App.Vector(-0.5, slot_mid_y - 0.5, 0.0))
+    check("pocket ceiling extends over the clearance slot",
+          housing.Shape.common(ray_over_slot).BoundBox.ZMin,
+          housing_bot_z)
+    probe = Part.makeBox(400.0, face_y - lid_front_y, housing_bot_z,
+                         App.Vector(-200.0, lid_front_y, 0.0))
+    check("pocket cavity is free of device material (lid can enter)",
+          housing.Shape.common(probe).Volume, 0.0)
+    check("laptop lid does not intersect the housing",
+          housing.Shape.common(o[DISPLAY].Shape).Volume, 0.0)
+    check_true("laptop lid remains a separate reference object",
+               o[DISPLAY] is not housing
+               and o[DISPLAY] in doc.getObject(
+                   document.GROUP_REFERENCES).Group)
+    check("housing front plane flush with the lid front plane",
+          housing_bb.YMin, lid_front_y)
+    check_true("arm tip descends below the lid top edge (captures it)",
+               bottom_z < 0.0)
+    check_true("arm is compact (tip in the top quarter of the lid)",
+               bottom_z > -base["DISPLAY_REFERENCE_HEIGHT"] / 4.0)
+    check("interaction drum still at its nominal pitch",
+          extents(o[INTERACTION_MARK])[1], int_base_y)
+    check("face head diameter unchanged by the arm correction",
+          extents(o[FACE])[1], base["FACE_HEAD_DIAMETER"])
+    check("interaction head diameter unchanged",
+          extents(o[INTERACTION])[1], base["INTERACTION_HEAD_DIAMETER"])
+    face_axis_z = axis_center_z(o[FACE])
+
+    print("--- Phase 3: pocket parameters regenerate the pocket ---")
+    # Expected values are recomputed from `base` (plain floats) because
+    # build_with() closes and replaces the document.
+    _, o2 = build_with(LAPTOP_LID_POCKET_CLEARANCE=
+                       base["LAPTOP_LID_POCKET_CLEARANCE"] + 1.0)
+    h2 = o2[HOUSING]
+    check_true("mounting face follows LAPTOP_LID_POCKET_CLEARANCE",
+               len(planar_mount_faces(h2, face_y + 1.0)) == 1)
+    check("arc radius re-derives to the bottom-rear corner",
+          x_axis_cylindrical_faces(h2)[0].Surface.Radius, radius - 1.0)
+    check("arc top still lands on the housing rear plane",
+          x_axis_cylindrical_faces(h2)[0].BoundBox.YMax, housing_rear_y)
+    check("arm tip follows the re-derived radius",
+          h2.Shape.BoundBox.ZMin, housing_bot_z - (radius - 1.0))
+    check("head geometry unchanged by pocket clearance edit",
+          extents(o2[FACE])[1], base["FACE_HEAD_DIAMETER"])
+    _, o2 = build_with(MAIN_BODY_LID_TOP_CLEARANCE=
+                       base["MAIN_BODY_LID_TOP_CLEARANCE"] + 2.0)
+    h2 = o2[HOUSING]
+    check("arm and ceiling follow MAIN_BODY_LID_TOP_CLEARANCE",
+          h2.Shape.BoundBox.ZMin, bottom_z + 2.0)
+    check("housing top follows MAIN_BODY_LID_TOP_CLEARANCE",
+          h2.Shape.BoundBox.ZMax, housing_top_z + 2.0)
+    check("heads ride with the housing (face axis Z follows)",
+          axis_center_z(o2[FACE]), face_axis_z + 2.0)
+    check("head diameter unchanged by lid-top clearance edit",
+          extents(o2[FACE])[1], base["FACE_HEAD_DIAMETER"])
+    _, o2 = build_with(MAIN_BODY_LID_FRONT_OFFSET=
+                       base["MAIN_BODY_LID_FRONT_OFFSET"] + 2.0)
+    h2 = o2[HOUSING]
+    check("housing front follows MAIN_BODY_LID_FRONT_OFFSET",
+          h2.Shape.BoundBox.YMin, housing_front_y + 2.0)
+    check("arm radius re-derives with the housing rear",
+          x_axis_cylindrical_faces(h2)[0].Surface.Radius, radius + 2.0)
+    check("arc top lands on the shifted rear plane",
+          x_axis_cylindrical_faces(h2)[0].BoundBox.YMax,
+          housing_rear_y + 2.0)
+    _, o2 = build_with(REAR_ARM_RADIUS=12.5)
+    h2 = o2[HOUSING]
+    check("explicit REAR_ARM_RADIUS override honoured",
+          x_axis_cylindrical_faces(h2)[0].Surface.Radius, 12.5)
+    check("explicit-radius arm tucks under the housing rear",
+          h2.Shape.BoundBox.YMax, housing_rear_y)
+    check("explicit-radius arm bottom follows RADIUS",
+          h2.Shape.BoundBox.ZMin, housing_bot_z - 12.5)
+    strips = [f for f in h2.Shape.Faces
+              if f.Surface.TypeId == "Part::GeomPlane"
+              and f.BoundBox.ZLength < 1e-9
+              and abs(f.BoundBox.ZMax - housing_bot_z) < 1e-6]
+    check("smaller explicit radius leaves a flat bottom strip behind "
+          "the arc", len(strips), 2)
+
+    _, o2 = build_with(LAPTOP_LID_POCKET_CLEARANCE=
+                       base["LAPTOP_LID_POCKET_CLEARANCE"] + 1.0,
+                       MAIN_BODY_LID_TOP_CLEARANCE=
+                       base["MAIN_BODY_LID_TOP_CLEARANCE"] + 2.0)
+    check("housing width unaffected by pocket edits",
+          extents(o2[HOUSING])[0], base["MAIN_BODY_WIDTH"])
+    check("face head diameter unaffected by pocket edits",
+          extents(o2[FACE])[1], base["FACE_HEAD_DIAMETER"])
+    check("interaction head diameter unaffected by pocket edits",
+          extents(o2[INTERACTION])[1], base["INTERACTION_HEAD_DIAMETER"])
+    check("display reference unaffected by pocket edits",
+          extents(o2[DISPLAY])[0], base["DISPLAY_REFERENCE_WIDTH"])
+
+    print("--- Phase 3: pocket invariants ---")
+    try:
+        build_with(LAPTOP_LID_POCKET_CLEARANCE=0.2)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects a sub-0.5 mm pocket clearance", raised)
+    try:
+        build_with(MAIN_BODY_LID_TOP_CLEARANCE=0.0)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects the housing touching the lid top",
+               raised)
+    try:
+        build_with(MAIN_BODY_LID_FRONT_OFFSET=30.0)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects housing placements with no pocket "
+               "room", raised)
+    try:
+        build_with(REAR_ARM_RADIUS=1.0)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects a sub-2 mm arm radius", raised)
+    try:
+        build_with(REAR_ARM_RADIUS=base["MAIN_BODY_LID_TOP_CLEARANCE"]
+                   + 0.5)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects an arm tip that does not capture the "
+               "lid top edge", raised)
+    try:
+        build_with(REAR_ARM_RADIUS=radius + 5.0)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects an arc reaching past the housing rear "
+               "face", raised)
+    try:
+        build_with(FACE_HEAD_DIAMETER=48.0, INTERACTION_HEAD_DIAMETER=48.0)
+        raised = False
+    except ValueError:
+        raised = True
+    check_true("resolve() rejects heads that break the pocket ceiling",
+               raised)
+
+    print("--- Phase 3: no cable or mounting-stack geometry ---")
+    doc, o = build_with()
+    forbidden = ("usb", "cable", "magnet", "plate", "tape", "foam",
+                 "adhesive")
+    check_true("no USB-C cable or Phase 4 mounting objects exist",
+               not any(tok in obj.Name.lower()
+                       for obj in doc.Objects for tok in forbidden))
+
     print("--- Phase 2.5: live-reload architecture ---")
     import live_reload
     import review_camera
 
     watched = {os.path.basename(p) for p in live_reload.watched_files()}
     for required in ("parameters.py", "parts.py", "sensor_heads.py",
-                     "document.py"):
+                     "rear_arm.py", "document.py"):
         check_true("watched: " + required, required in watched)
     for excluded in ("build.py", "validate.py", "live_reload.py",
                      "start_dev.py", "review_camera.py", "review_view.py",
@@ -435,7 +793,6 @@ def main():
           base["FACE_HEAD_DIAMETER"])
 
     print("--- Phase 2.5: orphan cleanup / generated-object ownership ---")
-    import Part
     doc, o = build_with()
     check_true("all generated objects carry the ownership stamp",
                all(getattr(obj, "DeepRealGenerated", False)
@@ -506,6 +863,8 @@ def main():
                      INTERACTION_MARK):
             check_true("saved document contains " + name,
                        saved.getObject(name) is not None)
+        check_true("saved document has no separate Rear_Arm object",
+                   saved.getObject("Rear_Arm") is None)
         check_true("saved document fully recomputed (no touched/invalid)",
                    all(not ({"Touched", "Invalid"} & set(obj.State))
                        for obj in saved.Objects))
@@ -528,7 +887,7 @@ def main():
         sys.stdout.flush()
         sys.stderr.flush()
         sys.exit(1)
-    print("All Phase 1 + Phase 2 validation checks passed.")
+    print("All validation checks passed (Phases 1, 2, 2.5 and 3).")
     sys.stdout.flush()
 
 

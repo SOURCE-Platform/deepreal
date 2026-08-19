@@ -8,6 +8,11 @@ dict produced by parameters.get_params(); nothing is hard-coded here, so
 editing parameters.py and rerunning build.py regenerates the geometry
 predictably.
 
+Only the display reference slab lives here: since Phase 3 the
+Main_Housing solid (rectangular body + quarter-circle rear arm +
+laptop-lid pocket) is built as one extruded side profile in
+rear_arm.py.
+
 Translations are baked into the shapes (object placements stay at the
 origin) so that Shape.BoundBox is always in global coordinates.
 """
@@ -43,47 +48,8 @@ def display_reference_shape(params):
     return shape
 
 
-def main_housing_shape(params):
-    """
-    DeepReal main sensor housing: concept-stage rectangular envelope.
-
-    - X = MAIN_BODY_WIDTH
-    - Y = MAIN_BODY_DEPTH
-    - Z = MAIN_BODY_HEIGHT
-
-    Positioned relative to the display top edge via the
-    MAIN_BODY_DISPLAY_OFFSET_* parameters:
-    - bottom face at Z = MAIN_BODY_DISPLAY_OFFSET_Z
-    - depth centred at Y = MAIN_BODY_DISPLAY_OFFSET_Y (0 = straddles lid)
-    - centred at X = MAIN_BODY_DISPLAY_OFFSET_X (0 = display centre)
-
-    Deliberately solid and prismatic: no wall thickness, fillets, bosses,
-    vents, optical openings, sensor heads, motors, PCB, USB-C, magnets, or
-    rear arm yet. Those land in later phases.
-    """
-    width = params["MAIN_BODY_WIDTH"]
-    depth = params["MAIN_BODY_DEPTH"]
-    height = params["MAIN_BODY_HEIGHT"]
-    offset_x = params["MAIN_BODY_DISPLAY_OFFSET_X"]
-    offset_y = params["MAIN_BODY_DISPLAY_OFFSET_Y"]
-    offset_z = params["MAIN_BODY_DISPLAY_OFFSET_Z"]
-
-    shape = Part.makeBox(width, depth, height)
-    shape.translate(App.Vector(offset_x - width / 2.0,
-                               offset_y - depth / 2.0,
-                               offset_z))
-    return shape
-
-
 def build_display_reference(doc, params):
     """Create the display-reference object in doc."""
     obj = doc.addObject("Part::Feature", DISPLAY_REFERENCE_NAME)
     obj.Shape = display_reference_shape(params)
-    return obj
-
-
-def build_main_housing(doc, params):
-    """Create the main-housing object in doc."""
-    obj = doc.addObject("Part::Feature", MAIN_HOUSING_NAME)
-    obj.Shape = main_housing_shape(params)
     return obj
