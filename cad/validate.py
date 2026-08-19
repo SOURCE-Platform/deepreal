@@ -434,6 +434,35 @@ def main():
           extents({obj.Name: obj for obj in doc.Objects}[FACE])[1],
           base["FACE_HEAD_DIAMETER"])
 
+    print("--- Phase 2.5: orphan cleanup / generated-object ownership ---")
+    import Part
+    doc, o = build_with()
+    check_true("all generated objects carry the ownership stamp",
+               all(getattr(obj, "DeepRealGenerated", False)
+                   for obj in doc.Objects))
+    orphan = doc.addObject("Part::Feature", "Orphan_Probe")
+    orphan.Shape = Part.makeSphere(5.0, App.Vector(0.0, 0.0, 15.0))
+    document._mark_generated(orphan)  # as if a previous build created it
+    doc.getObject(document.GROUP_REFERENCES).addObject(orphan)
+    manual = doc.addObject("Part::Feature", "Manual_Notes")
+    manual.Shape = Part.makeBox(1.0, 1.0, 1.0)
+    doc.getObject(document.GROUP_REFERENCES).addObject(manual)
+    doc.recompute()
+    check("object count with probe objects", len(doc.Objects), 10)
+    document.rebuild_in_place(doc)
+    check("stamped orphan removed on rebuild", len(doc.Objects), 9)
+    check_true("orphan name gone from the document",
+               doc.getObject("Orphan_Probe") is None)
+    check_true("manual (unstamped) object survives rebuild",
+               doc.getObject("Manual_Notes") is not None)
+    check_true("standard generated set intact after cleanup",
+               all(doc.getObject(n) is not None for n in (
+                   DISPLAY, HOUSING, FACE, INTERACTION,
+                   FACE_MARK, INTERACTION_MARK)))
+    check_true("groups still exist after cleanup",
+               doc.getObject(document.GROUP_REFERENCES) is not None
+               and doc.getObject(document.GROUP_PRODUCT) is not None)
+
     print("--- Phase 2.5: review camera preset ---")
     check_true("missing preset -> None (fallback to iso+fitAll)",
                review_camera.load_preset(

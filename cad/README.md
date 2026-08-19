@@ -10,7 +10,10 @@ can be rebuilt at any time.
 - `parts.py` — Phase 1 builders (display reference, main housing)
 - `sensor_heads.py` — Phase 2 builders (two X-axis barrels + debug orientation marks)
 - `document.py` — assembles the FreeCAD document (import-safe module);
-  `rebuild_in_place()` swaps generated geometry inside an open document
+  `rebuild_in_place()` swaps generated geometry inside an open document.
+  Generated objects carry a `DeepRealGenerated` stamp; rebuilds delete
+  stamped objects that are no longer registered in the source, and never
+  delete objects you created manually
 - `build.py` — script: rebuilds `deepreal.FCStd` from scratch
 - `validate.py` — script: perturbs parameters, rebuilds in memory, checks
   bounding boxes plus the live-reload architecture

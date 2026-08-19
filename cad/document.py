@@ -39,6 +39,21 @@ OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 GROUP_REFERENCES = "References"
 GROUP_PRODUCT = "Product"
 
+# Name of the dynamic property stamped onto every object the build system
+# creates. The stamp is stored in the document, so ownership survives
+# save/reload cycles: populate_document only ever deletes stamped objects
+# (plus the two reserved group names) and never touches objects the user
+# created manually.
+GENERATED_MARK = "DeepRealGenerated"
+
+
+def _mark_generated(obj):
+    """Stamp `obj` as owned by the DeepReal build system."""
+    if not hasattr(obj, GENERATED_MARK):
+        obj.addProperty("App::PropertyBool", GENERATED_MARK, "DeepReal",
+                        "Owned by the DeepReal build system; do not edit.")
+    setattr(obj, GENERATED_MARK, True)
+
 # Review colours as (r, g, b) floats in 0..1, plus optional transparency
 # (0..100). Cosmetic only; geometry never depends on these. Applied through
 # the normal view-provider API and only when a build runs with the FreeCAD
@@ -86,26 +101,38 @@ def populate_document(doc, params):
     Shared by the headless build and the interactive live reload, so both
     workflows run exactly the same geometry code. Generated objects are
     deleted and recreated deterministically by name; repeated calls never
-    accumulate duplicates. Non-generated objects in the document are left
-    untouched.
+    accumulate duplicates. An object whose registration is removed from
+    the source disappears from the document on the next rebuild: every
+    generated object carries the DeepRealGenerated stamp, and every
+    stamped object that is no longer in the registry is deleted. Manually
+    created (unstamped) objects are never deleted, even if the user put
+    them inside one of the generated groups.
     """
     shapes = generated_shape_map(params)  # may raise; doc stays untouched
 
-    # Remove previous generated objects (parts first, then empty groups).
-    for name in list(shapes.keys()) + [GROUP_REFERENCES, GROUP_PRODUCT]:
+    # Remove everything the build system owns: objects in the new registry
+    # (recreated below), objects stamped by previous builds (including any
+    # whose registration was since removed from the source), and the two
+    # generated groups (recreated below). Unstamped manual objects survive.
+    doomed = set(shapes.keys()) | {GROUP_REFERENCES, GROUP_PRODUCT}
+    doomed.update(obj.Name for obj in doc.Objects
+                  if getattr(obj, GENERATED_MARK, False))
+    for name in sorted(doomed):
         existing = doc.getObject(name)
         if existing is not None:
             doc.removeObject(name)
 
     groups = {}
     for group_name in (GROUP_REFERENCES, GROUP_PRODUCT):
-        groups[group_name] = doc.addObject("App::DocumentObjectGroup",
-                                           group_name)
+        group = doc.addObject("App::DocumentObjectGroup", group_name)
+        _mark_generated(group)
+        groups[group_name] = group
 
     created = []
     for name, (shape, group_name) in shapes.items():
         obj = doc.addObject("Part::Feature", name)
         obj.Shape = shape
+        _mark_generated(obj)
         groups[group_name].addObject(obj)
         created.append(obj)
 
