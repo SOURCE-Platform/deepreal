@@ -1,1 +1,6 @@
 .DS_Store
+
+# 58 MB Pololu STEP bundle; re-download via the URL in
+# cad/feasibility/component_sources.md (the extracted 75:1 MP variant we
+# actually use IS committed under assets/pololu-step/).
+cad/feasibility/assets/pololu-micro-metal-gearmotor-step-models.zip
