@@ -1,4 +1,6 @@
-"""Build cad/feasibility/drum_internals.FCStd (Gate 1 deliverable).
+"""Build cad/feasibility/drum_internals.FCStd.
+
+Gate 1 deliverable + Gate 1.5B depth-architecture layouts.
 
 Headless:
     /Applications/FreeCAD.app/Contents/MacOS/FreeCAD --console \\
@@ -9,7 +11,8 @@ Contents:
            cad/deepreal.FCStd, which is never written)
   * Ctx_*  drum shells / assumed interiors / travel markers
   * ENV_*  one true-size envelope per registry component, in a library row
-  * G00..G12 visibility groups
+  * LA_* / AP_* / KO_*  in-drum layout studies SL-A / SL-B / ToF-A
+  * G00..G18 visibility groups
 Review presets are view-only and live in review_presets.py.
 """
 
@@ -24,6 +27,7 @@ import drum_context
 import envelopes
 import exterior_reference
 import groups
+import layouts
 
 DOC_PATH = os.path.normpath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -41,7 +45,8 @@ def build():
     exterior = exterior_reference.import_exterior_reference(doc)
     context = drum_context.build(doc)
     envs = envelopes.build_all(doc)
-    groups.build(doc, exterior, context, envs)
+    layout_objs = layouts.build(doc)
+    groups.build(doc, exterior, context, envs, layout_objs)
     doc.recompute()
     doc.saveAs(DOC_PATH)
 

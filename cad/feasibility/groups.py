@@ -1,9 +1,10 @@
-"""Visibility groups for the feasibility document (Gate 1).
+"""Visibility groups for the feasibility document.
 
-Thirteen groups so each review question can show exactly the relevant
-subset (see review_presets.py). Groups are App::DocumentObjectGroup;
-objects may appear in more than one group (e.g. no-fit envelopes live in
-their functional group AND G11_NoFit_Reference).
+Gate 1: thirteen groups G00..G12. Gate 1.5B adds G13..G18 for the
+discrete depth-sensing components and the three in-drum layout studies.
+Groups are App::DocumentObjectGroup; objects may appear in more than one
+group (e.g. no-fit envelopes live in their functional group AND
+G11_NoFit_Reference).
 """
 
 GROUP_DEFS = [
@@ -16,7 +17,7 @@ GROUP_DEFS = [
     ("G03_Drum_Travel_Markers",
      "Rotation-travel limit markers (+/-75 deg from -Y)"),
     ("G04_Sensors_RGB",
-     "RGB camera envelopes (RPi CM3, CM3 sensor assembly)"),
+     "RGB camera envelopes (RPi CM3 board, CM3 sensor assembly)"),
     ("G05_Sensors_Depth_StructuredLight",
      "Structured-light depth envelopes (Orbbec all-in-one modules)"),
     ("G06_Actuators_SmartServo",
@@ -33,10 +34,25 @@ GROUP_DEFS = [
      "Components that cannot fit the drum; kept visible for comparison"),
     ("G12_Review_Preset_Notes",
      "Reserved for review annotations (presets act on view only)"),
+    ("G13_Sensors_IR_Camera",
+     "Global-shutter NIR camera die (OmniVision OV9281 bare sensor)"),
+    ("G14_Depth_Projectors",
+     "Structured-light dot projectors (ams BELICE-850, Belago1.2)"),
+    ("G15_Sensors_Depth_ToF",
+     "Time-of-flight imagers (Infineon IRS2877A, IRS2976C) + "
+     "illuminator placeholder"),
+    ("G16_Layout_SL_A",
+     "In-drum layout SL-A: axial RGB -> IR -> projector (BELICE-850)"),
+    ("G17_Layout_SL_B",
+     "In-drum layout SL-B: RGB axial, IR + projector (Belago1.2) share "
+     "a cross-section station"),
+    ("G18_Layout_ToF_A",
+     "In-drum layout ToF-A: IRS2877A + flood-illuminator placeholder + "
+     "carrier-PCB keep-out"),
 ]
 
 
-def build(doc, exterior, context, envelopes):
+def build(doc, exterior, context, envelopes, layout_objs=None):
     groups = {}
     for name, _desc in GROUP_DEFS:
         grp = doc.addObject("App::DocumentObjectGroup", name)
@@ -59,6 +75,12 @@ def build(doc, exterior, context, envelopes):
         "robotis_xl330_m288": "G06_Actuators_SmartServo",
         "pololu_5137": "G07_Actuators_DCGearmotor",
         "tmotor_gb2208": "G08_Actuators_GimbalBLDC",
+        "ov9281_ir_camera": "G13_Sensors_IR_Camera",
+        "ams_belice_850": "G14_Depth_Projectors",
+        "ams_belago1_2": "G14_Depth_Projectors",
+        "infineon_irs2877a": "G15_Sensors_Depth_ToF",
+        "infineon_irs2976c": "G15_Sensors_Depth_ToF",
+        "tof_illuminator_placeholder": "G15_Sensors_Depth_ToF",
     }
     no_fit = {"orbbec_astra_mini_pro", "orbbec_astra_embedded_s",
               "tmotor_gb2208"}
@@ -66,4 +88,14 @@ def build(doc, exterior, context, envelopes):
         groups[functional[key]].addObject(obj)
         if key in no_fit:
             groups["G11_NoFit_Reference"].addObject(obj)
+
+    if layout_objs:
+        layout_group = {
+            "SL-A": "G16_Layout_SL_A",
+            "SL-B": "G17_Layout_SL_B",
+            "ToF-A": "G18_Layout_ToF_A",
+        }
+        for lname, objs in layout_objs.items():
+            for obj in objs:
+                groups[layout_group[lname]].addObject(obj)
     return groups

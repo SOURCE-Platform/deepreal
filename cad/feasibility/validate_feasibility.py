@@ -1,13 +1,26 @@
-"""Gate 1 validation for cad/feasibility/drum_internals.FCStd.
+"""Validation for cad/feasibility/drum_internals.FCStd.
 
-Checks, all reported as PASS/FAIL lines with a summary and exit code:
+Gate 1 checks:
   1. every registry component has an ENV_* object whose bounding box
-     matches the published registry dimensions (tol 0.05 mm)
+     matches the published registry dimensions (tol 0.05 mm; multi-part
+     components compare against the union of their registry parts)
   2. drum context geometry matches the approved model positions
-  3. all 13 visibility groups exist
+  3. all visibility groups exist
   4. the exterior reference matches the approved Main_Housing bounds
   5. cad/deepreal.FCStd is untouched: its SHA1 equals the main-branch
      blob (git show main:cad/deepreal.FCStd)
+
+Gate 1.5B checks (in-drum layouts SL-A / SL-B / ToF-A):
+  6. every LA_* part bounding box matches its registry part dims
+  7. per-layout pairwise collision: common() volume ~ 0 for all LA_/KO_
+     pairs (AP_* markers live in the wall and are excluded)
+  8. containment: every LA_/KO_ part lies fully inside the assumed
+     interior (dia 21, X -54.5..-3.5) of the UNCHANGED face drum
+  9. both RGB results: the full CM3 board has NO axis-aligned
+     orientation inside dia 21 (expected no-fit), while the CM3 Sensor
+     Assembly fits (min enclosing circle reported)
+ 10. per-layout X span used / remaining and minimum radial clearance are
+     computed and printed for the report
 
 Run headless:
     /Applications/FreeCAD.app/Contents/MacOS/FreeCAD --console \\
@@ -15,6 +28,7 @@ Run headless:
 """
 
 import hashlib
+import math
 import os
 import subprocess
 import sys
@@ -22,6 +36,8 @@ import sys
 import FreeCAD as App
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import envelopes
+import layouts
 import registry
 from groups import GROUP_DEFS
 
@@ -33,7 +49,9 @@ APPROVED = os.path.normpath(
                  "..", "deepreal.FCStd"))
 
 TOL = 0.05
+COLLISION_TOL_MM3 = 1e-3
 _failures = []
+_layout_metrics = {}
 
 
 def check(ok, label, detail=""):
@@ -48,6 +66,7 @@ def dims_of(obj):
     return sorted([bb.XLength, bb.YLength, bb.ZLength])
 
 
+# ---------------------------------------------------------------- Gate 1
 def check_envelopes(doc):
     for key, entry in registry.COMPONENTS.items():
         obj = doc.getObject("ENV_" + key)
@@ -55,11 +74,7 @@ def check_envelopes(doc):
             check(False, "envelope %s" % key, "object missing")
             continue
         got = dims_of(obj)
-        if entry["shape"] == "cylinder":
-            d, length = entry["dims_mm"]
-            want = sorted([d, d, length])
-        else:
-            want = sorted(entry["dims_mm"])
+        want = envelopes.expected_union_dims(key)
         ok = all(abs(g - w) <= TOL for g, w in zip(got, want))
         check(ok, "envelope %s dims" % key,
               "got %s want %s" % (["%.2f" % v for v in got],
@@ -153,6 +168,159 @@ def check_approved_untouched():
           "disk %s vs main %s" % (disk[:12], committed[:12]))
 
 
+# ------------------------------------------------------------ Gate 1.5B
+def _max_corner_radius(bb):
+    """Max radial distance from the drum axis over the 4 YZ BB corners."""
+    r = 0.0
+    for y in (bb.YMin, bb.YMax):
+        for z in (bb.ZMin, bb.ZMax):
+            r = max(r, math.hypot(y - registry.DRUM_AXIS_Y,
+                                  z - registry.DRUM_AXIS_Z))
+    return r
+
+
+def check_layouts(doc):
+    r_int = registry.ASSUMED_INNER_DIAMETER / 2.0
+    x_lo = registry.FACE_INTERIOR_X_MIN
+    x_hi = registry.FACE_INTERIOR_X_MAX
+    for lname, ldef in layouts.LAYOUTS.items():
+        ltag = lname.replace("-", "")
+        parts = [o for o in doc.Objects
+                 if o.Name.startswith("LA_%s_" % ltag)
+                 or o.Name.startswith("KO_%s_" % ltag)]
+        markers = [o for o in doc.Objects
+                   if o.Name.startswith("AP_%s_" % ltag)]
+        if not parts:
+            check(False, "layout %s parts" % lname, "no objects found")
+            continue
+
+        # (6) dims vs registry -----------------------------------------
+        for obj in parts:
+            if obj.Name.startswith("KO_"):
+                continue   # keep-outs are labelled assumptions
+            ckey = obj.Component
+            pname = obj.PartName
+            entry = registry.COMPONENTS[ckey]
+            if entry["shape"] == "multipart":
+                reg = [p for p in entry["parts"] if p["name"] == pname]
+            else:
+                reg = [{"shape": entry["shape"],
+                        "dims_mm": entry["dims_mm"]}]
+            if not reg:
+                check(False, "layout %s part %s" % (lname, obj.Name),
+                      "not in registry")
+                continue
+            dims = reg[0]["dims_mm"]
+            if reg[0]["shape"] == "cylinder":
+                want = sorted([dims[0], dims[0], dims[1]])
+            else:
+                want = sorted(dims)
+            got = dims_of(obj)
+            ok = all(abs(g - w) <= TOL for g, w in zip(got, want))
+            check(ok, "layout %s part %s dims" % (lname, obj.Name),
+                  "got %s want %s" % (["%.2f" % v for v in got],
+                                      ["%.2f" % v for v in want]))
+
+        # (7) pairwise collisions --------------------------------------
+        n_coll = 0
+        for i in range(len(parts)):
+            for j in range(i + 1, len(parts)):
+                common = parts[i].Shape.common(parts[j].Shape)
+                if common.Volume > COLLISION_TOL_MM3:
+                    n_coll += 1
+                    check(False, "layout %s collision" % lname,
+                          "%s vs %s: %.4f mm^3"
+                          % (parts[i].Name, parts[j].Name, common.Volume))
+        if n_coll == 0:
+            check(True, "layout %s collision-free" % lname,
+                  "%d parts checked pairwise" % len(parts))
+
+        # (8) containment ----------------------------------------------
+        worst_r = 0.0
+        all_in = True
+        for obj in parts:
+            bb = obj.Shape.BoundBox
+            r = _max_corner_radius(bb)
+            worst_r = max(worst_r, r)
+            ok = (r <= r_int + TOL
+                  and bb.XMin >= x_lo - TOL and bb.XMax <= x_hi + TOL)
+            if not ok:
+                all_in = False
+                check(False, "layout %s containment" % lname,
+                      "%s corner radius %.2f (limit %.2f), X %.2f..%.2f"
+                      % (obj.Name, r, r_int, bb.XMin, bb.XMax))
+        if all_in:
+            check(True, "layout %s contained in dia %.1f interior"
+                  % (lname, 2 * r_int),
+                  "worst corner radius %.2f mm" % worst_r)
+        for mk in markers:
+            bb = mk.Shape.BoundBox
+            ok = (bb.XMin >= x_lo - TOL and bb.XMax <= x_hi + TOL
+                  and _max_corner_radius(bb) <= r_int + TOL)
+            check(ok, "layout %s aperture %s at wall" % (lname, mk.Name),
+                  "X %.2f..%.2f" % (bb.XMin, bb.XMax))
+
+        # (10) metrics for the report ----------------------------------
+        x_min = min(o.Shape.BoundBox.XMin for o in parts)
+        x_max = max(o.Shape.BoundBox.XMax for o in parts)
+        span = x_max - x_min
+        remaining = registry.ASSUMED_INNER_LENGTH - span
+        clearance = r_int - worst_r
+        _layout_metrics[lname] = {
+            "x_span_mm": span, "x_min": x_min, "x_max": x_max,
+            "x_remaining_mm": remaining,
+            "worst_corner_radius_mm": worst_r,
+            "min_radial_clearance_mm": clearance,
+            "n_parts": len(parts), "n_markers": len(markers),
+        }
+        print("METRIC %s | X span %.1f mm (%.1f..%.1f), remaining %.1f "
+              "mm of %.0f | worst corner r=%.2f | min radial clearance "
+              "%.2f mm" % (lname, span, x_min, x_max, remaining,
+                           registry.ASSUMED_INNER_LENGTH, worst_r,
+                           clearance), flush=True)
+
+
+def _min_cross_section_radius(dims):
+    """Min over axis choices of the centred cross-section half-diagonal.
+
+    A box inside a cylinder (axis X) needs, in the best case (centred),
+    a circle of radius = half the diagonal of its cross-section face.
+    """
+    best = None
+    for i in range(3):
+        cross = [d for j, d in enumerate(dims) if j != i]
+        r = math.hypot(cross[0], cross[1]) / 2.0
+        if best is None or r < best[1]:
+            best = (dims[i], r, cross)
+    return best
+
+
+def check_rgb_both_results():
+    r_int = registry.ASSUMED_INNER_DIAMETER / 2.0
+    r_shell = registry.DRUM_SHELL_DIAMETER / 2.0
+    board = registry.COMPONENTS["rpi_camera_module_3"]["dims_mm"]
+    sa = registry.COMPONENTS["rpi_cm3_sensor_assembly"]["dims_mm"]
+
+    ax_b, r_b, cross_b = _min_cross_section_radius(board)
+    check(r_b > r_int,
+          "RGB option 1 (full CM3 board) has NO in-drum orientation",
+          "best axis-aligned case: %.1f mm axial, cross %s needs dia "
+          "%.1f mm (interior dia %.1f; even the dia %.0f shell is "
+          "exceeded)" % (ax_b, ["%.1f" % c for c in cross_b], 2 * r_b,
+                         2 * r_int, 2 * r_shell))
+    check(2 * r_b > registry.DRUM_SHELL_DIAMETER,
+          "CM3 board exceeds even the drum shell",
+          "min enclosing dia %.2f > shell dia %.1f"
+          % (2 * r_b, registry.DRUM_SHELL_DIAMETER))
+
+    ax_s, r_s, cross_s = _min_cross_section_radius(sa)
+    check(r_s <= r_int,
+          "RGB option 2 (CM3 Sensor Assembly) fits in-drum",
+          "best case: %.1f mm axial, cross %s needs dia %.1f mm; "
+          "radial-optical placement (depth %.2f) verified in layouts"
+          % (ax_s, ["%.1f" % c for c in cross_s], 2 * r_s, sa[2]))
+
+
 def main():
     print("VALIDATE-BEGIN", flush=True)
     if not os.path.exists(DOC_PATH):
@@ -165,6 +333,8 @@ def main():
     check_drum_context(doc)
     check_groups(doc)
     check_exterior(doc)
+    check_layouts(doc)
+    check_rgb_both_results()
     check_approved_untouched()
     total = len(_failures)
     print("----", flush=True)
