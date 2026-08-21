@@ -1,0 +1,240 @@
+#!/usr/bin/env python3
+"""DeepReal Blender scene builder (headless).
+
+Assembles blender/deepreal.blend from generated artifacts + code:
+
+    1. cad/export_blender.py output (blender/assets/*.stl + manifest.json)
+       -> CAD Product / hidden CAD Reference collections
+    2. macbook.py     -> parametric MacBook Air locked to the CAD lid slab
+    3. mounting_stack.py -> provisional Phase-4 magnetic mount (render-only)
+    4. lid pivot + open angle, materials, studio lighting, cameras
+
+Everything is rebuilt from scratch on every run: no manual .blend edits
+survive, mirroring the CAD repo's "Python is the source of truth" rule.
+
+Usage (from the repository root):
+
+    /Applications/Blender.app/Contents/MacOS/Blender --background \
+        --factory-startup --python blender/build_scene.py -- [--render]
+
+    --render          also render the verification still to blender/renders/
+    --camera NAME     hero (default) | device
+    --samples N       Cycles samples (default 96)
+
+Run cad/export_blender.py first after any CAD change.
+"""
+
+import json
+import math
+import os
+import sys
+
+import bpy
+from mathutils import Vector
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+
+import macbook        # noqa: E402
+import materials      # noqa: E402
+import mounting_stack # noqa: E402
+import device         # noqa: E402
+
+ASSETS = os.path.join(HERE, "assets")
+BLEND_PATH = os.path.join(HERE, "deepreal.blend")
+RENDER_DIR = os.path.join(HERE, "renders")
+
+OPEN_ANGLE_DEG = 105.0   # laptop opening angle (90 = lid vertical, CAD frame)
+
+MM = 0.001
+
+
+def _argv_flag(name, default=None):
+    args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    if name in args:
+        return args[args.index(name) + 1] if default is not None else True
+    return default
+
+
+def _collection(name):
+    col = bpy.data.collections.new(name)
+    bpy.context.scene.collection.children.link(col)
+    return col
+
+
+def _shade_smooth(obj):
+    for op, kwargs in (("shade_auto_smooth", {"angle": math.radians(35)}),
+                       ("shade_smooth", {})):
+        try:
+            with bpy.context.temp_override(object=obj, active_object=obj,
+                                           selected_objects=[obj]):
+                getattr(bpy.ops.object, op)(**kwargs)
+            return
+        except Exception:
+            continue
+
+
+def _import_cad_parts(manifest, mats, col_reference):
+    """Import only reference/debug parts (kept hidden). Product parts are
+    rebuilt natively by device.py for clean quad topology; returns the
+    imported objects."""
+    imported = []
+    for part in manifest["parts"]:
+        if part["kind"] == "product":
+            continue
+        path = os.path.join(ASSETS, part["stl"])
+        try:
+            bpy.ops.wm.stl_import(filepath=path, global_scale=MM)
+        except RuntimeError:
+            bpy.ops.import_mesh.stl(filepath=path, scale=MM)
+        obj = bpy.context.selected_objects[0] or bpy.context.scene.objects[-1]
+        obj.name = part["name"]
+        obj.data.name = part["name"]
+        _shade_smooth(obj)
+        col_reference.objects.link(obj)
+        bpy.context.scene.collection.objects.unlink(obj)
+        obj.hide_viewport = True
+        obj.hide_render = True
+        imported.append(obj)
+    return imported
+
+
+def _aim(obj, target):
+    constraint = obj.constraints.new('TRACK_TO')
+    constraint.target = target
+    constraint.track_axis = 'TRACK_NEGATIVE_Z'
+    constraint.up_axis = 'UP_Y'
+
+
+def _area_light(name, location, size, energy, color, target):
+    light_data = bpy.data.lights.new(name, type='AREA')
+    light_data.shape = 'SQUARE'
+    light_data.size = size
+    light_data.energy = energy
+    light_data.color = color
+    obj = bpy.data.objects.new(name, light_data)
+    obj.location = location
+    bpy.context.scene.collection.objects.link(obj)
+    _aim(obj, target)
+    return obj
+
+
+def build():
+    do_render = _argv_flag("--render")
+    camera_name = _argv_flag("--camera", "hero")
+    samples = int(_argv_flag("--samples", 256))
+
+    with open(os.path.join(ASSETS, "manifest.json")) as handle:
+        manifest = json.load(handle)
+    params = manifest["params"]
+
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    scene = bpy.context.scene
+    scene.unit_settings.system = 'METRIC'
+    scene.unit_settings.scale_length = 1.0
+    scene.render.engine = 'CYCLES'
+    scene.cycles.samples = samples
+    scene.cycles.use_denoising = True
+    scene.render.resolution_x = 1600
+    scene.render.resolution_y = 1200
+    scene.view_settings.view_transform = 'AgX'
+
+    mats = materials.build_all()
+
+    col_product = _collection("CAD Product")
+    col_reference = _collection("CAD Reference (hidden)")
+    col_lid = _collection("MacBook Lid")
+    col_deck = _collection("MacBook Deck")
+    col_mount = _collection("Mounting (provisional)")
+    _collection("Lighting")
+
+    reference = _import_cad_parts(manifest, mats, col_reference)
+    product = device.build(manifest, mats, col_product)
+    lid, _deck = macbook.build(params, mats, col_lid, col_deck)
+    mount = mounting_stack.build(params, mats, col_mount)
+
+    # --- lid pivot: everything that swings with the lid -------------------
+    # All CAD/MacBook vertices are baked in absolute CAD-world coordinates,
+    # so children must be parented with matrix_parent_inverse = the pivot's
+    # (translation-only) matrix at parenting time. The pivot's later
+    # rotation then acts about the hinge point, T*R*T^-1, instead of about
+    # the world origin.
+    lid_h = params["DISPLAY_REFERENCE_HEIGHT"] * MM
+    pivot = bpy.data.objects.new("Lid_Pivot", None)
+    pivot.empty_display_size = 10 * MM
+    pivot.location = Vector((0.0, 0.0, -lid_h))
+    scene.collection.objects.link(pivot)
+    bpy.context.view_layer.update()
+    base = pivot.matrix_world.copy()          # rotation still zero
+    base_inv = base.inverted()
+    for obj in product + reference + lid + mount:
+        obj.parent = pivot
+        obj.matrix_parent_inverse = base_inv
+
+    # --- target + cameras + lights -----------------------------------------
+    target = bpy.data.objects.new("Device_Target", None)
+    target.empty_display_size = 5 * MM
+    target.parent = pivot
+    target.matrix_parent_inverse = base_inv
+    target.location = (0.0, 0.0, 10 * MM)   # device centre, CAD frame
+    scene.collection.objects.link(target)
+
+    pivot.rotation_euler.x = math.radians(90.0 - OPEN_ANGLE_DEG)
+
+    cam_data = bpy.data.cameras.new("Camera_Hero")
+    cam_data.lens = 45  # mm
+    hero = bpy.data.objects.new("Camera_Hero", cam_data)
+    hero.location = (0.16, -0.40, 0.12)
+    scene.collection.objects.link(hero)
+    _aim(hero, target)
+    scene.camera = hero
+
+    cam_data2 = bpy.data.cameras.new("Camera_Device")
+    cam_data2.lens = 50
+    device_cam = bpy.data.objects.new("Camera_Device", cam_data2)
+    device_cam.location = (0.05, -0.14, 0.05)
+    scene.collection.objects.link(device_cam)
+    _aim(device_cam, target)
+
+    # whole-laptop view: aims at a fixed world point near the chassis
+    # centre, not at the lid-mounted device
+    laptop_target = bpy.data.objects.new("Laptop_Target", None)
+    laptop_target.empty_display_size = 8 * MM
+    laptop_target.location = (0.0, -0.03, -0.13)
+    scene.collection.objects.link(laptop_target)
+    cam_data3 = bpy.data.cameras.new("Camera_Laptop")
+    cam_data3.lens = 32
+    laptop_cam = bpy.data.objects.new("Camera_Laptop", cam_data3)
+    laptop_cam.location = (0.30, -0.44, 0.20)
+    scene.collection.objects.link(laptop_cam)
+    _aim(laptop_cam, laptop_target)
+
+    _area_light("Key", (-0.42, -0.20, 0.38), 0.7, 40, (1.0, 0.98, 0.95),
+                target)
+    _area_light("Fill", (0.40, -0.25, 0.15), 0.5, 15, (0.85, 0.90, 1.0),
+                target)
+    _area_light("Rim", (0.10, 0.45, 0.35), 0.4, 25, (1.0, 1.0, 1.0), target)
+
+    world = bpy.data.worlds.new("World")
+    world.node_tree.nodes["Background"].inputs[0].default_value = \
+        (0.02, 0.02, 0.022, 1.0)
+    scene.world = world
+
+    bpy.ops.wm.save_as_mainfile(filepath=BLEND_PATH)
+    print("Scene built: {} objects, saved {}".format(
+        len(scene.objects), BLEND_PATH))
+
+    if do_render:
+        names = {"hero": hero, "device": device_cam, "laptop": laptop_cam}
+        cam = names.get(camera_name, hero)
+        scene.camera = cam
+        os.makedirs(RENDER_DIR, exist_ok=True)
+        scene.render.filepath = os.path.join(
+            RENDER_DIR, "{}_001.png".format(camera_name))
+        bpy.ops.render.render(write_still=True)
+        print("Rendered:", scene.render.filepath)
+
+
+if __name__ == "__main__":
+    build()

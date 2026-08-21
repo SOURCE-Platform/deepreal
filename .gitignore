@@ -4,3 +4,6 @@
 # cad/feasibility/component_sources.md (the extracted 75:1 MP variant we
 # actually use IS committed under assets/pololu-step/).
 cad/feasibility/assets/pololu-micro-metal-gearmotor-step-models.zip
+
+# ZCode agent session state
+.zcode/

@@ -18,6 +18,10 @@ can be rebuilt at any time.
   stamped objects that are no longer registered in the source, and never
   delete objects you created manually
 - `build.py` — script: rebuilds `deepreal.FCStd` from scratch
+- `export_blender.py` — script: tessellates every generated shape and
+  writes `blender/assets/` (per-part binary STLs + `manifest.json`
+  with resolved params) for the Blender render pipeline; never touches
+  the FCStd
 - `validate.py` — script: perturbs parameters, rebuilds in memory, checks
   bounding boxes plus the live-reload architecture
 - `live_reload.py` — file watcher + debounce + module reload + `DevSession`
@@ -52,6 +56,17 @@ writes FCStd archive members.
 ```sh
 /Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd cad/validate.py
 ```
+
+## Export to Blender (headless)
+
+```sh
+/Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd cad/export_blender.py
+```
+
+Writes `blender/assets/parts/*.stl` (mm, Z-up — Blender only needs the
+x0.001 m scale, applied on import) and `blender/assets/manifest.json`,
+the contract consumed by `blender/build_scene.py`. See `blender/README.md`
+for the render pipeline.
 
 ## Develop (live reload)
 

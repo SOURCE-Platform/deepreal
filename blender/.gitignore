@@ -1,0 +1,6 @@
+# Generated artifacts (rebuilt by cad/export_blender.py + build_scene.py)
+assets/
+deepreal.blend
+renders/
+__pycache__/
+*.blend1
