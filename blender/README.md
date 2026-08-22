@@ -26,6 +26,14 @@ to the CAD reference slab, the mounting stack spans the pocket exactly).
   keycaps, debug red)
 - `macbook.py` — parametric MacBook Air (M2-generation chassis, silver;
   lid locked to the CAD slab cross-section so the pocket fits)
+- `device.py` — native quad/n-gon rebuild of the device from the CAD
+  profile + bboxes, volume-verified against the CAD solids (<0.1%)
+- `optics.py` — sensor-drum optical treatment: five apertures per drum
+  (large depth lens | projector cluster | large RGB lens) bored through
+  the curved skin as live boolean modifiers, parallel optic axes on a
+  hidden internal carrier, per-aperture X/Z/diameter/depth/bezel
+  constants, per-drum optics pivots rotated per the CAD drum-pitch
+  params (spin a pivot = spin the turret)
 - `mounting_stack.py` — PROVISIONAL Phase-4 preview (magnet plate /
   steel plate / foam tape); delete when CAD Phase 4 models the real
   stack

@@ -40,6 +40,7 @@ import macbook        # noqa: E402
 import materials      # noqa: E402
 import mounting_stack # noqa: E402
 import device         # noqa: E402
+import optics         # noqa: E402
 
 ASSETS = os.path.join(HERE, "assets")
 BLEND_PATH = os.path.join(HERE, "deepreal.blend")
@@ -107,7 +108,7 @@ def _aim(obj, target):
     constraint.up_axis = 'UP_Y'
 
 
-def _area_light(name, location, size, energy, color, target):
+def _area_light(name, location, size, energy, color, target, col):
     light_data = bpy.data.lights.new(name, type='AREA')
     light_data.shape = 'SQUARE'
     light_data.size = size
@@ -115,7 +116,7 @@ def _area_light(name, location, size, energy, color, target):
     light_data.color = color
     obj = bpy.data.objects.new(name, light_data)
     obj.location = location
-    bpy.context.scene.collection.objects.link(obj)
+    col.objects.link(obj)
     _aim(obj, target)
     return obj
 
@@ -147,10 +148,13 @@ def build():
     col_lid = _collection("MacBook Lid")
     col_deck = _collection("MacBook Deck")
     col_mount = _collection("Mounting (provisional)")
-    _collection("Lighting")
+    col_rig = _collection("Render Rig (hidden)")
+    col_rig.hide_viewport = True   # functional for renders, invisible in viewport
 
     reference = _import_cad_parts(manifest, mats, col_reference)
     product = device.build(manifest, mats, col_product)
+    col_optics = _collection("Drum Optics")
+    optics.apply_to_product(manifest, mats, col_optics)
     lid, _deck = macbook.build(params, mats, col_lid, col_deck)
     mount = mounting_stack.build(params, mats, col_mount)
 
@@ -172,21 +176,21 @@ def build():
         obj.parent = pivot
         obj.matrix_parent_inverse = base_inv
 
-    # --- target + cameras + lights -----------------------------------------
+    # --- target + cameras + lights (all in the hidden rig collection) ----
     target = bpy.data.objects.new("Device_Target", None)
     target.empty_display_size = 5 * MM
     target.parent = pivot
     target.matrix_parent_inverse = base_inv
     target.location = (0.0, 0.0, 10 * MM)   # device centre, CAD frame
-    scene.collection.objects.link(target)
+    col_rig.objects.link(target)
 
     pivot.rotation_euler.x = math.radians(90.0 - OPEN_ANGLE_DEG)
 
     cam_data = bpy.data.cameras.new("Camera_Hero")
-    cam_data.lens = 45  # mm
+    cam_data.lens = 60  # mm
     hero = bpy.data.objects.new("Camera_Hero", cam_data)
-    hero.location = (0.16, -0.40, 0.12)
-    scene.collection.objects.link(hero)
+    hero.location = (0.13, -0.20, 0.055)   # front-right 3/4 of the device
+    col_rig.objects.link(hero)
     _aim(hero, target)
     scene.camera = hero
 
@@ -194,7 +198,7 @@ def build():
     cam_data2.lens = 50
     device_cam = bpy.data.objects.new("Camera_Device", cam_data2)
     device_cam.location = (0.05, -0.14, 0.05)
-    scene.collection.objects.link(device_cam)
+    col_rig.objects.link(device_cam)
     _aim(device_cam, target)
 
     # whole-laptop view: aims at a fixed world point near the chassis
@@ -202,19 +206,20 @@ def build():
     laptop_target = bpy.data.objects.new("Laptop_Target", None)
     laptop_target.empty_display_size = 8 * MM
     laptop_target.location = (0.0, -0.03, -0.13)
-    scene.collection.objects.link(laptop_target)
+    col_rig.objects.link(laptop_target)
     cam_data3 = bpy.data.cameras.new("Camera_Laptop")
     cam_data3.lens = 32
     laptop_cam = bpy.data.objects.new("Camera_Laptop", cam_data3)
     laptop_cam.location = (0.30, -0.44, 0.20)
-    scene.collection.objects.link(laptop_cam)
+    col_rig.objects.link(laptop_cam)
     _aim(laptop_cam, laptop_target)
 
     _area_light("Key", (-0.42, -0.20, 0.38), 0.7, 40, (1.0, 0.98, 0.95),
-                target)
+                target, col_rig)
     _area_light("Fill", (0.40, -0.25, 0.15), 0.5, 15, (0.85, 0.90, 1.0),
-                target)
-    _area_light("Rim", (0.10, 0.45, 0.35), 0.4, 25, (1.0, 1.0, 1.0), target)
+                target, col_rig)
+    _area_light("Rim", (0.10, 0.45, 0.35), 0.4, 25, (1.0, 1.0, 1.0), target,
+                col_rig)
 
     world = bpy.data.worlds.new("World")
     world.node_tree.nodes["Background"].inputs[0].default_value = \

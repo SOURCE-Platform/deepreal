@@ -56,10 +56,21 @@ def build_all():
     make("Device_Printed_Nylon", (0.74, 0.73, 0.70),
          roughness=0.46, **{"coat_weight": 0.10, "coat_roughness": 0.30})
 
-    # The two sensor drums: slightly darker satin so they read as distinct
-    # machined subsystems protruding from the printed housing.
-    make("Device_Sensor_Drum", (0.38, 0.38, 0.37),
-         roughness=0.42, **{"coat_weight": 0.15, "coat_roughness": 0.25})
+    # The two sensor drums: matte dark anodized aluminium per the drum
+    # industrial-design reference (precision cylindrical instrument).
+    make("Device_Sensor_Drum", (0.16, 0.16, 0.17),
+         metallic=1.0, roughness=0.42)
+
+    # Drum optics: flush glass with thin dark machined bezels.
+    make("Optic_Glass_Depth", (0.04, 0.035, 0.06),
+         roughness=0.05, **{"coat_weight": 0.6, "coat_roughness": 0.03})
+    make("Optic_Glass_RGB", (0.035, 0.05, 0.045),
+         roughness=0.05, **{"coat_weight": 0.6, "coat_roughness": 0.03})
+    make("Optic_Projector_Inset", (0.02, 0.02, 0.02), roughness=0.4)
+    make("Optic_Bezel", (0.10, 0.10, 0.11), metallic=1.0, roughness=0.35)
+    # Internal placeholder volumes: matte near-black, visible only in
+    # cutaway/exploded views of the drum.
+    make("Sensor_Internal", (0.08, 0.08, 0.085), roughness=0.8)
 
     # Device-side magnetic plate: bright nickel-plated steel.
     make("Mount_Magnet_Nickel", (0.70, 0.71, 0.72),

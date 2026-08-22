@@ -120,6 +120,38 @@ def _extrude_outline(bm, center, u, v, outline, thickness):
     return top, bot
 
 
+def tube(name, center, axis, r_inner, r_outer, length, material=None, seg=48):
+    """Annular tube along `axis`: quad inner/outer walls, annulus caps.
+    Used for machined bezel rings around drum apertures."""
+    bm = bmesh.new()
+    ref = X if abs(axis.dot(X)) < 0.9 else Y
+    u = ref.cross(axis).normalized()
+    v = axis.cross(u).normalized()
+    half = length / 2.0
+    rings = {}
+    for r_name, r in (("ri", r_inner), ("ro", r_outer)):
+        for s_name, s in (("t", half), ("b", -half)):
+            ring = []
+            for i in range(seg):
+                a = 2.0 * math.pi * i / seg
+                p = (center + u * (r * math.cos(a)) + v * (r * math.sin(a))
+                     + axis * s)
+                ring.append(bm.verts.new(p))
+            rings[r_name + s_name] = ring
+    for i in range(seg):
+        j = (i + 1) % seg
+        bm.faces.new((rings["rot"][i], rings["rob"][i], rings["rob"][j],
+                      rings["rot"][j]))
+        bm.faces.new((rings["rit"][i], rings["rit"][j], rings["rib"][j],
+                      rings["rib"][i]))
+        bm.faces.new((rings["rit"][i], rings["rit"][j], rings["rot"][j],
+                      rings["rot"][i]))
+        bm.faces.new((rings["rib"][i], rings["rob"][i], rings["rob"][j],
+                      rings["rib"][j]))
+    _recalc(bm)
+    return _finish_object(name, _mesh_from_bmesh(name, bm), material)
+
+
 def prism(name, outline, center, u, v, thickness, material=None):
     """Extrude an arbitrary CCW 2D outline [(x, y), ...] into a closed
     prism: quad side walls, n-gon caps. Outline lives in the (u, v)
