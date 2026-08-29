@@ -4,8 +4,8 @@ Implements the correction spec ("Put the Optical Hardware Inside the
 Rotating Drums") on top of the hollow-shell drums built by device.py:
 
 - drum exterities stay PERFECT cylinders (true circular cross-sections);
-  apertures are local through-wall bores (live BOOLEAN modifiers), never
-  flats or panels;
+  apertures are local through-wall bores (deterministic Boolean cuts baked
+  during each rebuild), never flats or panels;
 - inside each drum: a flat internal optical carrier rail plus three
   named module assemblies -- RGB camera, IR/depth camera, structured-
   light projector -- each with barrel + body + PCB placeholder volumes;
@@ -22,8 +22,8 @@ Rotating Drums") on top of the hollow-shell drums built by device.py:
 
 Drum-local layout (mm, measured from the drum axis; -Y = window side):
     skin outer r 12.0, wall 1.5, interior r 10.5
-    barrel mouth   dy -11.7 (0.3 inside the skin)
-    barrel run     dy -11.7 .. -7.5
+    barrel mouth   dy -10.6 (behind the recessed lens window)
+    barrel run     dy -10.6 .. -7.5
     module body    dy -7.5 .. -3.5   (projector: -7.0 .. -3.0)
     module PCB     dy -3.5 .. -2.9
     carrier rail   dy -2.9 .. -1.9, 12 tall, along the drum axis
@@ -41,6 +41,7 @@ MM = 0.001
 SKIN_R = 12.0 * MM
 INTERIOR_R = 10.5 * MM
 WALL = 1.5 * MM
+APERTURE_SEGMENTS = 64
 
 # --- per-aperture layout constants (drum-local mm) ----------------------
 # (name, kind, x, dz, diameter)
@@ -48,21 +49,28 @@ WALL = 1.5 * MM
 #   dz  : vertical offset from the drum axis (parallel optic axes stay
 #         along -Y; dz slides the opening around the skin)
 APERTURES = [
-    ("Depth",   "depth",     -19.0, 0.0, 8.0),
+    ("Depth",   "depth",     -19.0, 0.0, 9.0),
     # upper pair: 3.2 mm centre-to-centre (refinement pass: +23% over the
     # original 2.6 mm to sit credibly over the shared projector hardware);
     # lower pinhole keeps its vertical separation, unmoved
     ("ProjA",   "projector",   2.7, 1.9, 1.6),
     ("ProjB",   "projector",   5.9, 1.9, 1.6),
     ("Pinhole", "pinhole",     4.3, -0.7, 0.8),
-    ("RGB",     "rgb",        19.0, 0.0, 7.0),
+    ("RGB",     "rgb",        19.0, 0.0, 9.0),
 ]
 
-LENS_THICKNESS = 0.8 * MM
-LENS_RECESS = 0.45 * MM      # glass sits this far behind the outer skin
+LENS_THICKNESS = 0.35 * MM
+LENS_RECESS = 1.20 * MM      # projector/pinhole insert depth
 CUTTER_DEPTH = 3.6 * MM      # through the 1.5 mm wall + clearance
+CAMERA_WINDOW_RECESS = 1.20 * MM
+CAMERA_WINDOW_THICKNESS = 0.30 * MM
+CAMERA_SLEEVE_FRONT_RECESS = 1.15 * MM
+CAMERA_SLEEVE_DEPTH = 0.80 * MM
 
-BARREL_MOUTH_DY = -11.7 * MM
+# Keep the retaining barrel behind the window. Extending it to the skin
+# produces a bright porthole ring in front views, which the exterior design
+# explicitly rejects.
+BARREL_MOUTH_DY = -10.6 * MM
 BODY_FRONT_DY = -7.5 * MM
 BODY_LENGTH = 4.0 * MM
 PCB_THICKNESS = 0.6 * MM
@@ -114,6 +122,76 @@ def _radial_extent(obj, centre):
                for v in obj.bound_box)
 
 
+def _apply_bores_with_radial_normals(drum_obj, centre, radius):
+    """Bake drum modifiers and restore the analytic outer normals.
+
+    Boolean cuts fragment the drum's long outer quads into irregular
+    n-gons. Their generated corner normals otherwise interpolate across
+    each aperture cluster and show up as seams radiating from the openings.
+    Apply the drum's original end treatments first, then the bores, so the
+    global bevel cannot round the aperture rims into bright lower crescents.
+    The outer skin is still an exact cylinder, so its intended normal is
+    known: radial from the X-axis at every corner. Bore walls and the inner
+    skin retain Blender's calculated normals, preserving the hard rims.
+    """
+    bore_modifiers = [
+        mod for mod in drum_obj.modifiers
+        if mod.type == 'BOOLEAN' and mod.name.startswith("Bore_")
+    ]
+    bore_names = [mod.name for mod in bore_modifiers]
+    end_modifiers = [
+        mod.name for mod in drum_obj.modifiers
+        if mod not in bore_modifiers
+    ]
+    with bpy.context.temp_override(
+            object=drum_obj, active_object=drum_obj,
+            selected_objects=[drum_obj]):
+        # Boolean modifiers were inserted at the top of the live stack.
+        # Move the original Edge Split and Bevel ahead of them so these
+        # treatments affect only the drum ends, not the aperture rims.
+        for target_index, name in enumerate(end_modifiers):
+            current_index = drum_obj.modifiers.find(name)
+            drum_obj.modifiers.move(current_index, target_index)
+        for name in end_modifiers:
+            bpy.ops.object.modifier_apply(modifier=name)
+        for name in bore_names:
+            bpy.ops.object.modifier_apply(modifier=name)
+
+    mesh = drum_obj.data
+    mesh.update()
+    corner_normals = [
+        corner.vector.copy() for corner in mesh.corner_normals
+    ]
+    # A 64-sided, 12 mm radius drum has about 0.014 mm chord sag. This
+    # tolerance includes Boolean intersection vertices on those chords
+    # while remaining far inside the 1.5 mm wall thickness.
+    outer_tolerance = 0.05 * MM
+    outer_faces = 0
+    outer_corners = 0
+    for poly in mesh.polygons:
+        verts = [mesh.vertices[i].co for i in poly.vertices]
+        if not all(abs(math.hypot(co.y - centre.y, co.z - centre.z)
+                       - radius) <= outer_tolerance for co in verts):
+            continue
+        poly.use_smooth = True
+        outer_faces += 1
+        for loop_index in poly.loop_indices:
+            co = mesh.vertices[mesh.loops[loop_index].vertex_index].co
+            radial = Vector((0.0, co.y - centre.y, co.z - centre.z))
+            corner_normals[loop_index] = radial.normalized()
+            outer_corners += 1
+
+    if not outer_faces:
+        raise RuntimeError(
+            "{}: no outer drum faces found for radial normals".format(
+                drum_obj.name))
+    mesh.normals_split_custom_set(corner_normals)
+    print("optics: {} baked {} end modifiers before {} bores; applied "
+          "radial normals to {} outer faces / {} corners".format(
+              drum_obj.name, len(end_modifiers), len(bore_names),
+              outer_faces, outer_corners))
+
+
 def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
                   report):
     centre, radius, length = _drum_frame(bbox_mm)
@@ -142,7 +220,8 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
             prefix + "_Cutter_" + name,
             base_pt + axis * (skin - 1.0 * MM
                               + (CUTTER_DEPTH + 1.0 * MM) / 2.0),
-            axis, d / 2.0, CUTTER_DEPTH + 1.0 * MM, seg=40)
+            axis, d / 2.0, CUTTER_DEPTH + 1.0 * MM,
+            seg=APERTURE_SEGMENTS)
         cutter.hide_viewport = True
         cutter.hide_render = True
         _link_child(cutter, pivot, child_mpi, col)
@@ -153,13 +232,50 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
         mod.solver = 'EXACT'
         drum_obj.modifiers.move(len(drum_obj.modifiers) - 1, 0)
 
-        lens = macbook.cylinder(
-            prefix + "_Lens_" + name,
-            base_pt + axis * (skin - LENS_RECESS - LENS_THICKNESS / 2.0),
-            axis, d / 2.0 - 0.05 * MM, LENS_THICKNESS,
-            mats[_LENS_MAT[kind]], seg=40)
-        _smooth(lens)
-        _link_child(lens, pivot, child_mpi, col)
+        is_camera = kind in ("depth", "rgb")
+        if is_camera:
+            # Production-realistic camera opening: the cylindrical shell
+            # remains unflattened, while a matte internal sleeve terminates
+            # in a planar optical window normal to the camera axis.
+            element_radius = d / 2.0 - 0.12 * MM
+            sleeve_outer = d / 2.0 - 0.02 * MM
+            sleeve_inner = element_radius - 0.10 * MM
+            lens = macbook.tube(
+                prefix + "_Lens_" + name,
+                base_pt + axis * (
+                    skin - CAMERA_SLEEVE_FRONT_RECESS
+                    - CAMERA_SLEEVE_DEPTH / 2.0),
+                axis, sleeve_inner, sleeve_outer, CAMERA_SLEEVE_DEPTH,
+                mats["Optic_Lens_Well"], seg=APERTURE_SEGMENTS)
+            _link_child(lens, pivot, child_mpi, col)
+
+            element = macbook.cylinder(
+                prefix + "_Lens_" + name + "_Element",
+                base_pt + axis * (
+                    skin - CAMERA_WINDOW_RECESS
+                    - CAMERA_WINDOW_THICKNESS / 2.0),
+                axis, element_radius, CAMERA_WINDOW_THICKNESS,
+                mats[_LENS_MAT[kind]], seg=APERTURE_SEGMENTS)
+            _link_child(element, pivot, child_mpi, col)
+
+            pupil_t = 0.025 * MM
+            pupil = macbook.cylinder(
+                prefix + "_Lens_" + name + "_Pupil",
+                base_pt + axis * (
+                    skin - (CAMERA_WINDOW_RECESS - 0.02 * MM)
+                    - pupil_t / 2.0),
+                axis, element_radius * 0.15, pupil_t,
+                mats["Optic_Lens_Pupil"], seg=48)
+            _link_child(pupil, pivot, child_mpi, col)
+        else:
+            lens_radius = d / 2.0 - 0.10 * MM
+            lens = macbook.cylinder(
+                prefix + "_Lens_" + name,
+                base_pt + axis * (
+                    skin - LENS_RECESS - LENS_THICKNESS / 2.0),
+                axis, lens_radius, LENS_THICKNESS, mats[_LENS_MAT[kind]],
+                seg=APERTURE_SEGMENTS)
+            _link_child(lens, pivot, child_mpi, col)
 
         report.append(("path", prefix + "_Lens_" + name,
                        abs(dz) + d / 2.0, _WINDOW_BAND, "window band"))
@@ -171,6 +287,14 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
                      for v in lens.data.vertices)
         report.append(("path", prefix + "_Lens_" + name, lens_r,
                        SKIN_R + 1.0 * MM, "at the skin, not floating"))
+
+    # The interaction drum's calibrated rest angle rotates the aperture
+    # pattern around the X-axis. Set it before baking so its bore geometry
+    # and optical components remain coincident after the live cutters are
+    # removed.
+    pivot.rotation_euler.x = math.radians(rotation_deg)
+    bpy.context.view_layer.update()
+    _apply_bores_with_radial_normals(drum_obj, centre, radius)
 
     # ---- internal optical carrier rail -----------------------------------
     carrier = macbook.slab(
@@ -198,14 +322,14 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
         module.matrix_parent_inverse = child_mpi
         module_mpi = Matrix.Translation(-module_loc)
 
-        barrel = macbook.cylinder(
+        barrel_outer = d / 2.0 - 0.3 * MM
+        barrel = macbook.tube(
             module_name + "_Barrel",
             Vector((centre.x + x,
                     centre.y + (BARREL_MOUTH_DY + BODY_FRONT_DY) / 2.0,
                     centre.z + dz)),
-            axis, d / 2.0 - 0.3 * MM,
+            axis, barrel_outer - 0.45 * MM, barrel_outer,
             BODY_FRONT_DY - BARREL_MOUTH_DY, mats["Optic_Bezel"], seg=32)
-        _smooth(barrel)
         _link_child(barrel, module, module_mpi, col)
 
         body = macbook.slab(
@@ -303,16 +427,16 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
     for name, kind, x_mm, dz_mm, d_mm in APERTURES:
         if kind not in ("projector", "pinhole"):
             continue
-        barrel = macbook.cylinder(
+        barrel_outer = d_mm * MM / 2.0 - 0.15 * MM
+        barrel = macbook.tube(
             base + "_SL_Projector_Barrel_" + name,
             Vector((centre.x + x_mm * MM,
                     centre.y + (BARREL_MOUTH_DY
                                 + PROJECTOR["front_dy"] * MM) / 2.0,
                     centre.z + dz_mm * MM)),
-            axis, d_mm * MM / 2.0 - 0.15 * MM,
+            axis, max(0.03 * MM, barrel_outer - 0.20 * MM), barrel_outer,
             PROJECTOR["front_dy"] * MM - BARREL_MOUTH_DY,
             mats["Optic_Bezel"], seg=24)
-        _smooth(barrel)
         _link_child(barrel, projector, projector_mpi, col)
 
     # keep-out envelope: editable collision volume, 5-8 mm deep from the
@@ -371,7 +495,6 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
                    -abs(ko[3] - (centre.y + radius - WALL)), 0.0,
                    "overlap depth (must be <= 0)"))
 
-    pivot.rotation_euler.x = math.radians(rotation_deg)
     return pivot, keepout
 
 

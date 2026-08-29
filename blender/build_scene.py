@@ -18,7 +18,7 @@ Usage (from the repository root):
         --factory-startup --python blender/build_scene.py -- [--render]
 
     --render          also render the verification still to blender/renders/
-    --camera NAME     hero (default) | device
+    --camera NAME     hero (default) | front | device | laptop
     --samples N       Cycles samples (default 96)
 
 Run cad/export_blender.py first after any CAD change.
@@ -110,7 +110,7 @@ def _aim(obj, target):
 
 def _area_light(name, location, size, energy, color, target, col):
     light_data = bpy.data.lights.new(name, type='AREA')
-    light_data.shape = 'SQUARE'
+    light_data.shape = 'DISK'
     light_data.size = size
     light_data.energy = energy
     light_data.color = color
@@ -138,7 +138,7 @@ def build():
     scene.cycles.samples = samples
     scene.cycles.use_denoising = True
     scene.render.resolution_x = 1600
-    scene.render.resolution_y = 1200
+    scene.render.resolution_y = 900 if camera_name == "front" else 1200
     scene.view_settings.view_transform = 'AgX'
 
     mats = materials.build_all()
@@ -201,6 +201,16 @@ def build():
     col_rig.objects.link(device_cam)
     _aim(device_cam, target)
 
+    # Straight-on device study. The camera stays centered on the product
+    # rather than favoring either drum, with enough margin to judge the
+    # housing silhouette and optical layout.
+    cam_data_front = bpy.data.cameras.new("Camera_Front")
+    cam_data_front.lens = 55
+    front_cam = bpy.data.objects.new("Camera_Front", cam_data_front)
+    front_cam.location = (0.0, -0.18, 0.045)
+    col_rig.objects.link(front_cam)
+    _aim(front_cam, target)
+
     # whole-laptop view: aims at a fixed world point near the chassis
     # centre, not at the lid-mounted device
     laptop_target = bpy.data.objects.new("Laptop_Target", None)
@@ -216,7 +226,7 @@ def build():
 
     _area_light("Key", (-0.42, -0.20, 0.38), 0.7, 40, (1.0, 0.98, 0.95),
                 target, col_rig)
-    _area_light("Fill", (0.40, -0.25, 0.15), 0.5, 15, (0.85, 0.90, 1.0),
+    _area_light("Fill", (0.45, -0.10, 0.42), 0.8, 10, (0.85, 0.90, 1.0),
                 target, col_rig)
     _area_light("Rim", (0.10, 0.45, 0.35), 0.4, 25, (1.0, 1.0, 1.0), target,
                 col_rig)
@@ -231,7 +241,8 @@ def build():
         len(scene.objects), BLEND_PATH))
 
     if do_render:
-        names = {"hero": hero, "device": device_cam, "laptop": laptop_cam}
+        names = {"hero": hero, "front": front_cam, "device": device_cam,
+                 "laptop": laptop_cam}
         cam = names.get(camera_name, hero)
         scene.camera = cam
         os.makedirs(RENDER_DIR, exist_ok=True)

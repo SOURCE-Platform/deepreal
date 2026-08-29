@@ -51,23 +51,33 @@ def build_all():
         return mat
 
     # --- DeepReal device -------------------------------------------------
-    # Smooth professional 3D print (SLS/MJF nylon): satin, light warm grey,
-    # no visible layer texture.
-    make("Device_Printed_Nylon", (0.74, 0.73, 0.70),
-         roughness=0.46, **{"coat_weight": 0.10, "coat_roughness": 0.30})
+    # Near-black satin anodized aluminium across the stationary housing,
+    # rear arm, and both rotating drums. Keep the finish shared so the
+    # straight-on product view reads as one instrument.
+    anodized = (0.025, 0.028, 0.032)
+    make("Device_Housing_Anodized", anodized, metallic=0.92,
+         roughness=0.32, **{"coat_weight": 0.12,
+                           "coat_roughness": 0.24})
+    make("Device_Sensor_Drum", anodized, metallic=0.92,
+         roughness=0.58, **{"coat_weight": 0.12,
+                           "coat_roughness": 0.24})
 
-    # The two sensor drums: matte dark anodized aluminium per the drum
-    # industrial-design reference (precision cylindrical instrument).
-    make("Device_Sensor_Drum", (0.16, 0.16, 0.17),
-         metallic=1.0, roughness=0.42)
-
-    # Drum optics: flush glass with thin dark machined bezels.
-    make("Optic_Glass_Depth", (0.04, 0.035, 0.06),
-         roughness=0.05, **{"coat_weight": 0.6, "coat_roughness": 0.03})
-    make("Optic_Glass_RGB", (0.035, 0.05, 0.045),
-         roughness=0.05, **{"coat_weight": 0.6, "coat_roughness": 0.03})
-    make("Optic_Projector_Inset", (0.02, 0.02, 0.02), roughness=0.4)
-    make("Optic_Bezel", (0.10, 0.10, 0.11), metallic=1.0, roughness=0.35)
+    # Reference-component optical appearance: a matte-black recessed well
+    # surrounds each element, OV9281-class IR/depth glass carries a faint
+    # violet AR cast, and IMX708-class RGB glass a faint green/cyan cast.
+    make("Optic_Lens_Well", (0.0015, 0.0018, 0.0020), roughness=0.58,
+         **{"ior_level": 0.02})
+    make("Optic_Glass_Depth", (0.0018, 0.0010, 0.0030),
+         roughness=0.45, **{"ior_level": 0.025})
+    make("Optic_Glass_RGB", (0.0008, 0.0025, 0.0015),
+         roughness=0.45, **{"ior_level": 0.025})
+    make("Optic_Lens_Pupil", (0.0005, 0.0007, 0.0008),
+         roughness=0.18, **{"ior_level": 0.10})
+    make("Optic_Projector_Inset", (0.006, 0.006, 0.008),
+         roughness=0.34, **{"ior_level": 0.10, "coat_weight": 0.05,
+                           "coat_roughness": 0.20})
+    make("Optic_Bezel", (0.008, 0.009, 0.010),
+         metallic=0.35, roughness=0.52)
     # Internal placeholder volumes: matte near-black, visible only in
     # cutaway/exploded views of the drum.
     make("Sensor_Internal", (0.08, 0.08, 0.085), roughness=0.8)

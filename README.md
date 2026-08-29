@@ -4,6 +4,8 @@
 
 > **Status: architecture + hardware design in progress.** DeepReal is in active architecture, hardware-design, and prototype-planning work. Nothing here is production-ready, and no sensor configuration is final.
 
+System architecture: [Source of Truth v0.1](docs/system-architecture/system-architecture.md)
+
 Project page: https://sourceovcourse.com/deepreal
 
 ---

@@ -112,7 +112,7 @@ def build(manifest, mats, col):
             thickness = (bb["max"][0] - bb["min"][0]) * MM
             obj = macbook.prism(name, outline, center, macbook.Y,
                                 macbook.Z, thickness,
-                                mats["Device_Printed_Nylon"])
+                                mats["Device_Housing_Anodized"])
         elif name.endswith("Sensor_Head"):
             centre = Vector(((bb["min"][0] + bb["max"][0]) / 2.0 * MM,
                              (bb["min"][1] + bb["max"][1]) / 2.0 * MM,

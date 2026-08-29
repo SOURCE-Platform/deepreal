@@ -21,9 +21,9 @@ to the CAD reference slab, the mounting stack spans the pocket exactly).
 
 ## Files
 
-- `materials.py` — deterministic Principled BSDF library (smooth
-  3D-print nylon, nickel/steel/foam-tape mount, MacBook alu/screen/
-  keycaps, debug red)
+- `materials.py` — deterministic Principled BSDF library (near-black
+  satin anodized device, reference-component optics, nickel/steel/
+  foam-tape mount, MacBook alu/screen/keycaps, debug red)
 - `macbook.py` — parametric MacBook Air (M2-generation chassis, silver;
   lid locked to the CAD slab cross-section so the pocket fits)
 - `device.py` — native quad/n-gon rebuild of the device from the CAD
@@ -39,7 +39,7 @@ to the CAD reference slab, the mounting stack spans the pocket exactly).
   stack
 - `build_scene.py` — headless scene assembly: imports the CAD meshes,
   builds MacBook + mount, parents everything to the lid pivot (105°
-  open angle), materials, 3-point lighting, three cameras; saves
+  open angle), materials, 3-point lighting, four cameras; saves
   `deepreal.blend`
 - `assets/` — generated: `parts/*.stl` + `manifest.json`
 - `renders/` — generated verification stills
