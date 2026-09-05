@@ -72,6 +72,13 @@ HINGE_LENGTH = 272.0 * MM
 FOOT_RADIUS = 4.8 * MM
 FOOT_HEIGHT = 1.2 * MM
 
+# side I/O (deck side face, z at mid-thickness): M2 Air layout -- two
+# USB-C on the left, headphone on the right
+SIDE_PORT_Y = (-0.055, -0.088)     # world y of the two left USB-C slots
+SIDE_PORT_W = 9.2 * MM
+SIDE_PORT_H = 3.2 * MM
+HEADPHONE_Y = -0.100
+
 X = Vector((1.0, 0.0, 0.0))
 Y = Vector((0.0, 1.0, 0.0))
 Z = Vector((0.0, 0.0, 1.0))
@@ -342,6 +349,18 @@ def build(params, mats, col_lid, col_deck):
                    deck_top + 0.1 * MM / 2.0))
     deck.append(slab("MacBook_Trackpad", tp_c, X, Y, TRACKPAD_SIZE,
                      TRACKPAD_RADIUS, 0.1 * MM, mats["MacBook_Trackpad"]))
+
+    # ---- side I/O: flush dark slots on the deck side faces ---------------
+    side_z = deck_top - DECK_THICKNESS / 2.0
+    for i, port_y in enumerate(SIDE_PORT_Y):
+        deck.append(slab("MacBook_Side_USBC_{}".format(i + 1),
+                         Vector((-lid_w / 2.0 - 0.05 * MM, port_y, side_z)),
+                         Y, Z, (SIDE_PORT_W, SIDE_PORT_H), 1.6 * MM,
+                         0.1 * MM, mats["MacBook_Keyboard_Well"]))
+    deck.append(cylinder(
+        "MacBook_Side_Headphone",
+        Vector((lid_w / 2.0 + 0.05 * MM, HEADPHONE_Y, side_z)),
+        X, 1.75 * MM, 0.1 * MM, mats["MacBook_Keyboard_Well"], seg=24))
 
     # ---- hinge + feet ----------------------------------------------------
     deck.append(cylinder("MacBook_Hinge", Vector((0, 1.2 * MM,

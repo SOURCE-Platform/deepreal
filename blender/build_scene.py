@@ -41,6 +41,8 @@ import materials      # noqa: E402
 import mounting_stack # noqa: E402
 import device         # noqa: E402
 import optics         # noqa: E402
+import usb_port       # noqa: E402
+import usb_cable      # noqa: E402
 
 ASSETS = os.path.join(HERE, "assets")
 BLEND_PATH = os.path.join(HERE, "deepreal.blend")
@@ -121,6 +123,30 @@ def _area_light(name, location, size, energy, color, target, col):
     return obj
 
 
+def _set_default_viewport(target):
+    """Save a useful close perspective instead of Blender's origin view."""
+    focus = target.matrix_world.translation + Vector((0.0, 0.0, -0.010))
+    eye = focus + Vector((0.13, -0.20, 0.075))
+    rotation = (focus - eye).to_track_quat('-Z', 'Y')
+    configured = 0
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            if area.type != 'VIEW_3D':
+                continue
+            space = area.spaces.active
+            region = space.region_3d
+            space.lens = 50
+            space.clip_start = 1 * MM
+            space.clip_end = 10.0
+            region.view_perspective = 'PERSP'
+            region.view_location = focus
+            region.view_rotation = rotation
+            region.view_distance = (eye - focus).length
+            configured += 1
+    print("viewport: framed the complete device in {} 3D view(s)".format(
+        configured))
+
+
 def build():
     do_render = _argv_flag("--render")
     camera_name = _argv_flag("--camera", "hero")
@@ -157,6 +183,9 @@ def build():
     optics.apply_to_product(manifest, mats, col_optics)
     lid, _deck = macbook.build(params, mats, col_lid, col_deck)
     mount = mounting_stack.build(params, mats, col_mount)
+    col_usb = _collection("USB Port (provisional)")
+    usb_port.build(manifest, mats, col_usb)
+    usb_cable.build(manifest, mats, col_usb)
 
     # --- lid pivot: everything that swings with the lid -------------------
     # All CAD/MacBook vertices are baked in absolute CAD-world coordinates,
@@ -236,6 +265,8 @@ def build():
         (0.02, 0.02, 0.022, 1.0)
     scene.world = world
 
+    bpy.context.view_layer.update()
+    _set_default_viewport(target)
     bpy.ops.wm.save_as_mainfile(filepath=BLEND_PATH)
     print("Scene built: {} objects, saved {}".format(
         len(scene.objects), BLEND_PATH))

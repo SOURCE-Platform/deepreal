@@ -219,6 +219,7 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 | Keep-out per actuator | ≈22 × 10 × 22 mm until final actuator selection. |
 | Prototype actuator | Micro-servo class such as Kpower P0025 is acceptable for quick fit/motion experiments. |
 | Production direction | Micro geared DC motor + absolute magnetic encoder is preferred over a hobby servo. |
+| Drive layout | SELECTED: offset micro-gearmotor inside the housing behind each drum; pinion on the motor shaft meshes a ring (or sector) gear fixed to the drum's outboard end (≈3.25:1 in the packaging study). The drum rides its own centerline bearings; the drum-axis encoder closes the loop over gear lash. Coaxial end-pod motors REJECTED: ≈32 mm wider device and larger direct-drive motors. |
 | Driver reference | TI DRV8212-class H-bridge, one per brushed motor. |
 | Encoder reference | ams OSRAM AS5600-class magnetic absolute angle sensor; higher-resolution SPI alternative can be evaluated. |
 | Evidence requirement | Record measured encoder angle with every capture window; do not treat the motor command as the actual pose. |

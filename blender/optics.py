@@ -31,6 +31,7 @@ Drum-local layout (mm, measured from the drum axis; -Y = window side):
 
 import math
 
+import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
@@ -61,11 +62,16 @@ APERTURES = [
 
 LENS_THICKNESS = 0.35 * MM
 LENS_RECESS = 1.20 * MM      # projector/pinhole insert depth
-CUTTER_DEPTH = 3.6 * MM      # through the 1.5 mm wall + clearance
+CUTTER_DEPTH = 3.6 * MM      # 1.5 mm wall + 1.05 mm clearance per side
 CAMERA_WINDOW_RECESS = 1.20 * MM
 CAMERA_WINDOW_THICKNESS = 0.30 * MM
 CAMERA_SLEEVE_FRONT_RECESS = 1.15 * MM
-CAMERA_SLEEVE_DEPTH = 0.80 * MM
+CAMERA_SLEEVE_DEPTH = 0.55 * MM
+CAMERA_BARREL_FRONT_RECESS = 1.65 * MM
+CAMERA_BARREL_DEPTH = 1.15 * MM
+CAMERA_FRONT_ELEMENT_RECESS = 1.70 * MM
+CAMERA_FRONT_ELEMENT_DEPTH = 0.55 * MM
+CAMERA_PUPIL_RECESS = 2.83 * MM
 
 # Keep the retaining barrel behind the window. Extending it to the skin
 # produces a bright porthole ring in front views, which the exterior design
@@ -112,6 +118,69 @@ def _link_child(obj, parent, mpi, col):
 def _smooth(obj):
     for poly in obj.data.polygons:
         poly.use_smooth = True
+
+
+def _tapered_tube(name, center, axis, front_inner, front_outer,
+                  back_inner, back_outer, length, material, segments=64):
+    """Open annular frustum used as a matte optical light trap."""
+    ref = macbook.X if abs(axis.dot(macbook.X)) < 0.9 else macbook.Y
+    u = ref.cross(axis).normalized()
+    v = axis.cross(u).normalized()
+    half = length / 2.0
+    rings = {}
+    for end_name, axial, inner, outer in (
+            ("front", half, front_inner, front_outer),
+            ("back", -half, back_inner, back_outer)):
+        for radius_name, radius in (("inner", inner), ("outer", outer)):
+            rings[end_name + "_" + radius_name] = [
+                center + axis * axial
+                + u * (radius * math.cos(2.0 * math.pi * i / segments))
+                + v * (radius * math.sin(2.0 * math.pi * i / segments))
+                for i in range(segments)
+            ]
+
+    vertices = []
+    indexes = {}
+    for ring_name, ring in rings.items():
+        indexes[ring_name] = []
+        for point in ring:
+            indexes[ring_name].append(len(vertices))
+            vertices.append(tuple(point))
+
+    faces = []
+    for i in range(segments):
+        j = (i + 1) % segments
+        fi, fo = indexes["front_inner"], indexes["front_outer"]
+        bi, bo = indexes["back_inner"], indexes["back_outer"]
+        faces.append((fo[i], bo[i], bo[j], fo[j]))
+        faces.append((fi[i], fi[j], bi[j], bi[i]))
+        faces.append((fi[i], fo[i], fo[j], fi[j]))
+        faces.append((bi[i], bi[j], bo[j], bo[i]))
+
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(vertices, [], faces)
+    mesh.update()
+    obj = bpy.data.objects.new(name, mesh)
+    obj.data.materials.append(material)
+    _smooth(obj)
+    return obj
+
+
+def _lens_dome(name, center, radial_radius, depth_radius, material):
+    """Closed oblate lens element with its optical axis along Y."""
+    bm = bmesh.new()
+    bmesh.ops.create_uvsphere(
+        bm, u_segments=64, v_segments=32, radius=1.0,
+        matrix=Matrix.Diagonal(
+            (radial_radius, depth_radius, radial_radius, 1.0)))
+    mesh = bpy.data.meshes.new(name)
+    bm.to_mesh(mesh)
+    bm.free()
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = center
+    obj.data.materials.append(material)
+    _smooth(obj)
+    return obj
 
 
 def _radial_extent(obj, centre):
@@ -218,9 +287,8 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
 
         cutter = macbook.cylinder(
             prefix + "_Cutter_" + name,
-            base_pt + axis * (skin - 1.0 * MM
-                              + (CUTTER_DEPTH + 1.0 * MM) / 2.0),
-            axis, d / 2.0, CUTTER_DEPTH + 1.0 * MM,
+            base_pt + axis * (skin - WALL / 2.0),
+            axis, d / 2.0, CUTTER_DEPTH,
             seg=APERTURE_SEGMENTS)
         cutter.hide_viewport = True
         cutter.hide_render = True
@@ -234,19 +302,22 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
 
         is_camera = kind in ("depth", "rgb")
         if is_camera:
-            # Production-realistic camera opening: the cylindrical shell
-            # remains unflattened, while a matte internal sleeve terminates
-            # in a planar optical window normal to the camera axis.
-            element_radius = d / 2.0 - 0.12 * MM
-            sleeve_outer = d / 2.0 - 0.02 * MM
-            sleeve_inner = element_radius - 0.10 * MM
-            lens = macbook.tube(
+            # Production-realistic camera opening: a flat protective cover
+            # seals the cylindrical shell. Behind it, a tapered matte light
+            # trap reveals a smaller barrel, curved lens element, and pupil.
+            cover_radius = d / 2.0 - 0.12 * MM
+            trap_front_outer = d / 2.0 - 0.02 * MM
+            trap_front_inner = cover_radius - 0.12 * MM
+            trap_back_outer = d * 0.40
+            trap_back_inner = trap_back_outer - 0.28 * MM
+            lens = _tapered_tube(
                 prefix + "_Lens_" + name,
                 base_pt + axis * (
                     skin - CAMERA_SLEEVE_FRONT_RECESS
                     - CAMERA_SLEEVE_DEPTH / 2.0),
-                axis, sleeve_inner, sleeve_outer, CAMERA_SLEEVE_DEPTH,
-                mats["Optic_Lens_Well"], seg=APERTURE_SEGMENTS)
+                axis, trap_front_inner, trap_front_outer,
+                trap_back_inner, trap_back_outer, CAMERA_SLEEVE_DEPTH,
+                mats["Optic_Lens_Well"], segments=APERTURE_SEGMENTS)
             _link_child(lens, pivot, child_mpi, col)
 
             element = macbook.cylinder(
@@ -254,18 +325,39 @@ def apply_to_drum(drum_obj, bbox_mm, rotation_deg, mats, col, prefix,
                 base_pt + axis * (
                     skin - CAMERA_WINDOW_RECESS
                     - CAMERA_WINDOW_THICKNESS / 2.0),
-                axis, element_radius, CAMERA_WINDOW_THICKNESS,
-                mats[_LENS_MAT[kind]], seg=APERTURE_SEGMENTS)
+                axis, cover_radius, CAMERA_WINDOW_THICKNESS,
+                mats["Optic_Cover_Glass"], seg=APERTURE_SEGMENTS)
             _link_child(element, pivot, child_mpi, col)
 
-            pupil_t = 0.025 * MM
+            barrel_outer = trap_back_outer - 0.08 * MM
+            barrel_inner = barrel_outer - 0.38 * MM
+            barrel = macbook.tube(
+                prefix + "_Lens_" + name + "_Barrel",
+                base_pt + axis * (
+                    skin - CAMERA_BARREL_FRONT_RECESS
+                    - CAMERA_BARREL_DEPTH / 2.0),
+                axis, barrel_inner, barrel_outer, CAMERA_BARREL_DEPTH,
+                mats["Optic_Bezel"], seg=APERTURE_SEGMENTS)
+            _link_child(barrel, pivot, child_mpi, col)
+
+            lens_radius = barrel_inner - 0.08 * MM
+            front_element = _lens_dome(
+                prefix + "_Lens_" + name + "_Front_Element",
+                base_pt + axis * (
+                    skin - CAMERA_FRONT_ELEMENT_RECESS
+                    - CAMERA_FRONT_ELEMENT_DEPTH),
+                lens_radius, CAMERA_FRONT_ELEMENT_DEPTH,
+                mats[_LENS_MAT[kind]])
+            _link_child(front_element, pivot, child_mpi, col)
+
+            pupil_t = 0.04 * MM
             pupil = macbook.cylinder(
                 prefix + "_Lens_" + name + "_Pupil",
                 base_pt + axis * (
-                    skin - (CAMERA_WINDOW_RECESS - 0.02 * MM)
+                    skin - CAMERA_PUPIL_RECESS
                     - pupil_t / 2.0),
-                axis, element_radius * 0.15, pupil_t,
-                mats["Optic_Lens_Pupil"], seg=48)
+                axis, lens_radius * 0.42, pupil_t,
+                mats["Optic_Lens_Pupil"], seg=APERTURE_SEGMENTS)
             _link_child(pupil, pivot, child_mpi, col)
         else:
             lens_radius = d / 2.0 - 0.10 * MM

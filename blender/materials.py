@@ -28,11 +28,17 @@ def _fresh_principled(name):
 def _set(bsdf, socket, value):
     """Set a Principled input if this Blender version has it (4.x renamed
     several sockets; guard so the library works across versions)."""
-    try:
-        bsdf.inputs[socket].default_value = value
-        return True
-    except (KeyError, RuntimeError):
-        return False
+    normalized = socket.replace("_", "").replace(" ", "").lower()
+    aliases = {
+        "iorlevel": "speculariorlevel",
+    }
+    normalized = aliases.get(normalized, normalized)
+    for input_socket in bsdf.inputs:
+        candidate = input_socket.name.replace(" ", "").lower()
+        if candidate == normalized:
+            input_socket.default_value = value
+            return True
+    return False
 
 
 def build_all():
@@ -67,10 +73,19 @@ def build_all():
     # violet AR cast, and IMX708-class RGB glass a faint green/cyan cast.
     make("Optic_Lens_Well", (0.0015, 0.0018, 0.0020), roughness=0.58,
          **{"ior_level": 0.02})
+    make("Optic_Cover_Glass", (0.012, 0.014, 0.016),
+         roughness=0.08, **{"ior": 1.46, "ior_level": 0.18,
+                           "transmission_weight": 0.92})
     make("Optic_Glass_Depth", (0.0018, 0.0010, 0.0030),
-         roughness=0.45, **{"ior_level": 0.025})
+         roughness=0.12, **{"ior": 1.52, "ior_level": 0.28,
+                           "transmission_weight": 0.28,
+                           "coat_weight": 0.10,
+                           "coat_roughness": 0.08})
     make("Optic_Glass_RGB", (0.0008, 0.0025, 0.0015),
-         roughness=0.45, **{"ior_level": 0.025})
+         roughness=0.12, **{"ior": 1.52, "ior_level": 0.28,
+                           "transmission_weight": 0.28,
+                           "coat_weight": 0.10,
+                           "coat_roughness": 0.08})
     make("Optic_Lens_Pupil", (0.0005, 0.0007, 0.0008),
          roughness=0.18, **{"ior_level": 0.10})
     make("Optic_Projector_Inset", (0.006, 0.006, 0.008),
@@ -80,7 +95,7 @@ def build_all():
          metallic=0.35, roughness=0.52)
     # Internal placeholder volumes: matte near-black, visible only in
     # cutaway/exploded views of the drum.
-    make("Sensor_Internal", (0.08, 0.08, 0.085), roughness=0.8)
+    make("Sensor_Internal", (0.003, 0.0035, 0.004), roughness=0.86)
 
     # Device-side magnetic plate: bright nickel-plated steel.
     make("Mount_Magnet_Nickel", (0.70, 0.71, 0.72),
@@ -92,6 +107,13 @@ def build_all():
 
     # 3M double-sided foam tape: grey closed-cell foam, fully diffuse.
     make("Mount_Foam_Tape", (0.52, 0.53, 0.54), roughness=0.95)
+
+    # USB-C receptacle: bright tin-plated stamped shell + gold contacts.
+    make("USB_Shell_Tin", (0.62, 0.62, 0.60), metallic=1.0, roughness=0.35)
+    make("USB_Tongue_Gold", (0.75, 0.66, 0.42), metallic=1.0, roughness=0.30)
+    # Cable assembly: non-metallic charcoal jacket matched to the device.
+    make("Cable_Jacket", (0.025, 0.028, 0.032), roughness=0.62)
+    make("Cable_Overmold", (0.020, 0.022, 0.025), roughness=0.56)
 
     # --- MacBook Air (silver) ---------------------------------------------
     make("MacBook_Aluminium", (0.75, 0.76, 0.78),
