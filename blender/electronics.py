@@ -82,6 +82,8 @@ def _shield_can(mats, collection):
                            mats["shield"], collection))
     for obj in objects:
         tag(obj, "EMI shield", "FORMED-SHEET CONCEPT")
+        obj["Coverage_Intent"] = (
+            "All populated ICs; connector mating strip intentionally outside")
     return objects
 
 
@@ -90,6 +92,8 @@ def build(collection):
     objects = []
     board = box("Main_PCBA", (0.0, BOARD_Y, BOARD_Z),
                 (90.0, 1.6, 28.0), 0.8, mats["board"], collection)
+    board["EMI_Shield_Coverage"] = (
+        "All populated ICs; bare perimeter and connector strip remain outside")
     objects.append(tag(board, "Main electronics", "REQUIRED ENVELOPE"))
 
     keepout = box("Main_PCBA_Populated_Keepout", (0.0, 15.5, BOARD_Z),

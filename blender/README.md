@@ -27,14 +27,14 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   power/control harnesses.
 - `support_hardware.py` — removable PCBA standoffs, fasteners, and bearing
   carriers that connect the functional core to the enclosure.
-- `presentation_views.py` — four scenes made from linked instances of the
-  canonical geometry: assembled, housing-off, functional core, and exploded.
+- `presentation_views.py` — a labeled four-view overview plus four detail
+  scenes made from linked instances of the canonical geometry.
 - `mounting_stack.py`, `usb_port.py`, `usb_cable.py` — display attachment and
   external connection concepts.
 - `build_scene.py` — deterministic complete-scene build.
 - `validate_model.py` — named-subsystem and legacy-variant checks.
-- `review_renders.py` — renders all four presentation scenes for review and
-  website use.
+- `review_renders.py` — renders the overview and all four detail scenes for
+  review and website use.
 - `deepreal.blend` and `renders/` — generated outputs; rebuild rather than
   treating manual edits as authoritative.
 
@@ -64,6 +64,11 @@ X runs across the display, Y runs front-to-back, and Z runs vertically.
 - The populated area of the PCBA sits under one shallow grounded shield can:
   one lid plus four perimeter walls meeting the PCBA ground. A narrow board-
   edge strip remains outside the perimeter for cable connectors.
+- The can deliberately does not cover every visible millimetre of green PCB.
+  Bare board perimeter and the physical connector-mating strip remain outside;
+  all processor, FPGA, memory, power, USB, and driver packages remain inside.
+  Production design must bond connector shields/grounds and control the traces
+  where they pass beneath the can wall.
 - Four camera, two projector, and two motor connectors remain outside the can.
   Every external harness terminates at that strip; signals continue beneath
   the shield only as controlled PCB traces.
@@ -71,16 +76,23 @@ X runs across the display, Y runs front-to-back, and Z runs vertically.
   behind the PCBA into the rear housing surface. Neither thermal part is
   enclosed by the front-side EMI can.
 
-## Presentation scenes
+## Presentation scenes and navigation
 
-The generated `.blend` contains four numbered presentation scenes plus the
-canonical source scene. Presentation objects are linked duplicates: they have
-independent positions for composition, but share the source mesh or curve
-datablock. Geometry is modeled once and updates in every view.
+The generated `.blend` opens to **00 Four View Overview**, where all four
+versions are arranged together and labeled. You do not need to know Blender's
+navigation to find them. For a larger individual view, use the scene selector
+in the upper-right corner of Blender and choose one of the four numbered detail
+scenes. The canonical source scene is also retained for modeling work.
 
+Presentation objects are linked duplicates: they have independent positions
+for composition, but share the source mesh or curve datablock. Geometry is
+modeled once and updates in every view.
+
+0. **00 Four View Overview** — all four labeled arrangements on one canvas.
 1. **01 Fully Assembled** — complete enclosed DeepReal hardware.
 2. **02 Housing Removed** — enclosure and drum shells removed; mounting
-   brackets, carriers, and standoffs remain.
+   brackets, carriers, and standoffs remain. The enclosure-mounted USB-C
+   receptacle and external cable are removed with the housing.
 3. **03 Functional Core** — the same internals with removable support hardware
    omitted.
 4. **04 Electronics Exploded** — the PCBA, every component, the five can

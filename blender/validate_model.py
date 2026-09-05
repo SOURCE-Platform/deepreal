@@ -131,6 +131,7 @@ def main():
     print("ok: external harness centerlines stay above the shield boundary")
 
     presentation_scenes = (
+        "00 Four View Overview",
         "01 Fully Assembled", "02 Housing Removed",
         "03 Functional Core", "04 Electronics Exploded",
     )
@@ -147,7 +148,25 @@ def main():
             source = bpy.data.objects.get(clone["Linked_Source_Object"])
             if source is None or clone.data is not source.data:
                 missing.append(clone.name + " is not linked to source geometry")
-    print("ok: four presentation scenes share canonical geometry datablocks")
+    print("ok: overview and four detail scenes share canonical datablocks")
+
+    housing_only = (
+        "Main_Housing_USB_Back", "Main_Housing_USB_Cutter",
+        "Main_Housing_USB_Shell", "Main_Housing_USB_Tongue",
+        "USB_Cable", "USB_Plug_A_Overmold", "USB_Plug_A_Shell",
+        "USB_Plug_B_Overmold", "USB_Plug_B_Shell",
+    )
+    for scene_name in ("02 Housing Removed", "03 Functional Core"):
+        scene = bpy.data.scenes.get(scene_name)
+        if scene is None:
+            continue
+        linked_sources = {obj.get("Linked_Source_Object")
+                          for obj in scene.objects}
+        for object_name in housing_only:
+            if object_name in linked_sources:
+                missing.append(scene_name + " retains housing-mounted "
+                               + object_name)
+    print("ok: housing-off views omit the receptacle and external USB cable")
 
     if missing:
         raise RuntimeError("\n".join(missing))

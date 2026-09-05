@@ -66,11 +66,18 @@ drums. The flat internal stack does not dictate a box-shaped exterior.
 
 ## Four linked presentation views
 
+The Blender file opens to a single labeled overview showing all four versions
+together. Larger versions remain available through Blender's scene selector in
+the upper-right corner.
+
+![Four-view Blender overview](./blender-four-view-overview.png)
+
 ![Fully assembled DeepReal enclosure](./blender-fully-assembled.png)
 
 1. **Fully assembled** shows the complete enclosure.
 2. **Housing removed** retains brackets, standoffs, bearing carriers, and the
-   rest of the internal mounting hardware.
+   rest of the internal mounting hardware. The enclosure-mounted USB-C
+   receptacle and external cable are removed with the housing.
 3. **Functional core** removes those enclosure supports.
 4. **Electronics exploded** separates the board, every populated component,
    the five shield-can pieces, external connectors, heat spreader, and pad.
@@ -82,6 +89,13 @@ drums. The flat internal stack does not dictate a box-shaped exterior.
 These are linked Blender instances, not four independently modeled products.
 Each presentation object shares its source mesh or curve datablock with the
 canonical assembly while retaining a scene-specific transform.
+
+The visible green strip above the shield is intentional: it is the physical
+mating zone for the eight drum cable connectors, not an uncovered bank of
+processor components. The can covers all modeled processor, FPGA, memory,
+power, USB, and driver packages. In production, connector shields/grounds and
+the PCB traces passing beneath the top can wall still require EMC design and
+testing; “outside the can” does not mean electrically unimportant.
 
 ## Intentionally absent
 
