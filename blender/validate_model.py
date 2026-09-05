@@ -71,6 +71,18 @@ def _curve_min_z(name):
         evaluated.to_mesh_clear()
 
 
+def _drum_optics_axial_bounds(prefix):
+    objects = [obj for obj in bpy.data.objects
+               if obj.name.startswith(prefix + "_")
+               and obj.type == "MESH"
+               and "Drum Optics" in {c.name for c in obj.users_collection}
+               and "_Cutter_" not in obj.name
+               and not obj.name.endswith("_KeepOut")]
+    minima = [_bounds(obj.name)[0][0] for obj in objects]
+    maxima = [_bounds(obj.name)[1][0] for obj in objects]
+    return min(minima), max(maxima)
+
+
 def main():
     missing = []
     for subsystem, names in REQUIRED.items():
@@ -96,6 +108,22 @@ def main():
         if _overlap("Main_PCBA_Populated_Keepout", motor):
             missing.append("electronics keep-out overlaps " + motor)
     print("ok: electronics keep-out clears both geared motors")
+
+    gear_clearance = 0.0005
+    face_optics = _drum_optics_axial_bounds("Face_Drum")
+    face_gear = _bounds("Face_Ring_Gear")
+    face_gap = face_optics[0] - face_gear[1][0]
+    interaction_optics = _drum_optics_axial_bounds("Interaction_Drum")
+    interaction_gear = _bounds("Interaction_Ring_Gear")
+    interaction_gap = interaction_gear[0][0] - interaction_optics[1]
+    if face_gap < gear_clearance:
+        missing.append("Face ring gear clearance to optics is {:.2f} mm".format(
+            face_gap * 1000.0))
+    if interaction_gap < gear_clearance:
+        missing.append(
+            "Interaction ring gear clearance to optics is {:.2f} mm".format(
+                interaction_gap * 1000.0))
+    print("ok: ring gears clear all drum optics by at least 0.5 mm")
 
     shielded = (
         "NXP_iMX95", "CrossLink_NX_FPGA", "LPDDR_1", "LPDDR_2",

@@ -22,7 +22,8 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   board-covering EMI shield can, a separate external connector strip,
   thermal spreader/pad, microphone, and tamper switch.
 - `motion.py` — two offset gearmotors, pinions, ring gears, axles, four
-  bearings, encoder boards/magnets, brackets, and travel stops.
+  bearings, encoder boards/magnets, brackets, and travel stops. Each ring gear
+  occupies the final 2 mm drum-end band, clear of the outer camera window.
 - `interconnect.py` — four camera flex service loops and two projector
   power/control harnesses.
 - `support_hardware.py` — removable PCBA standoffs, fasteners, and bearing

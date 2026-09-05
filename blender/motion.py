@@ -7,6 +7,10 @@ from assembly_primitives import box, cylinder, material, tag, tube, wire
 
 AXIS_Y = -1.5
 AXIS_Z = 20.0
+OUTER_GEAR_X = 54.8
+RING_GEAR_WIDTH = 2.0
+MOTOR_X = 47.0
+MOTOR_LENGTH = 14.0
 
 
 def _materials():
@@ -34,8 +38,11 @@ def _side(sign, label, mats, collection):
     objects = []
     drum_inner_x = sign * 1.0
     drum_outer_x = sign * 55.0
-    gear_x = sign * 53.0
-    motor_x = sign * 44.5
+    # Keep the ring gear in the final 2 mm end band of the 54 mm drum.
+    # The outer camera windows reach to X +/-52.38 mm; the former 3.2 mm
+    # gear at X +/-53 mm overlapped those windows by about 1 mm.
+    gear_x = sign * OUTER_GEAR_X
+    motor_x = sign * MOTOR_X
     motor_y = 13.6
 
     shaft = cylinder("{}_Drum_Axle".format(label),
@@ -53,16 +60,18 @@ def _side(sign, label, mats, collection):
 
     ring = tube("{}_Ring_Gear".format(label),
                 (gear_x, AXIS_Y, AXIS_Z), Vector((1.0, 0.0, 0.0)),
-                9.8, 12.8, 3.2, mats["gear"], collection, segments=64)
+                9.8, 12.8, RING_GEAR_WIDTH, mats["gear"], collection,
+                segments=64)
     objects.append(tag(ring, "Drum drive", "CONCEPT GEAR ENVELOPE"))
 
     motor = cylinder("{}_Geared_Motor".format(label),
                      (motor_x, motor_y, AXIS_Z), Vector((1.0, 0.0, 0.0)),
-                     4.2, 12.0, mats["motor"], collection)
+                     4.2, MOTOR_LENGTH, mats["motor"], collection)
     objects.append(tag(motor, "Drum drive", "REFERENCE GEARMOTOR"))
     pinion = cylinder("{}_Motor_Pinion".format(label),
                       (gear_x, motor_y, AXIS_Z), Vector((1.0, 0.0, 0.0)),
-                      3.4, 3.2, mats["gear"], collection, segments=32)
+                      3.4, RING_GEAR_WIDTH, mats["gear"], collection,
+                      segments=32)
     objects.append(tag(pinion, "Drum drive", "CONCEPT GEAR ENVELOPE"))
 
     bracket = box("{}_Motor_Bracket".format(label),

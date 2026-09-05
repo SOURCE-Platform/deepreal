@@ -20,7 +20,7 @@ drums. The flat internal stack does not dictate a box-shaped exterior.
 | --- | --- | --- |
 | Face drum | Aims RGB, IR depth receiver, and structured-light projection at the user. | Shell and optical architecture present; exact optics remain reference/placeholder geometry. |
 | Interaction drum | Aims the same sensing classes toward hands and workspace. | Shell and optical architecture present; exact optics remain reference/placeholder geometry. |
-| Drum motion | Rotates each drum independently and measures its real angle. | Two motors, pinions, ring gears, axles, four bearings, encoders, brackets, and stops present as concept/reference envelopes. |
+| Drum motion | Rotates each drum independently and measures its real angle. | Two motors, pinions, ring gears, axles, four bearings, encoders, brackets, and stops present as concept/reference envelopes; ring gears occupy the outer 2 mm end bands clear of the camera windows. |
 | Electronics compartment | Houses the stationary Proof Engine below/behind the drums. | Curved hollow enclosure and populated PCBA volume present. |
 | EMI shield can | Encloses the populated PCBA area while leaving a narrow external connector strip at the board edge. | One lid and four perimeter walls present; grounding fingers, seams, and apertures await PCB/EMC design. |
 | Thermal path | Moves processor heat into the enclosure so the case can spread it. | Copper spreader and compliant housing pad present; dimensions and thermal performance remain unverified. |
@@ -109,6 +109,8 @@ testing; “outside the can” does not mean electrically unimportant.
 
 `blender/validate_model.py` confirms the named architecture-level subsystems
 exist and that no `Current_` or `Compact_` comparison objects remain. Optical
-containment checks also run during the scene build. This does **not** certify
+containment checks also run during the scene build. It also requires at least
+0.5 mm axial clearance between both ring gears and every optical mesh; the
+current concept provides 1.32 mm on each side. This does **not** certify
 manufacturability, signal integrity, EMC, thermal performance, eye safety,
 structural strength, cable life, or production tolerances.
