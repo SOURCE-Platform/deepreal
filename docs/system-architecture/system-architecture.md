@@ -1,25 +1,31 @@
-<!-- Canonical Markdown edition of the v0.1 Word source snapshot. -->
+<!-- Canonical Markdown edition of the current v0.2 Word baseline. -->
 
-[Original Word source](./DeepReal_System_Architecture_Source_of_Truth_v0.1.docx)
+[Word baseline](./DeepReal_System_Architecture_Source_of_Truth_v0.2.docx)
 
 # DeepReal
 
 **System Architecture & Hardware Specification**
 
-**SOURCE OF TRUTH — ENGINEERING BASELINE v0.1**
+**SOURCE OF TRUTH — ENGINEERING BASELINE v0.2**
 
 ![DeepReal reference architecture: sensor-to-proof trust path](./reference-architecture-trust-path.png)
 
 | **Document ID** | **DR-SYS-ARCH-001** |
 | --- | --- |
-| **Version** | 0.1 |
-| **Date** | 26 August 2026 |
+| **Version** | 0.2 |
+| **Date** | 5 September 2026 |
 | **Status** | Engineering baseline / pre-prototype |
 | **Scope** | Mechanical enclosure, sensing, electronics, Proof Engine, security, provenance DAG, BOM and validation plan |
-| **Supersedes** | 20 Aug 2026 Working Architecture where this document makes an explicit newer decision |
+| **Supersedes** | v0.1 architecture baseline plus the reviewed Blender-first mechanical and packaging update |
 
 > **Normative-use rule**
-> This document is the current architecture source of truth. Items marked LOCKED are current product decisions. REFERENCE items are the preferred engineering baseline but still require prototype validation. OPEN items must not be silently converted into assumptions in CAD, firmware or BOM work. If another DeepReal document conflicts with this one, this document wins until it is deliberately revised.
+> This document is the architecture and requirements source of truth. Blender
+> is the current mechanical/visual geometry authority. Items marked LOCKED are
+> current product decisions. REFERENCE items are preferred but still require
+> prototype validation. OPEN items must not be silently converted into
+> assumptions in Blender, later CAD, firmware or BOM work. When prose and the
+> reviewed Blender model disagree on dimensions or placement, update the prose
+> from Blender; architecture and safety requirements still govern the model.
 
 ## Document control and decision status
 
@@ -146,16 +152,19 @@ The reference architecture is effectively an S4 design: a small trusted capture 
 
 ## 4. Mechanical enclosure and current Blender model
 
-![Current DeepReal mechanical packaging concept](./mechanical-packaging-concept.png)
+![Current DeepReal Blender reference model](./current-blender-reference.png)
 
-Figure 2 — Mechanical packaging concept. Dimensions shown are architecture-study envelopes, not final industrial-design dimensions.
+Figure 2 — Single Blender-authoritative reference concept. The curved lower
+electronics compartment replaces both the colliding "Current" study and the
+boxy "Compact" comparison.
 
 ### 4.1 Overall enclosure
 
 | **Parameter** | **Current baseline** | **Status / note** |
 | --- | --- | --- |
-| Architecture-study envelope | ≈150 mm W × 45 mm H × 45 mm D | REFERENCE maximum planning box; should shrink after component validation. |
-| Historical envelope | ≈120 × 30 × 24 mm | SUPERSEDED; too small for two current RGB-D drums. |
+| Current Blender width | 120 mm | LOCKED concept width; tolerance-driven CAD remains future work. |
+| Upper body cross-section | 30 mm H × 24 mm D | Current exterior around the two Ø24 mm drums. |
+| Curved electronics compartment | Extends to ≈29 mm below the upper body and ≈24.5 mm rearward in the Blender product frame | REFERENCE concept profile derived from the approved design sketch. It is a compartment, not a separate rectangular chin. |
 | Main PCBA keep-out | ≈90 × 28 × 15 mm populated | REFERENCE reserve; one or two-board stack allowed. |
 | USB-C zone | ≈15 × 15 mm | REFERENCE packaging reserve. |
 | Rear mount | Integrated curved arm, device-side magnet, passive steel display plate, removable foam adhesive | LOCKED architecture; final magnet/adhesive not selected. |
@@ -179,8 +188,8 @@ The drums should rotate only the optical payload and lightweight internal carrie
 
 | **Item** | **Current value / decision** | **Status** |
 | --- | --- | --- |
-| Structured-light drum inner diameter | ≈35 mm | REFERENCE preliminary ID; final OD/wall thickness OPEN. |
-| Axial length | ≈60 mm | REFERENCE preliminary. |
+| Drum outside / assumed inside diameter | 24 mm OD / 21 mm usable ID | Current Blender shell; 1.5 mm architecture-stage wall assumption. |
+| Axial length | 54 mm | Current Blender shell. |
 | Exterior cross-section | Perfect circle / true cylinder | LOCKED industrial-design decision. |
 | Flat facet / recessed panel / raised mesa | None | REJECTED for current design. |
 | Large-lens rings / porthole bezels | None | LOCKED visual decision. |
@@ -199,10 +208,10 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 
 ### 4.4 Current Blender optical placeholder values
 
-> **Important: these are CAD implementation values, not production optical specifications**
+> **Important: these are Blender implementation values, not production optical specifications**
 > The current Blender pass uses a shared structured-light assembly behind a three-aperture triangular cluster. It should stay editable until the projector package is selected and optically validated.
 
-| **CAD parameter** | **Current Blender value** | **Interpretation** |
+| **Blender parameter** | **Current Blender value** | **Interpretation** |
 | --- | --- | --- |
 | Large-lens exterior ring | Removed | Shell cut itself defines the lens boundary. |
 | Large-lens recess | Flat optical window ≈1.2 mm behind the outermost skin, normal to the camera axis | The cylindrical shell remains unflattened; the through-bore and matte sleeve expose a planar, optically neutral camera window. Final FOV clearance must be measured. |
@@ -216,10 +225,10 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 | **Item** | **Baseline** |
 | --- | --- |
 | Actuator count | 2 independent axes: Motor A → face drum; Motor B → interaction drum. |
-| Keep-out per actuator | ≈22 × 10 × 22 mm until final actuator selection. |
+| Current modeled actuator | Offset cylindrical micro-gearmotor envelope, one per drum; exact part remains OPEN. |
 | Prototype actuator | Micro-servo class such as Kpower P0025 is acceptable for quick fit/motion experiments. |
 | Production direction | Micro geared DC motor + absolute magnetic encoder is preferred over a hobby servo. |
-| Drive layout | SELECTED: offset micro-gearmotor inside the housing behind each drum; pinion on the motor shaft meshes a ring (or sector) gear fixed to the drum's outboard end (≈3.25:1 in the packaging study). The drum rides its own centerline bearings; the drum-axis encoder closes the loop over gear lash. Coaxial end-pod motors REJECTED: ≈32 mm wider device and larger direct-drive motors. |
+| Drive layout | SELECTED: offset micro-gearmotor inside the housing behind each drum; pinion on the motor shaft meshes a ring gear fixed to the drum's outboard end. The current Blender model includes two motors, two pinions, two ring gears, four bearings, axles, brackets, magnetic encoders and travel stops. Tooth geometry, ratio and exact parts remain OPEN. Coaxial end-pod motors remain REJECTED. |
 | Driver reference | TI DRV8212-class H-bridge, one per brushed motor. |
 | Encoder reference | ams OSRAM AS5600-class magnetic absolute angle sensor; higher-resolution SPI alternative can be evaluated. |
 | Evidence requirement | Record measured encoder angle with every capture window; do not treat the motor command as the actual pose. |
@@ -227,7 +236,21 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 
 ### 4.6 Rotating flex architecture
 
-No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.
+No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera service loops plus two projector power/control routes. They are routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.
+
+### 4.7 Electronics compartment, EMI shield and heat path
+
+The stationary main PCBA sits in the curved lower compartment. One local,
+board-mounted conductive shield can encloses the i.MX 95, CrossLink-NX and
+memory region. Its lid and four perimeter walls terminate at PCBA ground. This
+is the baseline EMC concept; there is no second full-width metal wall between
+the compartment and drums. Camera flex connectors stay outside the can and
+reach protected devices through controlled PCB traces.
+
+A separate copper spreader and compliant pad show the intended thermal path
+from the compute region to the inside rear surface of the housing. The can is
+for electromagnetic containment; the spreader/pad is for heat. Venting is not
+assumed, and thermal/EMC tests must determine final geometry.
 
 ## 5. Sensor-head architecture
 
@@ -245,7 +268,7 @@ No slip ring is required because each head is expected to rotate only about 140�
 
 The current primary depth architecture is discrete structured light because high-quality facial geometry is a core requirement. A minimum structured-light system uses an IR camera plus a dot projector with non-zero baseline. The projector casts an invisible pattern; the IR camera observes how that pattern deforms across the scene. The RGB camera is separate and calibrated to the depth coordinate frame.
 
-The physical baseline between projector and IR receiver should be as large as practical within the ≈60 mm drum length. The current industrial design places the depth optic and projector group apart along the drum axis. Exact baseline, FOV overlap and algorithm performance are still OPEN and must be determined on an optical bench rather than from CAD alone.
+The physical baseline between projector and IR receiver should be as large as practical within the 54 mm drum length. The current industrial design places the depth optic and projector group apart along the drum axis. Exact baseline, FOV overlap and algorithm performance are still OPEN and must be determined on an optical bench rather than from the Blender concept alone.
 
 ### 5.3 The triangular projector cluster is not three independent sensors
 
@@ -525,17 +548,21 @@ This is the current source-of-truth BOM at subsystem/component-class level. It i
 | 1 set | PMIC/core regulators | NXP PF09 + PF53 reference pair or equivalent | REFERENCE | Stationary |
 | 1 | USB-C PD sink controller | Infineon CYPD3177 or equivalent | REFERENCE | Stationary |
 | 1 | USB-C SuperSpeed receptacle + ESD | Vendor TBD | REQUIRED | Stationary |
-| 2 | Motor | Micro geared DC motor w/ gear train; prototype servo acceptable | OPEN exact part | Stationary/axis mechanism |
+| 2 | Motor | Offset micro geared DC motor; prototype servo acceptable | MODELED reference envelope / exact part OPEN | Stationary behind drums |
 | 2 | Motor driver | TI DRV8212-class H-bridge | REFERENCE if brushed motor | Stationary |
-| 2 | Absolute drum encoder | AS5600-class magnetic encoder | REFERENCE / exact part OPEN | Axis |
+| 2 | Pinion/ring gear pair | Custom torque transfer from offset motor to drum | MODELED concept / tooth design OPEN | Drum ends |
+| 4 | Drum bearings + 2 axles | Miniature bearing and shaft system | MODELED reference envelopes / exact part OPEN | Drum axes |
+| 2 | Absolute drum encoder + magnet | AS5600-class magnetic encoder | MODELED reference / exact part OPEN | Axis |
+| 2 | Mechanical travel stop | Limits each drum to intended useful travel | MODELED concept / final geometry OPEN | Axis mechanism |
 | 1 | PDM MEMS microphone | Infineon IM69D130-class | REFERENCE | Stationary |
 | 1+ | Tamper sensors | Case switch / conductive seal / mesh concept | REQUIRED concept / OPEN implementation | Enclosure |
 | 4 | Camera flex links | MIPI-rated FPC/micro-coax, 2 image sensors per drum | REQUIRED / exact interconnect OPEN | Rotating joint |
 | 2 | Drum power/control flex harness | Emitter power, I²C/control, encoder, motor as architecture dictates | REQUIRED | Rotating joint |
 | 2 | Rotating optical carrier | Custom rigid calibrated carrier | LOCKED concept | Rotating |
-| 2 | Drum shells/endcaps/bearings | Custom mechanical parts | REQUIRED / material OPEN | Rotating |
+| 2 | Drum shells/endcaps | Custom mechanical parts | MODELED concept / material OPEN | Rotating |
 | 1 | Main PCBA / stack | Custom DeepReal proof-engine board(s) | REQUIRED | Stationary |
-| 1 | Thermal spreader/shielding | Custom metal spreader + EMI strategy | REQUIRED / design OPEN | Stationary |
+| 1 | Five-piece EMI shield can | Board-mounted lid + perimeter walls around compute cluster | MODELED concept / grounding and seam design OPEN | Stationary PCBA |
+| 1 | Thermal spreader + interface pad | Conducts compute heat into rear housing surface | MODELED concept / material and pressure stack OPEN | Stationary |
 | 1 | Rear mounting arm | Integrated curved arm | LOCKED architecture | Enclosure |
 | 1 | Device magnet | Permanent magnet | LOCKED architecture / exact magnet OPEN | Mount |
 | 1 | Display target plate | Thin passive steel plate | LOCKED architecture | Display |
@@ -591,7 +618,7 @@ The product goal remains a single USB-C cable. The historical planning target wa
 
 ### 12.4 Thermal design
 
-The most important heat sources are the application SoC/PMIC, active IR emitters and regulator losses. Keep the main SoC and power conversion stationary so the body can act as a heat spreader. The rotating projectors need an explicit heat path into the drum carrier/shell and must be duty-cycle limited until measured. Final enclosure material and heat-spreader geometry are OPEN.
+The most important heat sources are the application SoC/PMIC, active IR emitters and regulator losses. Keep the main SoC and power conversion stationary. The current Blender concept uses a copper spreader and compliant pad from the PCBA stack to the inside rear housing surface so the enclosure can spread heat. The rotating projectors still need an explicit path into the drum carrier/shell and must be duty-cycle limited until measured. Final materials, contact pressure, interface thickness, external temperature, and any need for venting remain OPEN.
 
 ## 13. Firmware and software partitioning
 
@@ -663,7 +690,7 @@ The next phase should be gated. Do not design a production motherboard and final
 | Gate 5 — i.MX 95 Proof Engine | Secure boot, OP-TEE, EdgeLock key provisioning, capture-window signing and encrypted USB transport. | Host verifies device attestation and signed capture sequence. |
 | Gate 6 — Motors/encoders | Select actuators, close control loop, test vibration/settle time and encoder repeatability. | Measured angle repeatability and settling support depth calibration requirements. |
 | Gate 7 — Power/thermal | Measure all subsystems, motor startup/stall, projector peaks and compute loads. | Thermals safe; power policy works under 15 W host mode and higher-power dev mode. |
-| Gate 8 — Mechanical integration | Package dev/prototype board, two motors, flex loops and optics into 150×45×45 planning box. | No collisions, acceptable weight/hinge behavior, serviceable assembly. |
+| Gate 8 — Mechanical integration | Replace Blender concept envelopes with selected parts and tolerance-driven geometry inside the curved 120 mm-wide concept. | No collisions through full travel, acceptable weight/hinge behavior, serviceable assembly. |
 | Gate 9 — Provenance/DAG | Emit capture, transform and claim nodes; verify selective disclosure and revocation path. | Independent verifier can trace a claim back to signed capture windows. |
 | Gate 10 — Red-team | Malicious host, replay, frame substitution, firmware downgrade, cable unplug/replug and tamper tests. | Defined attacks fail or are visibly recorded in the trust state. |
 
@@ -686,7 +713,7 @@ The next phase should be gated. Do not design a production motherboard and final
 | **Open item** | **Why it is still open** | **Decision trigger** |
 | --- | --- | --- |
 | Exact RGB sensor/module | IMX708 module is physically useful as a reference but large; production should shrink the RGB assembly. | Optical/image-quality requirements + module sourcing + custom PCB feasibility. |
-| Exact projector and exterior aperture pattern | Current 3-hole triangle is a CAD placeholder for one shared projector assembly. | Select eye-safe projector and complete optical bench. |
+| Exact projector and exterior aperture pattern | Current 3-hole triangle is a Blender placeholder for one shared projector assembly. | Select eye-safe projector and complete optical bench. |
 | Exact structured-light baseline | Depth quality depends strongly on baseline and calibration. | Measured depth error vs distance on prototype. |
 | CrossLink-NX device count/package | Four camera inputs, output lanes and hash throughput need implementation mapping. | FPGA lane/throughput design and SI test. |
 | First immutable capture byte | Target is FPGA ingress hashing; protected i.MX camera buffer is fallback. | Security prototype and red-team. |
@@ -694,7 +721,7 @@ The next phase should be gated. Do not design a production motherboard and final
 | Encoder | AS5600-class is a placeholder. | Required angular accuracy and axis geometry. |
 | One-cable power feasibility | Host source capability varies; projector/motor peaks are unmeasured. | Full-system power measurements. |
 | Final board topology | Single board vs stacked compute/IO boards. | SI/thermal/layout study after part selection. |
-| Final enclosure OD and mass | Current 150×45×45 is a safe planning envelope only. | All keep-outs and thermal/mass measurements. |
+| Final enclosure depth/profile and mass | Current curved 120 mm-wide Blender enclosure is a communication and packaging concept. | Selected parts, tolerance stack, thermal/mass measurements and hinge test. |
 | Depth algorithm / processing location | Could run on i.MX95 CPU/NPU/GPU or specialized library. | Optical prototype + performance benchmark. |
 | Confidential AI target | Local i.MX95 vs workstation/cloud confidential GPU. | Privacy/performance requirements and supported attestation environment. |
 | Protocol serialization | Canonical CBOR/COSE is recommended but not locked. | Protocol implementation and interoperability review. |
@@ -703,7 +730,9 @@ The next phase should be gated. Do not design a production motherboard and final
 
 | **Old assumption** | **Current status** |
 | --- | --- |
-| ≈120 × 30 × 24 mm enclosure is the governing size | SUPERSEDED. Use ≈150 × 45 × 45 mm architecture-study box until shrink phase. |
+| Colliding 120 × 30 × 24 mm "Current" housing | SUPERSEDED and removed. Use the single curved Blender reference concept. |
+| Boxy downward "Compact" chin | SUPERSEDED. Useful electronics volume is integrated into the curved lower compartment. |
+| ≈150 × 45 × 45 mm planning box is the active design | SUPERSEDED. It remains historical planning context only. |
 | One depth subsystem / one RGB camera | SUPERSEDED. Reference device has two independently aimed RGB-D heads. |
 | Four microphones + RP2040 audio hub | SUPERSEDED. One digital MEMS microphone. |
 | Interaction depth optional in the reference device | SUPERSEDED. Full reference device requires depth in interaction drum; lower-cost future SKU can revisit omission. |

@@ -1,12 +1,9 @@
-"""PROVISIONAL render-only magnetic mounting stack (Phase 4 preview).
+"""PROVISIONAL Blender-native magnetic mounting stack.
 
-The magnetic mounting stack is NOT modelled in the FreeCAD CAD yet
-(cad/README.md lists it as intentionally absent until Phase 4). These
-are render-side placeholder solids sized entirely from the exported CAD
-manifest parameters, so they always sit in the right place relative to
-the real geometry -- but their thicknesses/footprints are visual guesses,
-not engineering. When CAD Phase 4 lands, delete this module and export
-the real parts through cad/export_blender.py instead.
+These are reference solids sized from design_spec.py. Their thicknesses and
+footprints are visual/packaging assumptions, not production engineering. A
+future tolerance-driven CAD phase must re-create and validate the selected
+stack rather than treating these meshes as manufacturing geometry.
 
 Stack layout across the laptop-lid pocket (all driven by manifest
 params, nothing hand-placed):
@@ -21,7 +18,7 @@ params, nothing hand-placed):
     0.90 + 0.35 + 0.35 + 0.40 = 2.00 mm = LAPTOP_LID_POCKET_CLEARANCE
 
 The device-side magnet plate must be parented to the lid pivot along
-with the CAD product (it rides the arm); the laptop-side plate + tape
+with the product (it rides the arm); the laptop-side plate + tape
 glue to the lid rear face and follow the lid too. Everything this
 module builds is therefore lid-side; build() returns one list.
 """

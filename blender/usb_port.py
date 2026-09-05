@@ -1,10 +1,8 @@
-"""USB-C female port on the arm's curved underside (render-side).
+"""USB-C female port on the arm's curved underside.
 
-The CAD intentionally has no USB-C geometry yet (cad/README.md lists it
-as absent until a later phase), so this is a PROVISIONAL render-side
-feature exactly like mounting_stack.py -- sized and placed from the
-manifest's resolved arm parameters, to be superseded by real CAD when
-that phase lands.
+This is a PROVISIONAL Blender concept sized and placed from the Blender-native
+design specification. A later manufacturing-CAD phase must reconstruct the
+selected connector, retention, sealing, and wall details.
 
 Integration language (same as the drum optics): the curved arm surface
 is NOT flattened -- the panel opening is a rounded-rectangle bore cut

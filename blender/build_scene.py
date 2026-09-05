@@ -1,16 +1,9 @@
 #!/usr/bin/env python3
-"""DeepReal Blender scene builder (headless).
+"""Build the Blender-native DeepReal reference scene from source.
 
-Assembles blender/deepreal.blend from generated artifacts + code:
-
-    1. cad/export_blender.py output (blender/assets/*.stl + manifest.json)
-       -> CAD Product / hidden CAD Reference collections
-    2. macbook.py     -> parametric MacBook Air locked to the CAD lid slab
-    3. mounting_stack.py -> provisional Phase-4 magnetic mount (render-only)
-    4. lid pivot + open angle, materials, studio lighting, cameras
-
-Everything is rebuilt from scratch on every run: no manual .blend edits
-survive, mirroring the CAD repo's "Python is the source of truth" rule.
+The product dimensions live in design_spec.py.  No FreeCAD export or
+generated manifest is required.  Everything is rebuilt from scratch so the
+saved blend remains a generated, reproducible design artifact.
 
 Usage (from the repository root):
 
@@ -21,10 +14,8 @@ Usage (from the repository root):
     --camera NAME     hero (default) | front | device | laptop
     --samples N       Cycles samples (default 96)
 
-Run cad/export_blender.py first after any CAD change.
 """
 
-import json
 import math
 import os
 import sys
@@ -40,15 +31,18 @@ import macbook        # noqa: E402
 import materials      # noqa: E402
 import mounting_stack # noqa: E402
 import device         # noqa: E402
+import design_spec    # noqa: E402
+import electronics    # noqa: E402
+import interconnect   # noqa: E402
+import motion         # noqa: E402
 import optics         # noqa: E402
 import usb_port       # noqa: E402
 import usb_cable      # noqa: E402
 
-ASSETS = os.path.join(HERE, "assets")
 BLEND_PATH = os.path.join(HERE, "deepreal.blend")
 RENDER_DIR = os.path.join(HERE, "renders")
 
-OPEN_ANGLE_DEG = 105.0   # laptop opening angle (90 = lid vertical, CAD frame)
+OPEN_ANGLE_DEG = 105.0   # laptop opening angle (90 = lid vertical)
 
 MM = 0.001
 
@@ -64,43 +58,6 @@ def _collection(name):
     col = bpy.data.collections.new(name)
     bpy.context.scene.collection.children.link(col)
     return col
-
-
-def _shade_smooth(obj):
-    for op, kwargs in (("shade_auto_smooth", {"angle": math.radians(35)}),
-                       ("shade_smooth", {})):
-        try:
-            with bpy.context.temp_override(object=obj, active_object=obj,
-                                           selected_objects=[obj]):
-                getattr(bpy.ops.object, op)(**kwargs)
-            return
-        except Exception:
-            continue
-
-
-def _import_cad_parts(manifest, mats, col_reference):
-    """Import only reference/debug parts (kept hidden). Product parts are
-    rebuilt natively by device.py for clean quad topology; returns the
-    imported objects."""
-    imported = []
-    for part in manifest["parts"]:
-        if part["kind"] == "product":
-            continue
-        path = os.path.join(ASSETS, part["stl"])
-        try:
-            bpy.ops.wm.stl_import(filepath=path, global_scale=MM)
-        except RuntimeError:
-            bpy.ops.import_mesh.stl(filepath=path, scale=MM)
-        obj = bpy.context.selected_objects[0] or bpy.context.scene.objects[-1]
-        obj.name = part["name"]
-        obj.data.name = part["name"]
-        _shade_smooth(obj)
-        col_reference.objects.link(obj)
-        bpy.context.scene.collection.objects.unlink(obj)
-        obj.hide_viewport = True
-        obj.hide_render = True
-        imported.append(obj)
-    return imported
 
 
 def _aim(obj, target):
@@ -152,8 +109,7 @@ def build():
     camera_name = _argv_flag("--camera", "hero")
     samples = int(_argv_flag("--samples", 256))
 
-    with open(os.path.join(ASSETS, "manifest.json")) as handle:
-        manifest = json.load(handle)
+    manifest = design_spec.manifest()
     params = manifest["params"]
 
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -169,26 +125,30 @@ def build():
 
     mats = materials.build_all()
 
-    col_product = _collection("CAD Product")
-    col_reference = _collection("CAD Reference (hidden)")
+    col_product = _collection("DeepReal Product")
     col_lid = _collection("MacBook Lid")
     col_deck = _collection("MacBook Deck")
     col_mount = _collection("Mounting (provisional)")
     col_rig = _collection("Render Rig (hidden)")
     col_rig.hide_viewport = True   # functional for renders, invisible in viewport
 
-    reference = _import_cad_parts(manifest, mats, col_reference)
     product = device.build(manifest, mats, col_product)
     col_optics = _collection("Drum Optics")
     optics.apply_to_product(manifest, mats, col_optics)
+    col_electronics = _collection("Electronics Assembly")
+    product += electronics.build(col_electronics)
+    col_motion = _collection("Drum Motion")
+    product += motion.build(col_motion)
+    col_interconnect = _collection("Interconnect Routing")
+    product += interconnect.build(col_interconnect)
     lid, _deck = macbook.build(params, mats, col_lid, col_deck)
     mount = mounting_stack.build(params, mats, col_mount)
     col_usb = _collection("USB Port (provisional)")
-    usb_port.build(manifest, mats, col_usb)
-    usb_cable.build(manifest, mats, col_usb)
+    product += usb_port.build(manifest, mats, col_usb)
+    product += usb_cable.build(manifest, mats, col_usb)
 
     # --- lid pivot: everything that swings with the lid -------------------
-    # All CAD/MacBook vertices are baked in absolute CAD-world coordinates,
+    # All product/MacBook vertices are baked in absolute product coordinates,
     # so children must be parented with matrix_parent_inverse = the pivot's
     # (translation-only) matrix at parenting time. The pivot's later
     # rotation then acts about the hinge point, T*R*T^-1, instead of about
@@ -201,7 +161,7 @@ def build():
     bpy.context.view_layer.update()
     base = pivot.matrix_world.copy()          # rotation still zero
     base_inv = base.inverted()
-    for obj in product + reference + lid + mount:
+    for obj in product + lid + mount:
         obj.parent = pivot
         obj.matrix_parent_inverse = base_inv
 
@@ -210,7 +170,7 @@ def build():
     target.empty_display_size = 5 * MM
     target.parent = pivot
     target.matrix_parent_inverse = base_inv
-    target.location = (0.0, 0.0, 10 * MM)   # device centre, CAD frame
+    target.location = (0.0, 0.0, 10 * MM)   # device centre, product frame
     col_rig.objects.link(target)
 
     pivot.rotation_euler.x = math.radians(90.0 - OPEN_ANGLE_DEG)

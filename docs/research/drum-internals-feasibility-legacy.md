@@ -1,4 +1,10 @@
-# Depth architecture report — Gate 1.5B
+# Depth architecture report — Gate 1.5B (legacy study)
+
+> **Historical evidence only.** The original FreeCAD documents, build scripts,
+> and validators referenced below were intentionally removed when the project
+> moved to a Blender-first workflow. Component findings and vendor sources
+> remain useful, but geometry claims must be revalidated in the current Blender
+> model and later manufacturing CAD.
 
 Drum-internals feasibility, discrete depth-sensing architectures for the
 **unchanged** Ø24 × 54 mm sensor-head drums (`cad/deepreal.FCStd` @ main
@@ -150,8 +156,8 @@ the back and folds 180° (R 0.8) along the carrier.
 **Metrics (validator):** X span used **26.3 mm**, remaining **24.7 mm**
 of 51 · worst corner radius 9.96 mm → **min radial clearance 0.54 mm** ·
 collision-free (8 parts pairwise) · all parts inside Ø21.
-Schematics: `assets/renders/layout_SLA_side.svg`,
-`assets/renders/layout_SLA_cross.svg`.
+Schematics: `legacy-layouts/layout_SLA_side.svg`,
+`legacy-layouts/layout_SLA_cross.svg`.
 
 ## 8. Layout SL-B — mixed axial / cross-section
 
@@ -174,8 +180,8 @@ risk, flagged) · all parts inside Ø21.
 Trade-offs vs SL-A: shorter X, but recessed apertures need an oversized
 window with a vignetting check, and the 0.45 mm Z gap plus 0.27 mm
 radial clearance make SL-B strictly a "if X length runs out" fallback.
-Schematics: `assets/renders/layout_SLB_side.svg`,
-`assets/renders/layout_SLB_cross.svg`.
+Schematics: `legacy-layouts/layout_SLB_side.svg`,
+`legacy-layouts/layout_SLB_cross.svg`.
 
 ## 9. Layout ToF-A — iToF camera inside the current drum
 
@@ -197,8 +203,8 @@ spare for the actuator (Pololu 5137 needs 41.6 of 51 mm when axial —
 see §11 note). Reservations from §6 stand: only the imager die is
 OFFICIAL-VERIFIED; illuminator, lens, companion board are placeholders/
 assumptions.
-Schematics: `assets/renders/layout_ToFA_side.svg`,
-`assets/renders/layout_ToFA_cross.svg`.
+Schematics: `legacy-layouts/layout_ToFA_side.svg`,
+`legacy-layouts/layout_ToFA_cross.svg`.
 
 ## 10. Validation results
 

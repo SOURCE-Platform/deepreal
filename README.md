@@ -4,7 +4,10 @@
 
 > **Status: architecture + hardware design in progress.** DeepReal is in active architecture, hardware-design, and prototype-planning work. Nothing here is production-ready, and no sensor configuration is final.
 
-System architecture: [Source of Truth v0.1](docs/system-architecture/system-architecture.md)
+System architecture: [Source of Truth v0.2](docs/system-architecture/system-architecture.md)
+
+Current physical concept and visual BOM:
+[Blender reference model](docs/design/blender-reference-model.md)
 
 Project page: https://sourceovcourse.com/deepreal
 
@@ -80,16 +83,17 @@ DeepReal provides the physical sensing endpoint; SOURCE is the broader open prot
 
 ## Repository layout
 
-This repository is being set up. Planned structure, added as material lands:
-
 ```
 deepreal/
-├── docs/         # architecture, threat model, sensor evaluation notes
-├── hardware/     # CAD, enclosure, sensor carrier, PCB (schematics / layout)
-├── firmware/     # device firmware / secure-boot MCU
-├── renders/      # product and exploded renders
+├── blender/      # current design authority, generated scene and render tools
+├── docs/         # architecture, visual BOM and research notes
+├── references/   # retained component datasheets and vendor geometry
 └── README.md
 ```
+
+FreeCAD is not part of the active workflow. A future manufacturing-CAD phase
+will reconstruct the selected Blender concept with tolerances and production
+features after the component and validation gates are closed.
 
 ## Contributing
 
