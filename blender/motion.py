@@ -85,11 +85,12 @@ def _side(sign, label, mats, collection):
                mats["bracket"], collection)
     objects.append(tag(stop, "Travel limit", "150 DEG CONCEPT"))
 
+    connector_x = -38.0 if sign < 0 else 39.0
     harness = wire("{}_Motor_Encoder_Harness".format(label), (
         (motor_x, 18.8, AXIS_Z),
-        (sign * 37.0, 20.0, 8.0),
-        (sign * 28.0, 19.0, -2.0),
-        (sign * 27.0, 17.0, -10.0),
+        (sign * 37.0, 20.0, 10.0),
+        (sign * 32.0, 18.0, 4.0),
+        (connector_x, 16.2, 0.5),
     ), 0.45, mats["wire"], collection)
     objects.append(tag(harness, "Motor interconnect", "ROUTING CONCEPT"))
     return objects

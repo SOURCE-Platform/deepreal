@@ -5,6 +5,12 @@ from assembly_primitives import box, material, tag
 
 BOARD_Y = 18.0
 BOARD_Z = -11.5
+SHIELD_X0 = -44.0
+SHIELD_X1 = 44.0
+SHIELD_Z0 = -25.0
+SHIELD_Z1 = -2.2
+SHIELD_FRONT_Y = 12.2
+CONNECTOR_Z = 0.5
 
 
 def _materials():
@@ -23,8 +29,8 @@ def _materials():
                            roughness=0.38),
         "connector": material("Electronics_Connector", (0.72, 0.74, 0.76),
                               metallic=0.55, roughness=0.30),
-        "shield": material("EMI_Shield_Can", (0.58, 0.61, 0.65),
-                           metallic=0.95, roughness=0.22),
+        "shield": material("EMI_Shield_Can", (0.30, 0.34, 0.40),
+                           metallic=0.92, roughness=0.30),
         "copper": material("Thermal_Spreader_Copper", (0.66, 0.24, 0.06),
                            metallic=0.95, roughness=0.25),
         "pad": material("Thermal_Pad", (0.12, 0.30, 0.36),
@@ -44,11 +50,16 @@ def _component(name, x, z, dims, mat, collection, subsystem,
 
 
 def _shield_can(mats, collection):
-    """One grounded shallow can over the compute cluster."""
-    front_y = 13.7
+    """One grounded shallow can over the populated board area.
+
+    A narrow strip at the top of the PCBA remains outside the perimeter for
+    cable connectors. Harnesses terminate there; only PCB traces continue
+    beneath the can.
+    """
+    front_y = SHIELD_FRONT_Y
     board_face_y = BOARD_Y - 0.8
-    x0, x1 = -38.0, 20.5
-    z0, z1 = BOARD_Z - 12.0, BOARD_Z + 12.0
+    x0, x1 = SHIELD_X0, SHIELD_X1
+    z0, z1 = SHIELD_Z0, SHIELD_Z1
     wall = 0.30
     objects = []
     objects.append(box("EMI_Shield_Can_Lid",
@@ -98,9 +109,9 @@ def build(collection):
          "Working memory"),
         ("eMMC_Storage", 29.0, BOARD_Z - 7.0, (10.0, 2.0, 7.0), "memory",
          "System storage"),
-        ("PMIC_PF09", 29.0, BOARD_Z + 7.5, (6.0, 2.0, 6.0), "power",
+        ("PMIC_PF09", 29.0, BOARD_Z + 6.0, (6.0, 2.0, 6.0), "power",
          "Power management"),
-        ("PMIC_PF53", 38.0, BOARD_Z + 7.5, (6.0, 2.0, 6.0), "power",
+        ("PMIC_PF53", 38.0, BOARD_Z + 6.0, (6.0, 2.0, 6.0), "power",
          "Power management"),
         ("USB_PD_Controller", 40.0, BOARD_Z - 8.0, (5.0, 1.5, 5.0),
          "power", "USB power negotiation"),
@@ -119,15 +130,27 @@ def build(collection):
         objects.append(_component(name, x, z, dims, mats[mat], collection,
                                   subsystem))
 
-    mic = box("PDM_MEMS_Microphone", (-42.0, BOARD_Y - 1.4, BOARD_Z + 8.5),
+    mic = box("PDM_MEMS_Microphone", (-42.0, BOARD_Y - 1.4, CONNECTOR_Z),
               (4.0, 1.2, 3.0), 0.3, mats["mic"], collection)
     objects.append(tag(mic, "Audio", "REFERENCE PACKAGE"))
 
-    for index, x in enumerate((-35.0, -23.0, -11.0, 1.0)):
+    for index, x in enumerate((-16.0, -5.0, 6.0, 17.0)):
         connector = box("Camera_Flex_Connector_{}".format(index + 1),
-                        (x, BOARD_Y - 1.4, BOARD_Z + 12.3),
-                        (8.0, 1.2, 2.0), 0.2, mats["connector"], collection)
+                        (x, BOARD_Y - 1.4, CONNECTOR_Z),
+                        (7.0, 1.2, 2.0), 0.2, mats["connector"], collection)
         objects.append(tag(connector, "Camera interconnect"))
+
+    edge_connectors = (
+        ("Face_Motor_Connector", -38.0, "Motor interconnect"),
+        ("Face_Projector_Connector", -27.0, "Projector interconnect"),
+        ("Interaction_Projector_Connector", 28.0,
+         "Projector interconnect"),
+        ("Interaction_Motor_Connector", 39.0, "Motor interconnect"),
+    )
+    for name, x, subsystem in edge_connectors:
+        connector = box(name, (x, BOARD_Y - 1.4, CONNECTOR_Z),
+                        (7.0, 1.2, 2.0), 0.2, mats["connector"], collection)
+        objects.append(tag(connector, subsystem, "BOARD-EDGE CONNECTOR"))
 
     objects += _shield_can(mats, collection)
 
@@ -138,7 +161,7 @@ def build(collection):
               (60.0, 2.7, 20.0), 0.8, mats["pad"], collection)
     objects.append(tag(pad, "Thermal", "CONCEPT INTERFACE"))
 
-    tamper = box("Case_Open_Tamper_Switch", (43.0, 21.0, BOARD_Z + 11.0),
+    tamper = box("Case_Open_Tamper_Switch", (42.0, 21.0, CONNECTOR_Z),
                  (4.0, 3.0, 3.0), 0.4, mats["driver"], collection)
     objects.append(tag(tamper, "Tamper detection", "REQUIRED CONCEPT"))
     return objects

@@ -13,29 +13,30 @@ def build(collection):
     # Four independent camera links: face RGB/depth and interaction
     # depth/tracking. Curves show service loops, not a frozen production route.
     routes = (
-        ("Face_RGB_MIPI_Flex", -42.0, -35.0),
-        ("Face_Depth_MIPI_Flex", -20.0, -23.0),
-        ("Interaction_Depth_MIPI_Flex", 18.0, -11.0),
-        ("Interaction_Tracking_MIPI_Flex", 40.0, 1.0),
+        ("Face_RGB_MIPI_Flex", -42.0, -16.0),
+        ("Face_Depth_MIPI_Flex", -20.0, -5.0),
+        ("Interaction_Depth_MIPI_Flex", 18.0, 6.0),
+        ("Interaction_Tracking_MIPI_Flex", 40.0, 17.0),
     )
     for name, drum_x, board_x in routes:
         side = -1.0 if drum_x < 0 else 1.0
         obj = wire(name, (
             (drum_x, 7.5, 18.0),
             (drum_x + 4.0 * side, 9.0, 7.0),
-            (drum_x + 2.0 * side, 12.0, 2.0),
-            (board_x, 16.2, 0.8),
+            (drum_x + 2.0 * side, 12.0, 5.0),
+            (board_x, 16.2, 0.5),
         ), 0.55, flex, collection)
         objects.append(tag(obj, "Camera interconnect", "SERVICE-LOOP CONCEPT"))
 
-    for label, x in (("Face_Projector_Power", -31.0),
-                     ("Interaction_Projector_Power", 31.0)):
+    for label, x, board_x in (
+            ("Face_Projector_Power", -31.0, -27.0),
+            ("Interaction_Projector_Power", 31.0, 28.0)):
         side = -1.0 if x < 0 else 1.0
         obj = wire(label, (
             (x, 7.0, 22.0),
-            (x + 5.0 * side, 11.0, 8.0),
-            (x, 15.5, -5.0),
-            (x * 0.8, 16.5, -19.0),
+            (x + 5.0 * side, 11.0, 9.0),
+            (x, 14.0, 4.0),
+            (board_x, 16.2, 0.5),
         ), 0.42, power, collection)
         objects.append(tag(obj, "Projector interconnect", "ROUTING CONCEPT"))
     return objects

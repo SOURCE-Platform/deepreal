@@ -21,7 +21,7 @@ PARAGRAPH_REPLACEMENTS = {
     "The physical baseline between projector and IR receiver should be as large as practical within the ≈60 mm drum length. The current industrial design places the depth optic and projector group apart along the drum axis. Exact baseline, FOV overlap and algorithm performance are still OPEN and must be determined on an optical bench rather than from CAD alone.":
         "The physical baseline between projector and IR receiver should be as large as practical within the 54 mm drum length. The current industrial design places the depth optic and projector group apart along the drum axis. Exact baseline, FOV overlap and algorithm performance are still OPEN and must be determined on an optical bench rather than from the Blender concept alone.",
     "No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.":
-        "No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera service loops plus two projector power/control routes; these are routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax. The flexes remain reliability-critical and must be cycle-tested.",
+        "No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera, two projector and two motor/encoder routes. Every harness terminates at the exposed board-edge connector strip instead of crossing an EMI-can wall. These remain routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax. The flexes remain reliability-critical and must be cycle-tested.",
     "The most important heat sources are the application SoC/PMIC, active IR emitters and regulator losses. Keep the main SoC and power conversion stationary so the body can act as a heat spreader. The rotating projectors need an explicit heat path into the drum carrier/shell and must be duty-cycle limited until measured. Final enclosure material and heat-spreader geometry are OPEN.":
         "The most important heat sources are the application SoC/PMIC, active IR emitters and regulator losses. Keep the main SoC and power conversion stationary. The current Blender concept uses a copper spreader and compliant pad from the PCBA stack to the inside rear housing surface so the enclosure can spread heat. The rotating projectors still need an explicit heat path into the drum carrier/shell and must be duty-cycle limited until measured. Final materials, contact pressure, interface thickness, external temperature and any need for venting remain OPEN.",
 }
@@ -122,7 +122,7 @@ def main():
     _set_row(next(r for r in bom.rows
                   if r.cells[1].text.strip() == "Thermal spreader/shielding"), (
         "1", "EMI shield can + thermal path",
-        "Five-piece grounded can, copper spreader and interface pad",
+        "Five-piece grounded board-covering can, external connector strip, copper spreader and interface pad",
         "MODELED concepts / final designs OPEN", "Stationary PCBA"))
     for values in (
         ("2", "Pinion/ring gear pair", "Custom offset-drive torque transfer",
@@ -169,11 +169,14 @@ def main():
     p.style = "Heading 2"
     heading_five.insert_paragraph_before(
         "The stationary main PCBA sits in the curved lower compartment. One "
-        "local board-mounted conductive shield can encloses the i.MX 95, "
-        "CrossLink-NX and memory region. Its lid and four perimeter walls "
-        "terminate at PCBA ground. There is no second full-width metal wall. "
-        "Camera connectors remain outside the can. A separate copper spreader "
-        "and compliant pad show the heat path to the inside rear housing surface."
+        "shallow board-mounted conductive shield can encloses the populated "
+        "compute, memory, storage, power-management and driver area. Its lid "
+        "and four perimeter walls terminate at PCBA ground. A narrow top-edge "
+        "strip remains outside the perimeter for four camera, two projector "
+        "and two motor/encoder connectors. Every external harness terminates "
+        "there; only controlled PCB traces continue beneath the can. A "
+        "separate copper spreader and compliant pad sit behind the PCBA and "
+        "show the heat path to the inside rear housing surface."
     )
 
     heading_four = next(p for p in document.paragraphs

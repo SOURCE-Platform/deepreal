@@ -36,6 +36,8 @@ import electronics    # noqa: E402
 import interconnect   # noqa: E402
 import motion         # noqa: E402
 import optics         # noqa: E402
+import presentation_views  # noqa: E402
+import support_hardware  # noqa: E402
 import usb_port       # noqa: E402
 import usb_cable      # noqa: E402
 
@@ -141,6 +143,8 @@ def build():
     product += motion.build(col_motion)
     col_interconnect = _collection("Interconnect Routing")
     product += interconnect.build(col_interconnect)
+    col_supports = _collection("Internal Supports")
+    product += support_hardware.build(col_supports)
     lid, _deck = macbook.build(params, mats, col_lid, col_deck)
     mount = mounting_stack.build(params, mats, col_mount)
     col_usb = _collection("USB Port (provisional)")
@@ -227,11 +231,14 @@ def build():
 
     bpy.context.view_layer.update()
     _set_default_viewport(target)
+    scene.name = "SOURCE - Canonical Assembly"
+    presentation_views.build()
     bpy.ops.wm.save_as_mainfile(filepath=BLEND_PATH)
     print("Scene built: {} objects, saved {}".format(
         len(scene.objects), BLEND_PATH))
 
     if do_render:
+        bpy.context.window.scene = scene
         names = {"hero": hero, "front": front_cam, "device": device_cam,
                  "laptop": laptop_cam}
         cam = names.get(camera_name, hero)

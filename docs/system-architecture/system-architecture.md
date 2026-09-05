@@ -236,16 +236,19 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 
 ### 4.6 Rotating flex architecture
 
-No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera service loops plus two projector power/control routes. They are routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.
+No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera service loops, two projector power/control routes and two motor/encoder routes. Every route terminates at the exposed board-edge connector strip rather than crossing an EMI-can wall. They are routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.
 
 ### 4.7 Electronics compartment, EMI shield and heat path
 
-The stationary main PCBA sits in the curved lower compartment. One local,
-board-mounted conductive shield can encloses the i.MX 95, CrossLink-NX and
-memory region. Its lid and four perimeter walls terminate at PCBA ground. This
-is the baseline EMC concept; there is no second full-width metal wall between
-the compartment and drums. Camera flex connectors stay outside the can and
-reach protected devices through controlled PCB traces.
+The stationary main PCBA sits in the curved lower compartment. One shallow,
+board-mounted conductive shield can encloses the populated area: compute,
+memory, storage, power management and driver devices. Its lid and four
+perimeter walls terminate at PCBA ground. A narrow strip at the top board edge
+remains outside the perimeter for four camera, two projector and two
+motor/encoder connectors. Every external harness terminates on that strip;
+signals reach protected devices through controlled PCB traces rather than
+passing through a can wall. This is the baseline EMC concept; there is no
+second remote metal wall between the compartment and drums.
 
 A separate copper spreader and compliant pad show the intended thermal path
 from the compute region to the inside rear surface of the housing. The can is
@@ -561,7 +564,7 @@ This is the current source-of-truth BOM at subsystem/component-class level. It i
 | 2 | Rotating optical carrier | Custom rigid calibrated carrier | LOCKED concept | Rotating |
 | 2 | Drum shells/endcaps | Custom mechanical parts | MODELED concept / material OPEN | Rotating |
 | 1 | Main PCBA / stack | Custom DeepReal proof-engine board(s) | REQUIRED | Stationary |
-| 1 | Five-piece EMI shield can | Board-mounted lid + perimeter walls around compute cluster | MODELED concept / grounding and seam design OPEN | Stationary PCBA |
+| 1 | Five-piece EMI shield can | Board-mounted lid + perimeter walls over populated PCBA area, with external connector strip | MODELED concept / grounding and seam design OPEN | Stationary PCBA |
 | 1 | Thermal spreader + interface pad | Conducts compute heat into rear housing surface | MODELED concept / material and pressure stack OPEN | Stationary |
 | 1 | Rear mounting arm | Integrated curved arm | LOCKED architecture | Enclosure |
 | 1 | Device magnet | Permanent magnet | LOCKED architecture / exact magnet OPEN | Mount |
