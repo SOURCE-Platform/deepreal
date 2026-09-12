@@ -3,6 +3,8 @@
 This is presentation data, not an electrical netlist or fabrication source.
 """
 
+import math
+
 DISCLAIMER = "ILLUSTRATIVE COPPER - NOT ELECTRICALLY ROUTED"
 
 
@@ -35,14 +37,21 @@ TRACE_GROUPS = (
            (2.62, -13.2), (4.38, -13.2), 0.62),
     _lanes("Face_Head_MIPI", "TOP", "Face camera bridge", 0.11, 8,
            (-27.6, -21.75), (-27.6, -19.62), 0.42, axis="x"),
-    _lanes("Face_FPGA_to_SoC", "TOP", "Face camera bridge", 0.11, 8,
-           (-24.88, -16.9), (-12.62, -14.0), 0.38,
-           waypoints=((-23.5, -18.4), (-14.2, -18.4))),
+    _lanes("Face_FPGA_Output_Fanout", "TOP", "Face camera bridge", 0.11, 4,
+           (-27.5, -13.38), (-23.5, -11.4), 0.35,
+           waypoints=((-26.0, -12.1), (-24.5, -11.4))),
+    _lanes("Face_SoC_Input_Fanout", "TOP", "Face camera bridge", 0.11, 4,
+           (-17.0, -11.4), (-12.62, -11.4), 0.35),
     _lanes("Interaction_Head_MIPI", "TOP", "Interaction camera bridge",
            0.11, 8, (24.0, -21.75), (24.0, -19.62), 0.42, axis="x"),
-    _lanes("Interaction_FPGA_to_SoC", "TOP", "Interaction camera bridge",
-           0.11, 8, (20.88, -16.9), (2.62, -14.1), 0.38,
-           waypoints=((19.3, -19.2), (4.2, -19.2))),
+    _lanes("Interaction_FPGA_Output_Fanout", "TOP",
+           "Interaction camera bridge", 0.11, 4,
+           (24.0, -13.38), (18.5, -12.2), 0.35,
+           waypoints=((22.0, -12.2),)),
+    _lanes("Interaction_SoC_Input_Fanout", "TOP",
+           "Interaction camera bridge", 0.11, 4,
+           (4.0, -16.2), (2.62, -14.0), 0.30,
+           waypoints=((3.1, -16.2),)),
     _lanes("SoC_Left_Fanout", "TOP", "Compute control", 0.10, 6,
            (-12.62, -7.5), (-18.0, -7.5), 0.62,
            waypoints=((-14.5, -7.5), (-16.0, -5.9))),
@@ -62,16 +71,41 @@ TRACE_GROUPS = (
     _lanes("Interaction_Motor_Power", "BOTTOM", "Interaction motion",
            0.34, 2, (32.0, -19.62), (34.0, -22.25), 0.78,
            waypoints=((32.0, -21.0), (33.2, -21.8))),
-    _lanes("Rear_Service_Bus", "BOTTOM", "Board service", 0.12, 6,
-           (-11.5, -18.0), (20.0, -18.0), 0.52,
-           waypoints=((-7.0, -20.0), (15.5, -20.0))),
+    _lanes("Board_ID_Fanout", "BOTTOM", "Board service", 0.12, 2,
+           (-3.0, -16.68), (-3.0, -14.8), 0.48, axis="x"),
+    _lanes("Clock_Fanout", "BOTTOM", "Board service", 0.12, 2,
+           (2.0, -18.38), (2.0, -16.4), 0.48, axis="x"),
+    _lanes("Microphone_Fanout", "BOTTOM", "Board service", 0.12, 2,
+           (9.0, -18.55), (9.0, -16.4), 0.48, axis="x"),
     _lanes("VBUS_Power_Path", "TOP", "USB power", 0.62, 2,
-           (37.0, -17.0), (33.8, -17.0), 1.15,
-           waypoints=((35.2, -17.0), (34.5, -16.0))),
+           (37.0, -18.45), (35.05, -18.45), 0.48),
     _lanes("System_Power_Distribution", "TOP", "Power management", 0.48, 3,
            (31.8, -9.8), (15.0, -9.8), 1.25,
            waypoints=((29.8, -11.0), (22.0, -11.0), (19.0, -9.8))),
 )
+
+
+def visual_route_keepout(x, z, side, body_width, body_depth, clearance=0.18):
+    """Return true when a support part would cover visible surface routing."""
+    body_radius = math.hypot(body_width / 2.0, body_depth / 2.0)
+    for group in TRACE_GROUPS:
+        if group["side"] != side:
+            continue
+        threshold = body_radius + group["width"] / 2.0 + clearance
+        for path in group["paths"]:
+            for (x0, z0), (x1, z1) in zip(path, path[1:]):
+                dx, dz = x1 - x0, z1 - z0
+                length2 = dx * dx + dz * dz
+                if length2 == 0:
+                    distance = math.hypot(x - x0, z - z0)
+                else:
+                    amount = max(0.0, min(1.0,
+                        ((x - x0) * dx + (z - z0) * dz) / length2))
+                    distance = math.hypot(
+                        x - (x0 + amount * dx), z - (z0 + amount * dz))
+                if distance < threshold:
+                    return True
+    return False
 
 
 POURS = (
@@ -101,7 +135,14 @@ VIAS = (
     _via_row(-12.0, -8.0, -8.0, 0.8, "eMMC_TRANSITION") +
     _via_row(17.0, 33.0, -18.0, 2.0, "POWER_THERMAL") +
     _via_row(-31.0, -25.0, -20.1, 1.0, "MIPI_TRANSITION") +
-    _via_row(21.0, 27.0, -20.1, 1.0, "MIPI_TRANSITION")
+    _via_row(21.0, 27.0, -20.1, 1.0, "MIPI_TRANSITION") +
+    _via_row(-24.2, -22.8, -11.4, 0.4667, "MIPI_TRANSITION") +
+    _via_row(-17.0, -15.6, -11.4, 0.4667, "MIPI_TRANSITION") +
+    _via_row(17.8, 19.2, -12.2, 0.4667, "MIPI_TRANSITION") +
+    _via_row(3.5, 4.5, -16.2, 0.3333, "MIPI_TRANSITION") +
+    _via_row(-3.24, -2.76, -14.8, 0.48, "SERVICE_TRANSITION") +
+    _via_row(1.76, 2.24, -16.4, 0.48, "SERVICE_TRANSITION") +
+    _via_row(8.76, 9.24, -16.4, 0.48, "SERVICE_TRANSITION")
 )
 
 

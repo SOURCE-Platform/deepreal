@@ -21,6 +21,7 @@ REPO_ROOT = PROJECT_DIR.parents[2]
 sys.path.insert(0, str(REPO_ROOT / "blender"))
 
 from pcba_bom import ALL_PARTS, PLANNING_ZONES  # noqa: E402
+from pcba_visual_layout import visual_route_keepout  # noqa: E402
 
 
 LIB_ROOT = Path(
@@ -145,7 +146,8 @@ def blocked(x, y, side, parts):
         px, py = hx + X_OFFSET, Y_OFFSET - hz
         if (x - px) ** 2 + (y - py) ** 2 < 2.2 ** 2:
             return True
-    return False
+    return visual_route_keepout(
+        x - X_OFFSET, Y_OFFSET - y, side, 1.0, 0.5)
 
 
 def place_passive_field(

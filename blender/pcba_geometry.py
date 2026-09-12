@@ -8,8 +8,8 @@ from mathutils import Matrix, Vector
 
 from assembly_primitives import MM, box, cylinder, material, tag, tube
 from pcba_bom import ALL_PARTS, BOARD, PLANNING_ZONES
+from pcba_visual_layout import visual_route_keepout
 EVIDENCE_SUPPORT = "REPRESENTATIVE SUPPORT POPULATION - SCHEMATIC NOT FROZEN"
-
 def _materials():
     return {
         "package": material("PCBA_Package_Mold", (0.010, 0.012, 0.015),
@@ -229,6 +229,8 @@ def _blocked(x, z, side, occupied):
         return True
     if any((x-hx)**2 + (z-hz)**2 < 2.35**2
            for hx, hz in ((-42,-22.5),(-42,-.5),(42,-22.5),(42,-.5))):
+        return True
+    if visual_route_keepout(x, z, side, 1.0, 0.5):
         return True
     return any(item[0] == side and abs(x-item[1]) < item[3]/2 + 0.55
                and abs(z-item[2]) < item[4]/2 + 0.55 for item in occupied)

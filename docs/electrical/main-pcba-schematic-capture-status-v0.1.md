@@ -28,12 +28,12 @@ The Blender population was then changed to match those decisions:
 - a 2.0 mm visible assembly gap between the 15 mm i.MX95 body and LPDDR body;
 - two combined optical-head flex routes plus two separate motor/encoder harnesses.
 
-The updated model has 201 modeled component bodies. Automated checks report a
+The updated model has 178 modeled component bodies. Automated checks report a
 6.06 mm populated board stack inside the 15 mm target envelope, no major-package or
 component-body overlap, correct seating on the board, no mounting-hole intrusion,
 and collision-free shield, cable, support, thermal and sampled drum-travel geometry.
 
-The presentation derivative adds 99 engineering-informed visual trace paths, 81
+The presentation derivative adds 99 engineering-informed visual trace paths, 103
 visual vias, 10 test pads and four masked copper regions. KiCad and Blender consume
 the same tool-neutral coordinate data. This artwork is deliberately separated from
 the canonical placement-only KiCad board.

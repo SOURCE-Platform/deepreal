@@ -64,7 +64,7 @@ python3 scripts/generate_schematic_hierarchy.py
 
 The visual route contract is `../../../blender/pcba_visual_layout.py`. Blender
 and KiCad consume the same coordinates. The derivative contains 99 visual trace
-paths, 81 visual vias, 10 test pads and four masked copper regions. These counts
+paths, 103 visual vias, 10 test pads and four masked copper regions. These counts
 describe artwork, not connected electrical nets.
 
 Rebuild the public render package after `blender/build_scene.py` with:
