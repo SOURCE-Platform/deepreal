@@ -1,0 +1,34 @@
+Ref,Function,Candidate,Package,Body_mm,Side,Status,Geometry_source
+U1,Application processor,NXP MIMX9596CVTXNAC,FC-PBGA-548 SOT2251-1,15.0x15.0x1.584_max,Top,BASELINE,NXP IMX95IEC Rev 8
+U2,Face camera aggregation,Lattice LIFCL-17,121-ball csfBGA,6.0x6.0x1.0,Top,COMPILE_REQUIRED,Lattice CrossLink-NX selection table
+U3,Interaction camera aggregation,Lattice LIFCL-17,121-ball csfBGA,6.0x6.0x1.0,Top,COMPILE_REQUIRED,Lattice CrossLink-NX selection table
+U4,4 GB LPDDR4X,Micron MT53E1G32D2FW-046 AAT:B,200-ball TFBGA,10.0x14.5x1.1,Top,NXP_VALIDATION_REQUIRED,Micron production catalog
+U5,System PMIC,NXP MPF0900AVNA2ES,HVQFN56,8.0x8.0x0.53,Top,BASELINE,NXP PF09 Rev 1.3
+U6,SoC core regulator,NXP MPF5302BVNAAEP,H-FC-PQFN24,3.5x4.5x0.75,Top,BASELINE,NXP PF53 ordering table
+U7,CPU core regulator,NXP MPF5301BVNABEP,H-FC-PQFN24,3.5x4.5x0.75,Top,BASELINE,NXP PF53 ordering table
+U8,5 V system buck,TI TPS56637RPAR,VQFN-HR10 RPA,3.0x3.0x1.0,Top,THERMAL_REVIEW,TI TPS56637 product data
+U9,6 V motor buck,TI TPS56637RPAR,VQFN-HR10 RPA,3.0x3.0x1.0,Top,THERMAL_REVIEW,TI TPS56637 product data
+U10,VBUS protection,TI TPS259472LRPWR,WQFN10 RPW,2.0x2.0x0.8,Top,BASELINE,TI TPS25947 product data
+U11,USB-PD controller,Infineon CYPD3177-24LQXQ,QFN24,4.0x4.0x0.6,Top,BASELINE,Infineon datasheet
+U12,USB orientation mux,TI HD3SS3212IRKSR,VQFN20 RKS,2.5x4.5x1.0,Bottom,BASELINE,TI product data
+U13,Face motor driver,TI DRV8213RTER,WQFN16 RTE,3.0x3.0x0.8,Bottom,BASELINE,TI product data
+U14,Interaction motor driver,TI DRV8213RTER,WQFN16 RTE,3.0x3.0x0.8,Bottom,BASELINE,TI product data
+U15,32 GB eMMC,Micron MTFC32GBCAQTC-AAT,153-ball BGA,11.5x13.0x1.3,Bottom,BASELINE,Micron production catalog
+U16,Board identity EEPROM,Microchip AT24C64D-MAHM-T,UDFN8,2.0x3.0x0.6,Bottom,BASELINE,Microchip production catalog
+U17,Sensor clock buffer,TI LMK1C1104DQFR,WSON8 DQF,2.0x2.0x0.8,Bottom,BASELINE,TI product data
+U18,Face absolute drum angle,AS5600L-AWLM,WLCSP15,2.07x2.63x0.6,Top,SUPPLY_RECHECK,AS5600L datasheet
+U19,Interaction absolute drum angle,AS5600L-AWLM,WLCSP15,2.07x2.63x0.6,Top,SUPPLY_RECHECK,AS5600L datasheet
+U20,Main board temperature,TI TMP117AIDRVR,WSON6 DRV,2.0x2.0x0.8,Top,BASELINE,TI product data
+MK1,PDM microphone,TDK MMICT3902-00-012,Bottom-port LGA,3.5x2.65x0.98,Bottom,BASELINE,TDK product data
+SW1,Case-open tamper,Omron D3SK-B1R,Surface-mount NC detector,3.0x3.5x0.9,Top,MECHANICAL_GATE,Omron product data
+D1,USB SuperSpeed ESD,TI TPD4EUSB30DQAR,USON10 DQA,2.5x1.0x0.55,Bottom,SI_REVIEW,TI product data
+D2,USB 2 ESD,TI TPD2EUSB30ADRTR,SOT-9X3 DRT,1.0x1.0x0.6,Bottom,SI_REVIEW,TI product data
+D3-D8,Drum MIPI ESD,6 x TI TPD4E05U06DQAR,USON10 DQA,2.5x1.0x0.55,Top,SI_REVIEW,Three arrays at each drum connector
+D9,VBUS transient suppressor,TBD,Low-profile TVS,3.0x2.0x1.0,Top,SELECTION_REQUIRED,Choose from surge requirement
+J1,USB-C power and data,Hirose CX90M3-24P,Mid-mount USB Type-C,7.85x12.0x3.16,Top,BASELINE,Hirose STEP and drawing
+J2,Face optical-head flex,Hirose FH26W-51S-0.3SHW(97),0.3 mm FPC 51 pos,15.6x3.2x1.0,Top,FLEX_SI_GATE,Hirose FH26 catalog
+J3,Interaction optical-head flex,Hirose FH26W-51S-0.3SHW(97),0.3 mm FPC 51 pos,15.6x3.2x1.0,Top,FLEX_SI_GATE,Hirose FH26 catalog
+J4,Face motor/encoder,TBD,6-position low-profile,5.0x2.6x1.2,Top,RESERVED,Function envelope
+J5,Interaction motor/encoder,TBD,6-position low-profile,5.0x2.6x1.2,Top,RESERVED,Function envelope
+H1,Face head carrier,"SA31VA30P + Mira220 + AS1170 + Belago1.2 + local rails",Custom rigid-flex,OPEN,Rotating,HEAD_PCB_REQUIRED,Subsystem partition decision
+H2,Interaction head carrier,"SA31VA30P + Mira220 + AS1170 + Belago1.2 + local rails",Custom rigid-flex,OPEN,Rotating,HEAD_PCB_REQUIRED,Subsystem partition decision

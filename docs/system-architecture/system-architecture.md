@@ -1,5 +1,12 @@
 <!-- Canonical Markdown edition of the current v0.2 Word baseline. -->
 
+> **Electrical implementation update (12 September 2026):** For PCBA schematic
+> entry, exact candidate parts, camera-bridge count, optical-head partition and
+> connector strategy, use
+> `../electrical/main-pcba-schematic-entry-spec-v0.1.md`. This v0.2 architecture
+> remains the product-requirements baseline, but its older OV9281, one-FPGA and
+> four-camera-connector references are superseded for the current electrical pass.
+
 [Word baseline](./DeepReal_System_Architecture_Source_of_Truth_v0.2.docx)
 
 # DeepReal
@@ -229,14 +236,14 @@ Figure 4 — Current Blender cutaway: optical hardware is already packaged insid
 | Prototype actuator | Micro-servo class such as Kpower P0025 is acceptable for quick fit/motion experiments. |
 | Production direction | Micro geared DC motor + absolute magnetic encoder is preferred over a hobby servo. |
 | Drive layout | SELECTED: offset micro-gearmotor inside the housing behind each drum; pinion on the motor shaft meshes a ring gear fixed to the drum's outboard end. The current Blender model includes two motors, two pinions, two ring gears, four bearings, axles, brackets, magnetic encoders and travel stops. Tooth geometry, ratio and exact parts remain OPEN. Coaxial end-pod motors remain REJECTED. |
-| Driver reference | TI DRV8212-class H-bridge, one per brushed motor. |
-| Encoder reference | ams OSRAM AS5600-class magnetic absolute angle sensor; higher-resolution SPI alternative can be evaluated. |
+| Driver reference | TI DRV8213RTE H-bridge, one per brushed motor, with current telemetry and hardware stall support. |
+| Encoder reference | ams OSRAM AS5600L-class programmable-address magnetic absolute angle sensor; higher-resolution SPI alternative can be evaluated. |
 | Evidence requirement | Record measured encoder angle with every capture window; do not treat the motor command as the actual pose. |
 | Motion/capture policy | For high-precision depth, prefer move → settle → confirm angle → capture. If capturing while moving, mark motion state explicitly. |
 
 ### 4.6 Rotating flex architecture
 
-No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The Blender model now shows four camera service loops, two projector power/control routes and two motor/encoder routes. Every route terminates at the exposed board-edge connector strip rather than crossing an EMI-can wall. They are routing concepts, not production harness drawings. High-speed image data should use MIPI-rated FPC/micro-coax, with separate or carefully designed conductors for emitter current, motor power, encoder/control and sensor control. The flexes are a reliability-critical component and must be cycle-tested.
+No slip ring is required because each head is expected to rotate only about 140–160°. Use controlled flex loops through the pivots. The current Blender model shows one combined 51-conductor optical-head flex and one motor/encoder harness per drum. The projector driver and high-current pulse loop are local to each rotating head; only filtered 3.3 V feed, control, timing and status cross the head flex. Every route terminates at the exposed board-edge connector strip rather than crossing an EMI-can wall. They are routing concepts, not production harness drawings. High-speed image data needs an impedance-controlled dynamic-flex stack with distributed power/returns. The flexes are reliability-critical and must pass SI and cycle-life testing; separate camera flexes remain the fallback if the combined interface fails.
 
 ### 4.7 Electronics compartment, EMI shield and heat path
 
@@ -244,8 +251,8 @@ The stationary main PCBA sits in the curved lower compartment. One shallow,
 board-mounted conductive shield can encloses the populated area: compute,
 memory, storage, power management and driver devices. Its lid and four
 perimeter walls terminate at PCBA ground. A narrow strip at the top board edge
-remains outside the perimeter for four camera, two projector and two
-motor/encoder connectors. Every external harness terminates on that strip;
+remains outside the perimeter for two combined optical-head and two
+motor/encoder connectors. Every internal harness terminates on that strip;
 signals reach protected devices through controlled PCB traces rather than
 passing through a can wall. This is the baseline EMC concept; there is no
 second remote metal wall between the compartment and drums.

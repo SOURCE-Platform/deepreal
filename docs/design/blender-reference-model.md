@@ -1,116 +1,213 @@
 # Blender reference model and visual bill of materials
 
-**Status:** architecture-complete concept model, 5 September 2026
-**Authority:** `blender/design_spec.py` and generated `blender/deepreal.blend`
+**Status:** architecture-complete concept model, 7 September 2026
+**Authority:** Blender Python in `blender/` and the generated
+`blender/deepreal.blend`
 
-DeepReal now has one active mechanical concept in Blender. The obsolete
-"Current" model existed to demonstrate collisions and has been removed. The
-rectangular "Compact" chin has also been replaced by the approved curved
-electronics compartment, which turns the earlier empty lower curve into
-usable packaging volume.
+DeepReal has one active mechanical concept: a curved, 120 mm-wide device with
+two independently aimed sensor drums and a stationary electronics compartment.
+Blender is the mechanical and visual design authority. FreeCAD and the former
+comparison models are outside the current workflow.
 
-![Current curved Blender profile](./blender-reference-profile.png)
+This is packaging and architecture geometry, not production CAD. Reference
+envelopes and concept parts remain subject to component selection, tolerance
+analysis, thermal analysis, EMC development, and physical testing.
 
-The profile view shows the curved lower compartment continuing behind the
-drums. The flat internal stack does not dictate a box-shaped exterior.
+![Approved electronics architecture](./emi-full-enclosure-figma-reference-v1.png)
 
-## What the major sections do
+The approved illustration defines the packaging intent: a grounded enclosure
+around the complete populated board area, a serviceable lower connector apron,
+and separate cable routes down the left and right sides. It does not define
+released dimensions or prove EMC performance.
 
-| Section | What it does | Model status |
+## System architecture
+
+| Section | Model content | Status |
 | --- | --- | --- |
-| Face drum | Aims RGB, IR depth receiver, and structured-light projection at the user. | Shell and optical architecture present; exact optics remain reference/placeholder geometry. |
-| Interaction drum | Aims the same sensing classes toward hands and workspace. | Shell and optical architecture present; exact optics remain reference/placeholder geometry. |
-| Drum motion | Rotates each drum independently and measures its real angle. | Two motors, pinions, ring gears, axles, four bearings, encoders, brackets, and stops present as concept/reference envelopes; ring gears occupy the outer 2 mm end bands clear of the camera windows. |
-| Electronics compartment | Houses the stationary Proof Engine below/behind the drums. | Curved hollow enclosure and populated PCBA volume present. |
-| EMI shield can | Encloses the populated PCBA area while leaving a narrow external connector strip at the board edge. | One lid and four perimeter walls present; grounding fingers, seams, and apertures await PCB/EMC design. |
-| Thermal path | Moves processor heat into the enclosure so the case can spread it. | Copper spreader and compliant housing pad present; dimensions and thermal performance remain unverified. |
-| Interconnect | Carries camera streams, emitter power/control, and motor/encoder signals across limited drum rotation. | Four MIPI, two projector, and two motor/encoder service loops terminate at the external connector strip; exact flex stack and fatigue radii are open. |
-| USB-C | Carries host data and intended single-cable power. | Port and cable concept present; connector/mechanical integration remains provisional. |
-| Mount | Attaches the device to the display without putting active electronics in the laptop-side plate. | Magnet, steel target plate, and replaceable foam concept present. |
+| Sensor drums | Face and interaction drums, each with RGB, IR, structured-light, carrier, and PCB envelopes | Drum packaging is established; final optical parts and calibration features remain open |
+| Drum motion | Two motors, pinions, ring gears, axles, four bearings, encoders, brackets, and travel stops | Concept and reference envelopes; ring gears and routes are checked against the optical geometry |
+| Main electronics | 90 × 28 mm PCBA with processor, FPGA, memory, storage, power, USB, motor, and projector-driver packages | Architecture-level placement |
+| Electronics Shield Enclosure | Formed rear tray with integrated perimeter walls plus a removable front lid | Full-board conductive enclosure concept |
+| Grounding | PCB perimeter ground ring, ten ground-via features, and three chassis-bond tabs | Visible grounding strategy; final contact pitch and impedance remain open |
+| Connector apron | Separate face, auxiliary, and interaction banks below the shielded chamber | Service-accessible boundary concept |
+| Cable routing | Left and right camera-data lanes plus separate left and right power/motion lanes | Routing concept with lane metadata, grounded separators, clamps, and strain relief |
+| Thermal path | Shield rear tray, copper spreader, compliant housing pad, and rear housing contact | Continuous concept path; pressure and performance are unverified |
+| External connection | USB-C receptacle and cable | Provisional mechanical integration |
+| Display mount | Magnet, steel target, and replaceable foam | Provisional attachment stack |
 
-## Visual BOM
+## Electronics Shield Enclosure
 
-![Internal assembly with enclosure and drum shells hidden](./blender-internal-assembly.png)
+The former local can and exposed upper connector strip are not part of the
+active model. The populated PCBA field now sits inside a two-piece conductive
+enclosure:
 
-| Qty | Named model item | Purpose | Evidence/status |
-| ---: | --- | --- | --- |
-| 2 | 24 × 54 mm sensor drum | Independently aimed sensing payload | Locked exterior concept; 21 mm assumed usable ID |
-| 2 | RGB camera package | Color/identity/interaction imagery | IMX708-class reference geometry |
-| 2 | IR global-shutter camera | Structured-light receiver | OV9281-class; package/lens still incomplete |
-| 2 | Structured-light projector assembly | Active depth pattern | Reference envelope; final part and eye-safety design open |
-| 2 | Internal optical carrier | Holds calibrated drum optics | Concept geometry |
-| 2 | Offset geared motor | Drum rotation | Reference gearmotor envelope |
-| 2 | Pinion + ring gear pair | Transfers motor torque to drum | Concept gear envelopes, not tooth-level production gears |
-| 2 | Drum axle | Defines rotation axis | Concept geometry |
-| 4 | Drum bearing | Supports both ends of both drums | Reference envelopes; exact bearing selection open |
-| 2 | Magnetic encoder + magnet | Reports measured drum angle | AS5600-class concept |
-| 2 | Mechanical travel stop | Limits motion to the intended range | 150° concept; final stop geometry open |
-| 1 | Main PCBA | Stationary electronics substrate | 90 × 28 mm architecture envelope |
-| 1 | NXP i.MX 95 | Proof Engine compute and hardware-rooted trust | Reference package |
-| 1 | CrossLink-NX FPGA | Trusted camera ingress/aggregation | Reference package |
-| 2 | LPDDR package | Working memory | Reference package |
-| 1 | eMMC package | System storage | Reference package |
-| 2 | PF09/PF53 PMIC | Power sequencing and regulation | Reference packages |
-| 1 | USB PD controller | Negotiates available USB-C power | Reference package |
-| 1 | USB ESD/protection stage | Protects the external high-speed interface | Functional placeholder |
-| 2 | Motor driver | Bidirectional motor control | DRV8212-class functional placeholder |
-| 2 | Projector driver | Drives active depth emitters safely | Functional placeholder; exact part open |
-| 1 | PDM MEMS microphone | Stationary audio observation | Reference package |
-| 1 | Case-open tamper switch | Records enclosure-open state | Concept implementation |
-| 1 | Five-piece EMI shield can | RF containment over the populated PCBA area | Formed-sheet concept |
-| 1 | Heat spreader + thermal pad | Conducts compute heat to rear shell | Concept heat path |
-| 4 | Camera flex link | Moves MIPI camera data off rotating drums | Service-loop routing concept |
-| 2 | Projector power/control harness | Feeds active depth hardware | Routing concept |
-| 1 | USB-C receptacle and cable | Host data and power | Provisional mechanical concept |
-| 1 set | Magnet/steel/foam mount | Display attachment | Provisional reference stack |
+- `Shield_Front_Lid` is the removable service lid.
+- `Shield_Rear_Tray` fuses the rear panel, left wall, right wall, top wall,
+  and grounded connector-apron boundary into one formed part.
+- Four PCB ground-ring segments, ten ground-via features, and three
+  chassis-bond contacts show how the metal enclosure returns to board and
+  chassis ground.
 
-## Four linked presentation views
+The tray clears the PCB substrate on its top and side edges, while a controlled
+lower pass-through lets the board continue into the connector apron. The
+shield remains inside the established housing envelope. Every protected
+processor, memory, storage, power, motor-driver, and projector-driver package
+is contained by the chamber. The model does not claim that the illustrated
+seams, apertures, or contacts are ready for production.
 
-The Blender file opens to a single labeled overview showing all four versions
-together. Larger versions remain available through Blender's scene selector in
-the upper-right corner.
+## Connector apron and routing
 
-![Four-view Blender overview](./blender-four-view-overview.png)
+Drum connectors sit below the primary shielded chamber rather than along its
+upper edge. The lower apron has three zones:
 
-![Fully assembled DeepReal enclosure](./blender-fully-assembled.png)
+- `Face_Connector_Bank` on the left.
+- `Auxiliary_Connector_Bank` in the center.
+- `Interaction_Connector_Bank` on the right.
 
-1. **Fully assembled** shows the complete enclosure.
-2. **Housing removed** retains brackets, standoffs, bearing carriers, and the
-   rest of the internal mounting hardware. The enclosure-mounted USB-C
-   receptacle and external cable are removed with the housing.
-3. **Functional core** removes those enclosure supports.
-4. **Electronics exploded** separates the board, every populated component,
-   the five shield-can pieces, external connectors, heat spreader, and pad.
+Face-drum cables descend on the left. Interaction-drum cables descend on the
+right. Each side has two distinct paths:
 
-![Functional core without removable supports](./blender-functional-core.png)
+1. A camera-data lane for the two camera links.
+2. A power/motion lane for projector and motor/encoder wiring.
 
-![Exploded lower electronics assembly](./blender-electronics-shield.png)
+Grounded lane dividers, boundary clamps, and strain-relief features preserve
+the visible separation. Routes stay inside the housing silhouette and do not
+cross the center of the electronics chamber.
 
-These are linked Blender instances, not four independently modeled products.
-Each presentation object shares its source mesh or curve datablock with the
-canonical assembly while retaining a scene-specific transform.
+The curves communicate path and service-loop intent only. They do not specify
+production flex stack-up, impedance, shielding, conductor pairing, filtering,
+or fatigue life. Camera links still require controlled-impedance,
+ground-referenced construction. Switching-current supply and return
+conductors must remain tightly coupled.
 
-The visible green strip above the shield is intentional: it is the physical
-mating zone for the eight drum cable connectors, not an uncovered bank of
-processor components. The can covers all modeled processor, FPGA, memory,
-power, USB, and driver packages. In production, connector shields/grounds and
-the PCB traces passing beneath the top can wall still require EMC design and
-testing; “outside the can” does not mean electrically unimportant.
+## Thermal continuity
 
-## Intentionally absent
+The processor heat path remains continuous through the enclosure:
 
-- No battery: DeepReal is host/USB powered.
+```text
+processor region
+  → Shield_Rear_Tray
+  → Thermal_Spreader
+  → Housing_Thermal_Pad
+  → rear housing contact
+```
+
+The separate objects keep shielding, heat spreading, compliance, and housing
+contact visible as different design concerns. Final materials, electrical
+isolation, contact pressure, assembly tolerance, and thermal performance
+require engineering analysis and test.
+
+## Visual bill of materials
+
+| Qty | Named model item | Purpose |
+| ---: | --- | --- |
+| 2 | 24 × 54 mm sensor drum | Independently aimed sensing payload |
+| 2 each | RGB camera, IR camera, structured-light projector, optical carrier | Face and interaction sensing architecture |
+| 2 | Geared motor, pinion, ring gear, axle, encoder, and travel-stop set | Drum movement and measured angle |
+| 4 | Drum bearing | Supports both ends of both drums |
+| 1 | Main PCBA | Stationary electronics substrate |
+| 1 | NXP i.MX 95 | Main compute and hardware-rooted trust |
+| 1 | CrossLink-NX FPGA | Camera ingress and aggregation |
+| 1 | 4 GB-class LPDDR package | Working memory |
+| 1 | eMMC package | Storage |
+| 3 | One PF09 plus two PF53 footprints | Power sequencing and regulation; second PF53 provisional |
+| 2 each | Motor driver and projector driver | Drum and emitter actuation |
+| 1 each | USB PD controller, protection stage, input buck, and orientation mux | External power/data interface |
+| 4 | 13 mm camera FPC connector | One front- and one rear-side connector per drum |
+| 100+ | Representative passives, magnetics, and bulk capacitors | Density and package-height study; schematic not frozen |
+| 1 set | Electronics Shield Enclosure | Full populated-field conductive boundary |
+| 1 set | PCB ground ring, ten vias, three chassis-bond tabs | Shield grounding concept |
+| 3 | Connector bank | Face, auxiliary, and interaction apron zones |
+| 4 | Camera-data route | Two links per drum in side-specific data lanes |
+| 2 | Projector power/control route | Side-specific power/motion routing |
+| 2 | Motor/encoder harness | Side-specific power/motion routing |
+| 1 set | Grounded dividers, clamps, clips, and eight strain-relief features | Route separation and support |
+| 1 set | Shield rear tray, spreader, and housing pad | Thermal path |
+| 1 each | PDM microphone and case-open tamper switch | Auxiliary interfaces |
+| 1 | USB-C receptacle and cable | Host data and intended single-cable power |
+| 1 set | Magnet, steel target, and foam | Display attachment |
+
+## Eleven linked presentation scenes
+
+The generated file opens to **00 Four View Overview**. Presentation objects
+are linked instances of the canonical geometry: each scene has its own
+composition, but every mesh or curve continues to share its source datablock.
+
+1. **00 Four View Overview** presents assembled, housing-removed, functional
+   core, and exploded arrangements together.
+2. **01 Fully Assembled** shows the complete exterior.
+3. **02 Housing Removed** removes the housing and drum shells while retaining
+   brackets, carriers, standoffs, routing clips, and clamps.
+4. **03 Functional Core** also removes enclosure-mounted support hardware.
+5. **04 Electronics Exploded** separates the board, protected packages,
+   enclosure pieces, connector banks, grounding features, thermal parts,
+   routes, clips, clamps, and strain relief for inspection.
+6. **05 Shield Cutaway** removes the front lid to expose the protected
+   component field, shield boundary, lower apron, and side routes.
+7. **06 PCBA Top** is the orthographic top/front assembly view.
+8. **07 PCBA Bottom** is the orthographic bottom/rear assembly view.
+9. **08 PCBA Dimensioned** records the 90 × 28 × 1.6 mm substrate and 6.06 mm
+   modeled populated stack.
+10. **09 PCBA Identification** indexes the top and bottom reference designators.
+11. **10 Camera Flex Study** compares the four-connector baseline with an
+    explicitly unproven two-interface alternative.
+
+![Four-view overview](../../blender/renders/presentation-00-four-view-overview.png)
+
+![Shield cutaway](../../blender/renders/presentation-05-shield-cutaway.png)
+
+## Build, validate, and render
+
+Run from the repository root:
+
+```sh
+/Applications/Blender.app/Contents/MacOS/Blender --background \
+  --factory-startup --python blender/build_scene.py
+
+/Applications/Blender.app/Contents/MacOS/Blender --background \
+  blender/deepreal.blend --python blender/validate_model.py
+
+/Applications/Blender.app/Contents/MacOS/Blender --background \
+  blender/deepreal.blend --python blender/review_renders.py
+```
+
+The build uses millimetres in source and converts them to Blender metres.
+Product X runs across the display, Y runs front-to-back, and Z runs vertically.
+Rebuild generated outputs after changing Python. Do not treat an isolated
+manual edit to `deepreal.blend` as the source of truth.
+
+## Automated validation boundary
+
+`blender/validate_model.py` checks:
+
+- required shield, ground, apron, routing, support, thermal, and interface
+  objects;
+- absence of obsolete comparison and local-can objects;
+- containment of protected packages with chamber clearance;
+- connector placement below the shield boundary;
+- exact cable clearance from the housing, shield, gears, neighboring cables,
+  and fitted supports;
+- data versus power/motion lane separation, bend-radius metadata, connector
+  termination, and side-lane metadata;
+- PCB mounting-hole clearance and standoff/fastener seating;
+- contact through the shield rear tray, spreader, housing pad, and housing;
+- ring-gear clearance from optical and cable geometry;
+- protected-optics clearance through sampled −80° to +80° drum travel;
+- all eleven presentation scenes, linked instances, exploded content, and
+  cutaway content.
+
+A passing script is an architecture-level consistency check. It does not
+certify manufacturability, signal integrity, EMC, thermal performance, eye
+safety, structural strength, cable life, or production tolerances.
+
+## Intentionally absent and still open
+
+- No battery: the concept uses host/USB power.
 - No separate TPM or secure element: the baseline uses i.MX 95 EdgeLock.
-- No slip ring: limited 140–160° travel uses controlled flex loops.
-- No second remote EMI wall: the grounded board-covering can is the baseline;
-  EMC testing may change its seams, apertures, and grounding later.
+- No slip ring: limited drum travel uses controlled service loops.
+- No claim of emissions or immunity compliance.
 
-## Validation boundary
-
-`blender/validate_model.py` confirms the named architecture-level subsystems
-exist and that no `Current_` or `Compact_` comparison objects remain. Optical
-containment checks also run during the scene build. It also requires at least
-0.5 mm axial clearance between both ring gears and every optical mesh; the
-current concept provides 1.32 mm on each side. This does **not** certify
-manufacturability, signal integrity, EMC, thermal performance, eye safety,
-structural strength, cable life, or production tolerances.
+Production work still needs final PCB stack-up and connector selection,
+signal-integrity review, shield seam and contact design, motor suppression,
+thermal and structural analysis, cable-flex testing through full drum travel,
+near-field scanning, and emissions/immunity pre-compliance testing.

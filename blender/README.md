@@ -14,27 +14,30 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
 
 - `design_spec.py` — Blender-native dimensions and the approved curved housing
   profile.
-- `device.py` — hollow curved enclosure, drum channel, motor pocket, and two
-  cylindrical 24 × 54 mm drum shells.
+- `device.py` — hollow curved enclosure, drum and motor pockets, bounded side
+  cable passages, and two cylindrical 24 × 54 mm drum shells.
 - `optics.py` — bored apertures plus architecture-stage RGB, IR, projector,
   carrier, PCB, and optical keep-out geometry.
-- `electronics.py` — populated main PCBA, proof-engine parts, one formed
-  board-covering EMI shield can, a separate external connector strip,
-  thermal spreader/pad, microphone, and tamper switch.
+- `electronics.py` — populated main PCBA, formed rear shield tray and
+  removable lid, lower connector apron, thermal spreader/pad, microphone,
+  and tamper switch.
 - `motion.py` — two offset gearmotors, pinions, ring gears, axles, four
   bearings, encoder boards/magnets, brackets, and travel stops. Each ring gear
   occupies the final 2 mm drum-end band, clear of the outer camera window.
-- `interconnect.py` — four camera flex service loops and two projector
-  power/control harnesses.
-- `support_hardware.py` — removable PCBA standoffs, fasteners, and bearing
-  carriers that connect the functional core to the enclosure.
-- `presentation_views.py` — a labeled four-view overview plus four detail
-  scenes made from linked instances of the canonical geometry.
+- `interconnect.py` — two combined 51-conductor optical-head flex routes;
+  projector drivers and pulse loops remain local to the rotating heads.
+- `support_hardware.py` — removable PCBA mounts, bearing carriers, grounded
+  cable channels, boundary clamps, and strain relief.
+- `presentation_views.py` and `pcba_presentation.py` — full-device views plus
+  five dedicated PCBA scenes made from linked canonical geometry.
+- `pcba_bom.py` and `pcba_geometry.py` — the mechanical placement contract,
+  package/footprint geometry, support population, vias, and status data.
 - `mounting_stack.py`, `usb_port.py`, `usb_cable.py` — display attachment and
   external connection concepts.
 - `build_scene.py` — deterministic complete-scene build.
-- `validate_model.py` — named-subsystem and legacy-variant checks.
-- `review_renders.py` — renders the overview and all four detail scenes for
+- `validate_model.py` and `validate_pcba.py` — world-space product checks plus
+  board package, seating, density, keep-out, and stack validation.
+- `review_renders.py` — renders the overview and all five detail scenes for
   review and website use.
 - `deepreal.blend` and `renders/` — generated outputs; rebuild rather than
   treating manual edits as authoritative.
@@ -61,28 +64,25 @@ X runs across the display, Y runs front-to-back, and Z runs vertically.
 
 - The electronics compartment follows the approved curved/tapered lower
   profile instead of a rectangular chin.
-- The housing contains real drum, motor, and electronics cavities.
-- The populated area of the PCBA sits under one shallow grounded shield can:
-  one lid plus four perimeter walls meeting the PCBA ground. A narrow board-
-  edge strip remains outside the perimeter for cable connectors.
-- The can deliberately does not cover every visible millimetre of green PCB.
-  Bare board perimeter and the physical connector-mating strip remain outside;
-  all processor, FPGA, memory, power, USB, and driver packages remain inside.
-  Production design must bond connector shields/grounds and control the traces
-  where they pass beneath the can wall.
-- Four camera, two projector, and two motor connectors remain outside the can.
-  Every external harness terminates at that strip; signals continue beneath
-  the shield only as controlled PCB traces.
+- The housing contains real drum, motor, electronics, and side-route cavities.
+- The populated PCBA field sits inside a two-piece conductive enclosure: one
+  formed rear tray with integrated perimeter walls and one removable front
+  lid. The tray clears the PCB substrate rather than passing through it.
+- Only the grounded lower connector apron remains outside the primary
+  chamber. Four camera, two projector, and two motor connectors terminate
+  there.
+- Side cable passages are closely bounded, and data and power/motion routes
+  remain in separate fitted channels.
 - A separate copper spreader and compliant pad show the intended heat path
-  behind the PCBA into the rear housing surface. Neither thermal part is
-  enclosed by the front-side EMI can.
+  from the rear tray into the rear housing surface. The spreader and pad sit
+  behind the enclosure rather than inside the protected electronics chamber.
 
 ## Presentation scenes and navigation
 
 The generated `.blend` opens to **00 Four View Overview**, where all four
 versions are arranged together and labeled. You do not need to know Blender's
 navigation to find them. For a larger individual view, use the scene selector
-in the upper-right corner of Blender and choose one of the four numbered detail
+in the upper-right corner of Blender and choose a numbered detail
 scenes. The canonical source scene is also retained for modeling work.
 
 Presentation objects are linked duplicates: they have independent positions
@@ -96,8 +96,16 @@ modeled once and updates in every view.
    receptacle and external cable are removed with the housing.
 3. **03 Functional Core** — the same internals with removable support hardware
    omitted.
-4. **04 Electronics Exploded** — the PCBA, every component, the five can
-   pieces, heat spreader, pad, and connector strip separated for inspection.
+4. **04 Electronics Exploded** — the PCBA, tray, lid, components, thermal
+   stack, connector banks, routes, and supports separated for inspection.
+5. **05 Shield Cutaway** — the front lid removed to expose the shield
+   boundary, populated field, connector apron, and cable passages.
+6. **06 PCBA Top** — orthographic top/front assembly view.
+7. **07 PCBA Bottom** — orthographic bottom/rear assembly view.
+8. **08 PCBA Dimensioned** — board and populated-stack dimensions.
+9. **09 PCBA Identification** — top/bottom reference-designator index.
+10. **10 Camera Flex Study** — current two-connector drum interface beside the
+    four-camera-flex signal-integrity fallback.
 
 ## What remains open
 

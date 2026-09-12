@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the overview and four linked scenes for review and web use.
+"""Render the overview and five linked detail scenes for review and web use.
 
 Run after build_scene.py:
     Blender --background blender/deepreal.blend --python blender/review_renders.py
@@ -19,13 +19,22 @@ PRESENTATION_RENDERS = (
     ("02 Housing Removed", "presentation-02-housing-removed"),
     ("03 Functional Core", "presentation-03-functional-core"),
     ("04 Electronics Exploded", "presentation-04-electronics-exploded"),
+    ("05 Shield Cutaway", "presentation-05-shield-cutaway"),
+    ("06 PCBA Top", "presentation-06-pcba-top"),
+    ("07 PCBA Bottom", "presentation-07-pcba-bottom"),
+    ("08 PCBA Dimensioned", "presentation-08-pcba-dimensioned"),
+    ("09 PCBA Identification", "presentation-09-pcba-identification"),
+    ("10 Camera Flex Study", "presentation-10-camera-flex-study"),
 )
 
 
 def main():
     os.makedirs(OUTPUT, exist_ok=True)
     window = bpy.context.window
-    for scene_name, filename in PRESENTATION_RENDERS:
+    renders = PRESENTATION_RENDERS
+    if os.environ.get("DEEPREAL_RENDER_GROUP") == "pcba":
+        renders = PRESENTATION_RENDERS[6:]
+    for scene_name, filename in renders:
         scene = bpy.data.scenes.get(scene_name)
         if scene is None:
             raise RuntimeError("missing presentation scene: " + scene_name)

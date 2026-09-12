@@ -2,7 +2,9 @@
 
 from mathutils import Vector
 
-from assembly_primitives import box, cylinder, material, tag, tube, wire
+from assembly_primitives import (
+    box, cylinder, material, routed_wire, tag, tube,
+)
 
 
 AXIS_Y = -1.5
@@ -94,13 +96,23 @@ def _side(sign, label, mats, collection):
                mats["bracket"], collection)
     objects.append(tag(stop, "Travel limit", "150 DEG CONCEPT"))
 
-    connector_x = -38.0 if sign < 0 else 39.0
-    harness = wire("{}_Motor_Encoder_Harness".format(label), (
-        (motor_x, 18.8, AXIS_Z),
-        (sign * 37.0, 20.0, 10.0),
-        (sign * 32.0, 18.0, 4.0),
-        (connector_x, 16.2, 0.5),
-    ), 0.45, mats["wire"], collection)
+    connector_x = -34.0 if sign < 0 else 34.0
+    lane_x = sign * 54.0
+    harness = routed_wire("{}_Motor_Encoder_Harness".format(label), (
+        (sign * 40.0, motor_y, AXIS_Z),
+        (sign * 46.0, 13.0, 15.0),
+        (lane_x, 13.0, 10.0),
+        (lane_x, 13.0, -10.0),
+        (lane_x, 13.0, -25.0),
+        (sign * 44.0, 13.0, -25.0),
+        (sign * 40.0, 14.2, -24.2),
+        (connector_x, 14.95, -24.2),
+    ), 0.45, 3.0, mats["wire"], collection)
+    harness["Cable_Lane"] = (
+        "Face_Power_Motion_Lane" if sign < 0
+        else "Interaction_Power_Motion_Lane")
+    harness["Physical_Intent"] = (
+        "Tightly coupled supply and return with motor suppression provision")
     objects.append(tag(harness, "Motor interconnect", "ROUTING CONCEPT"))
     return objects
 

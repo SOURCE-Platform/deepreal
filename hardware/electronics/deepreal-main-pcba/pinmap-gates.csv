@@ -1,0 +1,13 @@
+Ref,Part,Required_source,State,Prohibited_shortcut,Closure_test
+U1,MIMX9596CVTXNAC,"NXP 548-ball package pin list and hardware design guide",TBD_PINMAP,"Generic SoC rectangle with invented pins","Symbol-to-datasheet audit plus ERC"
+U2,LIFCL-17 csfBGA121,"Lattice package pin file and Radiant-generated assignment",TBD_PINMAP,"Copying LIFCL-40 caBGA400 reference pins","Successful two-input/one-output compile and timing report"
+U3,LIFCL-17 csfBGA121,"Lattice package pin file and Radiant-generated assignment",TBD_PINMAP,"Copying LIFCL-40 caBGA400 reference pins","Successful two-input/one-output compile and timing report"
+U4,MT53E1G32D2FW-046 AAT:B,"Micron 200-ball production data and NXP-qualified memory configuration",TBD_PINMAP,"Visual ball-grid approximation","NXP DDR tool settings and independent pin audit"
+U5,MPF0900AVNA2ES,"NXP PF09 data sheet and industrial LPDDR4X OTP configuration",SOURCE_IDENTIFIED,"Assuming rail order from rail names","Power-sequence and OTP review"
+U6,MPF5302BVNAAEP,"NXP PF53 data sheet and i.MX95 reference design",SOURCE_IDENTIFIED,"Generic buck symbol only","15 A rail design and sequence review"
+U7,MPF5301BVNABEP,"NXP PF53 data sheet and i.MX95 reference design",SOURCE_IDENTIFIED,"Generic buck symbol only","8 A rail design and sequence review"
+U15,MTFC32GBCAQTC-AAT,"Micron 153-ball production data",TBD_PINMAP,"Pin-compatible assumption from another eMMC","Symbol audit and boot/stress test"
+J1,CX90M3-24P,"Hirose drawing and footprint",SOURCE_IDENTIFIED,"Generic USB-C footprint without shell/mid-mount geometry","Footprint drawing audit and 3D fit"
+J2-J3,FH26W-51S-0.3SHW(97),"Hirose drawing plus flex-vendor contact orientation",TBD_ORIENTATION,"Assigning contact numbers from render orientation","Mated flex drawing and continuity test"
+U18-U19,AS5600L-AWLM,"Current ams OSRAM data sheet and order-code confirmation",SOURCE_IDENTIFIED,"Using fixed-address AS5600 symbol","Supply/address audit and angle test"
+H1-H2,Optical head assembly,"Optical-head schematic and flex pin map",IN_PROGRESS,"Treating heads as generic cameras","Head ERC; bring-up; interlock test"

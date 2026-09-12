@@ -1,0 +1,19 @@
+Interface,Source,Destination,Signals_or_lanes,Rate_or_level,Routing_class,Validation_gate
+USB_SS,USB-C_J1,iMX95_USB1,"TX pair; RX pair through HD3SS3212",USB 3.x,"90 ohm differential; short connector-ESD-mux corridor",USB compliance and eye diagram
+USB_2,USB-C_J1,iMX95_USB1,"D+; D-",USB 2.0,"90 ohm differential; low-capacitance ESD",USB compliance
+USB_CC,USB-C_J1,CYPD3177,"CC1; CC2",USB-C/PD,"Protected low-speed",PD interoperability
+RGB_FACE,Face_head,LIFCL17_FACE,"CLK + 2 data lanes",MIPI D-PHY,"100 ohm differential; continuous reference",Flex SI and FPGA pin compile
+IR_FACE,Face_head,LIFCL17_FACE,"CLK + 2 data lanes",MIPI D-PHY,"100 ohm differential; continuous reference",Flex SI and FPGA pin compile
+FACE_AGG,LIFCL17_FACE,iMX95_CSI0,"CLK + 4 data lanes",MIPI D-PHY,"100 ohm differential; length rules from NXP/Lattice",FPGA timing and camera bring-up
+RGB_INTERACTION,Interaction_head,LIFCL17_INTERACTION,"CLK + 2 data lanes",MIPI D-PHY,"100 ohm differential; continuous reference",Flex SI and FPGA pin compile
+IR_INTERACTION,Interaction_head,LIFCL17_INTERACTION,"CLK + 2 data lanes",MIPI D-PHY,"100 ohm differential; continuous reference",Flex SI and FPGA pin compile
+INTERACTION_AGG,LIFCL17_INTERACTION,iMX95_CSI1,"CLK + 4 data lanes",MIPI D-PHY,"100 ohm differential; length rules from NXP/Lattice",FPGA timing and camera bring-up
+LPDDR4X,iMX95,MT53E1G32D2FW,"x32 data; command/address; clocks",4000 MT/s target,"NXP DDR topology and length rules",NXP DDR tool and bring-up
+EMMC,iMX95,MTFC32GBCAQTC,"8-bit data; CMD; CLK; reset",eMMC 5.1,"Controlled local bus",Boot and stress test
+FPGA_CONFIG,iMX95,"Two LIFCL-17","SPI data/clock; two chip selects; PROGRAMN/INITN/DONE",1.8 V logic,"Short digital; trusted control",Authenticated load and fault injection
+SENSOR_CONTROL,iMX95_M7,"Two drum heads","I2C; resets; triggers; enable/fault",1.8/3.3 V translated,"Default-off projector enable; filtered flex",Timing and fail-safe test
+MOTOR_FACE,iMX95_M7,DRV8213_FACE,"IN1/IN2; IPROPI; nSTALL; nFAULT",3.3 V logic/PWM,"Keep away from camera clocks",Torque/stall/EMI test
+MOTOR_INTERACTION,iMX95_M7,DRV8213_INTERACTION,"IN1/IN2; IPROPI; nSTALL; nFAULT",3.3 V logic/PWM,"Keep away from camera clocks",Torque/stall/EMI test
+ABS_ENCODERS,iMX95_M7,"Two stationary angle sensors","I2C/PWM plus interrupt",3.3 V,"Low-speed; independently readable",Absolute-angle and calibration test
+PDM_MIC,T3902,iMX95_MICFIL,"PDM clock; PDM data",1.8 V,"Acoustic keep-out; away from switch nodes",Audio and mechanical-noise test
+TAMPER,Case_switch,iMX95_M33_or_M7,"GPIO; wake",Always-on logic,"Debounced and fail-aware",Enclosure-open test

@@ -1,0 +1,47 @@
+Ref,Function,Selected_part,Side,Package_status,Support_population,Electrical_state
+J1,USB-C receptacle,Hirose CX90M3-24P,Top,VERIFIED_DRAWING,"shell bonds; CC and data protection",DEFINED
+U10,VBUS eFuse,TI TPS259472LRPWR,Top,VERIFY_LAND_PATTERN,"ILIM; dVdt; IMON; bypass caps",DEFINED
+U11,USB-PD sink,Infineon CYPD3177-24LQXQ,Top,VERIFY_LAND_PATTERN,"CC network; configuration; HPI; decoupling",DEFINED
+D1,USB SuperSpeed ESD,TI TPD4EUSB30DQAR,Bottom,SI_REVIEW,"ground vias at device",DEFINED
+D2,USB 2 ESD,TI TPD2EUSB30ADRTR,Bottom,SI_REVIEW,"ground vias at device",DEFINED
+D9,VBUS TVS,TBD low-profile TVS,Top,SELECTION_REQUIRED,"surge return path",OPEN
+U12,USB orientation mux,TI HD3SS3212IRKSR,Bottom,VERIFY_LAND_PATTERN,"bias and decoupling",DEFINED
+U8,System 5V buck,TI TPS56637RPAR,Top,VERIFY_LAND_PATTERN,"L1; input/output ceramics; feedback; bootstrap",CALC_REQUIRED
+U9,Motor 6V buck,TI TPS56637RPAR,Top,VERIFY_LAND_PATTERN,"L2; input/output ceramics; feedback; bootstrap",CALC_REQUIRED
+U5,System PMIC,NXP MPF0900AVNA2ES,Top,SOURCE_IDENTIFIED,"L5-L9; rail capacitors; sequence/control",PINMAP_REVIEW
+U6,SoC regulator,NXP MPF5302BVNAAEP,Top,SOURCE_IDENTIFIED,"L3; input/output ceramics; sense/compensation",PINMAP_REVIEW
+U7,CPU regulator,NXP MPF5301BVNABEP,Top,SOURCE_IDENTIFIED,"L4; input/output ceramics; sense/compensation",PINMAP_REVIEW
+U1,Application processor,NXP MIMX9596CVTXNAC,Top,OFFICIAL_SYMBOL_REQUIRED,"C120-C219 provisional decoupling field",TBD_PINMAP
+U4,4GB LPDDR4X,Micron MT53E1G32D2FW-046 AAT:B,Top,OFFICIAL_SYMBOL_REQUIRED,"C220-C259 provisional decoupling/termination",DDR_GATE
+U15,32GB eMMC,Micron MTFC32GBCAQTC-AAT,Bottom,OFFICIAL_SYMBOL_REQUIRED,"local decoupling; CLK damping option",TBD_PINMAP
+U2,Face camera bridge,Lattice LIFCL-17 csfBGA121,Top,COMPILE_REQUIRED,"core regulator; bank caps; config pulls",FPGA_GATE
+U3,Interaction camera bridge,Lattice LIFCL-17 csfBGA121,Top,COMPILE_REQUIRED,"core regulator; bank caps; config pulls",FPGA_GATE
+D3-D5,Face MIPI ESD,3x TI TPD4E05U06DQAR,Top,SI_REVIEW,"six differential pairs protected",FLEX_GATE
+D6-D8,Interaction MIPI ESD,3x TI TPD4E05U06DQAR,Top,SI_REVIEW,"six differential pairs protected",FLEX_GATE
+J2,Face optical-head flex,Hirose FH26W-51S-0.3SHW(97),Top,ORIENTATION_REQUIRED,"power filtering; sideband filtering",FLEX_GATE
+J3,Interaction optical-head flex,Hirose FH26W-51S-0.3SHW(97),Top,ORIENTATION_REQUIRED,"power filtering; sideband filtering",FLEX_GATE
+U21,Face head load switch/current monitor,TBD,Top,SELECTION_REQUIRED,"input/output caps; discharge; fault pull",OPEN
+U22,Interaction head load switch/current monitor,TBD,Top,SELECTION_REQUIRED,"input/output caps; discharge; fault pull",OPEN
+U13,Face motor driver,TI DRV8213RTER,Bottom,VERIFY_LAND_PATTERN,"bulk cap; charge pump; IPROPI set; filters",DEFINED
+U14,Interaction motor driver,TI DRV8213RTER,Bottom,VERIFY_LAND_PATTERN,"bulk cap; charge pump; IPROPI set; filters",DEFINED
+J4,Face motor/encoder,TBD 6-position,Top,SELECTION_REQUIRED,"motor/encoder ESD and filters",OPEN
+J5,Interaction motor/encoder,TBD 6-position,Top,SELECTION_REQUIRED,"motor/encoder ESD and filters",OPEN
+U18,Face absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
+U19,Interaction absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
+Y1,iMX95 reference oscillator,TBD 24MHz,Top,SELECTION_REQUIRED,"enable/reset timing network",OPEN
+Y2,Sensor reference oscillator,TBD 24MHz,Bottom,SELECTION_REQUIRED,"source damping; enable default",OPEN
+U17,Four-output sensor clock buffer,TI LMK1C1104DQFR,Bottom,VERIFY_LAND_PATTERN,"supply filter; four source resistors",DEFINED
+U16,Board identity EEPROM,Microchip AT24C64D-MAHM-T,Bottom,VERIFY_LAND_PATTERN,"address pulls; write protect; decoupling",DEFINED
+U20,Board temperature,TI TMP117AIDRVR,Top,VERIFY_LAND_PATTERN,"address pull; alert pull-up; decoupling",DEFINED
+MK1,PDM microphone,TDK MMICT3902-00-012,Bottom,ACOUSTIC_LAYOUT_REQUIRED,"supply filter; clock/data damping",DEFINED
+SW1,Case-open tamper,Omron D3SK-B1R,Top,MECHANICAL_ORIENTATION_REQUIRED,"debounce; bias; ESD",DEFINED
+J6,Debug/recovery/test,TBD compact pads/connector,Bottom,SELECTION_REQUIRED,"series isolation; no production cable dependency",OPEN
+TP1-TP32,Manufacturing test points,TBD,Bottom,DFT_REQUIRED,"power/reset/programming/critical sideband access",OPEN
+C1-C119,Input/power/support passives,TBD,Two-sided,CALC_REQUIRED,"USB; bucks; PMIC/PF53; head filters",IN_PROGRESS
+C120-C219,iMX95 decoupling field,TBD,Two-sided,PINMAP_REQUIRED,"rail-specific values and placement",TBD_PINMAP
+C220-C259,LPDDR4X support,TBD,Two-sided,DDR_TOOL_REQUIRED,"rail caps and optional damping",DDR_GATE
+C260-C319,FPGA/head-interface support,TBD,Two-sided,COMPILE_AND_SI_REQUIRED,"bank caps; local rails; filtering",IN_PROGRESS
+C320-C359,Motor/audio/misc support,TBD,Two-sided,CIRCUIT_CALC_REQUIRED,"bulk; charge pump; filters; debounce",IN_PROGRESS
+R1-R39,USB/power programming,TBD,Two-sided,CIRCUIT_CALC_REQUIRED,"CC/configuration/feedback/limits",IN_PROGRESS
+R40-R89,compute/memory straps,TBD,Two-sided,PINMAP_REQUIRED,"boot/config/series options",TBD_PINMAP
+R90-R139,FPGA/head sideband,TBD,Two-sided,COMPILE_REQUIRED,"configuration/translation/filtering",IN_PROGRESS

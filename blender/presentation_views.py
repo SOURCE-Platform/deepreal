@@ -1,4 +1,4 @@
-"""Build an overview and four maintainable presentation scenes.
+"""Build the linked overview, detail, exploded, and shield-cutaway scenes.
 
 The presentation objects are linked duplicates: every copy has its own
 transform, but continues to share the canonical mesh/curve datablock. Editing
@@ -30,8 +30,6 @@ HOUSING_ATTACHED_PREFIXES = (
     "USB_Plug_B_",
 )
 HOUSING_ATTACHED_NAMES = {"USB_Cable"}
-
-
 def _sources(collection_names):
     seen = set()
     result = []
@@ -130,12 +128,12 @@ def _rig(scene, prefix, eye_mm, target_mm, lens=58):
 def _overview_rig(scene):
     rig = _collection(scene, "OVERVIEW Rig")
     rig.hide_viewport = True
-    target = Vector((0.0, 0.0, 0.0))
+    target = Vector((0.0, 0.0, -0.050))
     data = bpy.data.cameras.new("OVERVIEW Camera")
     data.type = "ORTHO"
-    data.ortho_scale = 0.480
+    data.ortho_scale = 0.600
     camera = bpy.data.objects.new("OVERVIEW Camera", data)
-    camera.location = (0.0, -0.65, 0.0)
+    camera.location = (0.0, -0.65, -0.050)
     rig.objects.link(camera)
     _aim(camera, target)
     scene.camera = camera
@@ -175,54 +173,116 @@ def _center(obj):
 
 EXPLODED_CENTERS_MM = {
     "Main_PCBA": (0, 38, 0),
-    "EMI_Shield_Can_Lid": (-82, -8, 27),
-    "EMI_Shield_Can_Wall_Left": (-120, 0, 27),
-    "EMI_Shield_Can_Wall_Right": (-44, 0, 27),
-    "EMI_Shield_Can_Wall_Top": (-82, 0, 51),
-    "EMI_Shield_Can_Wall_Bottom": (-82, 0, 3),
-    "Face_Motor_Connector": (-64, 0, 70),
-    "Face_Projector_Connector": (-46, 0, 70),
-    "Camera_Flex_Connector_1": (-28, 0, 70),
-    "Camera_Flex_Connector_2": (-10, 0, 70),
-    "Camera_Flex_Connector_3": (8, 0, 70),
-    "Camera_Flex_Connector_4": (26, 0, 70),
-    "Interaction_Projector_Connector": (44, 0, 70),
-    "Interaction_Motor_Connector": (62, 0, 70),
-    "PDM_MEMS_Microphone": (83, 0, 70),
-    "Case_Open_Tamper_Switch": (104, 0, 70),
-    "CrossLink_NX_FPGA": (-38, 0, 24),
-    "NXP_iMX95": (-12, 0, 24),
-    "LPDDR_1": (10, 0, 24),
-    "LPDDR_2": (27, 0, 24),
-    "eMMC_Storage": (48, 0, 24),
-    "PMIC_PF09": (-45, 0, -28),
-    "PMIC_PF53": (-28, 0, -28),
-    "Motor_Driver_A": (-10, 0, -28),
-    "Motor_Driver_B": (5, 0, -28),
-    "Projector_Driver_A": (20, 0, -28),
-    "Projector_Driver_B": (35, 0, -28),
-    "USB_PD_Controller": (50, 0, -28),
-    "USB_ESD_Protection": (65, 0, -28),
-    "Thermal_Spreader": (94, 16, 26),
-    "Housing_Thermal_Pad": (94, 30, -27),
+    "Shield_Front_Lid": (-108, -12, 24),
+    "Shield_Rear_Tray": (108, 15, 24),
+    "Face_Connector_Bank": (-56, 0, 69),
+    "Auxiliary_Connector_Bank": (0, 0, 69),
+    "Interaction_Connector_Bank": (56, 0, 69),
+    "Face_Motor_Encoder": (-65, 0, 82),
+    "Face_Optical_Head_Connector": (-35, 0, 82),
+    "Interaction_Optical_Head_Connector": (35, 0, 82),
+    "Interaction_Motor_Encoder": (65, 0, 82),
+    "PDM_MEMS_Microphone": (-5, 0, 82),
+    "Case_Open_Tamper_Switch": (5, 0, 82),
+    "Face_CrossLink_NX": (-44, 0, 24), "NXP_iMX95": (-18, 0, 24),
+    "LPDDR4X_4GB": (8, 0, 24), "Interaction_CrossLink_NX": (30, 0, 24),
+    "eMMC_32GB": (50, 0, 24), "PMIC_PF09": (-50, 0, -28),
+    "PF53_SOC": (-38, 0, -28), "PF53_ARM": (-28, 0, -28),
+    "Face_Motor_Driver": (-16, 0, -28),
+    "Interaction_Motor_Driver": (-4, 0, -28),
+    "USB_PD_Controller": (12, 0, -28),
+    "System_5V_Buck": (24, 0, -28), "Motor_6V_Buck": (36, 0, -28),
+    "VBUS_eFuse": (48, 0, -28),
+    "USB_SS_Mux": (60, 0, -28), "USB_C_Receptacle": (78, 0, -28),
+    "Thermal_Spreader": (106, 18, -15),
+    "Housing_Thermal_Pad": (106, 30, -48),
 }
+
+
+def _is_cable_support(obj):
+    return any(fragment in obj.name for fragment in (
+        "_Lane_Grounded_", "_Boundary_Ground_Clamp",
+        "_Strain_Relief",
+    ))
+
+
+def _is_exploded_part(obj):
+    collections = {collection.name for collection in obj.users_collection}
+    if "Electronics Assembly" in collections:
+        return obj.name != "Main_PCBA_Populated_Keepout"
+    if "Interconnect Routing" in collections:
+        return True
+    if "Drum Motion" in collections:
+        return obj.name.endswith("_Motor_Encoder_Harness")
+    return "Internal Supports" in collections and _is_cable_support(obj)
+
+
+def _place_exploded(clone, source):
+    desired = EXPLODED_CENTERS_MM.get(source.name)
+    if desired:
+        clone.location += Vector(tuple(value * 0.001 for value in desired)) \
+            - _center(clone)
+        return
+    if (source.get("PCBA_Component") or "Land_Pattern" in source.name
+            or "Pad_Field" in source.name or "_51_Pin_Lands" in source.name
+            or source.name.startswith(("Silkscreen_", "PCBA_Ground_Via_"))
+            or source.name.endswith("_Latch")):
+        clone.location += Vector((0.0, 0.02165, 0.0115))
+        return
+    if source.name.startswith(("PCB_Ground_Ring_",
+                               "Shield_Ground_Via_",
+                               "Shield_Chassis_Bond_")):
+        clone.location += Vector((0.0, -0.020, 0.020))
+    elif "Interconnect Routing" in {
+            collection.name for collection in source.users_collection}:
+        offset_x = -0.105 if source.name.startswith("Face_") else 0.105
+        clone.location += Vector((offset_x, -0.030, -0.075))
+    elif source.name.endswith("_Motor_Encoder_Harness"):
+        offset_x = -0.105 if source.name.startswith("Face_") else 0.105
+        clone.location += Vector((offset_x, -0.030, -0.075))
+    elif _is_cable_support(source):
+        offset_x = -0.035 if source.name.startswith("Face_") else 0.035
+        clone.location += Vector((offset_x, 0.025, -0.055))
 
 
 def _exploded_view():
     scene = _scene(
         "04 Electronics Exploded",
-        "Widely separated linked instances of every lower electronics part.")
+        "Separated linked electronics, shield, apron, cable, and clip parts.")
     geometry = _collection(scene, "EXP Linked Electronics")
-    electronics = _sources(("Electronics Assembly",))
-    for source in electronics:
-        if source.name == "Main_PCBA_Populated_Keepout":
+    sources = _sources((
+        "Electronics Assembly", "Interconnect Routing",
+        "Drum Motion", "Internal Supports",
+    ))
+    for source in sources:
+        if not _is_exploded_part(source):
             continue
         clone = _clone(source, geometry, "EXP")
-        desired = EXPLODED_CENTERS_MM.get(source.name)
-        if desired:
-            clone.location += Vector(tuple(value * 0.001 for value in desired)) \
-                - _center(clone)
-    _rig(scene, "EXP", (205, -310, 115), (0, 8, 8), lens=62)
+        _place_exploded(clone, source)
+    _rig(scene, "EXP", (310, -500, 185), (0, 0, -30), lens=62)
+    return scene
+
+
+def _is_cutaway_part(obj):
+    collections = {collection.name for collection in obj.users_collection}
+    if "Electronics Assembly" in collections:
+        return obj.name not in {
+            "Main_PCBA_Populated_Keepout", "Shield_Front_Lid",
+        }
+    if "Interconnect Routing" in collections:
+        return True
+    if "Drum Motion" in collections:
+        return obj.name.endswith("_Motor_Encoder_Harness")
+    return "Internal Supports" in collections and _is_cable_support(obj)
+
+
+def _cutaway_view():
+    scene = _ordinary_view(
+        "05 Shield Cutaway", "CUT",
+        "Front lid removed to explain the shield boundary and lower apron.",
+        _is_cutaway_part, (125, -165, -2), (0, 16, -12))
+    scene.render.resolution_x = 1600
+    scene.render.resolution_y = 1200
     return scene
 
 
@@ -271,21 +331,19 @@ def _overview_view():
                     lambda obj: _fits_overview(obj) and _is_core(obj))
 
     exploded_offset = Vector((0.075, 0.0, -0.120))
-    for source in _sources(("Electronics Assembly",)):
-        if source.name == "Main_PCBA_Populated_Keepout":
+    for source in _sources((
+            "Electronics Assembly", "Interconnect Routing",
+            "Drum Motion", "Internal Supports")):
+        if not _is_exploded_part(source):
             continue
         clone = _clone(source, geometry, "OV4")
-        desired = EXPLODED_CENTERS_MM.get(source.name)
-        if desired:
-            clone.location += Vector(tuple(value * 0.001
-                                            for value in desired)) \
-                - _center(clone)
+        _place_exploded(clone, source)
         clone.location += exploded_offset
 
     _label(labels, "1  FULLY ASSEMBLED", -112, 23)
     _label(labels, "2  HOUSING REMOVED", 112, 23)
-    _label(labels, "3  FUNCTIONAL CORE", -112, -36)
-    _label(labels, "4  ELECTRONICS EXPLODED", 95, -36)
+    _label(labels, "3  FUNCTIONAL CORE", -112, -15)
+    _label(labels, "4  ELECTRONICS EXPLODED", 95, -15)
     _overview_rig(scene)
     return scene
 
@@ -301,7 +359,7 @@ def _set_camera_view(scene):
 
 
 def build():
-    """Create and return the overview plus four detail scenes."""
+    """Create and return the overview plus linked review scenes."""
     pivot = bpy.data.objects["Lid_Pivot"]
     original_rotation = pivot.rotation_euler.copy()
     pivot.rotation_euler = (0.0, 0.0, 0.0)
@@ -322,6 +380,7 @@ def build():
             "Functional internals only; enclosure supports are omitted.",
             _is_core, (150, -190, 52), (0, 7, 0)),
         _exploded_view(),
+        _cutaway_view(),
     ]
 
     pivot.rotation_euler = original_rotation

@@ -36,6 +36,7 @@ import electronics    # noqa: E402
 import interconnect   # noqa: E402
 import motion         # noqa: E402
 import optics         # noqa: E402
+import pcba_presentation  # noqa: E402
 import presentation_views  # noqa: E402
 import support_hardware  # noqa: E402
 import usb_port       # noqa: E402
@@ -233,6 +234,7 @@ def build():
     _set_default_viewport(target)
     scene.name = "SOURCE - Canonical Assembly"
     presentation_views.build()
+    pcba_presentation.build()
     bpy.ops.wm.save_as_mainfile(filepath=BLEND_PATH)
     print("Scene built: {} objects, saved {}".format(
         len(scene.objects), BLEND_PATH))

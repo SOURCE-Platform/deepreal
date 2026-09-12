@@ -1,0 +1,17 @@
+Connector,Group,Contacts,Logical_signals,Electrical_rule,Pin_numbers
+J2/J3,Head_3V3,8,"HEAD_x_3V3 parallel","Current sharing; filtered; switched; monitored",TBD_ORIENTATION
+J2/J3,Power_returns,8,"HEAD_x_GND parallel","Adjacent to power and distributed through flex",TBD_ORIENTATION
+J2/J3,RGB_CSI_signals,6,"RGB_CLK_P/N RGB_D0_P/N RGB_D1_P/N","100 ohm differential",TBD_ORIENTATION
+J2/J3,RGB_CSI_returns,3,"RGB_CLK_GND RGB_D0_GND RGB_D1_GND","One return beside each differential pair",TBD_ORIENTATION
+J2/J3,IR_CSI_signals,6,"IR_CLK_P/N IR_D0_P/N IR_D1_P/N","100 ohm differential",TBD_ORIENTATION
+J2/J3,IR_CSI_returns,3,"IR_CLK_GND IR_D0_GND IR_D1_GND","One return beside each differential pair",TBD_ORIENTATION
+J2/J3,RGB_clock,2,"RGB_MCLK RGB_MCLK_GND","24MHz source-terminated",TBD_ORIENTATION
+J2/J3,IR_clock,2,"IR_MCLK IR_MCLK_GND","24MHz source-terminated",TBD_ORIENTATION
+J2/J3,Control_bus,2,"HEAD_I2C_SCL HEAD_I2C_SDA","Open-drain; level/address audit",TBD_ORIENTATION
+J2/J3,Sensor_resets,2,"RGB_RESET_N IR_RESET_N","Hardware default reset",TBD_ORIENTATION
+J2/J3,Timing_triggers,2,"IR_TRIGGER ILLUM_TRIGGER","Bounded skew; default inactive",TBD_ORIENTATION
+J2/J3,Projector_control,2,"PROJECTOR_ENABLE PROJECTOR_FAULT_N","Enable pull-down on both PCBs",TBD_ORIENTATION
+J2/J3,Safety_interlock,1,LENS_INTERLOCK_OK,"Open/flex loss means unsafe",TBD_ORIENTATION
+J2/J3,Thermal_status,1,HEAD_TEMP_ALERT_N,"Open-drain; fail-aware",TBD_ORIENTATION
+J2/J3,Head_identity,1,HEAD_ID,"Resistor/EEPROM scheme to be selected",TBD_ORIENTATION
+J2/J3,Shield_reserved,2,"FLEX_SHIELD RESERVED","Assigned after SI review",TBD_ORIENTATION

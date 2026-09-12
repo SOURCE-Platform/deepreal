@@ -1,16 +1,31 @@
 """Blender concept geometry for the stationary DeepReal electronics."""
 
-from assembly_primitives import box, material, tag
+import bpy
+from mathutils import Vector
+
+from assembly_primitives import box, cylinder, material, tag
+from pcba_bom import BOARD
+import pcba_geometry
 
 
-BOARD_Y = 18.0
-BOARD_Z = -11.5
-SHIELD_X0 = -44.0
-SHIELD_X1 = 44.0
-SHIELD_Z0 = -25.0
-SHIELD_Z1 = -2.2
-SHIELD_FRONT_Y = 12.2
-CONNECTOR_Z = 0.5
+BOARD_Y = BOARD["center_y"]
+BOARD_Z = BOARD["center_z"]
+BOARD_X0 = -45.0
+BOARD_X1 = 45.0
+BOARD_Z0 = -25.5
+BOARD_Z1 = 2.5
+MOUNT_POINTS = (
+    (-42.0, -22.5), (-42.0, -0.5),
+    (42.0, -22.5), (42.0, -0.5),
+)
+SHIELD_X0 = -46.0
+SHIELD_X1 = 46.0
+SHIELD_Z0 = -20.9
+SHIELD_Z1 = 3.5
+SHIELD_FRONT_Y = 11.8
+SHIELD_REAR_Y = 19.05
+CONNECTOR_Z = -25.5
+SHIELD_SHEET = 0.45
 
 
 def _materials():
@@ -39,51 +54,149 @@ def _materials():
                         metallic=0.55, roughness=0.35),
         "keepout": material("Electronics_Keepout", (0.94, 0.55, 0.04),
                             roughness=0.45, alpha=0.10),
+        "ground": material("Shield_Ground_Features", (0.72, 0.56, 0.18),
+                           metallic=0.94, roughness=0.26),
+        "bank": material("Connector_Apron_PCBA", (0.035, 0.25, 0.09),
+                         roughness=0.58),
     }
 
 
-def _component(name, x, z, dims, mat, collection, subsystem,
-               evidence="REFERENCE PACKAGE"):
-    obj = box(name, (x, BOARD_Y - dims[1] / 2.0 - 0.8, z), dims, 0.35,
-              mat, collection)
-    return tag(obj, subsystem, evidence)
+def _apply_boolean(target, cutter, operation, label):
+    """Apply one exact construction boolean and remove its temporary tool."""
+    with bpy.context.temp_override(
+            object=target, active_object=target, selected_objects=[target]):
+        modifier = target.modifiers.new(label, "BOOLEAN")
+        modifier.operation = operation
+        modifier.solver = "EXACT"
+        modifier.object = cutter
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+    bpy.data.objects.remove(cutter, do_unlink=True)
 
 
-def _shield_can(mats, collection):
-    """One grounded shallow can over the populated board area.
+def _union_box(target, name, center, dims, radius, mat, collection):
+    tool = box(name, center, dims, radius, mat, collection)
+    _apply_boolean(target, tool, "UNION", "Join_" + name)
 
-    A narrow strip at the top of the PCBA remains outside the perimeter for
-    cable connectors. Harnesses terminate there; only PCB traces continue
-    beneath the can.
-    """
-    front_y = SHIELD_FRONT_Y
-    board_face_y = BOARD_Y - 0.8
+
+def _cut_mounting_holes(target, mat, collection, length, radius):
+    for index, (x, z) in enumerate(MOUNT_POINTS, 1):
+        cutter = cylinder(
+            "_Mounting_Hole_Tool_{:02d}".format(index),
+            (x, BOARD_Y, z), Vector((0.0, 1.0, 0.0)),
+            radius, length, mat, collection, segments=32)
+        _apply_boolean(
+            target, cutter, "DIFFERENCE",
+            "Mounting_Hole_{:02d}".format(index))
+
+
+def _shield_enclosure(mats, collection):
+    """Build a formed rear tray, removable lid, and grounded PCB boundary."""
     x0, x1 = SHIELD_X0, SHIELD_X1
     z0, z1 = SHIELD_Z0, SHIELD_Z1
-    wall = 0.30
+    front_y, rear_y = SHIELD_FRONT_Y, SHIELD_REAR_Y
+    sheet = SHIELD_SHEET
+    depth = rear_y - front_y
+    mid_y = (front_y + rear_y) / 2.0
+    mid_z = (z0 + z1) / 2.0
     objects = []
-    objects.append(box("EMI_Shield_Can_Lid",
-                       ((x0 + x1) / 2.0, front_y, (z0 + z1) / 2.0),
-                       (x1 - x0, wall, z1 - z0), 0.8,
-                       mats["shield"], collection))
-    depth = board_face_y - front_y
-    mid_y = (front_y + board_face_y) / 2.0
-    for name, center, dims in (
-        ("EMI_Shield_Can_Wall_Left", (x0, mid_y, BOARD_Z),
-         (wall, depth, z1 - z0)),
-        ("EMI_Shield_Can_Wall_Right", (x1, mid_y, BOARD_Z),
-         (wall, depth, z1 - z0)),
-        ("EMI_Shield_Can_Wall_Top", ((x0 + x1) / 2.0, mid_y, z1),
-         (x1 - x0, depth, wall)),
-        ("EMI_Shield_Can_Wall_Bottom", ((x0 + x1) / 2.0, mid_y, z0),
-         (x1 - x0, depth, wall)),
+
+    # Start with the rear panel and fuse the perimeter walls into it. The
+    # lower wall is split around the PCB thickness, forming a controlled
+    # pass-through rather than cutting through the board substrate.
+    tray = box(
+        "Shield_Rear_Tray", (0.0, rear_y, mid_z),
+        (x1 - x0, sheet, z1 - z0), 0.8, mats["shield"], collection)
+    wall_specs = (
+        ("_Tray_Left_Wall", (x0 + sheet / 2.0, mid_y, mid_z),
+         (sheet, depth, z1 - z0), 0.18),
+        ("_Tray_Right_Wall", (x1 - sheet / 2.0, mid_y, mid_z),
+         (sheet, depth, z1 - z0), 0.18),
+        ("_Tray_Top_Wall", (0.0, mid_y, z1 - sheet / 2.0),
+         (x1 - x0, depth, sheet), 0.18),
+        ("_Tray_Apron_Lip_Front",
+         (0.0, (front_y + 15.45) / 2.0, z0 + sheet / 2.0),
+         (x1 - x0, 15.45 - front_y, sheet), 0.18),
+        ("_Tray_Apron_Lip_Rear",
+         (0.0, (17.25 + rear_y) / 2.0, z0 + sheet / 2.0),
+         (x1 - x0, rear_y - 17.25, sheet), 0.18),
+    )
+    for name, center, dims, radius in wall_specs:
+        _union_box(
+            tray, name, center, dims, radius, mats["shield"], collection)
+    _cut_mounting_holes(
+        tray, mats["shield"], collection, depth + 2.0, 1.85)
+    tag(tray, "Electronics Shield Enclosure", "FORMED REAR-TRAY CONCEPT")
+    tray["Grounding_Intent"] = "PCB ground ring and three chassis bonds"
+    tray["Coverage_Intent"] = "Complete populated electronics chamber"
+    tray["Thermal_Path"] = (
+        "Rear tray contacts the copper spreader and housing pad")
+    tray["Integrated_Walls"] = "left, right, top, connector-apron boundary"
+    objects.append(tray)
+
+    lid = box(
+        "Shield_Front_Lid", (0.0, front_y, mid_z),
+        (x1 - x0, sheet, z1 - z0), 0.8, mats["shield"], collection)
+    tag(lid, "Electronics Shield Enclosure", "REMOVABLE LID CONCEPT")
+    lid["Grounding_Intent"] = "Perimeter contact to formed rear tray"
+    lid["Coverage_Intent"] = "Complete populated electronics chamber"
+    objects.append(lid)
+
+    # The visible ring and via field communicate a continuous, controlled
+    # shield termination. Exact via pitch and contact-finger geometry remain
+    # PCB and EMC engineering work.
+    ring_y = BOARD_Y - 0.93
+    ring_specs = (
+        ("PCB_Ground_Ring_Left", (BOARD_X0 + 0.45, ring_y, -10.1),
+         (0.55, 0.22, 24.0)),
+        ("PCB_Ground_Ring_Right", (BOARD_X1 - 0.45, ring_y, -10.1),
+         (0.55, 0.22, 24.0)),
+        ("PCB_Ground_Ring_Top", (0.0, ring_y, BOARD_Z1 - 0.45),
+         (88.2, 0.22, 0.55)),
+        ("PCB_Ground_Ring_Apron", (0.0, ring_y, SHIELD_Z0 + 0.70),
+         (88.2, 0.22, 0.55)),
+    )
+    for name, center, dims in ring_specs:
+        obj = box(name, center, dims, 0.12, mats["ground"], collection)
+        objects.append(tag(obj, "Shield perimeter ground",
+                           "GROUND-RING CONCEPT"))
+
+    via_positions = (
+        (-40.0, BOARD_Z1 - 0.45), (-20.0, BOARD_Z1 - 0.45),
+        (0.0, BOARD_Z1 - 0.45), (20.0, BOARD_Z1 - 0.45),
+        (40.0, BOARD_Z1 - 0.45),
+        (-40.0, z0 + 0.7), (-20.0, z0 + 0.7), (0.0, z0 + 0.7),
+        (20.0, z0 + 0.7), (40.0, z0 + 0.7),
+    )
+    for index, (x, z) in enumerate(via_positions, 1):
+        via = cylinder("Shield_Ground_Via_{:02d}".format(index),
+                       (x, ring_y - 0.02, z), Vector((0.0, 1.0, 0.0)),
+                       0.32, 0.36, mats["ground"], collection, segments=20)
+        objects.append(tag(via, "Shield perimeter ground",
+                           "VIA-FENCE CONCEPT"))
+
+    for label, x in (("Left", -34.0), ("Center", 0.0), ("Right", 34.0)):
+        tab = box("Shield_Chassis_Bond_" + label,
+                  (x, rear_y + 0.55, z1 - 1.6), (6.0, 1.5, 2.4), 0.25,
+                  mats["ground"], collection)
+        objects.append(tag(tab, "Shield chassis bond",
+                           "GROUND-TAB CONCEPT"))
+    return objects
+
+
+def _connector_apron(mats, collection):
+    """Mark the face/auxiliary/interaction service regions."""
+    objects = []
+    for name, x, width in (
+        ("Face_Connector_Bank", -28.0, 36.0),
+        ("Auxiliary_Connector_Bank", 0.0, 8.0),
+        ("Interaction_Connector_Bank", 28.0, 36.0),
     ):
-        objects.append(box(name, center, dims, 0.15,
-                           mats["shield"], collection))
-    for obj in objects:
-        tag(obj, "EMI shield", "FORMED-SHEET CONCEPT")
-        obj["Coverage_Intent"] = (
-            "All populated ICs; connector mating strip intentionally outside")
+        bank = box(name, (x, BOARD_Y - 0.25, CONNECTOR_Z),
+                   (width, 0.45, 4.2), 0.35, mats["bank"], collection)
+        bank["Apron_Zone"] = "Below grounded shield boundary"
+        objects.append(tag(bank, "Connector Apron",
+                           "SERVICE-ACCESS CONCEPT"))
+
     return objects
 
 
@@ -91,81 +204,31 @@ def build(collection):
     mats = _materials()
     objects = []
     board = box("Main_PCBA", (0.0, BOARD_Y, BOARD_Z),
-                (90.0, 1.6, 28.0), 0.8, mats["board"], collection)
+                (BOARD["width"], BOARD["thickness"], BOARD["depth"]),
+                0.8, mats["board"], collection)
+    _cut_mounting_holes(board, mats["board"], collection, 4.0, 1.35)
     board["EMI_Shield_Coverage"] = (
-        "All populated ICs; bare perimeter and connector strip remain outside")
+        "All populated ICs inside full enclosure; lower apron remains outside")
     objects.append(tag(board, "Main electronics", "REQUIRED ENVELOPE"))
+    board["Study_Label"] = (
+        "DeepReal Main PCBA - Preliminary Engineering Layout / Packaging Study")
 
-    keepout = box("Main_PCBA_Populated_Keepout", (0.0, 15.5, BOARD_Z),
-                  (90.0, 15.0, 28.0), 1.0, mats["keepout"], collection)
+    keepout = box("Main_PCBA_Populated_Keepout", (0.0, 15.425, BOARD_Z),
+                  (90.0, 6.0, 28.0), 1.0, mats["keepout"], collection)
     keepout.display_type = "WIRE"
     keepout.hide_render = True
     objects.append(tag(keepout, "Main electronics", "REFERENCE RESERVE"))
 
-    specs = (
-        ("NXP_iMX95", -5.0, BOARD_Z + 1.0, (15.0, 3.0, 15.0), "soc",
-         "Proof Engine SoC"),
-        ("CrossLink_NX_FPGA", -28.0, BOARD_Z + 1.0,
-         (13.0, 2.6, 13.0), "fpga", "Trusted camera bridge"),
-        ("LPDDR_1", 12.0, BOARD_Z - 4.0, (8.0, 2.2, 6.0), "memory",
-         "Working memory"),
-        ("LPDDR_2", 12.0, BOARD_Z + 6.0, (8.0, 2.2, 6.0), "memory",
-         "Working memory"),
-        ("eMMC_Storage", 29.0, BOARD_Z - 7.0, (10.0, 2.0, 7.0), "memory",
-         "System storage"),
-        ("PMIC_PF09", 29.0, BOARD_Z + 6.0, (6.0, 2.0, 6.0), "power",
-         "Power management"),
-        ("PMIC_PF53", 38.0, BOARD_Z + 6.0, (6.0, 2.0, 6.0), "power",
-         "Power management"),
-        ("USB_PD_Controller", 40.0, BOARD_Z - 8.0, (5.0, 1.5, 5.0),
-         "power", "USB power negotiation"),
-        ("USB_ESD_Protection", 40.0, BOARD_Z - 1.5, (4.0, 1.3, 3.0),
-         "driver", "USB protection"),
-        ("Motor_Driver_A", 27.0, BOARD_Z - 1.0, (4.0, 1.4, 4.0),
-         "driver", "Motor control"),
-        ("Motor_Driver_B", 33.0, BOARD_Z - 1.0, (4.0, 1.4, 4.0),
-         "driver", "Motor control"),
-        ("Projector_Driver_A", -31.0, BOARD_Z - 8.5, (4.0, 1.4, 4.0),
-         "driver", "IR emitter control"),
-        ("Projector_Driver_B", -24.5, BOARD_Z - 8.5, (4.0, 1.4, 4.0),
-         "driver", "IR emitter control"),
-    )
-    for name, x, z, dims, mat, subsystem in specs:
-        objects.append(_component(name, x, z, dims, mats[mat], collection,
-                                  subsystem))
+    objects += pcba_geometry.build(collection)
+    objects += _connector_apron(mats, collection)
 
-    mic = box("PDM_MEMS_Microphone", (-42.0, BOARD_Y - 1.4, CONNECTOR_Z),
-              (4.0, 1.2, 3.0), 0.3, mats["mic"], collection)
-    objects.append(tag(mic, "Audio", "REFERENCE PACKAGE"))
+    objects += _shield_enclosure(mats, collection)
 
-    for index, x in enumerate((-16.0, -5.0, 6.0, 17.0)):
-        connector = box("Camera_Flex_Connector_{}".format(index + 1),
-                        (x, BOARD_Y - 1.4, CONNECTOR_Z),
-                        (7.0, 1.2, 2.0), 0.2, mats["connector"], collection)
-        objects.append(tag(connector, "Camera interconnect"))
-
-    edge_connectors = (
-        ("Face_Motor_Connector", -38.0, "Motor interconnect"),
-        ("Face_Projector_Connector", -27.0, "Projector interconnect"),
-        ("Interaction_Projector_Connector", 28.0,
-         "Projector interconnect"),
-        ("Interaction_Motor_Connector", 39.0, "Motor interconnect"),
-    )
-    for name, x, subsystem in edge_connectors:
-        connector = box(name, (x, BOARD_Y - 1.4, CONNECTOR_Z),
-                        (7.0, 1.2, 2.0), 0.2, mats["connector"], collection)
-        objects.append(tag(connector, subsystem, "BOARD-EDGE CONNECTOR"))
-
-    objects += _shield_can(mats, collection)
-
-    spreader = box("Thermal_Spreader", (0.0, BOARD_Y + 1.55, BOARD_Z),
-                   (76.0, 1.5, 30.0), 1.0, mats["copper"], collection)
+    spreader = box("Thermal_Spreader", (0.0, 19.90, BOARD_Z),
+                   (76.0, 1.35, 23.0), 0.8, mats["copper"], collection)
+    spreader["Thermal_Path"] = "Shield rear tray to housing thermal pad"
     objects.append(tag(spreader, "Thermal", "CONCEPT HEAT PATH"))
-    pad = box("Housing_Thermal_Pad", (0.0, 21.65, BOARD_Z),
-              (60.0, 2.7, 20.0), 0.8, mats["pad"], collection)
+    pad = box("Housing_Thermal_Pad", (0.0, 21.2, BOARD_Z),
+              (60.0, 1.4, 18.0), 0.7, mats["pad"], collection)
     objects.append(tag(pad, "Thermal", "CONCEPT INTERFACE"))
-
-    tamper = box("Case_Open_Tamper_Switch", (42.0, 21.0, CONNECTOR_Z),
-                 (4.0, 3.0, 3.0), 0.4, mats["driver"], collection)
-    objects.append(tag(tamper, "Tamper detection", "REQUIRED CONCEPT"))
     return objects

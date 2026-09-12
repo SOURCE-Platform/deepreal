@@ -1,0 +1,28 @@
+Ref,Function,Candidate,Package,Body_mm,Side,Status,Geometry_source
+U1,Application processor,NXP i.MX95 15 mm family,FC-PBGA-548 SOT2251-1,15.0x15.0x1.414,Top,CONFIRMED,NXP IMX95IEC datasheet Figure 53
+U2,Camera aggregation,Lattice LIFCL-40 candidate,289-ball csBGA,9.5x9.5x1.2,Top,PROVISIONAL,Lattice CrossLink-NX selection table
+U3,4 GB-class working memory,Micron MT53E1G32D2FW class,200-ball TFBGA,10.0x14.5x1.1,Top,CONFIRMED,Micron production catalog
+U4,System PMIC,NXP PF09,8x8 QFN,8.0x8.0x0.9,Top,CONFIRMED,NXP product data
+U5,Core rail regulator A,NXP PF53,FC-QFN,3.5x4.5x0.75,Top,CONFIRMED,NXP product data
+U6,Reserved core rail regulator B,NXP PF53,FC-QFN,3.5x4.5x0.75,Top,PROVISIONAL,NXP reference architecture
+U7,USB input buck,TI TPS56637 class,10-pin VQFN-HR RPA,3.0x3.0x1.0,Top,PROVISIONAL,TI product data
+U8,VBUS protection,TI TPS25947 class,WQFN,2.0x2.0x1.0,Top,PROVISIONAL,Candidate envelope pending package recheck
+U9,USB-PD controller,Infineon CYPD3177,24-pin QFN,4.0x4.0x0.6,Top,CONFIRMED,Infineon datasheet
+U10,USB orientation mux,TI HD3SS3212 class,20-pin WQFN RKS,2.5x4.5x1.0,Bottom,PROVISIONAL,TI package data
+U11,Face motor driver,TI DRV8837C class,8-pin WSON DSG,2.0x2.0x0.8,Bottom,PROVISIONAL,TI product data
+U12,Interaction motor driver,TI DRV8837C class,8-pin WSON DSG,2.0x2.0x0.8,Bottom,PROVISIONAL,TI product data
+U13,Face IR emitter driver,TI LMH13000 class,13-pin WQFN-HR RQE,3.5x3.0x0.8,Bottom,PROVISIONAL,TI datasheet
+U14,Interaction IR emitter driver,TI LMH13000 class,13-pin WQFN-HR RQE,3.5x3.0x0.8,Bottom,PROVISIONAL,TI datasheet
+U15,32 GB-class storage,Micron MTFC32GBCAQTC class,153-ball BGA,11.5x13.0x1.3,Bottom,CONFIRMED,Micron production catalog
+U16,Board identity EEPROM,TBD,8-pin DFN,2.0x3.0x1.0,Bottom,RESERVED,Required function
+MK1,PDM microphone,TDK InvenSense T3902,Bottom-port LGA,3.5x2.65x0.98,Bottom,CONFIRMED,TDK product data
+SW1,Case-open tamper,Omron D3SK class,Surface-mount detector,3.0x3.5x0.9,Top,PROVISIONAL,Omron product data
+J1,USB-C power and data,Hirose CX90M3-24P,Mid-mount USB Type-C,7.85x12.0x3.16,Top,CONFIRMED,Hirose official STEP and drawing
+J2,Face RGB camera,Hirose FH34SRJ 22-position class,0.5 mm FPC,13.0x3.8x1.0,Top,PROVISIONAL,Hirose series data
+J3,Face IR camera,Hirose FH34SRJ 22-position class,0.5 mm FPC,13.0x3.8x1.0,Bottom,PROVISIONAL,Hirose series data
+J4,Interaction RGB camera,Hirose FH34SRJ 22-position class,0.5 mm FPC,13.0x3.8x1.0,Top,PROVISIONAL,Hirose series data
+J5,Interaction IR camera,Hirose FH34SRJ 22-position class,0.5 mm FPC,13.0x3.8x1.0,Bottom,PROVISIONAL,Hirose series data
+J6,Face motor and encoder,TBD,Reserved,5.0x2.6x1.2,Top,RESERVED,Function and space allocation
+J7,Face emitter,TBD,Reserved,5.0x2.6x1.2,Top,RESERVED,Function and space allocation
+J8,Interaction emitter,TBD,Reserved,5.0x2.6x1.2,Top,RESERVED,Function and space allocation
+J9,Interaction motor and encoder,TBD,Reserved,5.0x2.6x1.2,Top,RESERVED,Function and space allocation

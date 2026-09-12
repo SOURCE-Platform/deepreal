@@ -59,6 +59,59 @@ def wire(name, points_mm, radius_mm, material, collection):
     return obj
 
 
+def routed_wire(name, points_mm, radius_mm, bend_radius_mm, material,
+                collection, corner_segments=8):
+    """Build a non-overshooting cable path with rounded waypoint corners."""
+    points = [Vector(point) for point in points_mm]
+    sampled = [points[0]]
+    for index in range(1, len(points) - 1):
+        previous, corner, following = points[index - 1:index + 2]
+        to_previous = previous - corner
+        to_following = following - corner
+        previous_length = to_previous.length
+        following_length = to_following.length
+        if previous_length < 1e-6 or following_length < 1e-6:
+            sampled.append(corner)
+            continue
+        to_previous.normalize()
+        to_following.normalize()
+        if to_previous.dot(to_following) < -0.999:
+            sampled.append(corner)
+            continue
+        trim = min(
+            bend_radius_mm,
+            previous_length * 0.35,
+            following_length * 0.35,
+        )
+        entry = corner + to_previous * trim
+        exit_point = corner + to_following * trim
+        sampled.append(entry)
+        for step in range(1, corner_segments + 1):
+            factor = step / corner_segments
+            point = (
+                (1.0 - factor) ** 2 * entry
+                + 2.0 * (1.0 - factor) * factor * corner
+                + factor ** 2 * exit_point
+            )
+            sampled.append(point)
+    sampled.append(points[-1])
+
+    curve = bpy.data.curves.new(name, "CURVE")
+    curve.dimensions = "3D"
+    curve.resolution_u = 1
+    curve.bevel_depth = radius_mm * MM
+    curve.bevel_resolution = 3
+    curve.materials.append(material)
+    spline = curve.splines.new("POLY")
+    spline.points.add(len(sampled) - 1)
+    for point, coordinates in zip(spline.points, sampled):
+        point.co = tuple(value * MM for value in coordinates) + (1.0,)
+    obj = bpy.data.objects.new(name, curve)
+    obj["Minimum_Bend_Radius_mm"] = bend_radius_mm
+    collection.objects.link(obj)
+    return obj
+
+
 def material(name, color, metallic=0.0, roughness=0.45, alpha=1.0):
     mat = bpy.data.materials.get(name) or bpy.data.materials.new(name)
     mat.use_nodes = True

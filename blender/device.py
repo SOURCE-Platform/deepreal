@@ -94,11 +94,22 @@ def _hollow_housing(obj):
     bpy.context.scene.collection.objects.link(motor_cutter)
     _difference(obj, motor_cutter, "Motor_Pocket")
 
+    # Narrow side passages connect the drum/motor pocket to the electronics
+    # cavity without opening the full enclosure width.
+    for label, x in (("Face", -50.5), ("Interaction", 50.5)):
+        route_cutter = macbook.slab(
+            "_{}_Cable_Passage_Cutter".format(label),
+            Vector((x * MM, 10.0 * MM, 6.5 * MM)),
+            macbook.X, macbook.Z, (12.0 * MM, 10.0 * MM), 1.0 * MM,
+            7.0 * MM, None)
+        bpy.context.scene.collection.objects.link(route_cutter)
+        _difference(obj, route_cutter, label + "_Cable_Passage")
+
     # This profile is deliberately smaller than the outer cyan-sketch
     # profile, leaving real front/rear/bottom walls and 2 mm end caps.
     inner_yz_mm = [
-        (5.3, 3.6), (5.3, -24.5), (7.0, -26.0), (13.0, -26.8),
-        (18.5, -24.5), (21.3, -17.0), (21.3, 3.6),
+        (5.0, 3.6), (5.0, -25.0), (7.0, -27.0), (13.0, -27.8),
+        (19.8, -25.5), (21.3, -17.0), (21.3, 3.6),
     ]
     inner_outline = [(y * MM, z * MM) for y, z in inner_yz_mm]
     electronics_cutter = macbook.prism(
