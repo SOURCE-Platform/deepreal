@@ -1,0 +1,18 @@
+{
+  "artifact": "deepreal-main-pcba-visual.kicad_pcb",
+  "status": "production-intent engineering visualization",
+  "fabrication_allowed": false,
+  "disclaimer": "ILLUSTRATIVE COPPER - NOT ELECTRICALLY ROUTED",
+  "board_mm": [
+    90.0,
+    28.0,
+    1.6
+  ],
+  "trace_groups": 16,
+  "trace_paths": 99,
+  "visual_vias": 81,
+  "visual_pours": 4,
+  "test_pads": 10,
+  "source_of_placement": "blender/pcba_bom.py",
+  "source_of_visual_copper": "blender/pcba_visual_layout.py"
+}

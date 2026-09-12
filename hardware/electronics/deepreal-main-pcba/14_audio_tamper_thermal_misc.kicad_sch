@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "4d072d18-28cc-59de-8850-8a6fd5a37a7c")
+	(paper "A4")
+	(title_block
+		(title "Audio tamper thermal misc")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 14/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "Audio tamper thermal misc"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "cecf991f-baf9-5154-8f0c-8454160acb28")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "d4eff177-b47e-589c-8aeb-b6e36daaa2a9")
+	)
+	(text "PRIMARY REFERENCES: MK1 SW1 U17 U20"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3756d45a-7e1a-5ec2-97b7-4da864fcc38c")
+	)
+	(text "CLOSURE EVIDENCE: Acoustic keep-out; tamper fail state; address audit"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ffd5b9eb-2004-544f-bfd4-be525611682a")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa71ce51-9f45-5ba8-aaf6-369ab0ce989a")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "caec7a2c-8ef4-58ef-901a-a3698aea16c7")
+	)
+	(embedded_fonts no)
+)

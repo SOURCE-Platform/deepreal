@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "54669e33-3377-5ffb-baeb-1621790e2ca7")
+	(paper "A4")
+	(title_block
+		(title "iMX95 power and decoupling")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 5/15 — PINMAP_GATE")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "iMX95 power and decoupling"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "7a063546-ee08-5c59-ba49-a8b11740d101")
+	)
+	(text "STATUS: PINMAP_GATE"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "5cb266f2-ad95-5639-b92c-c5d7bab407fa")
+	)
+	(text "PRIMARY REFERENCES: U1 C120-C219"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c50650e0-3d21-5d6d-a718-d5bd1a629057")
+	)
+	(text "CLOSURE EVIDENCE: Official 548-ball symbol; power audit"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5cee2790-9d00-5e19-9e17-96cfb8ae9627")
+	)
+	(text "PIN-LEVEL CAPTURE BLOCKED — import and audit official package data"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "17392cb6-c04c-51a9-8870-e3437e6aa7a9")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "db888f40-11e1-59f4-9231-902cfe59c83c")
+	)
+	(embedded_fonts no)
+)

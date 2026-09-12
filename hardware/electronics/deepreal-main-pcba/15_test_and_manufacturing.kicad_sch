@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "190c6bca-d716-510b-89a5-85a22755d3c4")
+	(paper "A4")
+	(title_block
+		(title "Test and manufacturing")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 15/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "Test and manufacturing"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "cc182e79-c136-53c3-878d-f5ab2e3fc3ee")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "7444b71b-f32e-5bb2-8861-11395feb4eb0")
+	)
+	(text "PRIMARY REFERENCES: J6 TP1-TP32"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "790cac0d-ff02-5939-bc42-fec32572739f")
+	)
+	(text "CLOSURE EVIDENCE: DFT review; no-fit list; rail-access review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3e4f17bb-cae5-5a0c-828b-9b618fac534b")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0a1be4b-5b5a-5085-992b-8ac15093f0a7")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "25f329bb-a93a-5993-b3fe-d85111463703")
+	)
+	(embedded_fonts no)
+)

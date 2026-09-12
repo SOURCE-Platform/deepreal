@@ -1,0 +1,15 @@
+{
+  "title": "DeepReal Main PCBA",
+  "approved_caption": "DeepReal Main PCBA — production-intent engineering visualization.",
+  "status": "investor and website presentation only",
+  "fabrication_allowed": false,
+  "electrically_routed": false,
+  "assets": [
+    {"name": "pcba-top", "master": "renders/deepreal-pcba-top-master.png", "web": "renders/deepreal-pcba-top-web.png"},
+    {"name": "pcba-bottom", "master": "renders/deepreal-pcba-bottom-master.png", "web": "renders/deepreal-pcba-bottom-web.png"},
+    {"name": "pcba-dimensioned", "master": "renders/deepreal-pcba-dimensioned-master.png", "web": "renders/deepreal-pcba-dimensioned-web.png"},
+    {"name": "electronics-exploded", "master": "renders/deepreal-electronics-exploded-master.png", "web": "renders/deepreal-electronics-exploded-web.png"},
+    {"name": "shield-cutaway", "master": "renders/deepreal-shield-cutaway-master.png", "web": "renders/deepreal-shield-cutaway-web.png"},
+    {"name": "pcba-installed", "master": "renders/deepreal-pcba-installed-master.png", "web": "renders/deepreal-pcba-installed-web.png"}
+  ]
+}

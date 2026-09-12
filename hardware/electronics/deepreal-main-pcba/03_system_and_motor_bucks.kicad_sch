@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "a28b1767-82fa-54a2-918c-1b31032b4361")
+	(paper "A4")
+	(title_block
+		(title "System and motor bucks")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 3/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "System and motor bucks"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "49c3aa2d-501a-591e-b3a2-62ecf7a95299")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "f5431397-33b0-553f-a3be-4c185b6ce8a0")
+	)
+	(text "PRIMARY REFERENCES: U8 U9 L1 L2"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "39c32f85-8d49-5efb-abad-e97d32fc1b97")
+	)
+	(text "CLOSURE EVIDENCE: Calculated magnetics; compensation; thermal review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6fefc314-8800-51be-aaaa-07c226e89fcf")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d2797d7e-36c4-59e6-82c2-521c1fa1b8bc")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "14f71b49-da93-50d2-8925-16b0f4503208")
+	)
+	(embedded_fonts no)
+)

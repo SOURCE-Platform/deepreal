@@ -1,0 +1,6 @@
+(version 1)
+
+# Preliminary 10-layer HDI feasibility rule. The fabricator stack-up can only
+# replace this after BGA escape, impedance and DFM review.
+(rule "Preliminary HDI copper clearance"
+  (constraint clearance (min 0.075mm)))

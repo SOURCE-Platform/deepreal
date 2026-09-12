@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "069dea21-ae79-5b74-ad1e-b3d114455f83")
+	(paper "A4")
+	(title_block
+		(title "Interaction head interface")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 12/15 — FLEX_GATE")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "Interaction head interface"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "6381c5f4-a2e6-5a95-a05b-4ba26153e317")
+	)
+	(text "STATUS: FLEX_GATE"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc2f3fbb-8e63-5f35-b495-e58d1492a001")
+	)
+	(text "PRIMARY REFERENCES: J3 U22"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b248121-8260-5791-a744-715f6a878906")
+	)
+	(text "CLOSURE EVIDENCE: 51-pin flex drawing; impedance and current review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "523c34f0-31b0-5476-aeea-6c4becba46c0")
+	)
+	(text "PIN-LEVEL CAPTURE BLOCKED — import and audit official package data"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e8513981-4abc-5b07-b268-2d96eb9838a0")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "569ac2f8-4bde-5fd7-891e-37179f176c2f")
+	)
+	(embedded_fonts no)
+)

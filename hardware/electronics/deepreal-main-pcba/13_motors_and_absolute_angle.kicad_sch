@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "efd118b7-34ce-5be1-a965-dcef3b13887b")
+	(paper "A4")
+	(title_block
+		(title "Motors and absolute angle")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 13/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "Motors and absolute angle"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "ff2a380c-e494-5123-a239-e61c206d2010")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "eb7a8049-90a1-5abf-b3f9-a843a69885dd")
+	)
+	(text "PRIMARY REFERENCES: U13 U14 U18 U19 J4 J5"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08caedda-8efc-552a-9b75-251415a6f801")
+	)
+	(text "CLOSURE EVIDENCE: Current limit; stall; encoder and ESD review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "88f9b33c-5390-50b3-b2c4-6048a25d62d1")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0577e8c3-6d32-5ae0-851c-55ac86a217ec")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7911ef00-b7c7-5036-b32a-63bc6d551202")
+	)
+	(embedded_fonts no)
+)

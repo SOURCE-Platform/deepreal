@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "fbe8156c-0917-5367-b9b1-8d7afe34e347")
+	(paper "A4")
+	(title_block
+		(title "Face camera bridge")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 9/15 — FPGA_GATE")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "Face camera bridge"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "6a732b1b-cf6f-52af-9224-56081a34c26c")
+	)
+	(text "STATUS: FPGA_GATE"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "ba93060e-6cbd-5afa-8f19-1605a453c91a")
+	)
+	(text "PRIMARY REFERENCES: U2 D3-D5"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ccfcd79b-b19b-5f22-a13e-ee3270ba0579")
+	)
+	(text "CLOSURE EVIDENCE: Radiant compile; csfBGA121 legal pin assignment"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8a8024e7-6faf-569f-90c4-a6f8908b0747")
+	)
+	(text "PIN-LEVEL CAPTURE BLOCKED — import and audit official package data"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "574b54f2-1ae9-5dfa-8ae0-185a38f54bcf")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "84dfb214-0bd3-5581-8820-604a39feb4e4")
+	)
+	(embedded_fonts no)
+)

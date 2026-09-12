@@ -5,8 +5,9 @@
 | Date | 12 September 2026 |
 | Main board | 90 x 28 x 1.6 mm |
 | Electrical designs | Main PCBA plus one reusable optical-head carrier |
-| EDA state | Tool-neutral capture source complete; checked EDA pages not complete |
-| 3D synchronization | Rebuilt from electrical baseline and mechanically validated |
+| EDA state | KiCad project and 15-page hierarchy exist; circuits and vendor pin maps remain incomplete |
+| 3D synchronization | Shared placement and visual-copper contract mechanically validated |
+| Presentation state | Production-intent KiCad/Blender visualization complete; not for fabrication |
 
 ## Generated in this pass
 
@@ -24,23 +25,29 @@ The Blender population was then changed to match those decisions:
 - separate TPS56637 system and motor converters;
 - DRV8213 motor drivers and AS5600L absolute-angle sensors;
 - no projector drivers on the stationary main board;
-- a 1.0 mm visible assembly gap between the 15 mm i.MX95 body and LPDDR body;
+- a 2.0 mm visible assembly gap between the 15 mm i.MX95 body and LPDDR body;
 - two combined optical-head flex routes plus two separate motor/encoder harnesses.
 
-The updated model has 192 modeled component bodies. Automated checks report a
+The updated model has 201 modeled component bodies. Automated checks report a
 6.06 mm populated board stack inside the 15 mm target envelope, no major-package or
 component-body overlap, correct seating on the board, no mounting-hole intrusion,
 and collision-free shield, cable, support, thermal and sampled drum-travel geometry.
 
+The presentation derivative adds 99 engineering-informed visual trace paths, 81
+visual vias, 10 test pads and four masked copper regions. KiCad and Blender consume
+the same tool-neutral coordinate data. This artwork is deliberately separated from
+the canonical placement-only KiCad board.
+
 ## What is not generated
 
-- No checked KiCad/Altium/OrCAD schematic pages or symbol library.
+- No completed or independently checked circuit pages or audited symbol library.
 - No vendor-audited 548-ball i.MX95, 200-ball LPDDR4X, 153-ball eMMC or 121-ball
   FPGA pin mapping.
 - No ERC-clean exported netlist.
 - No NXP DDR-tool output or Lattice Radiant pin/timing report.
-- No fabricator stack-up, legal footprints, placed vias, copper planes or routed
-  traces.
+- No fabricator stack-up, fully legal footprints, electrically connected vias,
+  copper planes or netlist-derived routed traces. The visual derivative is not an
+  exception to this manufacturing gate.
 - No dynamic-flex impedance/fatigue report, SI/PI result, thermal test, EMC result,
   USB compliance result or eye-safety certification.
 - No Gerbers, drills, pick-and-place, assembly drawing or production BOM.
@@ -60,10 +67,17 @@ away from the housing USB opening center. This is currently a model-integration
 warning rather than a board-body collision, but it must be reconciled before the
 housing/PCBA arrangement is presented as mechanically final.
 
-## Next executable gate
+## Presentation release status
+
+The board may be published using the caption **DeepReal Main PCBA —
+production-intent engineering visualization**. It must not be called final,
+electrically routed, validated or manufacturing-ready. The visualization KiCad file
+must never be exported as Gerbers.
+
+## Next manufacturing gate
 
 Install or select the project EDA environment, import the official manufacturer
 symbols/footprints, and capture pages 2-4 and 13-15 first. In parallel, obtain the
 restricted or vendor-controlled BGA pin data and run the FPGA and DDR tool passes.
-Only then should surface copper in the marketing model be regenerated from an actual
+Only then should the illustrative marketing copper be replaced by an actual
 placement/routing export.

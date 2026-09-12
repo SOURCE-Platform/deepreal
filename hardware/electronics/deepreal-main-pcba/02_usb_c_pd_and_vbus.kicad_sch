@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "cb45d776-e38a-5d47-b94d-50aee130b447")
+	(paper "A4")
+	(title_block
+		(title "USB-C PD and VBUS")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 2/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "USB-C PD and VBUS"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "0470fe5c-0105-5061-b087-d7e6d82a1c0b")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "dcdfcff8-2cfc-535e-a83e-c8ffe5316be2")
+	)
+	(text "PRIMARY REFERENCES: J1 U10 U11 D1 D2 D9"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "225b2542-8c96-5477-8674-3af3e2ee5e57")
+	)
+	(text "CLOSURE EVIDENCE: Official symbols; CC configuration; protection review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "04feb853-0ca9-57dd-b085-2601e764eaa5")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f499ba10-0f3e-5615-bb18-f24a2c75aced")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e24b84f1-77f3-5d95-9bc1-aebbdd446f57")
+	)
+	(embedded_fonts no)
+)

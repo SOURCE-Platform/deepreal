@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "11388350-25b9-5a20-932e-724136f244e7")
+	(paper "A4")
+	(title_block
+		(title "iMX95 boot clock debug")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 6/15 — PINMAP_GATE")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "iMX95 boot clock debug"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "789a832a-f4d4-5b03-ad81-3daa7dc9df61")
+	)
+	(text "STATUS: PINMAP_GATE"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "5e113f1c-28f7-5c67-9d5f-878e22fd72db")
+	)
+	(text "PRIMARY REFERENCES: U1 Y1 J6"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "40c79e8a-73ce-5d98-a526-2b33541000e5")
+	)
+	(text "CLOSURE EVIDENCE: Boot table; reset timing; debug review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "305b7435-fcc5-58bb-866d-12bfbd56a1fd")
+	)
+	(text "PIN-LEVEL CAPTURE BLOCKED — import and audit official package data"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "911630be-dabf-504f-b184-98254674441e")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "934fb308-5c00-5046-afbb-08c8ee52352c")
+	)
+	(embedded_fonts no)
+)

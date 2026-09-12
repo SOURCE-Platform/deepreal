@@ -26,6 +26,22 @@ These files should be used for the next schematic and 3D packaging pass:
    electrical capture source for the two identical rotating carrier assemblies.
 8. `../electrical/main-pcba-schematic-capture-status-v0.1.md` - exact record of
    what the capture pass and synchronized Blender rebuild did and did not produce.
+9. `../../hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb` -
+   canonical 90 x 28 mm placement board; intentionally contains no decorative copper.
+
+## Current presentation artifacts
+
+1. `../../hardware/electronics/deepreal-main-pcba/deepreal-main-pcba-visual.kicad_pcb`
+   - explicitly non-fabrication visualization derivative.
+2. `../../blender/pcba_visual_layout.py` - tool-neutral visual trace, via, test-pad
+   and masked-pour coordinates shared by KiCad and Blender.
+3. `../../blender/deepreal.blend` and `../../blender/renders/` - generated Blender
+   model and public render masters; rebuild from the source scripts.
+4. `../../hardware/electronics/deepreal-main-pcba/renders/` - packaged KiCad and
+   website-ready PCBA views.
+
+Approved public caption: **DeepReal Main PCBA — production-intent engineering
+visualization**.
 
 ## Historical or visual-study inputs
 
@@ -36,8 +52,8 @@ electrical baseline:
 - `main-pcba-packaging-study-v0.1.md` - packaging study based on v0.1 mechanical
   assumptions.
 - `../research/main-pcba-feasibility-v0.1.md` - early feasibility research.
-- Existing Blender renders and the current Blender board - presentation geometry,
-  not a routed board derived from a schematic/netlist.
+- Superseded Blender renders without the shared visual-copper layer - historical
+  presentation geometry, not a routed board derived from a schematic/netlist.
 
 ## Not generated yet
 
@@ -51,5 +67,5 @@ electrical baseline:
 - SI/PI, thermal, EMC, USB compliance or eye-safety test results
 - Gerbers, drill files, pick-and-place, assembly drawings or production BOM
 
-Until those items exist, the board can be shown as a preliminary engineering layout,
-not as a final or production-ready PCB.
+Until those items exist, the board can be shown as a production-intent engineering
+visualization, not as a final, electrically routed or production-ready PCB.

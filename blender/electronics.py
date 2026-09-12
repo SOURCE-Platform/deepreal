@@ -6,6 +6,7 @@ from mathutils import Vector
 from assembly_primitives import box, cylinder, material, tag
 from pcba_bom import BOARD
 import pcba_geometry
+import pcba_visual_copper
 
 
 BOARD_Y = BOARD["center_y"]
@@ -30,8 +31,8 @@ SHIELD_SHEET = 0.45
 
 def _materials():
     return {
-        "board": material("Electronics_PCBA", (0.025, 0.20, 0.07),
-                          roughness=0.58),
+        "board": material("Electronics_PCBA", (0.008, 0.075, 0.022),
+                          roughness=0.48),
         "soc": material("Electronics_iMX95", (0.92, 0.48, 0.05),
                         metallic=0.18, roughness=0.32),
         "fpga": material("Electronics_FPGA", (0.02, 0.42, 0.68),
@@ -220,6 +221,7 @@ def build(collection):
     objects.append(tag(keepout, "Main electronics", "REFERENCE RESERVE"))
 
     objects += pcba_geometry.build(collection)
+    objects += pcba_visual_copper.build(collection)
     objects += _connector_apron(mats, collection)
 
     objects += _shield_enclosure(mats, collection)

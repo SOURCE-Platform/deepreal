@@ -78,21 +78,21 @@ def _clone_pcba(scene, prefix, transform=None):
 
 def _board_view(name, prefix, front):
     side = "top" if front else "bottom"
-    scene = pv._scene(name, "Orthographic {} assembly view of the 90 x 28 mm preliminary PCBA.".format(side))
-    scene.render.resolution_x = 2000
-    scene.render.resolution_y = 900
+    scene = pv._scene(name, "Orthographic {} view of the 90 x 28 mm production-intent PCBA visualization.".format(side))
+    scene.render.resolution_x = 3200
+    scene.render.resolution_y = 1440
     _clone_pcba(scene, prefix)
     labels = pv._collection(scene, prefix + " Labels")
-    _text(labels, "DEEPREAL MAIN PCBA - {} SIDE - PRELIMINARY PACKAGING".format(side.upper()),
+    _text(labels, "DEEPREAL MAIN PCBA - {} SIDE - PRODUCTION-INTENT VISUALIZATION".format(side.upper()),
           0, 9.5 if front else 23.0, 6.5, 1.75, front=front)
     _ortho_rig(scene, prefix, front=front, scale=125, target_z=-9.5)
     return scene
 
 
 def _dimension_view():
-    scene = pv._scene("08 PCBA Dimensioned", "Dimensioned 90 x 28 x 1.6 mm packaging-study view.")
-    scene.render.resolution_x = 2000
-    scene.render.resolution_y = 1100
+    scene = pv._scene("08 PCBA Dimensioned", "Dimensioned 90 x 28 x 1.6 mm production-intent visualization.")
+    scene.render.resolution_x = 3200
+    scene.render.resolution_y = 1760
     _clone_pcba(scene, "DIM")
     labels = pv._collection(scene, "DIM Labels")
     lines = pv._collection(scene, "DIM Lines")
@@ -112,14 +112,16 @@ def _dimension_view():
     _text(labels, "28.0 mm", -52.0, 9.7, -11.5, 1.45)
     _text(labels, "PCB 1.60 mm | TOP MAX 3.16 mm | BOTTOM MAX 1.30 mm | POPULATED STACK 6.06 mm",
           0, 9.7, 6.8, 1.25)
+    _text(labels, "ILLUSTRATIVE COPPER - NOT FOR FABRICATION",
+          0, 9.7, 4.4, 1.05)
     _ortho_rig(scene, "DIM", front=True, scale=130, target_z=-11.0)
     return scene
 
 
 def _identification_view():
     scene = pv._scene("09 PCBA Identification", "Top and bottom component-reference identification view.")
-    scene.render.resolution_x = 2200
-    scene.render.resolution_y = 1500
+    scene.render.resolution_x = 3200
+    scene.render.resolution_y = 2180
     top_shift = Matrix.Translation(Vector((-55*0.001, 0, 8*0.001)))
     center = Vector((0, BOARD["center_y"]*0.001, BOARD["center_z"]*0.001))
     flip = Matrix.Translation(Vector((55*0.001, 0, 8*0.001)) + center) @ \

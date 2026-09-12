@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "f2ba2ebe-8921-5156-89a8-4752f29f10b0")
+	(paper "A4")
+	(title_block
+		(title "LPDDR4X")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 7/15 — DDR_GATE")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "LPDDR4X"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "d61a9a41-b47b-56ed-a593-3498fc257c75")
+	)
+	(text "STATUS: DDR_GATE"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "5b647221-fc75-5a64-8cf1-bc43a1452cff")
+	)
+	(text "PRIMARY REFERENCES: U1 U4 C220-C259"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "059ab448-1b05-5b10-9676-abb2b2f48468")
+	)
+	(text "CLOSURE EVIDENCE: NXP DDR tool; Micron pin map; topology review"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f59b6df-a403-5250-996e-5281266cf093")
+	)
+	(text "PIN-LEVEL CAPTURE BLOCKED — import and audit official package data"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f5bfd0fc-6bf2-5d8a-b0de-ec88b82ef391")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "22d6c0fb-8c42-58a3-8661-ee744731cd09")
+	)
+	(embedded_fonts no)
+)

@@ -7,3 +7,11 @@ references/components/cad/pololu-micro-metal-gearmotor-step-models.zip
 
 # ZCode agent session state
 .zcode/
+
+# KiCad per-user state, locks, automatic history and generated check reports.
+*.kicad_prl
+*-visual.kicad_pro
+~*.lck
+**/.history/
+**/*-drc.json
+/tmp/

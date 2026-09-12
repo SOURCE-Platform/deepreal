@@ -1,0 +1,82 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "95063349-f65a-5480-91fe-feb0d0b0734a")
+	(paper "A4")
+	(title_block
+		(title "PF09 PF53 power tree")
+		(rev "0.2-capture")
+		(company "DeepReal")
+		(comment 1 "Page 4/15 — DEFINED")
+		(comment 2 "PRELIMINARY / NOT FOR FABRICATION")
+	)
+	(lib_symbols)
+	(text "PF09 PF53 power tree"
+		(exclude_from_sim no)
+		(at 25.4 30.0 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "36eab489-8a63-5760-b52d-1597125d255f")
+	)
+	(text "STATUS: DEFINED"
+		(exclude_from_sim no)
+		(at 25.4 40.0 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left bottom)
+		)
+		(uuid "29c6b6e5-02f4-57ea-97c4-222b319941cc")
+	)
+	(text "PRIMARY REFERENCES: U5 U6 U7 L3-L9"
+		(exclude_from_sim no)
+		(at 25.4 48.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0e9f0a1b-79c1-5ccd-b197-a10e1bf5070a")
+	)
+	(text "CLOSURE EVIDENCE: NXP OTP/sequence review; rail calculation"
+		(exclude_from_sim no)
+		(at 25.4 58.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f20c3770-45ad-5663-b891-b95e929a0832")
+	)
+	(text "ARCHITECTURE DEFINED — component values and pin-level review still required"
+		(exclude_from_sim no)
+		(at 25.4 75.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6e9c3c00-4177-5a37-bcfe-17efbd95098e")
+	)
+	(text "See circuit-specification.md, net-registry.csv, component-register.csv and pinmap-gates.csv.\nDo not add copper or release fabrication data until this page is electrically captured and reviewed."
+		(exclude_from_sim no)
+		(at 25.4 95.0 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "83b93dca-63b0-5702-bca6-d353c3199715")
+	)
+	(embedded_fonts no)
+)

@@ -1,0 +1,40 @@
+ERC report (2026-09-12T17:35:14, Encoding UTF8)
+Report includes: Errors, Warnings
+
+***** Sheet /
+
+***** Sheet /USB-C_PD_and_VBUS/
+
+***** Sheet /System_and_motor_bucks/
+
+***** Sheet /PF09_PF53_power_tree/
+
+***** Sheet /iMX95_power_and_decoupling/
+
+***** Sheet /iMX95_boot_clock_debug/
+
+***** Sheet /LPDDR4X/
+
+***** Sheet /eMMC_and_board_identity/
+
+***** Sheet /Face_camera_bridge/
+
+***** Sheet /Interaction_camera_bridge/
+
+***** Sheet /Face_head_interface/
+
+***** Sheet /Interaction_head_interface/
+
+***** Sheet /Motors_and_absolute_angle/
+
+***** Sheet /Audio_tamper_thermal_misc/
+
+***** Sheet /Test_and_manufacturing/
+
+ ** ERC messages: 0  Errors 0  Warnings 0
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

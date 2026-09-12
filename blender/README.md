@@ -39,6 +39,12 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   board package, seating, density, keep-out, and stack validation.
 - `review_renders.py` — renders the overview and all five detail scenes for
   review and website use.
+- `pcba_visual_layout.py` and `pcba_visual_copper.py` — shared, explicitly
+  illustrative trace/via/pour contract and its Blender geometry.
+- `render_pcba_public.py` — packages six production-intent PCBA views as
+  high-resolution masters and website-sized images.
+- `validate_visual_copper.py` — checks shared KiCad/Blender route counts,
+  dimensions, mounting clearance and non-fabrication metadata.
 - `deepreal.blend` and `renders/` — generated outputs; rebuild rather than
   treating manual edits as authoritative.
 
