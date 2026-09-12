@@ -1,8 +1,11 @@
 """Blender geometry for the shared production-intent copper artwork."""
 
+import math
+
+import bpy
 from mathutils import Vector
 
-from assembly_primitives import box, cylinder, material, routed_wire, tag, tube
+from assembly_primitives import MM, box, cylinder, material, tag, tube
 from pcba_bom import BOARD
 from pcba_visual_layout import DISCLAIMER, POURS, TEST_PADS, TRACE_GROUPS, VIAS
 
@@ -10,6 +13,48 @@ from pcba_visual_layout import DISCLAIMER, POURS, TEST_PADS, TRACE_GROUPS, VIAS
 def _surface_y(side, outward=0.0):
     direction = -1.0 if side == "TOP" else 1.0
     return BOARD["center_y"] + direction * (BOARD["thickness"] / 2 + outward)
+
+
+def _flat_trace(name, side, path, width, trace_material, collection):
+    """Build flush rectangular copper foil, never a raised wire-like curve."""
+    y = _surface_y(side, 0.010)
+    thickness = 0.018
+    vertices, faces = [], []
+    for (x0, z0), (x1, z1) in zip(path, path[1:]):
+        dx, dz = x1 - x0, z1 - z0
+        length = math.hypot(dx, dz)
+        if length < 0.01:
+            continue
+        ux, uz = dx / length, dz / length
+        px, pz = -uz * width / 2.0, ux * width / 2.0
+        overlap = min(0.06, width * 0.40)
+        ax, az = x0 - ux * overlap, z0 - uz * overlap
+        bx, bz = x1 + ux * overlap, z1 + uz * overlap
+        y0, y1 = y - thickness / 2.0, y + thickness / 2.0
+        base = len(vertices)
+        vertices.extend(
+            (x * MM, yy * MM, z * MM)
+            for x, yy, z in (
+                (ax + px, y0, az + pz), (bx + px, y0, bz + pz),
+                (bx - px, y0, bz - pz), (ax - px, y0, az - pz),
+                (ax + px, y1, az + pz), (bx + px, y1, bz + pz),
+                (bx - px, y1, bz - pz), (ax - px, y1, az - pz),
+            )
+        )
+        faces.extend(tuple(base + index for index in face) for face in (
+            (0, 1, 2, 3), (4, 7, 6, 5), (0, 4, 5, 1),
+            (1, 5, 6, 2), (2, 6, 7, 3), (4, 0, 3, 7),
+        ))
+    if not vertices:
+        return None
+    mesh = bpy.data.meshes.new(name + " Mesh")
+    mesh.from_pydata(vertices, [], faces)
+    mesh.materials.append(trace_material)
+    obj = bpy.data.objects.new(name, mesh)
+    collection.objects.link(obj)
+    obj["PCBA_Visual_Copper"] = True
+    obj["PCBA_Side"] = side
+    return obj
 
 
 def build(collection):
@@ -33,17 +78,14 @@ def build(collection):
         obj["PCBA_Side"] = side
         objects.append(tag(obj, pour["subsystem"], DISCLAIMER))
     for group in TRACE_GROUPS:
-        y = _surface_y(group["side"], 0.035)
         trace_mat = masked_power if group["width"] >= 0.30 else masked
         for index, path in enumerate(group["paths"], 1):
-            points = tuple((x, y, z) for x, z in path)
-            obj = routed_wire("Visual_{}_{}".format(group["name"], index),
-                              points, group["width"] / 2.0, 0.18,
-                              trace_mat, collection, corner_segments=4)
-            obj["PCBA_Visual_Copper"] = True
-            obj["PCBA_Side"] = group["side"]
-            obj["PCBA_Trace_Class"] = group["class"]
-            objects.append(tag(obj, group["subsystem"], DISCLAIMER))
+            name = "Visual_{}_{}".format(group["name"], index)
+            trace = _flat_trace(name, group["side"], path,
+                                group["width"], trace_mat, collection)
+            if trace:
+                trace["PCBA_Trace_Class"] = group["class"]
+                objects.append(tag(trace, group["subsystem"], DISCLAIMER))
     for index, via in enumerate(VIAS, 1):
         obj = tube("Visual_Via_{:03d}".format(index),
                    (via["x"], BOARD["center_y"], via["z"]), Vector((0, 1, 0)),
