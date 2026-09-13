@@ -13,7 +13,7 @@ def engineering_parts():
         part = dict(metadata)
         placed = by_ref.get(part["ref"])
         if placed is None:
-            part["placement_state"] = "MISSING_FROM_KICAD"
+            continue  # Missing parts are issues, never historical-position fallbacks.
         else:
             part["x"], part["z"] = board_to_blender(
                 *placed["position_mm"], bounds,

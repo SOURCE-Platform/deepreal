@@ -1,0 +1,106 @@
+{
+  "schema": "deepreal.layout-readiness-audit.v1",
+  "source_board_sha256": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5",
+  "engineering_status": "BLOCKED",
+  "public_visual_allowed": false,
+  "fabrication_allowed": false,
+  "violations": 610,
+  "violations_by_type": {
+    "clearance": 149,
+    "copper_edge_clearance": 7,
+    "courtyards_overlap": 56,
+    "hole_clearance": 4,
+    "nonmirrored_text_on_back_layer": 2,
+    "npth_inside_courtyard": 3,
+    "pth_inside_courtyard": 4,
+    "silk_edge_clearance": 11,
+    "silk_over_copper": 174,
+    "silk_overlap": 22,
+    "solder_mask_bridge": 126,
+    "text_height": 52
+  },
+  "schematic_parity_issues": 199,
+  "unconnected_items_reported": 0,
+  "ignored_rules": [
+    "footprint_filters_mismatch",
+    "footprint_type_mismatch",
+    "missing_courtyard",
+    "track_not_centered_on_via",
+    "tuning_profile_track_geometries"
+  ],
+  "missing_courtyard_refs": [],
+  "named_pad_nets": [],
+  "sheets": [
+    {
+      "file": "02_usb_c_pd_and_vbus.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "03_system_and_motor_bucks.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "04_pf09_pf53_power_tree.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "05_imx95_power_and_decoupling.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "06_imx95_boot_clock_debug.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "07_lpddr4x.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "08_emmc_and_board_identity.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "09_face_camera_bridge.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "10_interaction_camera_bridge.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "11_face_head_interface.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "12_interaction_head_interface.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "13_motors_and_absolute_angle.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "14_audio_tamper_thermal_misc.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    },
+    {
+      "file": "15_test_and_manufacturing.kicad_sch",
+      "symbols": 0,
+      "wires": 0
+    }
+  ],
+  "warning": "Zero unconnected items does not prove connectivity: inspect named nets and sheet completeness."
+}

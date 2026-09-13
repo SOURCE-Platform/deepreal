@@ -6,7 +6,7 @@ source geometry therefore propagates to every view.
 """
 
 import math
-
+from pcba_render_settings import configure
 import bpy
 from mathutils import Vector
 
@@ -53,7 +53,7 @@ def _scene(name, description):
     scene["DeepReal_View"] = description
     scene.unit_settings.system = "METRIC"
     scene.unit_settings.scale_length = 1.0
-    scene.render.engine = "BLENDER_EEVEE"
+    configure(scene)
     scene.render.resolution_x = 1600
     scene.render.resolution_y = 1100
     scene.render.resolution_percentage = 100
@@ -117,11 +117,11 @@ def _rig(scene, prefix, eye_mm, target_mm, lens=58):
     rig.objects.link(camera)
     _aim(camera, target)
     scene.camera = camera
-    _light(rig, prefix + " Key", (-0.18, -0.20, 0.22), 55, 0.35,
+    _light(rig, prefix + " Key", (-0.18, -0.20, 0.22), 2.0, 0.35,
            target)
-    _light(rig, prefix + " Fill", (0.20, -0.08, 0.18), 32, 0.30,
+    _light(rig, prefix + " Fill", (0.20, -0.08, 0.18), 1.1, 0.30,
            target)
-    _light(rig, prefix + " Rim", (0.04, 0.18, 0.16), 42, 0.24,
+    _light(rig, prefix + " Rim", (0.04, 0.18, 0.16), 1.5, 0.24,
            target)
 
 
@@ -223,7 +223,7 @@ def _place_exploded(clone, source):
         clone.location += Vector(tuple(value * 0.001 for value in desired)) \
             - _center(clone)
         return
-    if (source.get("PCBA_Component") or "Land_Pattern" in source.name
+    if (source.get("PCBA_Component") or source.get("PCBA_NativeSurface")
             or "Pad_Field" in source.name or "_51_Pin_Lands" in source.name
             or source.name.startswith(("Silkscreen_", "PCBA_Ground_Via_"))
             or source.name.endswith("_Latch")):
@@ -259,7 +259,7 @@ def _exploded_view():
             continue
         clone = _clone(source, geometry, "EXP")
         _place_exploded(clone, source)
-    _rig(scene, "EXP", (310, -500, 185), (0, 0, -30), lens=62)
+    _rig(scene, "EXP", (310, -500, 185), (0, 0, -30), lens=48)
     return scene
 
 

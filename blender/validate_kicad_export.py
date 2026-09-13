@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Validate the KiCad-to-Blender data boundary and release lock."""
 
+import hashlib
+from pathlib import Path
+
 from pcba_bom import ALL_PARTS
-from pcba_kicad_data import (blender_to_board, board_to_blender, load,
+from pcba_kicad_data import (DEFAULT_EXPORT, blender_to_board, board_to_blender, load,
                              public_ready)
 
 
@@ -13,6 +16,11 @@ def main():
     width = bounds[2] - bounds[0]
     depth = bounds[3] - bounds[1]
     failures = []
+    root = Path(DEFAULT_EXPORT).parent
+    for path, key in ((root / payload["metadata"]["source_board"], "source_board_sha256"),
+                      (root / "design-status.json", "source_status_sha256")):
+        if hashlib.sha256(path.read_bytes()).hexdigest() != payload["metadata"].get(key):
+            failures.append("stale source: " + str(path))
     open_issues = []
     gates = payload.get("validation_status", {})
     placement_passed = gates.get("G8") == "PASS"
@@ -59,7 +67,7 @@ def main():
         len(payload["tracks"]), len(payload["vias"]), len(payload["zones"])))
     for issue in open_issues:
         print("  OPEN:", issue)
-    print("PASS: coordinate conversion, canonical export, and release lock are truthful")
+    print("PASS: export freshness / coordinate arithmetic only; NOT an electrical or fit approval")
 
 
 if __name__ == "__main__":

@@ -70,10 +70,13 @@ The superseded visual board, handmade trace contract, generators, and renders we
 removed from the working tree. Git history is the historical record. Future Blender
 geometry must come from the canonical routed KiCad review draft instead.
 
-The active Blender build imports component positions through
-`../../../blender/pcba_placement.py` and visible tracks/vias through
-`../../../blender/pcba_kicad_geometry.py`. `../../../blender/pcba_bom.py` now
-supplies presentation metadata and historical fallback coordinates only.
+The active Blender build imports KiCad's native GLB through
+`../../../blender/pcba_native_import.py`, with a hash-checked JSON inventory.
+`../../../blender/pcba_bom.py` supplies presentation names and flagged body
+envelopes for missing 3D models, never fallback placement or invented pads.
+The native board remains unrouted and its footprint selections are unverified.
+See [the import checkpoint](../../../docs/electrical/native-pcba-import-checkpoint.md)
+for reproduction commands and the current internal-review asset inventory.
 
 Public rendering is intentionally blocked until `public_visual_allowed` becomes
 true after the engineering and visual gates pass. At that future point, rebuild with:

@@ -5,6 +5,7 @@ The export is descriptive only and inherits the design gate release locks.
 """
 
 import json
+import hashlib
 from pathlib import Path
 
 import wx
@@ -55,20 +56,34 @@ def components(board):
     for fp in sorted(board.GetFootprints(), key=lambda item: item.GetReference()):
         bbox = fp.GetBoundingBox(False, False)
         models = []
+        model_transforms = []
         for model in fp.Models():
             models.append(str(model.m_Filename))
+            model_transforms.append({"path": str(model.m_Filename),
+                "offset_mm": [model.m_Offset.x, model.m_Offset.y, model.m_Offset.z],
+                "rotation_deg": [model.m_Rotation.x, model.m_Rotation.y, model.m_Rotation.z],
+                "scale": [model.m_Scale.x, model.m_Scale.y, model.m_Scale.z]})
+        fp.BuildCourtyardCaches()
+        courtyard = fp.GetCourtyard(pcbnew.B_CrtYd if fp.IsFlipped() else pcbnew.F_CrtYd)
+        polygons = []
+        for index in range(courtyard.OutlineCount()):
+            chain = courtyard.COutline(index)
+            polygons.append([point(chain.CPoint(i)) for i in range(chain.PointCount())])
         result.append({
+            "uuid": fp.m_Uuid.AsString(),
             "ref": fp.GetReference(),
             "value": fp.GetValue(),
-            "footprint": str(fp.GetFPID()),
+            "footprint": str(fp.GetFPID().GetLibNickname()) + ":" + str(fp.GetFPID().GetLibItemName()),
             "side": "BOTTOM" if fp.IsFlipped() else "TOP",
             "position_mm": point(fp.GetPosition()),
             "rotation_deg": round(fp.GetOrientationDegrees(), 6),
-            "courtyard_bbox_mm": [
+            "graphics_bbox_mm": [
                 round(mm(bbox.GetX()), 6), round(mm(bbox.GetY()), 6),
                 round(mm(bbox.GetWidth()), 6), round(mm(bbox.GetHeight()), 6),
             ],
             "models": models,
+            "model_transforms": model_transforms,
+            "courtyard_polygons_mm": polygons,
         })
     return result
 
@@ -123,6 +138,7 @@ def pads(board):
         for pad in fp.Pads():
             size = pad.GetSize()
             result.append({
+                "uuid": pad.m_Uuid.AsString(),
                 "ref": fp.GetReference(),
                 "number": pad.GetNumber(),
                 "net": pad.GetNetname(),
@@ -169,6 +185,8 @@ def main():
             "fabrication_allowed": status["fabrication_allowed"],
             "public_visual_allowed": status["public_visual_allowed"],
             "source_board": BOARD_PATH.name,
+            "source_board_sha256": hashlib.sha256(BOARD_PATH.read_bytes()).hexdigest(),
+            "source_status_sha256": hashlib.sha256(STATUS_PATH.read_bytes()).hexdigest(),
         },
         "board": board_outline(board),
         "components": components(board),

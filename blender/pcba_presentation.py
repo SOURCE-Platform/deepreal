@@ -111,9 +111,9 @@ def _dimension_view():
         tag(wire(name, points, 0.09, ink, lines), "PCBA dimensions", "MEASURED")
     _text(labels, "90.0 mm", 0, 9.7, -31.0, 1.45)
     _text(labels, "28.0 mm", -52.0, 9.7, -11.5, 1.45)
-    _text(labels, "PCB 1.60 mm | TOP MAX 3.16 mm | BOTTOM MAX 1.30 mm | POPULATED STACK 6.06 mm",
+    _text(labels, "90 x 28 mm CANDIDATE | 1.60 mm NOMINAL PCB | HEIGHT / FIT REVIEW OPEN",
           0, 9.7, 6.8, 1.25)
-    _text(labels, "ILLUSTRATIVE COPPER - NOT FOR FABRICATION",
+    _text(labels, "NATIVE KICAD GEOMETRY + FLAGGED CHIP ENVELOPES - NOT FOR PUBLICATION",
           0, 9.7, 4.4, 1.05)
     _ortho_rig(scene, "DIM", front=True, scale=130, target_z=-11.0)
     return scene
@@ -180,6 +180,9 @@ def _flex_study():
 
 
 def build():
+    previous_scene = bpy.context.window.scene
+    # Update the source dependency graph, not the overview's detached clones.
+    bpy.context.window.scene = bpy.data.scenes["SOURCE - Canonical Assembly"]
     pivot = bpy.data.objects["Lid_Pivot"]
     original = pivot.rotation_euler.copy()
     pivot.rotation_euler = (0, 0, 0)
@@ -191,4 +194,5 @@ def build():
     ]
     pivot.rotation_euler = original
     bpy.context.view_layer.update()
+    bpy.context.window.scene = previous_scene
     return scenes

@@ -23,8 +23,6 @@ REQUIRED = {
     ),
     "electronics shield enclosure": (
         "Shield_Rear_Tray", "Shield_Front_Lid",
-        "PCB_Ground_Ring_Left", "PCB_Ground_Ring_Right",
-        "PCB_Ground_Ring_Top", "PCB_Ground_Ring_Apron",
         "Shield_Chassis_Bond_Left", "Shield_Chassis_Bond_Center",
         "Shield_Chassis_Bond_Right",
     ),
@@ -47,8 +45,6 @@ REQUIRED = {
         "Face_Motor_Encoder_Harness", "Interaction_Motor_Encoder_Harness",
     ),
     "connector apron": (
-        "Face_Connector_Bank", "Auxiliary_Connector_Bank",
-        "Interaction_Connector_Bank",
         "Face_Motor_Encoder", "Face_Optical_Head_Connector",
         "Interaction_Optical_Head_Connector",
         "Interaction_Motor_Encoder",
@@ -276,8 +272,7 @@ def _validate_presentations(failures):
         if "Shield_Front_Lid" in sources:
             failures.append("shield cutaway still contains the front lid")
         for required in (
-                "Shield_Rear_Tray", "Main_PCBA",
-                "Face_Connector_Bank", "Interaction_Connector_Bank"):
+                "Shield_Rear_Tray", "Main_PCBA"):
             if required not in sources:
                 failures.append("shield cutaway omits " + required)
 

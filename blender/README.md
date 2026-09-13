@@ -1,14 +1,19 @@
 # DeepReal Blender reference model
 
-Blender is the current mechanical and visual design authority for DeepReal.
+Blender contains the mechanical concept and presentation scenes. KiCad is the
+authority for the main PCB footprint placement and copper geometry.
 The canonical design is one curved 120 mm-wide assembly; the obsolete
 "Current" collision study and boxy "Compact" comparison are no longer part of
 the build. FreeCAD is not required.
 
-This is an architecture-complete concept model for communication, packaging,
-and website imagery. Named parts distinguish verified/reference component
-envelopes from concept geometry. It is not production CAD and must not be used
-to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
+The electronics are an incomplete engineering rebuild, **not approved for
+website use**. The native KiCad import preserves the current placement defects;
+it does not make the footprint selections, circuits or layout correct. The two
+rotating head-board designs and flex interfaces remain unresolved concepts.
+This model must not be used to manufacture or certify hardware.
+
+See [the current implementation checkpoint](../docs/electrical/native-pcba-import-checkpoint.md)
+for measured progress, reproducible commands and remaining blockers.
 
 ## Source files
 
@@ -18,9 +23,8 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   cable passages, and two cylindrical 24 × 54 mm drum shells.
 - `optics.py` — bored apertures plus architecture-stage RGB, IR, projector,
   carrier, PCB, and optical keep-out geometry.
-- `electronics.py` — populated main PCBA, formed rear shield tray and
-  removable lid, lower connector apron, thermal spreader/pad, microphone,
-  and tamper switch.
+- `electronics.py` — native main-PCB import, concept shield and thermal stack.
+  The missing KiCad tamper switch is no longer silently added in Blender.
 - `motion.py` — two offset gearmotors, pinions, ring gears, axles, four
   bearings, encoder boards/magnets, brackets, and travel stops. Each ring gear
   occupies the final 2 mm drum-end band, clear of the outer camera window.
@@ -30,39 +34,41 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   cable channels, boundary clamps, and strain relief.
 - `presentation_views.py` and `pcba_presentation.py` — full-device views plus
   five dedicated PCBA scenes made from linked canonical geometry.
-- `pcba_bom.py` and `pcba_geometry.py` — presentation metadata, package
-  geometry, representative support population, vias, and status data.
-- `pcba_kicad_data.py` and `pcba_kicad_geometry.py` — the one-way interface
-  from the canonical KiCad board to Blender placement and visible copper.
+- `pcba_bom.py` — presentation names and explicitly representative envelopes
+  for 18 missing native chip models; not an independent placement authority.
+- `pcba_kicad_data.py` and `pcba_native_import.py` — hash-checked JSON/GLB
+  interface from KiCad, including native components, pads, mask and holes.
 - `mounting_stack.py`, `usb_port.py`, `usb_cable.py` — display attachment and
   external connection concepts.
 - `build_scene.py` — deterministic complete-scene build.
-- `validate_model.py` and `validate_pcba.py` — world-space product checks plus
-  board package, seating, density, keep-out, and stack validation.
-- `review_renders.py` — renders the overview and all five detail scenes for
-  review and website use.
-- `render_pcba_public.py` — packages six production-intent PCBA views as
-  high-resolution masters and website-sized images.
+- `validate_model.py` — legacy assembly checks; still fails missing required
+  hardware and does not approve electronics.
+- `validate_pcba.py`, `validate_pcba_native.py`, `test_pcba_native.py` — geometry
+  transport and provenance checks, explicitly separate from engineering approval.
+- `render_native_review.py` — six stamped internal review images; no publication.
+- `review_renders.py` — legacy general-device review views, not a release gate.
+- `render_pcba_public.py` — gated public packaging; currently refuses release.
 - `deepreal.blend` and `renders/` — generated outputs; rebuild rather than
   treating manual edits as authoritative.
 
-The former handmade visual-copper modules and separate visual KiCad board were
-removed. Git history preserves them if historical comparison is ever needed;
-they no longer influence component spacing or presentation geometry.
+Handmade copper, decorative vias, fake connector-apron boards and the separate
+Blender support-population generator are no longer active. Removed source is
+recoverable from Git history. No traces have been invented to fill this board.
 
 ## Build and validate
 
 From the repository root:
 
 ```sh
+# Refresh the JSON and native GLB first; see the checkpoint for KiCad commands.
 /Applications/Blender.app/Contents/MacOS/Blender --background \
-  --factory-startup --python blender/build_scene.py
+  --factory-startup --python-exit-code 1 --python blender/build_scene.py
 
 /Applications/Blender.app/Contents/MacOS/Blender --background \
-  blender/deepreal.blend --python blender/validate_model.py
+  blender/deepreal.blend --python-exit-code 1 --python blender/validate_pcba.py
 
 /Applications/Blender.app/Contents/MacOS/Blender --background \
-  blender/deepreal.blend --python blender/review_renders.py
+  blender/deepreal.blend --python-exit-code 1 --python blender/test_pcba_native.py
 ```
 
 The build uses millimetres in source and converts to Blender metres. Product
@@ -73,12 +79,11 @@ X runs across the display, Y runs front-to-back, and Z runs vertically.
 - The electronics compartment follows the approved curved/tapered lower
   profile instead of a rectangular chin.
 - The housing contains real drum, motor, electronics, and side-route cavities.
-- The populated PCBA field sits inside a two-piece conductive enclosure: one
-  formed rear tray with integrated perimeter walls and one removable front
-  lid. The tray clears the PCB substrate rather than passing through it.
-- Only the grounded lower connector apron remains outside the primary
-  chamber. Four camera, two projector, and two motor connectors terminate
-  there.
+- A two-piece shield concept surrounds the main board. Actual connector,
+  component, thermal-contact and tolerance clearances remain open.
+- The head interfaces are two candidate combined flex connectors plus two
+  motor/encoder interfaces. Their native placement currently overhangs the
+  board incorrectly; no grounded connector apron has been implemented.
 - Side cable passages are closely bounded, and data and power/motion routes
   remain in separate fitted channels.
 - A separate copper spreader and compliant pad show the intended heat path

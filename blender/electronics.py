@@ -5,8 +5,7 @@ from mathutils import Vector
 
 from assembly_primitives import box, cylinder, material, tag
 from pcba_bom import BOARD
-import pcba_geometry
-import pcba_kicad_geometry
+import pcba_native_import
 
 
 BOARD_Y = BOARD["center_y"]
@@ -142,39 +141,8 @@ def _shield_enclosure(mats, collection):
     lid["Coverage_Intent"] = "Complete populated electronics chamber"
     objects.append(lid)
 
-    # The visible ring and via field communicate a continuous, controlled
-    # shield termination. Exact via pitch and contact-finger geometry remain
-    # PCB and EMC engineering work.
-    ring_y = BOARD_Y - 0.93
-    ring_specs = (
-        ("PCB_Ground_Ring_Left", (BOARD_X0 + 0.45, ring_y, -10.1),
-         (0.55, 0.22, 24.0)),
-        ("PCB_Ground_Ring_Right", (BOARD_X1 - 0.45, ring_y, -10.1),
-         (0.55, 0.22, 24.0)),
-        ("PCB_Ground_Ring_Top", (0.0, ring_y, BOARD_Z1 - 0.45),
-         (88.2, 0.22, 0.55)),
-        ("PCB_Ground_Ring_Apron", (0.0, ring_y, SHIELD_Z0 + 0.70),
-         (88.2, 0.22, 0.55)),
-    )
-    for name, center, dims in ring_specs:
-        obj = box(name, center, dims, 0.12, mats["ground"], collection)
-        objects.append(tag(obj, "Shield perimeter ground",
-                           "GROUND-RING CONCEPT"))
-
-    via_positions = (
-        (-40.0, BOARD_Z1 - 0.45), (-20.0, BOARD_Z1 - 0.45),
-        (0.0, BOARD_Z1 - 0.45), (20.0, BOARD_Z1 - 0.45),
-        (40.0, BOARD_Z1 - 0.45),
-        (-40.0, z0 + 0.7), (-20.0, z0 + 0.7), (0.0, z0 + 0.7),
-        (20.0, z0 + 0.7), (40.0, z0 + 0.7),
-    )
-    for index, (x, z) in enumerate(via_positions, 1):
-        via = cylinder("Shield_Ground_Via_{:02d}".format(index),
-                       (x, ring_y - 0.02, z), Vector((0.0, 1.0, 0.0)),
-                       0.32, 0.36, mats["ground"], collection, segments=20)
-        objects.append(tag(via, "Shield perimeter ground",
-                           "VIA-FENCE CONCEPT"))
-
+    # Ground copper is supplied only by KiCad. Mechanical tabs remain concept
+    # geometry; there is no implemented PCB ground ring or via fence yet.
     for label, x in (("Left", -34.0), ("Center", 0.0), ("Right", 34.0)):
         tab = box("Shield_Chassis_Bond_" + label,
                   (x, rear_y + 0.55, z1 - 1.6), (6.0, 1.5, 2.4), 0.25,
@@ -184,33 +152,12 @@ def _shield_enclosure(mats, collection):
     return objects
 
 
-def _connector_apron(mats, collection):
-    """Mark the face/auxiliary/interaction service regions."""
-    objects = []
-    for name, x, width in (
-        ("Face_Connector_Bank", -28.0, 36.0),
-        ("Auxiliary_Connector_Bank", 0.0, 8.0),
-        ("Interaction_Connector_Bank", 28.0, 36.0),
-    ):
-        bank = box(name, (x, BOARD_Y - 0.25, CONNECTOR_Z),
-                   (width, 0.45, 4.2), 0.35, mats["bank"], collection)
-        bank["Apron_Zone"] = "Below grounded shield boundary"
-        objects.append(tag(bank, "Connector Apron",
-                           "SERVICE-ACCESS CONCEPT"))
-
-    return objects
-
-
 def build(collection):
     mats = _materials()
     objects = []
-    board = box("Main_PCBA", (0.0, BOARD_Y, BOARD_Z),
-                (BOARD["width"], BOARD["thickness"], BOARD["depth"]),
-                0.8, mats["board"], collection)
-    _cut_mounting_holes(board, mats["board"], collection, 4.0, 1.35)
-    board["EMI_Shield_Coverage"] = (
-        "All populated ICs inside full enclosure; lower apron remains outside")
-    objects.append(tag(board, "Main electronics", "REQUIRED ENVELOPE"))
+    objects += pcba_native_import.build(collection)
+    board = bpy.data.objects["Main_PCBA"]
+    tag(board, "Main electronics", "NATIVE KICAD REVIEW IMPORT - NOT VERIFIED")
     board["Study_Label"] = (
         "DeepReal Main PCBA - Preliminary Engineering Layout / Packaging Study")
 
@@ -220,10 +167,7 @@ def build(collection):
     keepout.hide_render = True
     objects.append(tag(keepout, "Main electronics", "REFERENCE RESERVE"))
 
-    objects += pcba_geometry.build(collection)
-    # Visible tracks and vias come only from the canonical KiCad export.
-    objects += pcba_kicad_geometry.build(collection)
-    objects += _connector_apron(mats, collection)
+    # Connector banks were illustrative extra PCB slabs, not KiCad geometry.
 
     objects += _shield_enclosure(mats, collection)
 
