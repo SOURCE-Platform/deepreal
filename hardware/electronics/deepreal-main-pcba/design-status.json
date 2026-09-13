@@ -8,7 +8,7 @@
   "reviewer_type": "internal digital design audit",
   "fabrication_allowed": false,
   "public_visual_allowed": false,
-  "current_public_assets": "SUPERSEDED_CONCEPT",
+  "current_public_assets": "NONE",
   "change_control": "change-register.csv",
   "authority": {
     "connectivity": "deepreal-main-pcba.kicad_sch",

@@ -1,12 +1,11 @@
 {
   "title": "DeepReal Main PCBA",
-  "historical_caption": "DeepReal Main PCBA — production-intent engineering visualization.",
   "replacement_caption": "DeepReal Main PCBA — engineering development visualization based on a pre-fabrication PCB layout.",
-  "status": "SUPERSEDED_CONCEPT — PUBLICATION PAUSED",
+  "status": "NO CURRENT PUBLIC ASSETS — PUBLICATION PAUSED",
   "public_visual_allowed": false,
   "fabrication_allowed": false,
   "electrically_routed": false,
-  "assets": [
+  "planned_assets": [
     {"name": "pcba-top", "master": "renders/deepreal-pcba-top-master.png", "web": "renders/deepreal-pcba-top-web.png"},
     {"name": "pcba-bottom", "master": "renders/deepreal-pcba-bottom-master.png", "web": "renders/deepreal-pcba-bottom-web.png"},
     {"name": "pcba-dimensioned", "master": "renders/deepreal-pcba-dimensioned-master.png", "web": "renders/deepreal-pcba-dimensioned-web.png"},

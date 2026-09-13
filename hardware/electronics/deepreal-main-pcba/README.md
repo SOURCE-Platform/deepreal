@@ -8,7 +8,7 @@
 | KiCad | 10.0.6 project created and verified |
 | Schematic | 15-page hierarchy and page contracts; circuits not yet captured |
 | PCB | 90 x 28 mm, 10-layer preliminary placement; canonical board has no routed copper |
-| Visual derivative | Superseded concept artwork; publication paused |
+| Public visualization | Not generated; publication paused |
 | Status | Engineering rebuild in progress; electrical capture and routing not complete |
 | Architecture baseline | `../../../docs/electrical/main-pcba-schematic-entry-spec-v0.1.md` |
 
@@ -25,8 +25,6 @@ v0.2 and `design-status.json` supersede older release and FPGA assumptions.
 - `deepreal-main-pcba.kicad_pcb` - canonical engineering board. Its present
   contents are the inherited placement study, but future placement and copper
   edits originate only in KiCad.
-- `deepreal-main-pcba-visual.kicad_pcb` - superseded non-fabrication concept
-  containing historical illustrative copper artwork.
 - `design-status.json` - authoritative gate state and release permissions.
 - `component-evidence.csv` - exact-source and footprint audit register.
 - `source-evidence-register.csv` - versioned official-source locations and the
@@ -39,22 +37,9 @@ v0.2 and `design-status.json` supersede older release and FPGA assumptions.
   routing.
 - `engineering-review-manifest.json` - generated evidence, blocker, and release
   inventory for the current review checkpoint.
-- `visual-layout-summary.json` - machine-readable visual status, disclaimer and
-  KiCad/Blender geometry counts.
-- `public-assets.json` - publication lock and historical asset inventory. Current
-  images are not approved for publication.
-- `renders/preliminary-placement-top.png` and `-bottom.png` - KiCad 3D previews.
-- `renders/production-intent-visual-top.png` and `-bottom.png` - KiCad views of
-  the non-fabrication presentation board.
-- `renders/deepreal-*-master.png` and `-web.png` - superseded high-resolution and
-  website-sized Blender concept assets. They are retained for history and are
-  not approved for current publication.
+- `public-assets.json` - publication lock and the names reserved for future
+  KiCad-derived output. No current PCBA image is approved for publication.
 - `scripts/generate_schematic_hierarchy.py` - deterministic hierarchy generator.
-- `scripts/generate_preliminary_board.py` - guarded historical generator; it may
-  not overwrite the canonical board during the engineering rebuild.
-- `scripts/generate_visual_board.py` - regenerates only the superseded visual
-  derivative from a snapshot of the canonical board; it does not rebuild or
-  modify canonical placement.
 - `scripts/export_kicad_design.py` - exports canonical KiCad geometry for Blender.
 - `scripts/validate_design_gates.py` and the other validators - enforce release,
   evidence, completeness, bandwidth, and no-fabrication rules.
@@ -75,19 +60,15 @@ parts are space claims, not finished circuit values.
 6. Perform the Lattice pin compile and NXP DDR-tool pass before placement is
    treated as routeable.
 
-Regenerate only the hierarchy and historical visual derivative with:
+Regenerate the hierarchy with:
 
 ```sh
 python3 scripts/generate_schematic_hierarchy.py
-/Users/adam/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3 \
-  scripts/generate_visual_board.py
 ```
 
-The superseded visual route contract is `../../../blender/pcba_visual_layout.py`.
-The historical derivative contains 99 visual trace
-paths, 103 visual vias, 10 test pads and four masked copper regions. These counts
-describe artwork, not connected electrical nets. Future Blender geometry must come
-from the canonical routed KiCad review draft instead.
+The superseded visual board, handmade trace contract, generators, and renders were
+removed from the working tree. Git history is the historical record. Future Blender
+geometry must come from the canonical routed KiCad review draft instead.
 
 The active Blender build imports component positions through
 `../../../blender/pcba_placement.py` and visible tracks/vias through
@@ -113,8 +94,8 @@ true after the engineering and visual gates pass. At that future point, rebuild 
 - `MOTOR_6V` remains disabled unless the accepted USB-PD contract is at least 9 V.
 - Every projector-enable path is hardware-default-off and interrupted by the local
   lens-integrity loop.
-- The superseded concept images must not be used for new marketing or investor
-  materials. The replacement caption is controlled by `public-assets.json`.
+- No PCBA image may be used for new marketing or investor materials until the
+  replacement passes G11. Its caption is controlled by `public-assets.json`.
 
 ## Current completion definition
 

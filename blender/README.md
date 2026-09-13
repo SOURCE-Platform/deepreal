@@ -30,8 +30,10 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   cable channels, boundary clamps, and strain relief.
 - `presentation_views.py` and `pcba_presentation.py` — full-device views plus
   five dedicated PCBA scenes made from linked canonical geometry.
-- `pcba_bom.py` and `pcba_geometry.py` — the mechanical placement contract,
-  package/footprint geometry, support population, vias, and status data.
+- `pcba_bom.py` and `pcba_geometry.py` — presentation metadata, package
+  geometry, representative support population, vias, and status data.
+- `pcba_kicad_data.py` and `pcba_kicad_geometry.py` — the one-way interface
+  from the canonical KiCad board to Blender placement and visible copper.
 - `mounting_stack.py`, `usb_port.py`, `usb_cable.py` — display attachment and
   external connection concepts.
 - `build_scene.py` — deterministic complete-scene build.
@@ -39,14 +41,14 @@ to manufacture tooling or certify optical, thermal, EMC, or safety behavior.
   board package, seating, density, keep-out, and stack validation.
 - `review_renders.py` — renders the overview and all five detail scenes for
   review and website use.
-- `pcba_visual_layout.py` and `pcba_visual_copper.py` — shared, explicitly
-  illustrative trace/via/pour contract and its Blender geometry.
 - `render_pcba_public.py` — packages six production-intent PCBA views as
   high-resolution masters and website-sized images.
-- `validate_visual_copper.py` — checks shared KiCad/Blender route counts,
-  dimensions, mounting clearance and non-fabrication metadata.
 - `deepreal.blend` and `renders/` — generated outputs; rebuild rather than
   treating manual edits as authoritative.
+
+The former handmade visual-copper modules and separate visual KiCad board were
+removed. Git history preserves them if historical comparison is ever needed;
+they no longer influence component spacing or presentation geometry.
 
 ## Build and validate
 

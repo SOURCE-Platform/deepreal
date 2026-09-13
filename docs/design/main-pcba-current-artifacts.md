@@ -37,20 +37,15 @@ These files should be used for the next schematic and 3D packaging pass:
 12. `main-pcba-usb-mechanical-options-v0.1.md` - measured 41.1 mm USB mismatch and
     the three mechanical closure options.
 
-## Superseded presentation artifacts
+## Removed presentation artifacts
 
-Publication is paused. The listed renders and illustrative-copper KiCad board are
-historical concept artifacts and are not approved for new investor, grant or website
-use. Their copper does not come from a complete schematic or netlist.
+The separate visual KiCad board, handmade copper definitions, visual-board
+generators, and superseded PCBA renders were removed from the working tree on
+13 September 2026. They did not derive from a complete schematic or netlist and no
+longer influence Blender spacing. Git history remains the historical record.
 
-1. `../../hardware/electronics/deepreal-main-pcba/deepreal-main-pcba-visual.kicad_pcb`
-   - explicitly non-fabrication visualization derivative.
-2. `../../blender/pcba_visual_layout.py` - tool-neutral visual trace, via, test-pad
-   and masked-pour coordinates shared by KiCad and Blender.
-3. `../../blender/deepreal.blend` and `../../blender/renders/` - generated Blender
-   model and public render masters; rebuild from the source scripts.
-4. `../../hardware/electronics/deepreal-main-pcba/renders/` - historical packaged
-   KiCad and Blender PCBA views; none are currently approved for publication.
+`../../blender/deepreal.blend` remains a generated mechanical/presentation output.
+Rebuild it from source; do not treat manual edits as authoritative.
 
 Replacement caption after the engineering release gate: **DeepReal Main PCBA —
 engineering development visualization based on a pre-fabrication PCB layout**.
@@ -64,8 +59,8 @@ electrical baseline:
 - `main-pcba-packaging-study-v0.1.md` - packaging study based on v0.1 mechanical
   assumptions.
 - `../research/main-pcba-feasibility-v0.1.md` - early feasibility research.
-- Superseded Blender renders without the shared visual-copper layer - historical
-  presentation geometry, not a routed board derived from a schematic/netlist.
+- Historical Blender renders are available only from Git history; they are not a
+  routed board derived from a schematic/netlist.
 
 ## Not generated yet
 
@@ -79,6 +74,6 @@ electrical baseline:
 - SI/PI, thermal, EMC, USB compliance or eye-safety test results
 - Gerbers, drill files, pick-and-place, assembly drawings or production BOM
 
-Until those items exist, the superseded board images remain paused. They must not be
-shown as a current engineering visualization or described as final, electrically
-routed or production-ready.
+Until those items exist, no current PCBA website image exists. A replacement must
+not be shown or described as final, electrically routed, or production-ready until
+the applicable gates pass.
