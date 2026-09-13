@@ -1,0 +1,180 @@
+{
+  "schema": "deepreal.pcba.design-status.v1",
+  "design": "DeepReal Main PCBA",
+  "design_revision": "ERD-0.1",
+  "baseline_commit": "0264d2b",
+  "status": "ENGINEERING_REBUILD_IN_PROGRESS",
+  "last_reviewed": "2026-09-13",
+  "reviewer_type": "internal digital design audit",
+  "fabrication_allowed": false,
+  "public_visual_allowed": false,
+  "current_public_assets": "SUPERSEDED_CONCEPT",
+  "change_control": "change-register.csv",
+  "authority": {
+    "connectivity": "deepreal-main-pcba.kicad_sch",
+    "placement_and_copper": "deepreal-main-pcba.kicad_pcb",
+    "presentation_geometry": "engineering-layout-export.json"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Concept freeze and classification",
+      "status": "PASS",
+      "depends_on": [],
+      "responsible_disciplines": ["electrical/PCB lead", "visualization lead"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal artifact audit",
+      "required_evidence": ["publication lock", "artifact classification"],
+      "evidence": ["public-assets.json", "docs/design/main-pcba-current-artifacts.md"],
+      "blockers": []
+    },
+    {
+      "id": "G1",
+      "name": "Electrical and product requirements",
+      "status": "PASS",
+      "depends_on": ["G0"],
+      "responsible_disciplines": ["electrical/PCB lead", "firmware engineer", "optical/safety engineer"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal requirements review",
+      "required_evidence": ["measurable electrical and product requirements", "explicit open assumptions"],
+      "evidence": ["docs/electrical/main-pcba-engineering-requirements-v0.2.md"],
+      "blockers": []
+    },
+    {
+      "id": "G2",
+      "name": "Verified component evidence library",
+      "status": "IN_PROGRESS",
+      "depends_on": ["G1"],
+      "responsible_disciplines": ["electrical/PCB lead", "independent footprint reviewer"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "automated coverage audit; independent pad audit pending",
+      "required_evidence": ["exact orderable parts", "official pin sources", "audited symbols and footprints", "source revisions"],
+      "evidence": ["component-evidence.csv", "pinmap-gates.csv", "source-evidence-register.csv"],
+      "blockers": [
+        "Several exact symbols and land patterns are not audited",
+        "Current placement board contains known footprint substitutions",
+        "U21/U22, D9, J4/J5, Y1/Y2 and J6 selections remain open"
+      ]
+    },
+    {
+      "id": "G3",
+      "name": "Camera and FPGA architecture",
+      "status": "BLOCKED",
+      "depends_on": ["G1", "G2"],
+      "responsible_disciplines": ["FPGA engineer", "electrical/PCB lead", "firmware engineer"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal bandwidth audit; FPGA tool review pending",
+      "required_evidence": ["zero/one/two topology comparison", "Radiant projects", "legal package pins", "timing/resource/power reports"],
+      "evidence": [
+        "docs/research/main-pcba-fpga-topology-study-v0.2.md",
+        "camera-bandwidth.json"
+      ],
+      "blockers": [
+        "Radiant is not available natively on the current macOS host; a supported Windows/Linux host and license setup are required",
+        "One-versus-two FPGA legal I/O and timing comparison is incomplete"
+      ]
+    },
+    {
+      "id": "G4",
+      "name": "Mechanical and flex geometry",
+      "status": "BLOCKED",
+      "depends_on": ["G1"],
+      "responsible_disciplines": ["mechanical engineer", "electrical/PCB lead"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal coordinate audit; mechanical approval pending",
+      "required_evidence": ["shared coordinate system", "USB mating geometry", "mount/shield/thermal/flex clearance"],
+      "evidence": ["docs/design/main-pcba-usb-mechanical-options-v0.1.md", "docs/electrical/main-pcba-schematic-capture-status-v0.1.md"],
+      "blockers": [
+        "USB-C receptacle is 41.1 mm from the modeled housing opening",
+        "Selected CX90M3-24P lists 0.8 mm maximum recommended PCB thickness versus the 1.6 mm board candidate"
+      ]
+    },
+    {
+      "id": "G5",
+      "name": "Optical-head and flex interface",
+      "status": "IN_PROGRESS",
+      "depends_on": ["G1", "G2", "G4"],
+      "responsible_disciplines": ["electrical/PCB lead", "optical/safety engineer", "flex/PCB specialist"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal interface review; vendor SI/fatigue review pending",
+      "required_evidence": ["head circuitry", "safe-default interlock", "exact connector pinout", "flex current/SI/bend validation"],
+      "evidence": ["../deepreal-optical-head/README.md", "connector-allocation.csv"],
+      "blockers": ["Exact flex construction, contact orientation and SI review are open"]
+    },
+    {
+      "id": "G6",
+      "name": "Complete schematic and netlist",
+      "status": "BLOCKED",
+      "depends_on": ["G2", "G3", "G5"],
+      "responsible_disciplines": ["electrical/PCB lead", "FPGA engineer", "firmware engineer"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "automated sheet-content audit",
+      "required_evidence": ["15 populated sheets", "audited pin mappings", "ERC", "BOM draft", "approved netlist"],
+      "evidence": ["sheet-plan.csv", "circuit-specification.md"],
+      "blockers": ["All 14 functional sheets are note-only placeholders"]
+    },
+    {
+      "id": "G7",
+      "name": "Stack-up and encoded constraints",
+      "status": "IN_PROGRESS",
+      "depends_on": ["G2", "G3", "G4", "G5"],
+      "responsible_disciplines": ["electrical/PCB lead", "HDI fabricator or PCB specialist"],
+      "review_date": "2026-09-13",
+      "reviewer_type": "internal feasibility assumption; fabricator review pending",
+      "required_evidence": ["candidate stack-up", "impedance geometries", "via capability", "encoded KiCad net classes and rules"],
+      "evidence": ["deepreal-main-pcba.kicad_dru", "preliminary-stackup.json"],
+      "blockers": ["Fabricator stack-up and critical net-class rules are not approved"]
+    },
+    {
+      "id": "G8",
+      "name": "Pin-driven placement",
+      "status": "BLOCKED",
+      "depends_on": ["G2", "G3", "G4", "G5", "G6", "G7"],
+      "responsible_disciplines": ["electrical/PCB lead", "mechanical engineer"],
+      "review_date": null,
+      "reviewer_type": "not reviewed",
+      "required_evidence": ["pin-justified orientations", "exact courtyards", "mechanical and assembly clearance"],
+      "evidence": ["deepreal-main-pcba.kicad_pcb"],
+      "blockers": [
+        "G2, G3, G4, G5, G6 and G7 must close first",
+        "SW1 is registered but absent from the inherited canonical placement board"
+      ]
+    },
+    {
+      "id": "G9",
+      "name": "Critical-route feasibility and size decision",
+      "status": "NOT_STARTED",
+      "depends_on": ["G8"],
+      "responsible_disciplines": ["electrical/PCB lead", "independent high-speed reviewer", "mechanical engineer"],
+      "review_date": null,
+      "reviewer_type": "not reviewed",
+      "required_evidence": ["DDR/MIPI/USB/eMMC/power critical routes", "constraint reports", "board-size decision report"],
+      "evidence": [],
+      "blockers": ["Requires approved netlist, stack-up and placement"]
+    },
+    {
+      "id": "G10",
+      "name": "Complete routed engineering review draft",
+      "status": "NOT_STARTED",
+      "depends_on": ["G9"],
+      "responsible_disciplines": ["electrical/PCB lead", "independent high-speed reviewer"],
+      "review_date": null,
+      "reviewer_type": "not reviewed",
+      "required_evidence": ["complete intended routing", "ERC/DRC/connectivity reports", "thermal/mechanical/BOM review"],
+      "evidence": [],
+      "blockers": ["Requires G9"]
+    },
+    {
+      "id": "G11",
+      "name": "KiCad-derived Blender visualization and website release",
+      "status": "BLOCKED",
+      "depends_on": ["G10"],
+      "responsible_disciplines": ["visualization lead", "electrical/PCB lead"],
+      "review_date": null,
+      "reviewer_type": "not reviewed",
+      "required_evidence": ["deterministic KiCad export", "0.1 mm geometry agreement", "full-resolution visual QA", "approved public manifest"],
+      "evidence": [],
+      "blockers": ["Requires G10 and visual QA"]
+    }
+  ]
+}

@@ -8,12 +8,12 @@
 	)
 	(paper "A4")
 	(title_block
-		(title "DeepReal Main PCBA — PRODUCTION-INTENT VISUALIZATION")
+		(title "DeepReal Main PCBA — SUPERSEDED CONCEPT")
 		(rev "0.3-visual")
 		(company "DeepReal")
 		(comment 1 "90 x 28 mm; illustrative surface copper")
 		(comment 2 "NOT ELECTRICALLY ROUTED / NOT FOR FABRICATION")
-		(comment 3 "Website and investor presentation artifact only")
+		(comment 3 "PUBLICATION PAUSED - HISTORICAL ARTIFACT ONLY")
 	)
 	(layers
 		(0 "F.Cu" signal)
@@ -52560,7 +52560,7 @@
 		(layer "Edge.Cuts")
 		(uuid "efce03a1-9709-4b66-8c2e-919992ab4612")
 	)
-	(gr_text "PRODUCTION-INTENT VISUALIZATION"
+	(gr_text "SUPERSEDED CONCEPT - PUBLICATION PAUSED"
 		(at 65 46.6 0)
 		(layer "F.SilkS")
 		(uuid "37a0cfcc-a6f9-404b-b74b-35d24974c24a")

@@ -1,7 +1,9 @@
 {
   "title": "DeepReal Main PCBA",
-  "approved_caption": "DeepReal Main PCBA — production-intent engineering visualization.",
-  "status": "investor and website presentation only",
+  "historical_caption": "DeepReal Main PCBA — production-intent engineering visualization.",
+  "replacement_caption": "DeepReal Main PCBA — engineering development visualization based on a pre-fabrication PCB layout.",
+  "status": "SUPERSEDED_CONCEPT — PUBLICATION PAUSED",
+  "public_visual_allowed": false,
   "fabrication_allowed": false,
   "electrically_routed": false,
   "assets": [

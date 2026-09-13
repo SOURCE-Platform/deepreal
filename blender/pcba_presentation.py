@@ -6,7 +6,8 @@ import bpy
 from mathutils import Matrix, Vector
 
 from assembly_primitives import box, material, tag, wire
-from pcba_bom import ALL_PARTS, BOARD
+from pcba_bom import BOARD
+from pcba_placement import ENGINEERING_PARTS
 import presentation_views as pv
 
 
@@ -83,7 +84,7 @@ def _board_view(name, prefix, front):
     scene.render.resolution_y = 1440
     _clone_pcba(scene, prefix)
     labels = pv._collection(scene, prefix + " Labels")
-    _text(labels, "DEEPREAL MAIN PCBA - {} SIDE - PRODUCTION-INTENT VISUALIZATION".format(side.upper()),
+    _text(labels, "DEEPREAL MAIN PCBA - {} SIDE - ENGINEERING REBUILD / NOT FOR PUBLICATION".format(side.upper()),
           0, 9.5 if front else 23.0, 6.5, 1.75, front=front)
     _ortho_rig(scene, prefix, front=front, scale=125, target_z=-9.5)
     return scene
@@ -131,8 +132,8 @@ def _identification_view():
     labels = pv._collection(scene, "ID Labels")
     _text(labels, "TOP / FRONT", -55, 8.0, 13.0, 1.8)
     _text(labels, "BOTTOM / REAR", 55, 8.0, 13.0, 1.8)
-    top_parts = [p for p in ALL_PARTS if p["side"] == "TOP"]
-    bottom_parts = [p for p in ALL_PARTS if p["side"] == "BOTTOM"]
+    top_parts = [p for p in ENGINEERING_PARTS if p["side"] == "TOP"]
+    bottom_parts = [p for p in ENGINEERING_PARTS if p["side"] == "BOTTOM"]
     for column, parts, x in ((0, top_parts, -110), (1, bottom_parts, 10)):
         for index, part in enumerate(parts):
             z = -34.0 - index * 2.35

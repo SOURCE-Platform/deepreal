@@ -6,7 +6,7 @@ from mathutils import Vector
 from assembly_primitives import box, cylinder, material, tag
 from pcba_bom import BOARD
 import pcba_geometry
-import pcba_visual_copper
+import pcba_kicad_geometry
 
 
 BOARD_Y = BOARD["center_y"]
@@ -221,7 +221,8 @@ def build(collection):
     objects.append(tag(keepout, "Main electronics", "REFERENCE RESERVE"))
 
     objects += pcba_geometry.build(collection)
-    objects += pcba_visual_copper.build(collection)
+    # Visible tracks and vias come only from the canonical KiCad export.
+    objects += pcba_kicad_geometry.build(collection)
     objects += _connector_apron(mats, collection)
 
     objects += _shield_enclosure(mats, collection)

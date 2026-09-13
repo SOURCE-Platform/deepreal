@@ -13,7 +13,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
-from pcba_bom import ALL_PARTS, BOARD
+from pcba_bom import BOARD
+from pcba_placement import ENGINEERING_PARTS
 
 
 VALID_STATUS = {
@@ -98,7 +99,7 @@ def main():
             failures.append("board dimensions {} != {} mm".format(got, expected))
 
         part_objects = []
-        for part in ALL_PARTS:
+        for part in ENGINEERING_PARTS:
             obj = bpy.data.objects.get(part["name"])
             if not obj:
                 failures.append("missing mechanical BOM part " + part["name"])

@@ -1,11 +1,9 @@
 # DeepReal Main PCBA - Architecture Input Decisions v0.1
 
-> **Status note (12 September 2026):** This research decision record is preserved
-> for traceability. The newer
-> `../electrical/main-pcba-schematic-entry-spec-v0.1.md` is authoritative for
-> schematic entry. It retains the selected sensors and two-FPGA topology, and moves
-> the AS1170 circuits and local optical-head regulators onto two internal head
-> carriers after the flex-current and pulse-loop review.
+> **Superseded status note (13 September 2026):** This record is preserved for
+> traceability, but its two-FPGA decision has been reopened. Requirements v0.2 and
+> `main-pcba-fpga-topology-study-v0.2.md` are authoritative. Zero FPGA is presently
+> rejected; one versus two devices requires legal Radiant compile and timing data.
 
 | Field | Value |
 | --- | --- |

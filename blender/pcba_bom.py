@@ -1,8 +1,8 @@
-"""Electrical-baseline population for the preliminary Main PCBA.
+"""Presentation metadata for the preliminary Main PCBA population.
 
-Coordinates are millimetres in the established board X/Z plane. ``height`` is
-normal to the PCB. This is a placement/packaging contract, not routed copper.
-Source: docs/design/main-pcba-mechanical-bom-v0.2.csv.
+Dimensions, names, and material metadata remain useful to Blender. Coordinates
+are historical fallbacks only; active engineering placement is merged from the
+canonical KiCad export by ``pcba_placement.py``.
 """
 
 BOARD = {
@@ -142,7 +142,7 @@ HEAD_CONNECTORS = (
 OTHER_CONNECTORS = (
     _part("USB_C_Receptacle", "J1", "Hirose", "CX90M3-24P",
           "Mid-mount USB Type-C", 7.85, 12.0, 3.16,
-          41.075, -11.5, "TOP", "BASELINE", "USB-C power/data",
+          41.075, -11.5, "TOP", "MECHANICAL_GATE", "USB-C power/data",
           "Hirose drawing", "Hirose official STEP"),
     _part("Face_Motor_Encoder", "J4", "TBD", "6-position low-profile",
           "Reserved", 5.0, 2.6, 1.2, -34.0, -23.7, "TOP", "RESERVED",

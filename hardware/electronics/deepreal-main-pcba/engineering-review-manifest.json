@@ -1,0 +1,185 @@
+{
+  "schema": "deepreal.pcba.engineering-review-manifest.v1",
+  "design_revision": "ERD-0.1",
+  "design_status": "ENGINEERING_REBUILD_IN_PROGRESS",
+  "fabrication_allowed": false,
+  "public_visual_allowed": false,
+  "approved_caption": "DeepReal Main PCBA \u2014 engineering development visualization based on a pre-fabrication PCB layout.",
+  "gate_status": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "IN_PROGRESS",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "IN_PROGRESS",
+    "G6": "BLOCKED",
+    "G7": "IN_PROGRESS",
+    "G8": "BLOCKED",
+    "G9": "NOT_STARTED",
+    "G10": "NOT_STARTED",
+    "G11": "BLOCKED"
+  },
+  "evidence_inventory": [
+    {
+      "gate": "G0",
+      "path": "public-assets.json",
+      "exists": true
+    },
+    {
+      "gate": "G0",
+      "path": "docs/design/main-pcba-current-artifacts.md",
+      "exists": true
+    },
+    {
+      "gate": "G1",
+      "path": "docs/electrical/main-pcba-engineering-requirements-v0.2.md",
+      "exists": true
+    },
+    {
+      "gate": "G2",
+      "path": "component-evidence.csv",
+      "exists": true
+    },
+    {
+      "gate": "G2",
+      "path": "pinmap-gates.csv",
+      "exists": true
+    },
+    {
+      "gate": "G2",
+      "path": "source-evidence-register.csv",
+      "exists": true
+    },
+    {
+      "gate": "G3",
+      "path": "docs/research/main-pcba-fpga-topology-study-v0.2.md",
+      "exists": true
+    },
+    {
+      "gate": "G3",
+      "path": "camera-bandwidth.json",
+      "exists": true
+    },
+    {
+      "gate": "G4",
+      "path": "docs/design/main-pcba-usb-mechanical-options-v0.1.md",
+      "exists": true
+    },
+    {
+      "gate": "G4",
+      "path": "docs/electrical/main-pcba-schematic-capture-status-v0.1.md",
+      "exists": true
+    },
+    {
+      "gate": "G5",
+      "path": "../deepreal-optical-head/README.md",
+      "exists": true
+    },
+    {
+      "gate": "G5",
+      "path": "connector-allocation.csv",
+      "exists": true
+    },
+    {
+      "gate": "G6",
+      "path": "sheet-plan.csv",
+      "exists": true
+    },
+    {
+      "gate": "G6",
+      "path": "circuit-specification.md",
+      "exists": true
+    },
+    {
+      "gate": "G7",
+      "path": "deepreal-main-pcba.kicad_dru",
+      "exists": true
+    },
+    {
+      "gate": "G7",
+      "path": "preliminary-stackup.json",
+      "exists": true
+    },
+    {
+      "gate": "G8",
+      "path": "deepreal-main-pcba.kicad_pcb",
+      "exists": true
+    }
+  ],
+  "missing_evidence_files": [],
+  "deferred_release_outputs": [
+    "Gerbers",
+    "drill files",
+    "stencil",
+    "pick-and-place",
+    "assembly release drawing",
+    "production BOM"
+  ],
+  "known_blockers": [
+    {
+      "gate": "G2",
+      "items": [
+        "Several exact symbols and land patterns are not audited",
+        "Current placement board contains known footprint substitutions",
+        "U21/U22, D9, J4/J5, Y1/Y2 and J6 selections remain open"
+      ]
+    },
+    {
+      "gate": "G3",
+      "items": [
+        "Radiant is not available natively on the current macOS host; a supported Windows/Linux host and license setup are required",
+        "One-versus-two FPGA legal I/O and timing comparison is incomplete"
+      ]
+    },
+    {
+      "gate": "G4",
+      "items": [
+        "USB-C receptacle is 41.1 mm from the modeled housing opening",
+        "Selected CX90M3-24P lists 0.8 mm maximum recommended PCB thickness versus the 1.6 mm board candidate"
+      ]
+    },
+    {
+      "gate": "G5",
+      "items": [
+        "Exact flex construction, contact orientation and SI review are open"
+      ]
+    },
+    {
+      "gate": "G6",
+      "items": [
+        "All 14 functional sheets are note-only placeholders"
+      ]
+    },
+    {
+      "gate": "G7",
+      "items": [
+        "Fabricator stack-up and critical net-class rules are not approved"
+      ]
+    },
+    {
+      "gate": "G8",
+      "items": [
+        "G2, G3, G4, G5, G6 and G7 must close first",
+        "SW1 is registered but absent from the inherited canonical placement board"
+      ]
+    },
+    {
+      "gate": "G9",
+      "items": [
+        "Requires approved netlist, stack-up and placement"
+      ]
+    },
+    {
+      "gate": "G10",
+      "items": [
+        "Requires G9"
+      ]
+    },
+    {
+      "gate": "G11",
+      "items": [
+        "Requires G10 and visual QA"
+      ]
+    }
+  ]
+}

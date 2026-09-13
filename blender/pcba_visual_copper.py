@@ -1,4 +1,8 @@
-"""Blender geometry for the shared production-intent copper artwork."""
+"""Superseded handmade copper artwork retained only for history.
+
+Do not import this module into a public or engineering scene. Canonical visible
+copper is built by ``pcba_kicad_geometry.py`` from the KiCad export.
+"""
 
 import math
 

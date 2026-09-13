@@ -7,7 +7,7 @@
 | Electrical designs | Main PCBA plus one reusable optical-head carrier |
 | EDA state | KiCad project and 15-page hierarchy exist; circuits and vendor pin maps remain incomplete |
 | 3D synchronization | Shared placement and visual-copper contract mechanically validated |
-| Presentation state | Production-intent KiCad/Blender visualization complete; not for fabrication |
+| Presentation state | Previous visualization superseded; publication paused |
 
 ## Generated in this pass
 
@@ -69,10 +69,11 @@ housing/PCBA arrangement is presented as mechanically final.
 
 ## Presentation release status
 
-The board may be published using the caption **DeepReal Main PCBA —
-production-intent engineering visualization**. It must not be called final,
-electrically routed, validated or manufacturing-ready. The visualization KiCad file
-must never be exported as Gerbers.
+The current board images may not be published as a current engineering visualization.
+They are preserved as superseded concepts. A replacement may be released only after
+the gate state in `design-status.json` permits it and its geometry comes from the
+canonical KiCad review draft. The visualization KiCad file must never be exported as
+Gerbers.
 
 ## Next manufacturing gate
 

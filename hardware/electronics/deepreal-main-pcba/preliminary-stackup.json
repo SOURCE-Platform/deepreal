@@ -1,0 +1,46 @@
+{
+  "schema": "deepreal.pcba.preliminary-stackup.v1",
+  "status": "UNAPPROVED_FEASIBILITY_ASSUMPTION",
+  "routing_allowed": false,
+  "fabricator_reviewed": false,
+  "board_thickness_mm": 1.6,
+  "layer_count": 10,
+  "layers": [
+    {"index": 1, "name": "F.Cu", "intent": "components and short signal escape"},
+    {"index": 2, "name": "In1.Cu", "intent": "continuous ground reference"},
+    {"index": 3, "name": "In2.Cu", "intent": "high-speed signals"},
+    {"index": 4, "name": "In3.Cu", "intent": "power distribution"},
+    {"index": 5, "name": "In4.Cu", "intent": "high-speed signals"},
+    {"index": 6, "name": "In5.Cu", "intent": "high-speed signals"},
+    {"index": 7, "name": "In6.Cu", "intent": "power distribution"},
+    {"index": 8, "name": "In7.Cu", "intent": "signals"},
+    {"index": 9, "name": "In8.Cu", "intent": "continuous ground reference"},
+    {"index": 10, "name": "B.Cu", "intent": "components and short signal escape"}
+  ],
+  "unresolved_fabrication_parameters": [
+    "copper weights",
+    "dielectric materials and thicknesses",
+    "finished impedance geometries",
+    "laser microvia dimensions and aspect ratios",
+    "buried-via span",
+    "filled and capped via-in-pad capability",
+    "minimum production trace width and spacing",
+    "final finished board-thickness tolerance"
+  ],
+  "critical_classes": [
+    {"name": "LPDDR4X", "target_ohms": null, "geometry_status": "NXP_DDR_RULES_REQUIRED"},
+    {"name": "MIPI_DPHY", "target_diff_ohms": 100, "geometry_status": "FIELD_SOLVER_REQUIRED"},
+    {"name": "USB_SUPERSPEED", "target_diff_ohms": 90, "geometry_status": "FIELD_SOLVER_REQUIRED"},
+    {"name": "USB2", "target_diff_ohms": 90, "geometry_status": "FIELD_SOLVER_REQUIRED"},
+    {"name": "EMMC", "target_ohms": null, "geometry_status": "DEVICE_RULES_REQUIRED"},
+    {"name": "CLOCK", "target_ohms": null, "geometry_status": "SOURCE_RULES_REQUIRED"},
+    {"name": "POWER", "target_ohms": null, "geometry_status": "CURRENT_AND_DROP_CALC_REQUIRED"}
+  ],
+  "via_assumptions": {
+    "through_vias": "expected",
+    "laser_microvias": "provisional L1-L2 and L10-L9",
+    "buried_vias": "candidate only",
+    "via_in_pad": "candidate for 0.5 mm BGA escape; filled/capped process required"
+  },
+  "release_rule": "No critical routing may be accepted until a fabricator or PCB specialist supplies a compatible stack-up and the calculated geometries are encoded in KiCad."
+}

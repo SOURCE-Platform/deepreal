@@ -1,0 +1,37 @@
+{
+  "schema": "deepreal.camera-bandwidth.v1",
+  "simultaneous_heads": 2,
+  "engineering_margin": 0.25,
+  "streams_per_head": [
+    {
+      "name": "RGB",
+      "width": 1920,
+      "height": 1080,
+      "frames_per_second": 50,
+      "bits_per_pixel": 10,
+      "sensor_lanes": 2
+    },
+    {
+      "name": "IR",
+      "width": 1600,
+      "height": 1400,
+      "frames_per_second": 60,
+      "bits_per_pixel": 10,
+      "sensor_lanes": 2
+    }
+  ],
+  "candidate_outputs": [
+    {
+      "name": "one_fpga_one_output",
+      "output_count": 1,
+      "lanes_per_output": 4,
+      "maximum_lane_rate_gbps": 2.5
+    },
+    {
+      "name": "two_fpga_two_outputs",
+      "output_count": 2,
+      "lanes_per_output": 4,
+      "maximum_lane_rate_gbps": 2.5
+    }
+  ]
+}

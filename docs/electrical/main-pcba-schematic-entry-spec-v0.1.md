@@ -1,5 +1,10 @@
 # DeepReal Main PCBA - Schematic Entry Specification v0.1
 
+> **Superseded architecture note (13 September 2026):** Use this document as source
+> evidence, not as permission to freeze two FPGAs or begin pin-driven layout. The
+> authoritative requirements are in `main-pcba-engineering-requirements-v0.2.md`;
+> FPGA count remains open in the v0.2 topology study until compile evidence exists.
+
 | Field | Value |
 | --- | --- |
 | Date | 12 September 2026 |

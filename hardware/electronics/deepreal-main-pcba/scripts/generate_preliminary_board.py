@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Generate the placement-only DeepReal Main PCBA KiCad board.
+"""Historical Blender-driven placement generator for the Main PCBA.
 
-This is intentionally not a routed production board. Footprints marked
-``PROVISIONAL`` are mechanical proxies until vendor land patterns and pin maps
-are audited. The script uses KiCad's own footprint libraries and pcbnew API.
+The canonical KiCad board superseded this source direction. Direct execution is
+guarded because it would overwrite the engineering placement with concept data.
 """
 
 from pathlib import Path
@@ -275,6 +274,12 @@ def build_board():
 
 
 if __name__ == "__main__":
+    if "--allow-overwrite-canonical-concept" not in sys.argv:
+        raise SystemExit(
+            "REFUSED: this superseded generator would overwrite the canonical "
+            "KiCad board. Pass --allow-overwrite-canonical-concept only when "
+            "deliberately restoring the historical placement study."
+        )
     major, capacitors, resistors = build_board()
     print(f"Generated {OUTPUT}")
     print(f"Placed {major} major/support packages, {capacitors} capacitor proxies, {resistors} resistor proxies")

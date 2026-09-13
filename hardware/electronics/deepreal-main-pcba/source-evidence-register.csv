@@ -1,0 +1,20 @@
+Source_id,Applies_to,Authority,Document_or_page,Revision_or_date,Location,State,Closure_use
+SRC-IMX95-PRODUCT,U1,NXP,i.MX95 product page,accessed 2026-09-13,https://www.nxp.com/products/i.MX95,IDENTIFIED_NOT_AUDITED,processor feature and interface baseline
+SRC-IMX95-DS,U1,NXP,i.MX95 industrial data sheet IMX95IEC,Rev 8,https://www.nxp.com/docs/en/data-sheet/IMX95IEC.pdf,IDENTIFIED_NOT_AUDITED,orderable device package and public pin evidence
+SRC-PF09,U5,NXP,PF09 data sheet,current public revision,https://www.nxp.com/docs/en/data-sheet/PF09.pdf,IDENTIFIED_NOT_AUDITED,power symbol and rail allocation
+SRC-PF09-HWG,U5,NXP,PF09 hardware guidelines AN14910,current public revision,https://www.nxp.com/docs/en/application-note/AN14910.pdf,IDENTIFIED_NOT_AUDITED,power layout and external circuitry
+SRC-PF53,U6-U7,NXP,PF53 product and ordering data,accessed 2026-09-13,https://www.nxp.com/products/PF53,IDENTIFIED_NOT_AUDITED,package and regulator selection
+SRC-CROSSLINKNX,U2-U3,Lattice,CrossLink-NX product page,accessed 2026-09-13,https://www.latticesemi.com/CrossLinkNX,IDENTIFIED_NOT_AUDITED,device/package/interface baseline
+SRC-LIFCL17-PINOUT,U2-U3,Lattice,CrossLink-NX LIFCL-17 pinout FPGA-SC-02006,0.92 2020-10-26,https://www.latticesemi.com/CrossLinkNX,COMPILE_REQUIRED,package pin source before Radiant assignment
+SRC-CROSSLINK-VC,U2-U3,Lattice,MIPI CSI-2 virtual-channel aggregation reference,current public page,https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/ReferenceDesigns/ReferenceDesign04/Nto1,REFERENCE_ONLY,topology feasibility; not a DeepReal compile
+SRC-RADIANT,U2-U3,Lattice,Radiant FPGA design software,2026.1,https://www.latticesemi.com/Radiant,HOST_REQUIRED,legal pin timing resource and power reports
+SRC-LPDDR,U4,Micron,LPDDR4 part catalog,accessed 2026-09-13,https://www.micron.com/products/memory/lpddr-components/lpddr4/part-catalog,CONTROLLED_DATA_REQUIRED,exact pin map and package source
+SRC-EMMC,U15,Micron,e.MMC part catalog,accessed 2026-09-13,https://www.micron.com/products/storage/managed-nand/emmc/part-catalog,CONTROLLED_DATA_REQUIRED,exact pin map and package source
+SRC-J1,J1,Hirose,CX90M3-24P CL0480-0919-0-00 product record,specifications updated 2026-06-19,https://www.hirose.com/product/p/CL0480-0919-0-00,MECHANICAL_CONFLICT,drawing footprint PCB thickness and connector geometry
+SRC-J1-STEP,J1,Hirose,CX90M3-24P manufacturer STEP,retrieved 2026-09-10,blender/vendor_cad/hirose/README.md,RETRIEVED_PROVENANCE,mechanical envelope only
+SRC-J2-J3,J2-J3,Hirose,FH26 series connector catalog,current public catalog,https://www.hirose.com/en/product/document?clcode=CL0580-2413-0-60&documentid=D49355_en&documenttype=Catalog&lang=en&series=FH26,ORIENTATION_REQUIRED,land pattern contact numbering and flex mating
+SRC-RGB,H1-H2/RGB,Raspberry Pi,Camera Module 3 sensor assembly product brief,current public revision,https://datasheets.raspberrypi.com/camera/sensor-assembly-product-brief.pdf,REFERENCE_BASELINE,optical-head RGB assembly baseline
+SRC-RGB-SCH,H1-H2/RGB,Raspberry Pi,Camera Module 3 reference schematic,current public revision,https://pip-assets.raspberrypi.com/categories/1207-design-files/documents/RP-008969-SD-3-Raspberry%20Pi%20Camera%20Module%203%20Reference%20Schematic.pdf,REFERENCE_BASELINE,optical-head RGB support circuit
+SRC-MIRA220,H1-H2/IR,ams OSRAM,Mira220 public data sheet,current public revision,https://look.ams-osram.com/m/7591efdbe4af32dc/original/Mira220-1-2-7-2-2-MP-NIR-enhanced-global-shutter-image-sensor.pdf,PIN_AUDIT_REQUIRED,optical-head IR interface and sequencing
+SRC-BELAGO,H1-H2/PROJECTOR,ams OSRAM,Belago1.2 public data sheet,current public revision,https://look.ams-osram.com/m/4971b838d6356daa/original/Belago1-2-Dot-pattern-infrared-illuminator.pdf,SAFETY_REVIEW_REQUIRED,projector electrical and optical limits
+SRC-AS1170,H1-H2/PROJECTOR,ams OSRAM,AS1170 product page,accessed 2026-09-13,https://ams-osram.com/products/drivers/led-drivers/ams-as1170-2-channel-led-and-vcsel-driver-ic,SAFETY_REVIEW_REQUIRED,projector driver baseline

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Generate the non-fabrication KiCad board used for website visualization.
+"""Regenerate the superseded non-fabrication KiCad concept board.
 
-The canonical engineering board stays placement-only.  This derivative adds
-the shared illustrative copper from Blender's visual layout contract.
+The canonical engineering board stays placement-only. This historical derivative
+must never be used for publication or fabrication.
 """
 
 import json
@@ -21,7 +21,7 @@ REPO_ROOT = PROJECT_DIR.parents[2]
 sys.path.insert(0, str(REPO_ROOT / "blender"))
 sys.path.insert(0, str(HERE))
 
-from generate_preliminary_board import build_board, mm, point  # noqa: E402
+from generate_preliminary_board import mm, point  # noqa: E402
 from pcba_visual_layout import (  # noqa: E402
     DISCLAIMER, POURS, TEST_PADS, TRACE_GROUPS, VIAS,
 )
@@ -73,7 +73,7 @@ def add_via(board, x, z, width=0.52, drill=0.24):
 def replace_board_labels(board):
     replacements = {
         "PRELIMINARY PLACEMENT — NOT FOR FABRICATION":
-            "PRODUCTION-INTENT VISUALIZATION",
+            "SUPERSEDED CONCEPT - PUBLICATION PAUSED",
         "UNROUTED: vendor pin maps + FPGA + DDR gates open":
             "ILLUSTRATIVE COPPER - NOT FOR FABRICATION",
     }
@@ -87,7 +87,7 @@ def replace_board_labels(board):
 def write_summary(trace_count):
     payload = {
         "artifact": OUTPUT.name,
-        "status": "production-intent engineering visualization",
+        "status": "superseded concept - publication paused",
         "fabrication_allowed": False,
         "disclaimer": DISCLAIMER,
         "board_mm": [90.0, 28.0, 1.6],
@@ -103,15 +103,16 @@ def write_summary(trace_count):
 
 
 def build_visual_board():
-    build_board()
+    # Deliberately do not call the old Blender-driven placement generator here.
+    # The canonical KiCad board is now the only placement authority.
     board = pcbnew.LoadBoard(str(SOURCE))
     board.SetFileName(str(OUTPUT))
     title = board.GetTitleBlock()
-    title.SetTitle("DeepReal Main PCBA — PRODUCTION-INTENT VISUALIZATION")
+    title.SetTitle("DeepReal Main PCBA — SUPERSEDED CONCEPT")
     title.SetRevision("0.3-visual")
     title.SetComment(0, "90 x 28 mm; illustrative surface copper")
     title.SetComment(1, "NOT ELECTRICALLY ROUTED / NOT FOR FABRICATION")
-    title.SetComment(2, "Website and investor presentation artifact only")
+    title.SetComment(2, "PUBLICATION PAUSED - HISTORICAL ARTIFACT ONLY")
     board.SetTitleBlock(title)
     replace_board_labels(board)
 

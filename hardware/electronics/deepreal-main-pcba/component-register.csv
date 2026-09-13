@@ -1,5 +1,5 @@
 Ref,Function,Selected_part,Side,Package_status,Support_population,Electrical_state
-J1,USB-C receptacle,Hirose CX90M3-24P,Top,VERIFIED_DRAWING,"shell bonds; CC and data protection",DEFINED
+J1,USB-C receptacle,Hirose CX90M3-24P,Top,MECHANICAL_CONFLICT,"shell bonds; CC and data protection",BLOCKED
 U10,VBUS eFuse,TI TPS259472LRPWR,Top,VERIFY_LAND_PATTERN,"ILIM; dVdt; IMON; bypass caps",DEFINED
 U11,USB-PD sink,Infineon CYPD3177-24LQXQ,Top,VERIFY_LAND_PATTERN,"CC network; configuration; HPI; decoupling",DEFINED
 D1,USB SuperSpeed ESD,TI TPD4EUSB30DQAR,Bottom,SI_REVIEW,"ground vias at device",DEFINED

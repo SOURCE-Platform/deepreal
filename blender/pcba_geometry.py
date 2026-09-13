@@ -1,5 +1,4 @@
 """Dimensioned two-sided population for the Main PCBA packaging study."""
-
 import math
 import os
 
@@ -7,7 +6,8 @@ import bpy
 from mathutils import Matrix, Vector
 
 from assembly_primitives import MM, box, cylinder, material, tag, tube
-from pcba_bom import ALL_PARTS, BOARD, PLANNING_ZONES
+from pcba_bom import BOARD, PLANNING_ZONES
+from pcba_placement import ENGINEERING_PARTS
 from pcba_visual_layout import visual_route_keepout
 EVIDENCE_SUPPORT = "REPRESENTATIVE SUPPORT POPULATION - SCHEMATIC NOT FROZEN"
 def _materials():
@@ -189,7 +189,7 @@ def _major_population(mats, collection):
         "LPDDR4X_4GB": (20, 10, 0.50),
         "eMMC_32GB": (17, 9, 0.65),
     }
-    for part in ALL_PARTS:
+    for part in ENGINEERING_PARTS:
         if part["name"] == "USB_C_Receptacle":
             body = _manufacturer_usb(part, mats, collection)
         else:
@@ -244,7 +244,7 @@ def _representative_support(mats, collection):
                  ("L7",19.0,-15.0,2.0,2.0))
     bulk_caps = ((-36,-17),(-28,-19),(28,-19),(36,-22))
     occupied = [(p["side"], p["x"], p["z"], p["width"], p["depth"])
-                for p in ALL_PARTS]
+                for p in ENGINEERING_PARTS]
     occupied += [("TOP", x, z, width, depth)
                  for _, x, z, width, depth in inductors]
     occupied += [("BOTTOM", x, z, 3.2, 2.5) for x, z in bulk_caps]
