@@ -22,7 +22,7 @@ D2,TI TPD2EUSB30ADRTR,"DRT SOT-9X3 land pattern; USB SI model","Product source i
 D3-D8,TI TPD4E05U06DQAR,"DQA land pattern; MIPI capacitance/SI review","Product source identified",SI_REVIEW,"Not represented as registered exact footprints"
 D9,TBD low-profile VBUS TVS,"Part selection; surge rating; package",None,SELECTION_REQUIRED,"Current SMA proxy is not a selected part"
 J1,Hirose CX90M3-24P,"Official drawing; exact land pattern; STEP; shell strategy; supported PCB thickness","Official product record and STEP available",MECHANICAL_CONFLICT,"Current KiCad uses an Amphenol footprint; selected Hirose lists 0.8 mm max recommended PCB thickness versus the 1.6 mm board"
-J2-J3,Hirose FH26W-51S-0.3SHW(97),"Official drawing; pad numbering; mating orientation; flex continuity","Product identified",ORIENTATION_REQUIRED,"Contact orientation and flex stack-up not approved"
+J2-J3,Hirose FH26W-51S-0.3SHW(97),"Official drawing; pad numbering; mating orientation; flex continuity","Catalog body and copper dimension subset screened; see head-interface-evidence.json",ORIENTATION_REQUIRED,"16.8mm body versus 15.6mm FPC end; numbering paste orientation current sharing and dynamic flex remain open"
 J4-J5,TBD 6-position motor/encoder connector,"Exact part; mating system; land pattern",None,SELECTION_REQUIRED,"Generic pin-header proxy only"
 SW1,Omron D3SK-B1R,"Exact actuator drawing; land pattern; tolerance","Product source identified",MECHANICAL_REVIEW,"Actuation direction not reconciled with enclosure"
 Y1-Y2,TBD 24 MHz oscillators,"Part selection; jitter; startup; land pattern",None,SELECTION_REQUIRED,"No selected devices"

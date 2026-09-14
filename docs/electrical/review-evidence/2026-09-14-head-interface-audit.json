@@ -1,0 +1,388 @@
+{
+  "schema": "deepreal.head-interface-audit.v1",
+  "source_board_sha256": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5",
+  "catalog_sha256": "38e5c3c1278d7843146da4eb44c1a360f847659dd8d758143c5d55407148a40c",
+  "interface_status": "BLOCKED",
+  "fabrication_allowed": false,
+  "public_visual_allowed": false,
+  "capacity_screen": {
+    "contacts_per_head": 51,
+    "camera_differential_pairs_per_head": 6,
+    "supply_contacts": 8,
+    "dedicated_return_contacts": 8,
+    "ideal_equal_sharing_rating_sum_a": 1.6,
+    "conservative_70_percent_screen_a": 1.12,
+    "screen_input_power_before_losses_w": 3.696,
+    "required_peak_input_current_a": null,
+    "power_feasibility": "BLOCKED_MISSING_LOAD_AND_DERATING_EVIDENCE"
+  },
+  "copper_land_pattern_screens": [
+    {
+      "ref": "J2",
+      "dimension_screen": "PASS",
+      "errors": [],
+      "pad_counts": {
+        "long_row": 26,
+        "short_row": 25,
+        "retention_tabs": 2
+      },
+      "pin_numbering_audited": false,
+      "paste_apertures_audited": false,
+      "warning": "Dimension subset only. Reflection, pin-one numbering, tab alignment, mask/paste, 3D model and mating orientation require exact-part audit."
+    },
+    {
+      "ref": "J3",
+      "dimension_screen": "PASS",
+      "errors": [],
+      "pad_counts": {
+        "long_row": 26,
+        "short_row": 25,
+        "retention_tabs": 2
+      },
+      "pin_numbering_audited": false,
+      "paste_apertures_audited": false,
+      "warning": "Dimension subset only. Reflection, pin-one numbering, tab alignment, mask/paste, 3D model and mating orientation require exact-part audit."
+    }
+  ],
+  "open_closure_evidence": [
+    "exact_numbered_connector_drawing_and_pad_audit",
+    "flex_stackup_stiffener_strain_relief_and_bend_life",
+    "head_current_startup_pulse_recharge_and_fault_budget",
+    "head_native_schematic_and_netlist",
+    "head_safe_default_hardware_interlock",
+    "latch_access_and_full_motion_clearance",
+    "main_and_head_connector_orientation_and_continuity",
+    "parallel_contact_derating_and_voltage_drop",
+    "six_differential_pairs_impedance_and_crosstalk"
+  ],
+  "current_placements": [
+    {
+      "ref": "J2",
+      "position_mm": [
+        43.0,
+        46.0
+      ],
+      "rotation_deg": 0.0,
+      "courtyard_polygons_mm": [
+        [
+          [
+            45.295,
+            37.105
+          ],
+          [
+            45.295,
+            54.895
+          ],
+          [
+            40.355,
+            54.895
+          ],
+          [
+            40.355,
+            37.105
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        40.355,
+        37.105,
+        45.295,
+        54.895
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        6.895
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C54",
+        "C59",
+        "C74",
+        "C81",
+        "D3",
+        "D4",
+        "U2"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    },
+    {
+      "ref": "J3",
+      "position_mm": [
+        87.0,
+        46.0
+      ],
+      "rotation_deg": 0.0,
+      "courtyard_polygons_mm": [
+        [
+          [
+            89.295,
+            37.105
+          ],
+          [
+            89.295,
+            54.895
+          ],
+          [
+            84.355,
+            54.895
+          ],
+          [
+            84.355,
+            37.105
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        84.355,
+        37.105,
+        89.295,
+        54.895
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        6.895
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C56",
+        "C71",
+        "C86",
+        "D6",
+        "D7",
+        "U3"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    }
+  ],
+  "quarter_turn_trials_not_applied": [
+    {
+      "ref": "J2",
+      "position_mm": [
+        43.0,
+        45.0
+      ],
+      "rotation_deg": 90,
+      "courtyard_polygons_mm": [
+        [
+          [
+            34.105,
+            42.705
+          ],
+          [
+            51.895,
+            42.705
+          ],
+          [
+            51.895,
+            47.645
+          ],
+          [
+            34.105,
+            47.645
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        34.105,
+        42.705,
+        51.895,
+        47.645
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C74",
+        "C81",
+        "C82",
+        "C93",
+        "U2",
+        "U21"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    },
+    {
+      "ref": "J2",
+      "position_mm": [
+        43.0,
+        45.0
+      ],
+      "rotation_deg": -90,
+      "courtyard_polygons_mm": [
+        [
+          [
+            51.895,
+            47.295
+          ],
+          [
+            34.105,
+            47.295
+          ],
+          [
+            34.105,
+            42.355
+          ],
+          [
+            51.895,
+            42.355
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        34.105,
+        42.355,
+        51.895,
+        47.295
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C74",
+        "C81",
+        "C82",
+        "C93",
+        "U2",
+        "U21"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    },
+    {
+      "ref": "J3",
+      "position_mm": [
+        87.0,
+        45.0
+      ],
+      "rotation_deg": 90,
+      "courtyard_polygons_mm": [
+        [
+          [
+            78.105,
+            42.705
+          ],
+          [
+            95.895,
+            42.705
+          ],
+          [
+            95.895,
+            47.645
+          ],
+          [
+            78.105,
+            47.645
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        78.105,
+        42.705,
+        95.895,
+        47.645
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C79",
+        "C86",
+        "C87",
+        "U22",
+        "U3"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    },
+    {
+      "ref": "J3",
+      "position_mm": [
+        87.0,
+        45.0
+      ],
+      "rotation_deg": -90,
+      "courtyard_polygons_mm": [
+        [
+          [
+            95.895,
+            47.295
+          ],
+          [
+            78.105,
+            47.295
+          ],
+          [
+            78.105,
+            42.355
+          ],
+          [
+            95.895,
+            42.355
+          ]
+        ]
+      ],
+      "courtyard_bounds_mm": [
+        78.105,
+        42.355,
+        95.895,
+        47.295
+      ],
+      "outline_overhang_left_top_right_bottom_mm": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "same_side_courtyard_aabb_candidates": [
+        "C79",
+        "C86",
+        "C87",
+        "U22",
+        "U3"
+      ],
+      "same_side_missing_courtyard_refs": [],
+      "status": "NOT_APPROVED",
+      "limitation": "AABB screen only; not polygon DRC, pad clearance, verified body, shield, latch, cable, motion, or electrical feasibility. Other components remain fixed."
+    }
+  ],
+  "warning": "Trial positions are diagnostic perturbations, not design decisions. No KiCad or Blender placement was changed.",
+  "source_evidence_sha256": "3c4051681e7db84e29058a69f66f612a90ade5e2554a87cc5de7db411fb214a3",
+  "source_allocation_sha256": "c6cbd253be1e63326229e47f2dec5f11a886ce764ed3c3aa9d58405327e45539",
+  "groups_awaiting_pin_numbers": [
+    "Head_3V3",
+    "Power_returns",
+    "RGB_CSI_signals",
+    "RGB_CSI_returns",
+    "IR_CSI_signals",
+    "IR_CSI_returns",
+    "RGB_clock",
+    "IR_clock",
+    "Control_bus",
+    "Sensor_resets",
+    "Timing_triggers",
+    "Projector_control",
+    "Safety_interlock",
+    "Thermal_status",
+    "Head_identity",
+    "Shield_reserved"
+  ]
+}

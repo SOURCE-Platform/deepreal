@@ -1,0 +1,57 @@
+{
+  "schema": "deepreal.head-interface-evidence.v1",
+  "status": "INTERNAL_AUDIT_NOT_INTERFACE_APPROVAL",
+  "source": {
+    "file": "references/components/datasheets/hirose-fh26-D49355-en.pdf",
+    "sha256": "38e5c3c1278d7843146da4eb44c1a360f847659dd8d758143c5d55407148a40c",
+    "url": "https://www.hirose.com/en/product/document?clcode=&documentid=D49355_en&documenttype=Catalog&lang=en&productname=&series=FH26",
+    "document": "Hirose D49355_en; cover May 2017 revision 3; footer Aug.1.2026",
+    "retrieved": "2026-09-14",
+    "pages": {"ratings": 4, "body": [6, 7], "land_pattern": 8, "fpc": [8, 9]},
+    "review": "Internal visual catalog inspection; independent pin-number audit pending"
+  },
+  "connector": {
+    "mpn": "FH26W-51S-0.3SHW(97)",
+    "contacts": 51,
+    "body_length_width_height_mm": [16.8, 3.2, 1.0],
+    "mating_contact_pitch_mm": 0.3,
+    "pcb_row_pitch_mm": 0.6,
+    "fpc_end_width_mm": 15.6,
+    "fpc_end_width_tolerance_mm": 0.05,
+    "fpc_mating_thickness_mm": 0.2,
+    "fpc_mating_thickness_tolerance_mm": 0.03,
+    "current_rating_per_contact_a": 0.2,
+    "all_contacts_loaded_factor": 0.7,
+    "mating_durability_cycles": 10,
+    "warning": "Mating durability is not flex bending life. Mating thickness includes the end construction, not a mandatory dynamic-flex stack-up."
+  },
+  "screening_assumptions": {
+    "supply_voltage_v": 3.3,
+    "parallel_contacts_share_equally": true,
+    "apply_all_contacts_loaded_factor_conservatively": true,
+    "warning": "A conservative numerical screen, not approved ampacity. Actual loading, unequal sharing, temperature, faults, cable resistance and head startup/pulse recharge remain unresolved."
+  },
+  "catalog_land_pattern_mm": {
+    "long_row": {"count": 26, "span": 15.0, "pitch": 0.6, "pad_size": [0.8, 0.3]},
+    "short_row": {"count": 25, "span": 14.4, "pitch": 0.6, "pad_size": [0.65, 0.3]},
+    "row_center_separation": 2.875,
+    "retention_tabs": {"count": 2, "span": 16.4, "pad_size": [0.95, 0.4]},
+    "paste_aperture_sizes": [[0.65, 0.23], [0.55, 0.23], [0.7, 0.3]],
+    "derivation": "Page 8: row center separation = 0.8/2 + 2.15 + 0.65/2. Tab center span = C + 2*(0.5 + 0.4/2). Coordinates are in the inherited footprint's local axes; these dimensions do not establish electrical pin numbering."
+  },
+  "instances": [
+    {"head": "face", "main_connector": "J2", "head_connector": "J1", "head_design": "deepreal-optical-head"},
+    {"head": "interaction", "main_connector": "J3", "head_connector": "J1", "head_design": "deepreal-optical-head"}
+  ],
+  "closure_evidence": {
+    "exact_numbered_connector_drawing_and_pad_audit": null,
+    "main_and_head_connector_orientation_and_continuity": null,
+    "head_native_schematic_and_netlist": null,
+    "head_current_startup_pulse_recharge_and_fault_budget": null,
+    "parallel_contact_derating_and_voltage_drop": null,
+    "six_differential_pairs_impedance_and_crosstalk": null,
+    "flex_stackup_stiffener_strain_relief_and_bend_life": null,
+    "latch_access_and_full_motion_clearance": null,
+    "head_safe_default_hardware_interlock": null
+  }
+}

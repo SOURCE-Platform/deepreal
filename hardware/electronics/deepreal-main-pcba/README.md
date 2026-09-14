@@ -78,6 +78,14 @@ The native board remains unrouted and its footprint selections are unverified.
 See [the import checkpoint](../../../docs/electrical/native-pcba-import-checkpoint.md)
 for reproduction commands and the current internal-review asset inventory.
 
+The [two-drum interface checkpoint](../../../docs/electrical/head-interface-checkpoint-2026-09-14.md)
+records official connector dimensions, read-only rotation trials, the head current
+screen and remaining flex/head-board work. `head-interface-evidence.json` pins the
+manufacturer catalog and lists open closure evidence. Run
+`python3 scripts/validate_flex_interface.py` for an honest audit, or add
+`--require-ready` to reject the currently unapproved interface. The comparison
+image is an internal diagnostic, not an approved replacement layout.
+
 Public rendering is intentionally blocked until `public_visual_allowed` becomes
 true after the engineering and visual gates pass. At that future point, rebuild with:
 
@@ -90,8 +98,9 @@ true after the engineering and visual gates pass. At that future point, rebuild 
 
 - U1 and U4 package bodies cannot touch; keep a physical assembly gap and preserve
   an unobstructed DDR corridor.
-- U2 belongs near J2 and U3 belongs near J3. Each FPGA feeds only its associated
-  i.MX95 CSI receiver.
+- Under the inherited two-FPGA candidate, U2 serves J2 and U3 serves J3, each with
+  its associated i.MX95 CSI receiver. This is not a locked architecture: G3 must
+  decide zero/one/two FPGAs before final placement and routing.
 - Projector pulse drivers are not on this board. They are on the optical heads.
 - `HEAD_*_3V3` is filtered and independently switchable for each head.
 - `MOTOR_6V` remains disabled unless the accepted USB-PD contract is at least 9 V.

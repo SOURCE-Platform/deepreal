@@ -12,7 +12,7 @@ U7,IR 1.8V regulator,TBD,low-profile,"mode-current calculation; sequence control
 U8,Head temperature sensor,TBD,low-profile,"alert pull-up; local decoupling",SELECTION_REQUIRED
 U9,Local safety/interlock logic,TBD,low-profile,"hardware AND/latch; pull-down; fault return",SAFETY_REVIEW
 U10,Head identity device,TBD resistor or EEPROM,low-profile,"revision and calibration identity",SELECTION_REQUIRED
-J1,51-contact dynamic-flex connector,Hirose FH26W-51S-0.3SHW(97),15.6x3.2x1.0mm,"MIPI protection strategy; power contacts",FLEX_GATE
+J1,51-contact dynamic-flex connector,Hirose FH26W-51S-0.3SHW(97),16.8x3.2x1.0mm,"15.6mm is the FPC end width not connector body; MIPI and current audit open",FLEX_GATE
 J2,RGB assembly connector,Hirose DF37NC-30DS-0.4V baseline,30-position mezzanine,"mating and service access",MECHANICAL_GATE
 L1,Projector boost inductor,TBD 1uH class,low-profile,"saturation and pulse-loss calculation",CALC_REQUIRED
 C1-C20,Power and pulse capacitors,TBD,0201-0805,"AS1170 pulse loop and six local rails",CALC_REQUIRED

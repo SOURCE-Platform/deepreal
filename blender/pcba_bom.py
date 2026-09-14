@@ -130,11 +130,11 @@ PROTECTION_PARTS = (
 HEAD_CONNECTORS = (
     _part("Face_Optical_Head_Connector", "J2", "Hirose",
           "FH26W-51S-0.3SHW(97)", "0.3mm FPC 51-position",
-          15.6, 3.2, 1.0, -22.0, -23.5, "TOP", "FLEX_SI_GATE",
+          16.8, 3.2, 1.0, -22.0, -23.5, "TOP", "FLEX_SI_GATE",
           "Face optical head", "Hirose FH26 catalog"),
     _part("Interaction_Optical_Head_Connector", "J3", "Hirose",
           "FH26W-51S-0.3SHW(97)", "0.3mm FPC 51-position",
-          15.6, 3.2, 1.0, 22.0, -23.5, "TOP", "FLEX_SI_GATE",
+          16.8, 3.2, 1.0, 22.0, -23.5, "TOP", "FLEX_SI_GATE",
           "Interaction optical head", "Hirose FH26 catalog"),
 )
 

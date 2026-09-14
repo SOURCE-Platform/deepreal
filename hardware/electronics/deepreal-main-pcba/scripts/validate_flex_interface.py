@@ -2,9 +2,13 @@
 """Validate the 51-contact head-flex allocation without inventing pin numbers."""
 
 import csv
+import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
+
+from head_interface_audit import audit
 
 
 PROJECT = Path(__file__).resolve().parent.parent
@@ -19,6 +23,10 @@ REQUIRED_GROUPS = {
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--require-ready", action="store_true",
+                        help="Fail while interface evidence remains incomplete")
+    args = parser.parse_args()
     failures = []
     with ALLOCATION.open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
@@ -28,6 +36,8 @@ def main():
     total = sum(int(row["Contacts"]) for row in rows)
     if groups != REQUIRED_GROUPS:
         failures.append("head-flex group set is incomplete or unexpected")
+    if len(groups) != len(rows) or any(int(row["Contacts"]) < 1 for row in rows):
+        failures.append("groups must be unique and contact counts positive")
     if total != 51:
         failures.append("head-flex allocation is {} contacts, expected 51".format(total))
     if any(row["Connector"] != "J2/J3" for row in rows):
@@ -38,12 +48,33 @@ def main():
         failures.append("G5 passed with unnumbered groups: " + ", ".join(unnumbered))
     if failures:
         raise RuntimeError("\n".join(failures))
+    evidence = json.loads((PROJECT / "head-interface-evidence.json").read_text())
+    layout = json.loads((PROJECT / "engineering-layout-export.json").read_text())
+    board = PROJECT / "deepreal-main-pcba.kicad_pcb"
+    if hashlib.sha256(board.read_bytes()).hexdigest() != layout["metadata"]["source_board_sha256"]:
+        raise RuntimeError("Stale layout export; regenerate before interface screening")
+    report = audit(rows, evidence, layout, PROJECT.parents[2])
+    report["source_evidence_sha256"] = hashlib.sha256(
+        (PROJECT / "head-interface-evidence.json").read_bytes()).hexdigest()
+    report["source_allocation_sha256"] = hashlib.sha256(ALLOCATION.read_bytes()).hexdigest()
+    report["groups_awaiting_pin_numbers"] = unnumbered
+    output = PROJECT / "generated-review" / "head-interface-audit.json"
+    output.parent.mkdir(exist_ok=True)
+    output.write_text(json.dumps(report, indent=2)+"\n")
     print("HEAD FLEX INTERFACE")
     print("  reusable connectors: J2 and J3")
     print("  allocated contacts:", total)
     print("  signal/power groups:", len(groups))
     print("  groups awaiting physical pin numbers:", len(unnumbered))
-    print("PASS: the logical allocation fits 51 contacts; physical numbering remains open")
+    print("  camera differential pairs per head:",
+          report["capacity_screen"]["camera_differential_pairs_per_head"])
+    print("  conservative connector-only current screen: {} A; NOT approved ampacity".format(
+        report["capacity_screen"]["conservative_70_percent_screen_a"]))
+    print("  interface status:", report["interface_status"])
+    print("  report:", output)
+    if args.require_ready or gate["status"] == "PASS":
+        raise RuntimeError("Interface is not approved: review evidence, numbered continuity, head circuitry and physical fit remain required")
+    print("PASS: audit ran with truthful release locks. The interface itself remains BLOCKED.")
 
 
 if __name__ == "__main__":
