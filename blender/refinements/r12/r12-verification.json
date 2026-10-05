@@ -1,0 +1,170 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r12/deepreal-exterior-refinement-r12.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "one connected board with near-full-height wing and H5 opening",
+      "pass": true,
+      "evidence": {
+        "bounds_mm": [
+          [
+            -45.0,
+            57.5
+          ],
+          [
+            10.6,
+            12.1
+          ],
+          [
+            -25.5,
+            2.5
+          ]
+        ],
+        "geometry": {
+          "nonmanifold_edges": 0,
+          "connected_components": 1
+        }
+      }
+    },
+    {
+      "check": "illustrative USB socket sits on the one-piece board",
+      "pass": true,
+      "evidence": {
+        "triangle_intersections": 117,
+        "socket_geometry": {
+          "nonmanifold_edges": 0,
+          "connected_components": 1
+        },
+        "actual_footprint_and_solder_joints_verified": false
+      }
+    },
+    {
+      "check": "native board finish spans the new wing on both faces",
+      "pass": true,
+      "evidence": {
+        "PCBA_Native_Surface_03": [
+          -45.0,
+          57.5
+        ],
+        "PCBA_Native_Surface_04": [
+          -45.0,
+          57.5
+        ]
+      }
+    },
+    {
+      "check": "candidate housing support sits beneath H5, with blind pilot",
+      "pass": true,
+      "evidence": {
+        "pilot_axis_open": true,
+        "boss_shoulders_present": true,
+        "housing_status": "candidate integral housing boss under new H5 board hole; fastener, wall thickness, tooling and strength unverified"
+      }
+    },
+    {
+      "check": "four flat end skins cover the drum rims",
+      "pass": true,
+      "evidence": {
+        "Face_Sensor_Head_Flat_End_Left": {
+          "flat_disk_manifold": true,
+          "covers_tube_radius_mm": 12.0,
+          "outside_shell_mm": 0.24,
+          "center_ray_hits": true
+        },
+        "Face_Sensor_Head_Flat_End_Right": {
+          "flat_disk_manifold": true,
+          "covers_tube_radius_mm": 12.0,
+          "outside_shell_mm": 0.24,
+          "center_ray_hits": true
+        },
+        "Interaction_Sensor_Head_Flat_End_Left": {
+          "flat_disk_manifold": true,
+          "covers_tube_radius_mm": 12.0,
+          "outside_shell_mm": 0.24,
+          "center_ray_hits": true
+        },
+        "Interaction_Sensor_Head_Flat_End_Right": {
+          "flat_disk_manifold": true,
+          "covers_tube_radius_mm": 12.0,
+          "outside_shell_mm": 0.24,
+          "center_ray_hits": true
+        }
+      }
+    },
+    {
+      "check": "separate native outline and H5 study is internally consistent",
+      "pass": true,
+      "evidence": {
+        "edge_count": 6,
+        "expected_outline": true,
+        "H5_count": 1,
+        "H5_position": true,
+        "H5_drill_2_7_mm": true,
+        "footprints_added": 1,
+        "uuid_duplicates": 0,
+        "native_J1_unchanged": true
+      }
+    },
+    {
+      "check": "R11 and native PCB sources are unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r11/deepreal-exterior-refinement-r11.blend": true,
+        "blender/refinements/r11/build_r11.py": true,
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": true
+      }
+    },
+    {
+      "check": "unrelated prework Git changes are preserved",
+      "pass": true,
+      "evidence": {
+        "before": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ],
+        "after": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ]
+      }
+    }
+  ],
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "The new PCB outline and H5 support are layout concepts, not strength or fabrication validation.",
+    "The separate native copy has no connector footprint/routing update and has not passed KiCad DRC.",
+    "The drum end disks are presentation skins, not validated closures or bearing designs."
+  ]
+}

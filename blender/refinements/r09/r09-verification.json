@@ -1,0 +1,114 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r09/deepreal-exterior-refinement-r09.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "centered daughterboard and flex study removed",
+      "pass": true,
+      "evidence": [
+        "Centered_USB_Daughterboard",
+        "USB_Power_Data_Side_Route_CONCEPT",
+        "Mainboard_USB_Flex_Connector_CONCEPT",
+        "Main_Housing_USB_Back",
+        "Main_Housing_USB_Cutter",
+        "Main_Housing_USB_Shell",
+        "Main_Housing_USB_Tongue"
+      ]
+    },
+    {
+      "check": "socket is outside spreader footprint",
+      "pass": true,
+      "evidence": {
+        "socket_to_spreader_lateral_mm": 8.25,
+        "physical_temperature_verified": false
+      }
+    },
+    {
+      "check": "conceptual tab touches original board and socket",
+      "pass": true,
+      "evidence": {
+        "tab_to_source_board": 10,
+        "socket_to_tab": 5
+      }
+    },
+    {
+      "check": "listed unintended mesh intersections are absent",
+      "pass": true,
+      "evidence": {
+        "Main_PCBA_Right_USB_Tab_GEOMETRY_PROPOSAL <> Shield_Rear_Tray": 0,
+        "Main_PCBA_Right_USB_Tab_GEOMETRY_PROPOSAL <> Main_Housing": 0,
+        "Main_PCBA_Right_USB_Tab_GEOMETRY_PROPOSAL <> Thermal_Spreader": 0,
+        "Main_PCBA_Right_USB_Tab_GEOMETRY_PROPOSAL <> Shield_Front_Lid": 0,
+        "USB_C_Direct_Board_Socket_ENVELOPE_UNSELECTED <> Shield_Rear_Tray": 0,
+        "USB_C_Direct_Board_Socket_ENVELOPE_UNSELECTED <> Shield_Front_Lid": 0,
+        "USB_C_Direct_Board_Socket_ENVELOPE_UNSELECTED <> Main_Housing": 0,
+        "USB_C_Plug_Overmold <> Thermal_Spreader": 0,
+        "USB_C_Plug_Overmold <> Shield_Rear_Tray": 0,
+        "USB_C_Plug_Overmold <> Main_Housing": 0,
+        "USB_C_Plug_Overmold <> Housing_Thermal_Pad_Right": 0,
+        "USB_C_Plug_Overmold <> Thermal_Link_Right": 0,
+        "USB_C_Male_Metal_Shell <> Thermal_Spreader": 0,
+        "USB_C_Male_Metal_Shell <> Shield_Rear_Tray": 0,
+        "USB_C_Male_Metal_Shell <> Main_Housing": 0,
+        "USB_C_Cable <> Shield_Rear_Tray": 0,
+        "USB_C_Cable <> Main_Housing": 0
+      }
+    },
+    {
+      "check": "side shield and housing entry open; center housing closed",
+      "pass": true,
+      "evidence": {
+        "side_shield_ray_hit": false,
+        "center_housing_ray_hit": true,
+        "right_housing_ray_hit": false,
+        "shield_wall_faces_removed": 33
+      }
+    },
+    {
+      "check": "saved model opens at close review scale",
+      "pass": true,
+      "evidence": [
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645,
+        0.14000000059604645
+      ]
+    },
+    {
+      "check": "protected R08 and KiCad files unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r08/deepreal-exterior-refinement-r08.blend": {
+          "expected": "02bdcf08ab95145b79c200694f4673cc9a4b0925f2a967b365cb2e5a012d9ff7",
+          "actual": "02bdcf08ab95145b79c200694f4673cc9a4b0925f2a967b365cb2e5a012d9ff7"
+        },
+        "blender/refinements/r08/build_r08.py": {
+          "expected": "0fd021b76c58dae9324db35acab00cde5765e9fa61ff274fdb01a8fee4918d9b",
+          "actual": "0fd021b76c58dae9324db35acab00cde5765e9fa61ff274fdb01a8fee4918d9b"
+        },
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": {
+          "expected": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5",
+          "actual": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5"
+        },
+        "hardware/electronics/deepreal-main-pcba/02_usb_c_pd_and_vbus.kicad_sch": {
+          "expected": "d16697545109e104e409fb8dd22f9a20abbbdf2e07d5f2b5e3f0ac9e6f066f06",
+          "actual": "d16697545109e104e409fb8dd22f9a20abbbdf2e07d5f2b5e3f0ac9e6f066f06"
+        }
+      }
+    }
+  ],
+  "r08_plug_spreader_triangle_intersections": 10,
+  "r09_plug_spreader_triangle_intersections": 0,
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "Board tab and socket are Blender geometry only; KiCad board unchanged.",
+    "Exact USB-C receptacle, mating cable, pads and solder joints unverified.",
+    "No USB power/data routing, SI, thermal, shield/EMI or retention approval."
+  ]
+}

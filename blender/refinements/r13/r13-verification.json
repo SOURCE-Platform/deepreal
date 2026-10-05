@@ -1,0 +1,122 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r13/deepreal-exterior-refinement-r13.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "drum bodies have a 1.0 mm center gap",
+      "pass": true,
+      "evidence": {
+        "left_end_x_mm": -0.5,
+        "right_start_x_mm": 0.5,
+        "body_gap_mm": 1.0,
+        "shells_manifold": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "check": "flat center faces have visible clearance and no intersection",
+      "pass": true,
+      "evidence": {
+        "visible_face_gap_mm": 0.52,
+        "face_to_face_triangle_intersections": 0,
+        "face_to_opposing_shell_triangle_intersections": 0
+      }
+    },
+    {
+      "check": "all ten lens centers still pass through their drum openings",
+      "pass": true,
+      "evidence": {
+        "Face_Depth": true,
+        "Face_RGB": true,
+        "Face_ProjA": true,
+        "Face_ProjB": true,
+        "Face_Pinhole": true,
+        "Interaction_Depth": true,
+        "Interaction_RGB": true,
+        "Interaction_ProjA": true,
+        "Interaction_ProjB": true,
+        "Interaction_Pinhole": true
+      }
+    },
+    {
+      "check": "PCB, housing and USB socket are unchanged from R12",
+      "pass": true,
+      "evidence": {
+        "Main_PCBA_Near_Full_Height_Right_Wing_PROPOSAL": true,
+        "Main_Housing": true,
+        "USB_C_Direct_Board_Socket_ENVELOPE_UNSELECTED": true
+      }
+    },
+    {
+      "check": "outer enclosure is enabled in saved model",
+      "pass": true,
+      "evidence": {
+        "housing_collection_renders": true,
+        "main_housing_renders": true
+      }
+    },
+    {
+      "check": "R12 and native PCB sources remain unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r12/deepreal-exterior-refinement-r12.blend": true,
+        "blender/refinements/r12/build_r12.py": true,
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": true
+      }
+    },
+    {
+      "check": "unrelated prework Git changes are preserved",
+      "pass": true,
+      "evidence": {
+        "before": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ],
+        "after": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ]
+      }
+    }
+  ],
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "A 1.0 mm body gap is a visual layout choice, not validated running clearance.",
+    "Thin end faces remain presentation skins, not manufacturable drum closures.",
+    "Thermal expansion, bearing play, runout and assembly tolerances need engineering review."
+  ]
+}

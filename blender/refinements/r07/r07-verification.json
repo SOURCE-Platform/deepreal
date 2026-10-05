@@ -1,0 +1,114 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r07/deepreal-exterior-refinement-r07.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "one-eye solid-to-wireframe viewport toggle is configured",
+      "pass": true,
+      "evidence": {
+        "solid_collection": "00 \u2014 HOUSING MODE \u2014 CLICK EYE: SOLID \u2194 WIREFRAME",
+        "wire_collection": "00A \u2014 WIREFRAME FALLBACK \u2014 KEEP VISIBLE",
+        "wire_scale": [
+          0.996999979019165,
+          0.996999979019165,
+          0.996999979019165
+        ],
+        "wire_render_hidden": true
+      }
+    },
+    {
+      "check": "daughterboard is above and forward of the plug overmold",
+      "pass": true,
+      "evidence": {
+        "daughterboard_bounds_mm": [
+          [
+            -8.0,
+            8.0
+          ],
+          [
+            14.0,
+            15.0
+          ],
+          [
+            -20.0,
+            -11.0
+          ]
+        ],
+        "overmold_bounds_mm": [
+          [
+            -4.5,
+            4.5
+          ],
+          [
+            15.5,
+            20.5
+          ],
+          [
+            -33.278,
+            -21.278
+          ]
+        ]
+      }
+    },
+    {
+      "check": "no triangle intersections remain in the USB packaging path",
+      "pass": true,
+      "evidence": {
+        "Centered_USB_Daughterboard <-> USB_C_Plug_Overmold": 0,
+        "Centered_USB_Daughterboard <-> Thermal_Spreader": 0,
+        "Centered_USB_Daughterboard <-> Shield_Rear_Tray": 0,
+        "Centered_USB_Daughterboard <-> Shield_Front_Lid": 0,
+        "Centered_USB_Daughterboard <-> Main_Housing": 0,
+        "USB_C_Plug_Overmold <-> Main_Housing": 0
+      }
+    },
+    {
+      "check": "service path provides nominal 1 mm board-edge clearance",
+      "pass": true,
+      "evidence": {
+        "Thermal_Spreader": {
+          "width_mm": 18.0,
+          "z_mm": [
+            -25.0,
+            -10.0
+          ]
+        },
+        "Shield_Rear_Tray": {
+          "width_mm": 18.0,
+          "z_mm": [
+            -25.0,
+            -10.0
+          ]
+        },
+        "Shield_Front_Lid": {
+          "width_mm": 18.0,
+          "z_mm": [
+            -25.0,
+            -10.0
+          ]
+        }
+      }
+    },
+    {
+      "check": "R06 and authoritative DeepReal input hashes are unchanged",
+      "pass": true,
+      "evidence": {
+        "/Users/adam/Documents/deepreal/blender/refinements/r06/deepreal-exterior-refinement-r06.blend": {
+          "actual": "30a89ce7b16fe1003d620c28853861467f50d36e3f3e8cc94719ff0346bd3d88",
+          "expected": "30a89ce7b16fe1003d620c28853861467f50d36e3f3e8cc94719ff0346bd3d88",
+          "match": true
+        },
+        "/Users/adam/Documents/deepreal/blender/deepreal.blend": {
+          "actual": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+          "expected": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+          "match": true
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "The daughterboard is a conditional packaging option, not an approved USB implementation.",
+    "The split thermal path is a clearance workaround, not validated thermal design.",
+    "USB SI, PD, ESD, shield bonding, cable retention, thermals, tolerances, and physical testing remain open."
+  ]
+}

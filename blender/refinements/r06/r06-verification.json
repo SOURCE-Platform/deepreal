@@ -1,0 +1,140 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r06/deepreal-exterior-refinement-r06.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "housing has a one-collection visibility switch",
+      "pass": true,
+      "evidence": {
+        "collection": "00 \u2014 HOUSING SHELL \u2014 CLICK EYE OR CAMERA",
+        "objects": [
+          "Main_Housing"
+        ],
+        "display_type": "SOLID"
+      }
+    },
+    {
+      "check": "unverified source bodies are retained but hidden",
+      "pass": true,
+      "evidence": {
+        "objects": [
+          "SOURCE_UNVERIFIED_J2_WRONG_ORIENTATION",
+          "SOURCE_UNVERIFIED_J3_WRONG_ORIENTATION",
+          "SOURCE_UNVERIFIED_J4_NO_EXACT_PART",
+          "SOURCE_UNVERIFIED_J5_NO_EXACT_PART",
+          "SOURCE_UNVERIFIED_PCBA_NATIVE_SURFACE_BAKED"
+        ],
+        "hidden_viewport": true,
+        "hidden_render": true
+      }
+    },
+    {
+      "check": "J2 and J3 use manufacturer-dimensioned envelope proxies",
+      "pass": true,
+      "evidence": {
+        "J2": {
+          "dimensions_mm": [
+            16.8,
+            1.0,
+            3.2
+          ],
+          "part": "FH26W-51S-0.3SHW(97)",
+          "source": "https://www.hirose.com/product/p/CL0580-2415-6-97",
+          "bounds_mm": [
+            [
+              -30.4,
+              -13.6
+            ],
+            [
+              9.595,
+              10.595
+            ],
+            [
+              -25.1,
+              -21.9
+            ]
+          ]
+        },
+        "J3": {
+          "dimensions_mm": [
+            16.8,
+            1.0,
+            3.2
+          ],
+          "part": "FH26W-51S-0.3SHW(97)",
+          "source": "https://www.hirose.com/product/p/CL0580-2415-6-97",
+          "bounds_mm": [
+            [
+              13.6,
+              30.4
+            ],
+            [
+              9.595,
+              10.595
+            ],
+            [
+              -25.1,
+              -21.9
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "check": "visible electronics do not extend below housing global envelope",
+      "pass": true,
+      "evidence": {
+        "housing_min_z_mm": -29.0,
+        "objects_below": {}
+      }
+    },
+    {
+      "check": "USB overmold enters its housing recess by at least 1 mm",
+      "pass": true,
+      "evidence": {
+        "surface_z_mm": -22.278,
+        "overmold_bounds_mm": [
+          [
+            -4.4999998062849045,
+            4.4999998062849045
+          ],
+          [
+            15.49999974668026,
+            20.499998703598976
+          ],
+          [
+            -33.278029412031174,
+            -21.278029307723045
+          ]
+        ],
+        "axial_insertion_mm": 1.0,
+        "recess_mm": [
+          9.4,
+          5.4,
+          2.2
+        ]
+      }
+    },
+    {
+      "check": "R05 and authoritative DeepReal source hashes are unchanged",
+      "pass": true,
+      "evidence": {
+        "/Users/adam/Documents/deepreal/blender/refinements/r05/deepreal-exterior-refinement-r05.blend": {
+          "actual": "f35eec8c33e1476d1a4a8d9cfc9c5197aa3c1f0843e10e874b817baf98a125f3",
+          "expected": "f35eec8c33e1476d1a4a8d9cfc9c5197aa3c1f0843e10e874b817baf98a125f3",
+          "match": true
+        },
+        "/Users/adam/Documents/deepreal/blender/deepreal.blend": {
+          "actual": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+          "expected": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+          "match": true
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "J2/J3 are dimensional envelope proxies, not detailed manufacturer STEP models.",
+    "J4/J5 exact manufacturer parts remain unspecified and are a packaging blocker.",
+    "The centered USB daughterboard, flex, pin mapping, SI, shielding, and thermal performance remain unverified."
+  ]
+}

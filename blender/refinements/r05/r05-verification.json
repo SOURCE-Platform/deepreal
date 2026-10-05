@@ -1,0 +1,267 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r05/deepreal-exterior-refinement-r05.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/deepreal.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "imported capacitors follow shifted board",
+      "pass": true,
+      "evidence": {
+        "board": {
+          "x": [
+            -45.0,
+            45.0
+          ],
+          "y": [
+            10.595,
+            12.105
+          ],
+          "z": [
+            -25.5,
+            2.5
+          ]
+        },
+        "C101": {
+          "x": [
+            -5.15,
+            -4.85
+          ],
+          "y": [
+            12.19,
+            12.49
+          ],
+          "z": [
+            -0.4,
+            0.2
+          ]
+        },
+        "C107": {
+          "x": [
+            35.15,
+            35.45
+          ],
+          "y": [
+            12.19,
+            12.49
+          ],
+          "z": [
+            -3.0,
+            -2.4
+          ]
+        },
+        "rear_face_gaps_mm": [
+          0.085,
+          0.085
+        ]
+      }
+    },
+    {
+      "check": "artificial housing bosses removed",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "check": "housing defaults to solid",
+      "pass": true,
+      "evidence": "SOLID"
+    },
+    {
+      "check": "inspection wire is optional and hidden",
+      "pass": true,
+      "evidence": {
+        "display": "WIRE",
+        "hide_viewport": true,
+        "hide_render": true
+      }
+    },
+    {
+      "check": "legacy right-edge J1 is hidden",
+      "pass": true,
+      "evidence": {
+        "hide_viewport": true,
+        "hide_render": true
+      }
+    },
+    {
+      "check": "USB path is recorded through spreader and shields",
+      "pass": true,
+      "evidence": {
+        "Thermal_Spreader": {
+          "width_mm": 15.0,
+          "z_mm": [
+            -24.0,
+            -13.5
+          ]
+        },
+        "Shield_Rear_Tray": {
+          "width_mm": 15.0,
+          "z_mm": [
+            -24.0,
+            -13.5
+          ]
+        },
+        "Shield_Front_Lid": {
+          "width_mm": 15.0,
+          "z_mm": [
+            -24.0,
+            -13.5
+          ]
+        }
+      }
+    },
+    {
+      "check": "USB service openings exist in native geometry",
+      "pass": true,
+      "evidence": {
+        "Thermal_Spreader": false,
+        "Shield_Rear_Tray": false,
+        "Shield_Front_Lid": false
+      }
+    },
+    {
+      "check": "proposed board and routes are present",
+      "pass": true,
+      "evidence": [
+        "Centered_USB_Daughterboard",
+        "Mainboard_USB_Flex_Connector_CONCEPT",
+        "USB3_PD_Internal_Flex_CONCEPT",
+        "Face_Head_Power_Data_Flex_CONCEPT",
+        "Interaction_Head_Power_Data_Flex_CONCEPT",
+        "Face_Head_Flex_Interface_CONCEPT",
+        "Interaction_Head_Flex_Interface_CONCEPT"
+      ]
+    },
+    {
+      "check": "route centerlines terminate in their modeled interfaces",
+      "pass": true,
+      "evidence": {
+        "USB3_PD_Internal_Flex_CONCEPT": {
+          "start_inside": true,
+          "end_inside": true,
+          "start_mm": [
+            0.0,
+            15.4,
+            -17.0
+          ],
+          "end_mm": [
+            0.0,
+            13.0,
+            -15.0
+          ]
+        },
+        "Face_Head_Power_Data_Flex_CONCEPT": {
+          "start_inside": true,
+          "end_inside": true,
+          "start_mm": [
+            -22.0,
+            9.7,
+            -23.5
+          ],
+          "end_mm": [
+            -20.0,
+            9.0,
+            -9.5
+          ]
+        },
+        "Interaction_Head_Power_Data_Flex_CONCEPT": {
+          "start_inside": true,
+          "end_inside": true,
+          "start_mm": [
+            22.0,
+            9.7,
+            -23.5
+          ],
+          "end_mm": [
+            20.0,
+            9.0,
+            -9.5
+          ]
+        }
+      }
+    },
+    {
+      "check": "bounded thermal links are inside nominal housing width",
+      "pass": true,
+      "evidence": {
+        "Thermal_Link_Left": {
+          "x": [
+            -29.0,
+            -11.0
+          ],
+          "y": [
+            15.575,
+            20.0
+          ],
+          "z": [
+            -15.0,
+            -6.0
+          ]
+        },
+        "Thermal_Link_Right": {
+          "x": [
+            11.0,
+            29.0
+          ],
+          "y": [
+            15.575,
+            20.0
+          ],
+          "z": [
+            -15.0,
+            -6.0
+          ]
+        },
+        "Housing_Thermal_Pad_Left": {
+          "x": [
+            -29.0,
+            -11.0
+          ],
+          "y": [
+            20.0,
+            21.0
+          ],
+          "z": [
+            -15.0,
+            -6.0
+          ]
+        },
+        "Housing_Thermal_Pad_Right": {
+          "x": [
+            11.0,
+            29.0
+          ],
+          "y": [
+            20.0,
+            21.0
+          ],
+          "z": [
+            -15.0,
+            -6.0
+          ]
+        }
+      }
+    },
+    {
+      "check": "external USB port is centered",
+      "pass": true,
+      "evidence": {
+        "Main_Housing_USB_Back": 0.0,
+        "Main_Housing_USB_Shell": 0.0,
+        "Main_Housing_USB_Tongue": 0.0
+      }
+    },
+    {
+      "check": "authoritative source blend hash unchanged",
+      "pass": true,
+      "evidence": {
+        "actual": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+        "expected": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412"
+      }
+    }
+  ],
+  "limitations": [
+    "No electrical continuity or pin mapping is established by this model.",
+    "Daughterboard, flex, connector, shielding, SI, thermal, and fit details remain unverified.",
+    "The existing main-board J1 location cannot serve the centered-port concept without redesign."
+  ]
+}

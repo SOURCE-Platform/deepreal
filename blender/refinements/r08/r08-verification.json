@@ -1,0 +1,161 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r08/deepreal-exterior-refinement-r08.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "spreader and front shield have their original uncut mesh",
+      "pass": true,
+      "evidence": {
+        "Thermal_Spreader": true,
+        "Shield_Front_Lid": true
+      }
+    },
+    {
+      "check": "center layers are closed and only side tray feedthrough is open",
+      "pass": true,
+      "evidence": {
+        "spreader_center_closed": true,
+        "front_lid_center_closed": true,
+        "rear_tray_center_closed": true,
+        "rear_tray_side_open": true
+      }
+    },
+    {
+      "check": "external USB and proposed daughterboard are centered",
+      "pass": true,
+      "evidence": {
+        "board": [
+          [
+            -8.0,
+            8.0
+          ],
+          [
+            17.5,
+            18.5
+          ],
+          [
+            -15.0,
+            -9.0
+          ]
+        ],
+        "socket_envelope": [
+          [
+            -5.25,
+            5.25
+          ],
+          [
+            15.85,
+            20.15
+          ],
+          [
+            -20.2,
+            -15.0
+          ]
+        ],
+        "plug_overmold": [
+          [
+            -4.5,
+            4.5
+          ],
+          [
+            15.5,
+            20.5
+          ],
+          [
+            -33.278,
+            -21.278
+          ]
+        ]
+      }
+    },
+    {
+      "check": "no unintended mesh intersections along new USB path",
+      "pass": true,
+      "evidence": {
+        "Centered_USB_Daughterboard <> Thermal_Spreader": 0,
+        "Centered_USB_Daughterboard <> Shield_Rear_Tray": 0,
+        "Centered_USB_Daughterboard <> Shield_Front_Lid": 0,
+        "Centered_USB_Daughterboard <> Main_Housing": 0,
+        "Centered_USB_Daughterboard <> Thermal_Link_Left": 0,
+        "Centered_USB_Daughterboard <> Thermal_Link_Right": 0,
+        "USB_C_Plug_Overmold <> Main_Housing": 0,
+        "USB_C_Male_Metal_Shell <> Main_Housing": 0,
+        "USB_C_Female_Socket_ENVELOPE_NOT_PART_SELECTED <> Thermal_Spreader": 0,
+        "USB_C_Female_Socket_ENVELOPE_NOT_PART_SELECTED <> Main_Housing": 0,
+        "Mainboard_USB_Flex_Connector_CONCEPT <> Main_Housing": 0,
+        "Mainboard_USB_Flex_Connector_CONCEPT <> Shield_Rear_Tray": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Thermal_Spreader": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Shield_Rear_Tray": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Shield_Front_Lid": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Main_Housing": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Thermal_Link_Right": 0,
+        "USB_Power_Data_Side_Route_CONCEPT <> Housing_Thermal_Pad_Right": 0
+      }
+    },
+    {
+      "check": "route goes to right of spreader with a small rear feedthrough",
+      "pass": true,
+      "evidence": {
+        "max_route_x_mm": 39.0,
+        "max_route_y_mm": 18.0,
+        "spreader_max_x_mm": 38.0,
+        "rear_feedthrough_mm": [
+          5.0,
+          4.0
+        ]
+      }
+    },
+    {
+      "check": "unverified electrical and thermal status remains explicit",
+      "pass": true,
+      "evidence": {
+        "scene": "R08 geometric packaging study; no electrical or thermal approval",
+        "thermal": "spreader continuous; PCB-to-spreader interface, heat budget, materials and housing rejection unverified; vents undecided"
+      }
+    },
+    {
+      "check": "saved viewport framing is close",
+      "pass": true,
+      "evidence": [
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14
+      ]
+    },
+    {
+      "check": "protected Blender sources retain baseline hashes",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r07/deepreal-exterior-refinement-r07.blend": {
+          "expected": "1e31502e0f7e859d0513d891fa6c9db259c285e856b085de1e3cc253ccb6234a",
+          "actual": "1e31502e0f7e859d0513d891fa6c9db259c285e856b085de1e3cc253ccb6234a"
+        },
+        "blender/refinements/r06/deepreal-exterior-refinement-r06.blend": {
+          "expected": "30a89ce7b16fe1003d620c28853861467f50d36e3f3e8cc94719ff0346bd3d88",
+          "actual": "30a89ce7b16fe1003d620c28853861467f50d36e3f3e8cc94719ff0346bd3d88"
+        },
+        "blender/refinements/r04/deepreal-exterior-refinement-r04.blend": {
+          "expected": "0a8599a3b38f938fa9c68352d40226961f56a7c25272acd8831dddf51444c78a",
+          "actual": "0a8599a3b38f938fa9c68352d40226961f56a7c25272acd8831dddf51444c78a"
+        },
+        "blender/deepreal.blend": {
+          "expected": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+          "actual": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412"
+        }
+      }
+    }
+  ],
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "USB-C socket is a visual envelope, not an exact selected part.",
+    "Internal flex route is diagrammatic; no real PCB, pin mapping, power, or SI design exists.",
+    "Thermal path, vent decision, shield bonding, and EMI require engineering and measurement."
+  ]
+}

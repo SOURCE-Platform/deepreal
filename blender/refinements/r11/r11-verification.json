@@ -1,0 +1,175 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r11/deepreal-exterior-refinement-r11.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "R10 baseline reproduces five misaligned interaction windows",
+      "pass": true,
+      "evidence": {
+        "Face_Depth": false,
+        "Face_RGB": false,
+        "Face_ProjA": false,
+        "Face_ProjB": false,
+        "Face_Pinhole": false,
+        "Interaction_Depth": true,
+        "Interaction_RGB": true,
+        "Interaction_ProjA": true,
+        "Interaction_ProjB": true,
+        "Interaction_Pinhole": true
+      }
+    },
+    {
+      "check": "all five interaction lens centers now ray through their openings",
+      "pass": true,
+      "evidence": {
+        "Face_Depth": false,
+        "Face_RGB": false,
+        "Face_ProjA": false,
+        "Face_ProjB": false,
+        "Face_Pinhole": false,
+        "Interaction_Depth": false,
+        "Interaction_RGB": false,
+        "Interaction_ProjA": false,
+        "Interaction_ProjB": false,
+        "Interaction_Pinhole": false
+      }
+    },
+    {
+      "check": "every retained interaction lens component rotates with its window",
+      "pass": true,
+      "evidence": {
+        "Interaction_Drum_Lens_Depth": 45.0,
+        "Interaction_Drum_Lens_Depth_Barrel": 45.0,
+        "Interaction_Drum_Lens_Depth_Element": 45.0,
+        "Interaction_Drum_Lens_Depth_Front_Element": 45.0,
+        "Interaction_Drum_Lens_Depth_Pupil": 45.0,
+        "Interaction_Drum_Lens_Pinhole": 45.0,
+        "Interaction_Drum_Lens_ProjA": 45.0,
+        "Interaction_Drum_Lens_ProjB": 45.0,
+        "Interaction_Drum_Lens_RGB": 45.0,
+        "Interaction_Drum_Lens_RGB_Barrel": 45.0,
+        "Interaction_Drum_Lens_RGB_Element": 45.0,
+        "Interaction_Drum_Lens_RGB_Front_Element": 45.0,
+        "Interaction_Drum_Lens_RGB_Pupil": 45.0
+      }
+    },
+    {
+      "check": "both drums have opaque faces at both ends",
+      "pass": true,
+      "evidence": {
+        "Face_Sensor_Head_Closed_End_Left": {
+          "manifold": true,
+          "flush_with_drum_end_mm": 0.0,
+          "axial_center_ray_hits_cap": true
+        },
+        "Face_Sensor_Head_Closed_End_Right": {
+          "manifold": true,
+          "flush_with_drum_end_mm": 0.0,
+          "axial_center_ray_hits_cap": true
+        },
+        "Interaction_Sensor_Head_Closed_End_Left": {
+          "manifold": true,
+          "flush_with_drum_end_mm": 0.0,
+          "axial_center_ray_hits_cap": true
+        },
+        "Interaction_Sensor_Head_Closed_End_Right": {
+          "manifold": true,
+          "flush_with_drum_end_mm": 0.0,
+          "axial_center_ray_hits_cap": true
+        }
+      }
+    },
+    {
+      "check": "R10 continuous board retained",
+      "pass": true,
+      "evidence": {
+        "manifold": true,
+        "bounds_mm": [
+          [
+            -45.0,
+            57.5
+          ],
+          [
+            10.6,
+            12.1
+          ],
+          [
+            -25.5,
+            2.5
+          ]
+        ]
+      }
+    },
+    {
+      "check": "R10 and source KiCad files unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r10/deepreal-exterior-refinement-r10.blend": {
+          "expected": "134265e4880317509dbfd57be9f057761be34cf95b898ad3486e1dd4884eda4b",
+          "actual": "134265e4880317509dbfd57be9f057761be34cf95b898ad3486e1dd4884eda4b"
+        },
+        "blender/refinements/r10/build_r10.py": {
+          "expected": "2081f79699f913c5c1d1d4562fe8c6dcb899157366e3d616644d097bae3d89f4",
+          "actual": "2081f79699f913c5c1d1d4562fe8c6dcb899157366e3d616644d097bae3d89f4"
+        },
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": {
+          "expected": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5",
+          "actual": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5"
+        }
+      }
+    },
+    {
+      "check": "unrelated prework Git changes are preserved",
+      "pass": true,
+      "evidence": {
+        "before": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ],
+        "after": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ]
+      }
+    }
+  ],
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "Lens alignment is visual geometry, not optical calibration.",
+    "Drum end caps are visual closures, not bearing or seal designs.",
+    "Website exterior views remain draft renders.",
+    "USB, PCB, thermal and motor engineering remain unresolved."
+  ]
+}

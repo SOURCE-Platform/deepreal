@@ -1,0 +1,185 @@
+{
+  "file": "/Users/adam/Documents/deepreal/blender/refinements/r04/deepreal-exterior-refinement-r04.blend",
+  "blender_version": "5.2.0 LTS",
+  "result": "PASS",
+  "qualification": "PASS verifies saved geometry and source-file integrity only. It does not approve thermal, electrical, tolerance, rotation, sealing, assembly, connector, or manufacturing performance.",
+  "metrics": {
+    "drum_surface_gap_mm": 0.0,
+    "panel_usb_center_x_mm": 0.0,
+    "male_plug_center_x_mm": 0.0,
+    "overmold_center_x_mm": 0.0,
+    "male_shell_insertion_overlap_z_mm": 3.978,
+    "overmold_to_housing_surface_z_gap_mm": 0.2,
+    "spreader_to_pad_contact_y_mm": 0.0,
+    "pad_to_boss_contact_y_mm": 0.0,
+    "split_pad_center_channel_width_mm": 15.0,
+    "usb_shell_side_clearance_each_mm": 3.05,
+    "male_plug_side_clearance_each_mm": 3.325,
+    "saved_viewport_count": 10
+  },
+  "checks": {
+    "drums_touch_without_visible_gap": true,
+    "usb_assembly_is_centered": true,
+    "male_shell_is_inserted": true,
+    "overmold_is_seated_close_to_body": true,
+    "pad_touches_spreader": true,
+    "boss_touches_pad": true,
+    "center_channel_clears_usb": true,
+    "viewports_use_close_review_scale": true,
+    "source_blend_unchanged": true
+  },
+  "source_integrity": {
+    "source_blend_sha256": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+    "recorded_source_blend_sha256": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+    "source_blend_mtime_epoch": 1789342681,
+    "recorded_source_blend_mtime_epoch": 1789342681,
+    "note": "deepreal.blend is generated and Git-ignored; hash and pre-existing mtime are pinned here for repeat checks",
+    "source_blend_matches_recorded_baseline": true
+  },
+  "bounds_mm": {
+    "Face_Sensor_Head": {
+      "min": [
+        -54.0,
+        -13.5,
+        8.0
+      ],
+      "max": [
+        0.0,
+        10.5,
+        32.0
+      ]
+    },
+    "Interaction_Sensor_Head": {
+      "min": [
+        -0.0,
+        -13.5,
+        8.0
+      ],
+      "max": [
+        54.0,
+        10.5,
+        32.0
+      ]
+    },
+    "Main_PCBA": {
+      "min": [
+        -45.0,
+        10.595,
+        -25.5
+      ],
+      "max": [
+        45.0,
+        12.105,
+        2.5
+      ]
+    },
+    "Main_PCBA_Populated_Keepout": {
+      "min": [
+        -45.0,
+        7.425,
+        -25.5
+      ],
+      "max": [
+        45.0,
+        13.425,
+        2.5
+      ]
+    },
+    "Main_Housing_USB_Shell": {
+      "min": [
+        -4.45,
+        16.35,
+        -21.478
+      ],
+      "max": [
+        4.45,
+        19.65,
+        -15.478
+      ]
+    },
+    "USB_C_Male_Metal_Shell": {
+      "min": [
+        -4.175,
+        16.65,
+        -25.0
+      ],
+      "max": [
+        4.175,
+        19.35,
+        -17.5
+      ]
+    },
+    "USB_C_Plug_Overmold": {
+      "min": [
+        -4.5,
+        15.5,
+        -34.478
+      ],
+      "max": [
+        4.5,
+        20.5,
+        -22.478
+      ]
+    },
+    "Thermal_Spreader": {
+      "min": [
+        -38.0,
+        14.225,
+        -23.0
+      ],
+      "max": [
+        38.0,
+        15.575,
+        0.0
+      ]
+    },
+    "Housing_Thermal_Pad_Left": {
+      "min": [
+        -30.0,
+        15.575,
+        -20.5
+      ],
+      "max": [
+        -7.5,
+        16.975,
+        -2.5
+      ]
+    },
+    "Housing_Thermal_Pad_Right": {
+      "min": [
+        7.5,
+        15.575,
+        -20.5
+      ],
+      "max": [
+        30.0,
+        16.975,
+        -2.5
+      ]
+    },
+    "Housing_Thermal_Boss_Left": {
+      "min": [
+        -30.0,
+        16.975,
+        -20.5
+      ],
+      "max": [
+        -7.5,
+        21.9,
+        -2.5
+      ]
+    },
+    "Housing_Thermal_Boss_Right": {
+      "min": [
+        7.5,
+        16.975,
+        -20.5
+      ],
+      "max": [
+        30.0,
+        21.9,
+        -2.5
+      ]
+    }
+  }
+}
