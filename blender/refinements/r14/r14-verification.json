@@ -1,0 +1,189 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r14/deepreal-exterior-refinement-r14.blend",
+  "result": "PASS",
+  "engineering_readiness": "BLOCKED",
+  "checks": [
+    {
+      "check": "R13 enclosure, PCB, drum and thermal meshes preserved",
+      "pass": true,
+      "evidence": {
+        "Main_Housing": true,
+        "Face_Sensor_Head": true,
+        "Interaction_Sensor_Head": true,
+        "Main_PCBA_Near_Full_Height_Right_Wing_PROPOSAL": true,
+        "Thermal_Spreader": true,
+        "Shield_Rear_Tray": true
+      }
+    },
+    {
+      "check": "44 motor and optical source parts restored",
+      "pass": true,
+      "evidence": {
+        "count": 44,
+        "missing": []
+      }
+    },
+    {
+      "check": "two head boards and both power/data/drive paths exist",
+      "pass": true,
+      "evidence": {
+        "Face_Head_PCBA_Carrier_CONCEPT": true,
+        "Face_Head_Flex_Connector_PROXY": true,
+        "Face_Head_Power_Data_Flex_ROUTE_CONCEPT": true,
+        "Face_Motor_Power_Harness_ROUTE_CONCEPT": true,
+        "Face_Encoder_Feedback_ROUTE_CONCEPT": true,
+        "Interaction_Head_PCBA_Carrier_CONCEPT": true,
+        "Interaction_Head_Flex_Connector_PROXY": true,
+        "Interaction_Head_Power_Data_Flex_ROUTE_CONCEPT": true,
+        "Interaction_Motor_Power_Harness_ROUTE_CONCEPT": true,
+        "Interaction_Encoder_Feedback_ROUTE_CONCEPT": true
+      }
+    },
+    {
+      "check": "obsolete unterminated flex proxies removed",
+      "pass": true,
+      "evidence": [
+        "Face_Head_Flex_Interface_CONCEPT",
+        "Interaction_Head_Flex_Interface_CONCEPT"
+      ]
+    },
+    {
+      "check": "head flex routes terminate at intended main-PCB area",
+      "pass": true,
+      "evidence": {
+        "Face": {
+          "last_point_mm": [
+            -22.0,
+            10.1,
+            -23.5
+          ],
+          "distance_to_nominal_J2_J3_mm": 0.0,
+          "target": "J2"
+        },
+        "Interaction": {
+          "last_point_mm": [
+            22.0,
+            10.1,
+            -23.5
+          ],
+          "distance_to_nominal_J2_J3_mm": 0.0,
+          "target": "J3"
+        }
+      }
+    },
+    {
+      "check": "restored hard parts clear the drum shell and housing",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "check": "R13 one-millimeter center body gap retained",
+      "pass": true,
+      "evidence": {
+        "left_end_mm": -0.5,
+        "right_start_mm": 0.5
+      }
+    },
+    {
+      "check": "all ten optical openings remain unobstructed by shells",
+      "pass": true,
+      "evidence": {
+        "Face_Depth": true,
+        "Face_RGB": true,
+        "Face_ProjA": true,
+        "Face_ProjB": true,
+        "Face_Pinhole": true,
+        "Interaction_Depth": true,
+        "Interaction_RGB": true,
+        "Interaction_ProjA": true,
+        "Interaction_ProjB": true,
+        "Interaction_Pinhole": true
+      }
+    },
+    {
+      "check": "saved file opens with housing and drum shells visible",
+      "pass": true,
+      "evidence": {
+        "housing": true,
+        "drum_shells": true
+      }
+    },
+    {
+      "check": "saved viewport remains close to the model",
+      "pass": true,
+      "evidence": [
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14
+      ]
+    },
+    {
+      "check": "R13, donor and native PCB sources unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r13/deepreal-exterior-refinement-r13.blend": true,
+        "blender/deepreal.blend": true,
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": true
+      }
+    },
+    {
+      "check": "pre-existing unrelated edits remain untouched",
+      "pass": true,
+      "evidence": {
+        "before": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ],
+        "after": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "No verified head PCB schematic, copper, footprint or pinout.",
+    "Drum rotation feedthrough and flex fatigue are unresolved.",
+    "Drive torque, gearing, bearing fit, stop mounts and shell passages are unresolved.",
+    "Motor wiring and optical routes show intended paths, not routed nets."
+  ]
+}

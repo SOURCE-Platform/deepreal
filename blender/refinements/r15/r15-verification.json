@@ -1,0 +1,273 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r15/deepreal-exterior-refinement-r15.blend",
+  "result": "PASS",
+  "engineering_readiness": "BLOCKED",
+  "checks": [
+    {
+      "check": "enclosure, thermal and main-PCB meshes retained",
+      "pass": true,
+      "evidence": {
+        "Main_Housing": true,
+        "Thermal_Spreader": true,
+        "Shield_Rear_Tray": true,
+        "Main_PCBA_Near_Full_Height_Right_Wing_PROPOSAL": true
+      }
+    },
+    {
+      "check": "shell and removable covers are closed meshes",
+      "pass": true,
+      "evidence": {
+        "Face_Sensor_Head": {
+          "vertices": 1041,
+          "faces": 642,
+          "non_manifold_edges": 0
+        },
+        "Face_Rear_Access_Cover_REMOVABLE_CONCEPT": {
+          "vertices": 68,
+          "faces": 36,
+          "non_manifold_edges": 0
+        },
+        "Interaction_Sensor_Head": {
+          "vertices": 1043,
+          "faces": 644,
+          "non_manifold_edges": 0
+        },
+        "Interaction_Rear_Access_Cover_REMOVABLE_CONCEPT": {
+          "vertices": 68,
+          "faces": 36,
+          "non_manifold_edges": 0
+        }
+      }
+    },
+    {
+      "check": "gear envelopes lie inside the drum shells",
+      "pass": true,
+      "evidence": {
+        "dimensions": {
+          "Face": {
+            "radial_outer_diameter_mm": 20.9,
+            "drum_inner_diameter_mm": 21.0,
+            "ring_x_mm": [
+              -53.6,
+              -51.6
+            ],
+            "shell_x_mm": [
+              -54.0,
+              -0.5
+            ]
+          },
+          "Interaction": {
+            "radial_outer_diameter_mm": 20.9,
+            "drum_inner_diameter_mm": 21.0,
+            "ring_x_mm": [
+              51.6,
+              53.6
+            ],
+            "shell_x_mm": [
+              0.5,
+              54.0
+            ]
+          }
+        },
+        "pivot_links": {
+          "Face": {
+            "ring_parent": true,
+            "cover_parent": true
+          },
+          "Interaction": {
+            "ring_parent": true,
+            "cover_parent": true
+          }
+        }
+      }
+    },
+    {
+      "check": "one-millimeter center drum gap retained",
+      "pass": true,
+      "evidence": {
+        "left_end_mm": -0.5,
+        "right_start_mm": 0.5
+      }
+    },
+    {
+      "check": "sampled 150-degree travel clears fixed parts and housing",
+      "pass": true,
+      "evidence": {
+        "Face_-75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+0": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+0": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        }
+      }
+    },
+    {
+      "check": "normal saved view has housing, shells and covers visible",
+      "pass": true,
+      "evidence": {
+        "00 \u2014 HOUSING MODE \u2014 CLICK EYE: SOLID \u2194 WIREFRAME": true,
+        "01 \u2014 DRUM SHELLS \u2014 CLICK EYE FOR INTERNALS": true,
+        "01A \u2014 REAR ACCESS COVERS \u2014 CLICK EYE TO INSPECT OPENINGS": true
+      }
+    },
+    {
+      "check": "saved viewport is framed near the model",
+      "pass": true,
+      "evidence": [
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14,
+        0.14
+      ]
+    },
+    {
+      "check": "R14, R13 and native PCB sources unchanged",
+      "pass": true,
+      "evidence": {
+        "blender/refinements/r14/deepreal-exterior-refinement-r14.blend": true,
+        "blender/refinements/r13/deepreal-exterior-refinement-r13.blend": true,
+        "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": true
+      }
+    },
+    {
+      "check": "unrelated pre-existing work remains untouched",
+      "pass": true,
+      "evidence": {
+        "before": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ],
+        "after": [
+          " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+          " M hardware/electronics/deepreal-main-pcba/README.md",
+          " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+          " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+          " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+          " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+          " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+          " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+          " M hardware/electronics/deepreal-optical-head/README.md",
+          " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+          " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+          "?? docs/electrical/pcb-progress-2026-09-14.md",
+          "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+          "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+          "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+          "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Sampled triangle intersections and lens center rays do not establish full mechanical or optical clearance.",
+    "Gear teeth, coupling, torque, tolerances, hard stops and retention are not designed.",
+    "The rear access cover requires real fasteners, sealing and structural validation.",
+    "The head flex is shown only at neutral pose; dynamic service loop and cable life are unresolved."
+  ]
+}

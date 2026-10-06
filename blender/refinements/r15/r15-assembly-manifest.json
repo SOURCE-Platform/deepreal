@@ -1,0 +1,47 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r15/deepreal-exterior-refinement-r15.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r14/deepreal-exterior-refinement-r14.blend",
+  "rear_access_cover_objects": [
+    "Face_Rear_Access_Cover_REMOVABLE_CONCEPT",
+    "Interaction_Rear_Access_Cover_REMOVABLE_CONCEPT"
+  ],
+  "revised_drive_objects": [
+    "Face_Motor_Mount_Arm_Low_CONCEPT",
+    "Face_Motor_Mount_Arm_High_CONCEPT",
+    "Face_Motor_Mount_Standoff_Low_CONCEPT",
+    "Face_Motor_Mount_Standoff_High_CONCEPT",
+    "Face_Ring_Gear",
+    "Face_Geared_Motor",
+    "Face_Motor_Pinion",
+    "Face_Motor_Output_Shaft_CONCEPT",
+    "Face_Encoder_Board",
+    "Face_Encoder_Magnet",
+    "Interaction_Motor_Mount_Arm_Low_CONCEPT",
+    "Interaction_Motor_Mount_Arm_High_CONCEPT",
+    "Interaction_Motor_Mount_Standoff_Low_CONCEPT",
+    "Interaction_Motor_Mount_Standoff_High_CONCEPT",
+    "Interaction_Ring_Gear",
+    "Interaction_Geared_Motor",
+    "Interaction_Motor_Pinion",
+    "Interaction_Motor_Output_Shaft_CONCEPT",
+    "Interaction_Encoder_Board",
+    "Interaction_Encoder_Magnet"
+  ],
+  "neutral_pose_routes": [
+    "Face_Head_Power_Data_Flex_ROUTE_CONCEPT",
+    "Face_Motor_Power_Harness_ROUTE_CONCEPT",
+    "Face_Encoder_Feedback_ROUTE_CONCEPT",
+    "Interaction_Head_Power_Data_Flex_ROUTE_CONCEPT",
+    "Interaction_Motor_Power_Harness_ROUTE_CONCEPT",
+    "Interaction_Encoder_Feedback_ROUTE_CONCEPT"
+  ],
+  "travel_pivots": [
+    "Face_Rotating_Drum_Pivot_R15",
+    "Interaction_Rotating_Drum_Pivot_R15"
+  ],
+  "design_sweep_absolute_deg": [
+    -75,
+    75
+  ],
+  "engineering_readiness": "BLOCKED"
+}

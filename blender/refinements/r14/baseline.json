@@ -1,0 +1,28 @@
+{
+  "protected_sha256": {
+    "blender/refinements/r13/deepreal-exterior-refinement-r13.blend": "a089d05f55b73ff538568602b759d92142af57905788332d80bdb6ed18a80724",
+    "blender/deepreal.blend": "4c65762f65d35f5345bb3ad601aafdb0ce2809681931aad480586cc5747d3412",
+    "hardware/electronics/deepreal-main-pcba/deepreal-main-pcba.kicad_pcb": "63739aa744a85b407b4784bacde8dd61b5b745cae19ed3499ce07cf85a1c31b5"
+  },
+  "git_status_before": [
+    " M docs/electrical/main-pcba-schematic-entry-spec-v0.1.md",
+    " M hardware/electronics/deepreal-main-pcba/README.md",
+    " M hardware/electronics/deepreal-main-pcba/change-register.csv",
+    " M hardware/electronics/deepreal-main-pcba/circuit-specification.md",
+    " M hardware/electronics/deepreal-main-pcba/component-evidence.csv",
+    " M hardware/electronics/deepreal-main-pcba/component-register.csv",
+    " M hardware/electronics/deepreal-main-pcba/connector-allocation.csv",
+    " M hardware/electronics/deepreal-main-pcba/net-registry.csv",
+    " M hardware/electronics/deepreal-main-pcba/source-evidence-register.csv",
+    " M hardware/electronics/deepreal-optical-head/README.md",
+    " M hardware/electronics/deepreal-optical-head/circuit-specification.md",
+    " M hardware/electronics/deepreal-optical-head/net-registry.csv",
+    "?? blender/refinements/r14/",
+    "?? docs/electrical/pcb-progress-2026-09-14.md",
+    "?? docs/electrical/review-evidence/2026-09-14-head-power-audit.json",
+    "?? hardware/electronics/deepreal-main-pcba/scripts/audit_head_power.py",
+    "?? hardware/electronics/deepreal-main-pcba/scripts/test_head_power.py",
+    "?? hardware/electronics/deepreal-optical-head/power-clock-evidence.json",
+    "?? references/components/datasheets/ams-mira220-ds000642-v9.pdf"
+  ]
+}

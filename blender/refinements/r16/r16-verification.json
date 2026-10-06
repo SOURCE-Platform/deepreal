@@ -1,0 +1,202 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "R15 housing, face drum, boards and all lens positions unchanged",
+      "pass": true,
+      "evidence": {
+        "Main_Housing": true,
+        "Thermal_Spreader": true,
+        "Shield_Rear_Tray": true,
+        "Face_Sensor_Head": true,
+        "Face_Rear_Access_Cover_REMOVABLE_CONCEPT": true,
+        "Face_Head_PCBA_Carrier_CONCEPT": true,
+        "Interaction_Head_PCBA_Carrier_CONCEPT": true,
+        "Face_Drum_Lens_Depth": true,
+        "Face_Drum_Lens_RGB": true,
+        "Face_Drum_Lens_ProjA": true,
+        "Face_Drum_Lens_ProjB": true,
+        "Face_Drum_Lens_Pinhole": true,
+        "Interaction_Drum_Lens_Depth": true,
+        "Interaction_Drum_Lens_RGB": true,
+        "Interaction_Drum_Lens_ProjA": true,
+        "Interaction_Drum_Lens_ProjB": true,
+        "Interaction_Drum_Lens_Pinhole": true
+      }
+    },
+    {
+      "check": "interaction cover is lower at saved pose",
+      "pass": true,
+      "evidence": {
+        "cover_center_angles_deg": {
+          "Face": 0.0,
+          "Interaction": -25.28
+        },
+        "interaction_cutter_angle_deg": -25.0
+      }
+    },
+    {
+      "check": "both shells and covers remain closed meshes",
+      "pass": true,
+      "evidence": {
+        "Face_Sensor_Head": {
+          "faces": 642,
+          "non_manifold_edges": 0
+        },
+        "Face_Rear_Access_Cover_REMOVABLE_CONCEPT": {
+          "faces": 36,
+          "non_manifold_edges": 0
+        },
+        "Interaction_Sensor_Head": {
+          "faces": 642,
+          "non_manifold_edges": 0
+        },
+        "Interaction_Rear_Access_Cover_REMOVABLE_CONCEPT": {
+          "faces": 38,
+          "non_manifold_edges": 0
+        }
+      }
+    },
+    {
+      "check": "shifted cover clears interaction optics and shell",
+      "pass": true,
+      "evidence": {
+        "shell_cover": 0,
+        "cover_Depth": 0,
+        "cover_RGB": 0,
+        "cover_ProjA": 0,
+        "cover_ProjB": 0,
+        "cover_Pinhole": 0
+      }
+    },
+    {
+      "check": "all ten lens-center passages remain open",
+      "pass": true,
+      "evidence": {
+        "Face_Depth": true,
+        "Face_RGB": true,
+        "Face_ProjA": true,
+        "Face_ProjB": true,
+        "Face_Pinhole": true,
+        "Interaction_Depth": true,
+        "Interaction_RGB": true,
+        "Interaction_ProjA": true,
+        "Interaction_ProjB": true,
+        "Interaction_Pinhole": true
+      }
+    },
+    {
+      "check": "sampled drum travel clears fixed parts and housing",
+      "pass": true,
+      "evidence": {
+        "Face_-75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_-15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+0": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Face_+75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_-15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+0": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+15": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+30": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+45": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+60": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        },
+        "Interaction_+75": {
+          "fixed_part_or_housing_intersections": [],
+          "housing_blocked_lens_center_rays": []
+        }
+      }
+    },
+    {
+      "check": "one-millimeter drum gap remains",
+      "pass": true,
+      "evidence": {
+        "face_end_mm": -0.5,
+        "interaction_start_mm": 0.5
+      }
+    },
+    {
+      "check": "R15 source file remains unchanged",
+      "pass": true,
+      "evidence": {
+        "before_sha256": "4ac344b86dc9d0bab68cb33f535edcae7799de5b5154e33836e04ff03435d35e",
+        "after_sha256": "4ac344b86dc9d0bab68cb33f535edcae7799de5b5154e33836e04ff03435d35e"
+      }
+    }
+  ],
+  "visual_review": "At the tested 75-degree-down high-front camera, the interaction opening and seam are hidden. This is not a guarantee for every viewpoint or future travel range.",
+  "engineering_readiness": "BLOCKED"
+}
