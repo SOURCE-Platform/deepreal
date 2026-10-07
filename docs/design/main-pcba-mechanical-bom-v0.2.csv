@@ -31,4 +31,4 @@ J3,Interaction optical-head flex,Hirose FH26W-51S-0.3SHW(97),0.3 mm FPC 51 pos,1
 J4,Face motor/encoder,TBD,6-position low-profile,5.0x2.6x1.2,Top,RESERVED,Function envelope
 J5,Interaction motor/encoder,TBD,6-position low-profile,5.0x2.6x1.2,Top,RESERVED,Function envelope
 H1,Face head carrier,"SA31VA30P + Mira220 + AS1170 + Belago1.2 + local rails",Custom rigid-flex,OPEN,Rotating,HEAD_PCB_REQUIRED,Subsystem partition decision
-H2,Interaction head carrier,"SA31VA30P + Mira220 + AS1170 + Belago1.2 + local rails",Custom rigid-flex,OPEN,Rotating,HEAD_PCB_REQUIRED,Subsystem partition decision
+H2,Interaction head carrier,"SA36VA30P wide + Mira220 + AS1170 + Belago1.2 + local rails",Custom rigid-flex,OPEN,Rotating,HEAD_PCB_REQUIRED,Wide lens optical target; shared carrier and window fit unverified

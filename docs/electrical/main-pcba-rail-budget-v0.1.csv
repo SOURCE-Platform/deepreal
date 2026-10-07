@@ -15,7 +15,7 @@ FPGA_CORE_B,Local point-of-load,1.0,0.8,1.2,Interaction LIFCL-17,"Estimate pendi
 FACE_HEAD_3V3,SYS_3V3 filtered,3.3,0.55,0.9,"RGB/IR local rails; AS1170; Belago pulse storage","Estimate; eight parallel flex contacts before system derating"
 INTERACTION_HEAD_3V3,SYS_3V3 filtered,3.3,0.55,0.9,"RGB/IR local rails; AS1170; Belago pulse storage","Estimate; eight parallel flex contacts before system derating"
 RGB_1V1_FACE,Head local buck,1.1,0.6,0.7,SA31VA30P,"Raspberry Pi reference maximum load"
-RGB_1V1_INTERACTION,Head local buck,1.1,0.6,0.7,SA31VA30P,"Raspberry Pi reference maximum load"
+RGB_1V1_INTERACTION,Head local buck,1.1,0.6,0.7,SA36VA30P target,"Provisional standard-reference load; verify wide variant current before freeze"
 RGB_1V8_EACH,Head local LDO,1.8,0.05,0.08,SA31VA30P,"Raspberry Pi reference maximum load"
 RGB_2V8_EACH,Head local LDO,2.8,0.05,0.08,SA31VA30P,"Raspberry Pi reference maximum load"
 IR_2V5_EACH,Head local regulator,2.5,0.2,0.35,Mira220,"350 mA documented startup interval"

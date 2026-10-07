@@ -3,6 +3,9 @@
 Status: REFERENCE — for website video generation. These presets describe what footage
 from the DeepReal reference cameras should look like. They are approximations of
 documented hardware behavior, not captured prototype footage.
+The 6 October 2026 EVT optical target now matches these RGB lens roles: standard
+SA31VA30P for face and wide SA36VA30P for interaction. The working drum window,
+depth overlap, and complete optical clearance remain unverified.
 
 ## 1. Verified hardware basis
 

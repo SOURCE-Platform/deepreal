@@ -1,0 +1,33 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r20/deepreal-wide-interaction-optics-r20.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "part": "Raspberry Pi SA36VA30P wide RGB sensor assembly",
+  "lens_diameter_mm": 6.95,
+  "lens_depth_dimension_mm": 8.3,
+  "assembly_outline_mm": [
+    10.8,
+    10.8
+  ],
+  "existing_visual_bore_diameter_mm": 9.0,
+  "triangle_overlaps_with_rotating_shell": {
+    "Interaction_RGB_Wide_Lens_6p95mm_ENVELOPE_R20": 0,
+    "Interaction_RGB_Wide_Assembly_10p8mm_ENVELOPE_R20": 0
+  },
+  "triangle_overlaps_with_neighbor_proxies": {
+    "Interaction_RGB_Wide_Lens_6p95mm_ENVELOPE_R20": {
+      "Interaction_Internal_Optical_Carrier": 57,
+      "Interaction_IR_Depth_Module_Body": 0,
+      "Interaction_SL_Projector_Body": 0
+    },
+    "Interaction_RGB_Wide_Assembly_10p8mm_ENVELOPE_R20": {
+      "Interaction_Internal_Optical_Carrier": 30,
+      "Interaction_IR_Depth_Module_Body": 0,
+      "Interaction_SL_Projector_Body": 0
+    }
+  },
+  "limits": [
+    "Envelope placement uses existing visual window as a provisional nose datum.",
+    "Published 8.3 mm depth is represented as a conservative cylinder, not manufacturer CAD.",
+    "Existing R16 RGB proxy and window are retained; fit to carrier and optical cone are unverified."
+  ]
+}

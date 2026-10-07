@@ -1,0 +1,87 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r19/deepreal-role-specific-sweep-r19.blend",
+  "samples": {
+    "Face": {
+      "-45": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R19": 0,
+          "Face_Rear_Arm_Outer_R19": 0
+        },
+        "potential_front_facing_slot_deg": 12.0,
+        "housing_blocked_lens_centers": []
+      },
+      "0": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R19": 0,
+          "Face_Rear_Arm_Outer_R19": 0
+        },
+        "potential_front_facing_slot_deg": 0.0,
+        "housing_blocked_lens_centers": []
+      },
+      "45": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R19": 0,
+          "Face_Rear_Arm_Outer_R19": 8
+        },
+        "potential_front_facing_slot_deg": 12.0,
+        "housing_blocked_lens_centers": []
+      }
+    },
+    "Interaction": {
+      "0": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R19": 0,
+          "Interaction_Rear_Arm_Outer_R19": 0
+        },
+        "potential_front_facing_slot_deg": 6.0,
+        "housing_blocked_lens_centers": []
+      },
+      "45": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R19": 0,
+          "Interaction_Rear_Arm_Outer_R19": 0
+        },
+        "potential_front_facing_slot_deg": 0.0,
+        "housing_blocked_lens_centers": []
+      },
+      "90": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R19": 0,
+          "Interaction_Rear_Arm_Outer_R19": 0
+        },
+        "potential_front_facing_slot_deg": 6.0,
+        "housing_blocked_lens_centers": [
+          "Depth",
+          "RGB",
+          "Pinhole"
+        ]
+      }
+    }
+  },
+  "limits": [
+    "These are provisional user-proposed angles, not finalized hard stops.",
+    "Front-facing slot angle is a geometric exposure estimate; consult renders for actual enclosure occlusion.",
+    "Arm-shell triangle overlap is a rough collision check, not a tolerance check.",
+    "Bearing load path, motor, encoder, cable and assembly are not designed in this model."
+  ],
+  "arm_shell_clear_at_samples": false,
+  "lens_centers_clear_at_samples": false,
+  "slots_never_face_front_at_samples": false,
+  "interaction_first_center_ray_blocked_deg": 87,
+  "interaction_center_ray_blockages_by_degree": {
+    "87": [
+      "Pinhole"
+    ],
+    "88": [
+      "Pinhole"
+    ],
+    "89": [
+      "Pinhole"
+    ],
+    "90": [
+      "Depth",
+      "RGB",
+      "Pinhole"
+    ]
+  }
+}

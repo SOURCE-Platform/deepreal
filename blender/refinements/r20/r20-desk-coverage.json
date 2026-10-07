@@ -1,0 +1,41 @@
+{
+  "basis": "Flat desk below camera; optic level; no housing, lens distortion, focus, or depth-system overlap modeled.",
+  "source_vertical_fov_deg": {
+    "standard": 41,
+    "wide": 67
+  },
+  "rows": [
+    {
+      "pose": "Wide, straight",
+      "vertical_fov_deg": 67,
+      "optical_down_deg": 0,
+      "near_distance_over_height": 1.511,
+      "far_distance_over_height": null
+    },
+    {
+      "pose": "Wide, 22.5\u00b0 down",
+      "vertical_fov_deg": 67,
+      "optical_down_deg": 22.5,
+      "near_distance_over_height": 0.675,
+      "far_distance_over_height": null
+    },
+    {
+      "pose": "Wide, 45\u00b0 down",
+      "vertical_fov_deg": 67,
+      "optical_down_deg": 45,
+      "near_distance_over_height": 0.203,
+      "far_distance_over_height": 4.915
+    },
+    {
+      "pose": "Standard, 45\u00b0 down",
+      "vertical_fov_deg": 41,
+      "optical_down_deg": 45,
+      "near_distance_over_height": 0.456,
+      "far_distance_over_height": 2.194
+    }
+  ],
+  "directly_below_requires_at_least_deg": {
+    "wide": 56.5,
+    "standard": 69.5
+  }
+}

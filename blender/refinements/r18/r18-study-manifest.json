@@ -1,0 +1,19 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r18/deepreal-rear-support-study-r18.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "study_parts": [
+    "Face_Plain_Rotating_Outer_Face_R18",
+    "Face_Rear_Support_Yoke_R18",
+    "Face_Rear_Arm_Inner_R18",
+    "Face_Bearing_Inner_ENVELOPE_R18",
+    "Face_Rear_Arm_Outer_R18",
+    "Face_Bearing_Outer_ENVELOPE_R18",
+    "Interaction_Plain_Rotating_Outer_Face_R18",
+    "Interaction_Rear_Support_Yoke_R18",
+    "Interaction_Rear_Arm_Inner_R18",
+    "Interaction_Bearing_Inner_ENVELOPE_R18",
+    "Interaction_Rear_Arm_Outer_R18",
+    "Interaction_Bearing_Outer_ENVELOPE_R18"
+  ],
+  "engineering_readiness": "VISIBILITY_STUDY_ONLY"
+}

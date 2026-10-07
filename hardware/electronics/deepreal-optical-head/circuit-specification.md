@@ -18,6 +18,11 @@ S1 is the 10.8 mm IMX708-based sensor assembly, not the complete Raspberry Pi ca
 module PCB. J2 and the support circuit follow the published Camera Module 3 reference
 design. Its two-lane CSI, MCLK, CCI/control, reset/power-down and autofocus support
 are retained. Assembly availability and software enablement remain EVT risks.
+The face population targets standard SA31VA30P; the interaction population targets
+wide SA36VA30P. These are optical selections, not proof that their complete
+electrical populations are interchangeable. Verify the wide assembly's pinout,
+connector mating, autofocus current and support BOM before freezing a common J2
+footprint and rail budget.
 
 ## IR channel
 

@@ -10,6 +10,10 @@
 The two drums do not use two independently designed head PCBs. H1 and H2 are the
 same controlled design populated twice, with identity/configuration selecting face
 or interaction use. This reduces layout, firmware and test divergence.
+The current RGB optical target populates standard SA31VA30P in the face head and
+wide SA36VA30P in the interaction head. One shared carrier is still an objective,
+subject to verifying both variants' mating connector, pinout, autofocus load and
+the larger interaction lens clearance before schematic/layout freeze.
 
 This is the intended partition, not an existing completed pair of PCBs. No native
 KiCad head schematic or board has been captured yet. Main-board J2 goes to the

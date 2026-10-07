@@ -1,0 +1,114 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r18/deepreal-rear-support-study-r18.blend",
+  "samples": {
+    "Face": {
+      "-75": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 78.0
+      },
+      "-60": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 63.0
+      },
+      "-45": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 48.0
+      },
+      "-30": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 33.0
+      },
+      "-15": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 4,
+          "Face_Rear_Arm_Outer_R18": 10
+        },
+        "potential_front_facing_slot_deg": 18.0
+      },
+      "0": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 6.0
+      },
+      "15": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 4,
+          "Face_Rear_Arm_Outer_R18": 10
+        },
+        "potential_front_facing_slot_deg": 18.0
+      },
+      "30": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 33.0
+      },
+      "45": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 14
+        },
+        "potential_front_facing_slot_deg": 48.0
+      },
+      "60": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 63.0
+      },
+      "75": {
+        "arm_shell_triangle_hits": {
+          "Face_Rear_Arm_Inner_R18": 0,
+          "Face_Rear_Arm_Outer_R18": 6
+        },
+        "potential_front_facing_slot_deg": 78.0
+      }
+    },
+    "Interaction": {
+      "45": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R18": 0,
+          "Interaction_Rear_Arm_Outer_R18": 0
+        },
+        "potential_front_facing_slot_deg": 0.0
+      },
+      "60": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R18": 0,
+          "Interaction_Rear_Arm_Outer_R18": 0
+        },
+        "potential_front_facing_slot_deg": 0.0
+      },
+      "75": {
+        "arm_shell_triangle_hits": {
+          "Interaction_Rear_Arm_Inner_R18": 0,
+          "Interaction_Rear_Arm_Outer_R18": 0
+        },
+        "potential_front_facing_slot_deg": 0.0
+      }
+    }
+  },
+  "limits": [
+    "Angular front exposure does not account for housing occlusion or side views.",
+    "Triangle overlap tests are not tolerance or flexible-cable checks.",
+    "Bearings, motor, encoder, load path and assembly are envelopes only."
+  ],
+  "arm_shell_clear_at_samples": false,
+  "slots_never_face_front_at_samples": false
+}

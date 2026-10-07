@@ -1,0 +1,317 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "model_sha256": "dc691afb7f2903b82efae0dcb09530a57a91741e18ffb786b6f80198d6ab2340",
+  "drum_inner_diameter_mm": 21.0,
+  "encoder_board_envelope_mm": [
+    0.8,
+    6.0,
+    6.0
+  ],
+  "results": {
+    "Face": {
+      "current_bounds_mm": {
+        "Sensor_Head": [
+          [
+            -54.0,
+            -0.5
+          ],
+          [
+            -13.5,
+            10.5
+          ],
+          [
+            8.0,
+            32.0
+          ]
+        ],
+        "Geared_Motor": [
+          [
+            -50.8,
+            -38.8
+          ],
+          [
+            1.3,
+            8.3
+          ],
+          [
+            16.5,
+            23.5
+          ]
+        ],
+        "Ring_Gear": [
+          [
+            -53.6,
+            -51.6
+          ],
+          [
+            -11.95,
+            8.95
+          ],
+          [
+            9.55,
+            30.45
+          ]
+        ],
+        "Motor_Bracket": [
+          [
+            -56.7,
+            -54.7
+          ],
+          [
+            2.6,
+            8.4
+          ],
+          [
+            15.5,
+            24.5
+          ]
+        ],
+        "Encoder_Board": [
+          [
+            -57.2,
+            -56.4
+          ],
+          [
+            -4.5,
+            1.5
+          ],
+          [
+            17.0,
+            23.0
+          ]
+        ],
+        "Encoder_Magnet": [
+          [
+            -55.9,
+            -55.1
+          ],
+          [
+            -3.5,
+            0.5
+          ],
+          [
+            18.0,
+            22.0
+          ]
+        ],
+        "Drum_Axle": [
+          [
+            -55.15,
+            -0.5
+          ],
+          [
+            -3.7,
+            0.7
+          ],
+          [
+            17.8,
+            22.2
+          ]
+        ],
+        "Head_PCBA_Carrier_CONCEPT": [
+          [
+            -50.0,
+            -3.5
+          ],
+          [
+            -5.0,
+            -4.4
+          ],
+          [
+            14.0,
+            26.0
+          ]
+        ]
+      },
+      "outer_end_scan": {
+        "angles_deg": [
+          -75,
+          -45,
+          0,
+          45,
+          75
+        ],
+        "positions_tested": 1176,
+        "collision_free_positions": []
+      },
+      "whole_drum_coarse_scan": {
+        "angles_deg": [
+          -75,
+          -45,
+          -15,
+          0,
+          15,
+          45,
+          75
+        ],
+        "positions_tested": 2100,
+        "collision_free_positions": [
+          {
+            "center_mm": [
+              4,
+              4,
+              20
+            ],
+            "radial_clearance_mm": 1.49
+          }
+        ]
+      }
+    },
+    "Interaction": {
+      "current_bounds_mm": {
+        "Sensor_Head": [
+          [
+            0.5,
+            54.0
+          ],
+          [
+            -13.5,
+            10.5
+          ],
+          [
+            8.0,
+            32.0
+          ]
+        ],
+        "Geared_Motor": [
+          [
+            38.8,
+            50.8
+          ],
+          [
+            1.3,
+            8.3
+          ],
+          [
+            16.5,
+            23.5
+          ]
+        ],
+        "Ring_Gear": [
+          [
+            51.6,
+            53.6
+          ],
+          [
+            -11.95,
+            8.95
+          ],
+          [
+            9.55,
+            30.45
+          ]
+        ],
+        "Motor_Bracket": [
+          [
+            54.7,
+            56.7
+          ],
+          [
+            2.6,
+            8.4
+          ],
+          [
+            15.5,
+            24.5
+          ]
+        ],
+        "Encoder_Board": [
+          [
+            56.4,
+            57.2
+          ],
+          [
+            -4.5,
+            1.5
+          ],
+          [
+            17.0,
+            23.0
+          ]
+        ],
+        "Encoder_Magnet": [
+          [
+            55.1,
+            55.9
+          ],
+          [
+            -3.5,
+            0.5
+          ],
+          [
+            18.0,
+            22.0
+          ]
+        ],
+        "Drum_Axle": [
+          [
+            0.5,
+            55.15
+          ],
+          [
+            -3.7,
+            0.7
+          ],
+          [
+            17.8,
+            22.2
+          ]
+        ],
+        "Head_PCBA_Carrier_CONCEPT": [
+          [
+            3.5,
+            50.0
+          ],
+          [
+            -8.22,
+            0.69
+          ],
+          [
+            13.28,
+            22.19
+          ]
+        ]
+      },
+      "outer_end_scan": {
+        "angles_deg": [
+          -75,
+          -45,
+          0,
+          45,
+          75
+        ],
+        "positions_tested": 1176,
+        "collision_free_positions": []
+      },
+      "whole_drum_coarse_scan": {
+        "angles_deg": [
+          -75,
+          -45,
+          -15,
+          0,
+          15,
+          45,
+          75
+        ],
+        "positions_tested": 2100,
+        "collision_free_positions": [
+          {
+            "center_mm": [
+              4,
+              4,
+              20
+            ],
+            "radial_clearance_mm": 1.49
+          }
+        ]
+      }
+    }
+  },
+  "conclusion": "The motor and ring are already axially within the drum. The current encoder board has no collision-free drop-in position near either outer end at sampled angles and with at least 1 mm radial clearance. The bracket, magnet, bearing, and head cable require a joint redesign for full concealment.",
+  "limits": [
+    "Triangle overlap sampling is a screen, not a tolerance study.",
+    "The interaction drum's final travel limits remain undecided; the scan uses the same -75 to +75 degree study as R15.",
+    "The coarse whole-drum scan does not prove a clear position can be supported from the fixed enclosure or sense a magnet.",
+    "No cable size, bend radius, strain relief, or life is checked."
+  ]
+}

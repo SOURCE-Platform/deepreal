@@ -1,5 +1,5 @@
 Ref,Function,Selected_part,Package,Support_population,State
-S1,RGB camera sensor assembly,Raspberry Pi SA31VA30P,10.8x10.8mm assembly,"30-pin board connector; local rail filtering",PINMAP_SOURCE_IDENTIFIED
+S1,RGB camera sensor assembly,Face SA31VA30P / interaction SA36VA30P wide,10.8x10.8mm assembly,"30-pin board connector; local rail filtering; verify wide variant pinout and autofocus load",VARIANT_COMPATIBILITY_GATE
 S2,IR global-shutter sensor,ams OSRAM Mira220 Q65114A0087,5.4x5.4mm CSP,"bias resistor; sequenced rails; output caps",PINMAP_SOURCE_IDENTIFIED
 P1,940nm dot projector,ams OSRAM Belago1.2 Q65114A0198,4.2x3.6x3.325mm,"Sense1/Sense2 lens loop; pulse path",SAFETY_GATE
 U1,Projector driver,ams OSRAM AS1170 Q65113A7129,WLCSP13 2.25x1.5mm,"1uH-class inductor; pulse storage; current programming",CALC_REQUIRED

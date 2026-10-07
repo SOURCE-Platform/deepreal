@@ -1,0 +1,29 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r19/deepreal-role-specific-sweep-r19.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "face_optical_directions_deg": [
+    -45,
+    0,
+    45
+  ],
+  "interaction_optical_directions_deg": [
+    0,
+    45,
+    90
+  ],
+  "study_parts": [
+    "Face_Plain_Rotating_Outer_Face_R19",
+    "Face_Rear_Support_Yoke_R19",
+    "Face_Rear_Arm_Inner_R19",
+    "Face_Bearing_Inner_ENVELOPE_R19",
+    "Face_Rear_Arm_Outer_R19",
+    "Face_Bearing_Outer_ENVELOPE_R19",
+    "Interaction_Plain_Rotating_Outer_Face_R19",
+    "Interaction_Rear_Support_Yoke_R19",
+    "Interaction_Rear_Arm_Inner_R19",
+    "Interaction_Bearing_Inner_ENVELOPE_R19",
+    "Interaction_Rear_Arm_Outer_R19",
+    "Interaction_Bearing_Outer_ENVELOPE_R19"
+  ],
+  "engineering_readiness": "VISIBILITY_STUDY_ONLY"
+}

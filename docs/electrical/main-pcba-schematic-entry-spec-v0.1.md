@@ -82,7 +82,7 @@ claim that routing will close at that size.
 | Digital microphone | TDK MMICT3902-00-012 | LGA, 3.5 x 2.65 mm | 90% | PDM, bottom port |
 | Case tamper | Omron D3SK-B1R | Surface-mount NC switch, 3 x 3.5 x 0.9 mm | 70% | Exact lever direction still enclosure-dependent |
 | Drum connector baseline | 2 x Hirose FH26W-51S-0.3SHW(97) | 51 pos, 15.6 x 3.2 x 1.0 mm | 65% | Dynamic-flex and SI validation required |
-| RGB sensors | 2 x Raspberry Pi SA31VA30P | 10.8 x 10.8 mm sensor assembly | 70% | Located on head carrier |
+| RGB sensors | Face SA31VA30P; interaction SA36VA30P wide | Both 10.8 x 10.8 mm sensor assemblies | 70% electrical, optical fit open | Variant pinout and common head carrier to verify |
 | IR sensors | 2 x ams OSRAM Mira220 Q65114A0087 | CSP, 5.4 x 5.4 x 0.74 mm | 80% | Located on head carrier |
 | Projectors | 2 x ams OSRAM Belago1.2 Q65114A0198 | 4.2 x 3.6 x 3.325 mm | 75% | Located on head carrier |
 | Projector drivers | 2 x ams OSRAM AS1170 Q65113A7129 | WLCSP13, 2.25 x 1.5 x 0.6 mm | 75% | Located on head carrier |

@@ -1,0 +1,405 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r17/deepreal-exterior-refinement-r17.blend",
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "R16 drums, optics, thermal stack and head boards preserved",
+      "pass": true,
+      "evidence": {
+        "Thermal_Spreader": true,
+        "Shield_Rear_Tray": true,
+        "Face_Sensor_Head": true,
+        "Interaction_Sensor_Head": true,
+        "Face_Rear_Access_Cover_REMOVABLE_CONCEPT": true,
+        "Interaction_Rear_Access_Cover_REMOVABLE_CONCEPT": true,
+        "Face_Head_PCBA_Carrier_CONCEPT": true,
+        "Interaction_Head_PCBA_Carrier_CONCEPT": true,
+        "Face_Drum_Lens_Depth": true,
+        "Face_Drum_Lens_RGB": true,
+        "Face_Drum_Lens_ProjA": true,
+        "Face_Drum_Lens_ProjB": true,
+        "Face_Drum_Lens_Pinhole": true,
+        "Interaction_Drum_Lens_Depth": true,
+        "Interaction_Drum_Lens_RGB": true,
+        "Interaction_Drum_Lens_ProjA": true,
+        "Interaction_Drum_Lens_ProjB": true,
+        "Interaction_Drum_Lens_Pinhole": true
+      }
+    },
+    {
+      "check": "Face drive and encoder are enclosed at sampled poses",
+      "pass": true,
+      "evidence": {
+        "drum_x_mm": [
+          -54.0,
+          -0.5
+        ],
+        "sleeve_x_mm": [
+          -58.7,
+          -54.4
+        ],
+        "outer_cap_x_mm": [
+          -59.1,
+          -58.7
+        ],
+        "fixed_part_max_radii_mm": {
+          "Axial_Motor_Stator_ENVELOPE_R17": 9.5,
+          "Axial_Motor_Rotor_Hub_ENVELOPE_R17": 4.8,
+          "Encoder_Board": 2.75,
+          "Encoder_Sensor_IC_PROXY_R17": 1.131,
+          "Encoder_Magnet": 2.0,
+          "Stator_Mount_Top_R17": 8.56,
+          "Stator_Mount_Bottom_R17": 8.56,
+          "Encoder_Board_Mount_A_R17": 2.755,
+          "Encoder_Board_Mount_B_R17": 2.755
+        },
+        "uncovered_side_ray_positions_mm": [],
+        "fixed_route_intersections": {
+          "Head_Power_Data_Flex_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          },
+          "Motor_Power_Harness_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          },
+          "Encoder_Feedback_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          }
+        },
+        "sampled_motion_intersections": {
+          "-75": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-60": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-45": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-30": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-15": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "0": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "15": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "30": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "45": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "60": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "75": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          }
+        },
+        "stationary_intersections": {
+          "sleeve_housing_hits": 0,
+          "outer_cap_housing_hits": 0
+        },
+        "topology": {
+          "Face_Fixed_End_Chamber_Sleeve_R17": {
+            "faces": 403,
+            "non_manifold_edges": 0
+          },
+          "Face_Smooth_Outer_End_Cap_R17": {
+            "faces": 98,
+            "non_manifold_edges": 0
+          },
+          "Face_Sensor_Head_Flat_End_Left": {
+            "faces": 566,
+            "non_manifold_edges": 0
+          }
+        }
+      }
+    },
+    {
+      "check": "Interaction drive and encoder are enclosed at sampled poses",
+      "pass": true,
+      "evidence": {
+        "drum_x_mm": [
+          0.5,
+          54.0
+        ],
+        "sleeve_x_mm": [
+          54.4,
+          58.7
+        ],
+        "outer_cap_x_mm": [
+          58.7,
+          59.1
+        ],
+        "fixed_part_max_radii_mm": {
+          "Axial_Motor_Stator_ENVELOPE_R17": 9.5,
+          "Axial_Motor_Rotor_Hub_ENVELOPE_R17": 4.8,
+          "Encoder_Board": 2.75,
+          "Encoder_Sensor_IC_PROXY_R17": 1.131,
+          "Encoder_Magnet": 2.0,
+          "Stator_Mount_Top_R17": 8.56,
+          "Stator_Mount_Bottom_R17": 8.56,
+          "Encoder_Board_Mount_A_R17": 2.755,
+          "Encoder_Board_Mount_B_R17": 2.755
+        },
+        "uncovered_side_ray_positions_mm": [],
+        "fixed_route_intersections": {
+          "Head_Power_Data_Flex_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          },
+          "Motor_Power_Harness_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          },
+          "Encoder_Feedback_ROUTE_CONCEPT": {
+            "inner_cap_hits": 0,
+            "sleeve_hits": 0,
+            "outer_cap_hits": 0
+          }
+        },
+        "sampled_motion_intersections": {
+          "-75": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-60": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-45": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-30": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "-15": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "0": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "15": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "30": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "45": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "60": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          },
+          "75": {
+            "pigtail_inner_cap_hits": 0,
+            "pigtail_sleeve_hits": 0,
+            "shell_sleeve_hits": 0,
+            "shell_outer_cap_hits": 0
+          }
+        },
+        "stationary_intersections": {
+          "sleeve_housing_hits": 0,
+          "outer_cap_housing_hits": 0
+        },
+        "topology": {
+          "Interaction_Fixed_End_Chamber_Sleeve_R17": {
+            "faces": 403,
+            "non_manifold_edges": 0
+          },
+          "Interaction_Smooth_Outer_End_Cap_R17": {
+            "faces": 98,
+            "non_manifold_edges": 0
+          },
+          "Interaction_Sensor_Head_Flat_End_Right": {
+            "faces": 566,
+            "non_manifold_edges": 0
+          }
+        }
+      }
+    },
+    {
+      "check": "sampled movement retains fixed-part and lens-center clearance",
+      "pass": true,
+      "evidence": {
+        "Face_-75": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_-60": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_-45": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_-30": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_-15": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+0": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+15": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+30": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+45": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+60": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Face_+75": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_-75": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_-60": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_-45": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_-30": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_-15": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+0": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+15": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+30": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+45": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+60": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        },
+        "Interaction_+75": {
+          "part_intersections": [],
+          "housing_blocked_lenses": []
+        }
+      }
+    },
+    {
+      "check": "R16 model file unchanged",
+      "pass": true,
+      "evidence": {
+        "sha256": "dc691afb7f2903b82efae0dcb09530a57a91741e18ffb786b6f80198d6ab2340"
+      }
+    }
+  ],
+  "engineering_readiness": "BLOCKED",
+  "limits": [
+    "Side-ray and triangle checks sample geometry, not manufacturing tolerances.",
+    "The moving service-loop curve is a saved-pose illustration; full-angle deformation and cable fatigue are unverified.",
+    "Encoder part, magnet specification, accuracy and calibration are unselected.",
+    "Annular motor availability, torque, shaft coupling, fixed-cap attachment, sealing and housing strength are unverified.",
+    "Interaction final travel range is still open; -75 to +75 degrees is a conservative visual study."
+  ]
+}

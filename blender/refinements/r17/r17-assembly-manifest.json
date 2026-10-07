@@ -1,0 +1,39 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r17/deepreal-exterior-refinement-r17.blend",
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r16/deepreal-exterior-refinement-r16.blend",
+  "module_parts": [
+    "Face_Stator_Mount_Top_R17",
+    "Face_Stator_Mount_Bottom_R17",
+    "Face_Encoder_Board_Mount_A_R17",
+    "Face_Encoder_Board_Mount_B_R17",
+    "Face_Fixed_End_Chamber_Sleeve_R17",
+    "Face_Smooth_Outer_End_Cap_R17",
+    "Face_Axial_Motor_Stator_ENVELOPE_R17",
+    "Face_Axial_Motor_Rotor_Hub_ENVELOPE_R17",
+    "Face_Encoder_Board",
+    "Face_Encoder_Sensor_IC_PROXY_R17",
+    "Interaction_Stator_Mount_Top_R17",
+    "Interaction_Stator_Mount_Bottom_R17",
+    "Interaction_Encoder_Board_Mount_A_R17",
+    "Interaction_Encoder_Board_Mount_B_R17",
+    "Interaction_Fixed_End_Chamber_Sleeve_R17",
+    "Interaction_Smooth_Outer_End_Cap_R17",
+    "Interaction_Axial_Motor_Stator_ENVELOPE_R17",
+    "Interaction_Axial_Motor_Rotor_Hub_ENVELOPE_R17",
+    "Interaction_Encoder_Board",
+    "Interaction_Encoder_Sensor_IC_PROXY_R17"
+  ],
+  "route_parts": [
+    "Face_Head_Flex_Rotating_Pigtail_R17",
+    "Face_Head_Flex_Service_Loop_REST_POSE_ONLY_R17",
+    "Face_Head_Power_Data_Flex_ROUTE_CONCEPT",
+    "Face_Motor_Power_Harness_ROUTE_CONCEPT",
+    "Face_Encoder_Feedback_ROUTE_CONCEPT",
+    "Interaction_Head_Flex_Rotating_Pigtail_R17",
+    "Interaction_Head_Flex_Service_Loop_REST_POSE_ONLY_R17",
+    "Interaction_Head_Power_Data_Flex_ROUTE_CONCEPT",
+    "Interaction_Motor_Power_Harness_ROUTE_CONCEPT",
+    "Interaction_Encoder_Feedback_ROUTE_CONCEPT"
+  ],
+  "engineering_readiness": "BLOCKED"
+}

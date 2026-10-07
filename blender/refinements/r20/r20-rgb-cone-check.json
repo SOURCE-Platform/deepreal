@@ -1,0 +1,59 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r20/deepreal-wide-interaction-optics-r20.blend",
+  "method": "Nine rays from the modeled RGB cover center to the existing shell and housing at each pose; this is not a full aperture or field clearance proof.",
+  "limits": [
+    "The retained R16 housing and lens windows predate the wide-lens choice.",
+    "The modeled RGB modules are visual proxies, not true sensor assembly CAD.",
+    "Full entrance-pupil rays, window edge clearance and depth/IR overlap remain unverified."
+  ],
+  "poses": {
+    "Face_-45": {
+      "optical_down_deg": -45,
+      "fov_h_deg": 66,
+      "fov_v_deg": 41,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    },
+    "Face_+0": {
+      "optical_down_deg": 0,
+      "fov_h_deg": 66,
+      "fov_v_deg": 41,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    },
+    "Face_+45": {
+      "optical_down_deg": 45,
+      "fov_h_deg": 66,
+      "fov_v_deg": 41,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    },
+    "Interaction_+0": {
+      "optical_down_deg": 0,
+      "fov_h_deg": 102,
+      "fov_v_deg": 67,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    },
+    "Interaction_+22.5": {
+      "optical_down_deg": 22.5,
+      "fov_h_deg": 102,
+      "fov_v_deg": 67,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    },
+    "Interaction_+45": {
+      "optical_down_deg": 45,
+      "fov_h_deg": 102,
+      "fov_v_deg": 67,
+      "housing_blocked_samples": [],
+      "shell_blocked_samples": [],
+      "sample_count": 9
+    }
+  }
+}
