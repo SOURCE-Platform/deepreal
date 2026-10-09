@@ -1,0 +1,17 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r25/deepreal-exposed-drum-top-r25.blend",
+  "enclosure_topology": {
+    "vertex_components": 1,
+    "non_manifold_edges": 0,
+    "faces": 543
+  },
+  "moving_part_intersections_by_pose": {
+    "Face_-45_deg": {},
+    "Face_+0_deg": {},
+    "Face_+45_deg": {},
+    "Interaction_+0_deg": {},
+    "Interaction_+22.5_deg": {},
+    "Interaction_+45_deg": {}
+  },
+  "limits": "Triangle intersections only; production tolerance and assembly path unverified."
+}

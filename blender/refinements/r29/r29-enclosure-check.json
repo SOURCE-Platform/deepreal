@@ -1,0 +1,22 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r29/deepreal-circular-divider-enclosure-r29.blend",
+  "enclosure_topology": {
+    "vertex_components": 1,
+    "non_manifold_edges": 0,
+    "faces": 629
+  },
+  "moving_part_intersections_by_pose": {
+    "Face_-45_deg": {},
+    "Face_+0_deg": {},
+    "Face_+45_deg": {},
+    "Interaction_+0_deg": {},
+    "Interaction_+22.5_deg": {},
+    "Interaction_+45_deg": {}
+  },
+  "nominal_radial_gap_mm": 0.5,
+  "profile_radial_gap_range_mm": [
+    0.49999999999999645,
+    0.5000000000000018
+  ],
+  "limits": "Nominal mesh geometry only; production tolerances and dust sealing unverified."
+}

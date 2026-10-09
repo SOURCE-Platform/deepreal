@@ -1,0 +1,12 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r26/deepreal-contoured-roof-edge-r26.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r28/deepreal-three-divider-enclosure-r28.blend",
+  "enclosure": "R28_One_Piece_Enclosure",
+  "frontmost_divider_y_mm": -7.5,
+  "dividers": [
+    "left",
+    "center",
+    "right"
+  ],
+  "scope": "appearance concept; assembly details deferred"
+}

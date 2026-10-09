@@ -1,0 +1,12 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r26/deepreal-contoured-roof-edge-r26.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r27/deepreal-integrated-three-supports-r27.blend",
+  "enclosure": "R27_One_Piece_Enclosure",
+  "roof_support_join_y_mm": 6.8,
+  "three_supports": [
+    "left",
+    "center",
+    "right"
+  ],
+  "scope": "appearance concept; assembly details deferred"
+}

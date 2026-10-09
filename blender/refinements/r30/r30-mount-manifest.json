@@ -1,0 +1,17 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r29/deepreal-circular-divider-enclosure-r29.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r30/deepreal-monitor-ledge-enclosure-r30.blend",
+  "enclosure": "R30_One_Piece_Enclosure",
+  "monitor_lid_thickness_mm": 3.0,
+  "ledge_depth_from_lid_front_mm": 7.0,
+  "mount_stack_space_behind_lid_mm": 2.0,
+  "mounting_pad_recess_depth_mm": 2.0,
+  "provisional_stack_mm": {
+    "foam_tape": 0.4,
+    "steel_plate": 0.35,
+    "air_gap": 0.35,
+    "magnet": 0.9
+  },
+  "shelf_underside_z_mm": 0.0,
+  "scope": "appearance and packaging concept; magnet/adhesive selection open"
+}

@@ -1,0 +1,11 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r21/deepreal-side-supported-drums-r21.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r23/deepreal-integrated-flat-roof-r23.blend",
+  "enclosure": "R23_Unified_Enclosure",
+  "mesh_vertices": 616,
+  "flat_roof_top_mm": 34.2,
+  "flat_roof_underside_mm": 32.8,
+  "front_roof_edge_y_mm": -6.0,
+  "rear_corner_radius_mm": 11.5,
+  "readiness": "appearance and packaging concept only"
+}

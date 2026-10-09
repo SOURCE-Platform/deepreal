@@ -1,0 +1,13 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r22/deepreal-curved-drum-canopy-r22.blend",
+  "canopy_to_nominal_drum_radial_gap_mm": 1.0,
+  "moving_part_triangle_overlaps_by_pose": {
+    "Face_-45_deg": {},
+    "Face_+0_deg": {},
+    "Face_+45_deg": {},
+    "Interaction_+0_deg": {},
+    "Interaction_+22.5_deg": {},
+    "Interaction_+45_deg": {}
+  },
+  "status": "sampled visual geometry only; minimum tolerance and optical ray envelopes unverified"
+}

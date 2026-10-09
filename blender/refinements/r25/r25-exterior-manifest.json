@@ -1,0 +1,10 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r24/deepreal-finished-exterior-r24.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r25/deepreal-exposed-drum-top-r25.blend",
+  "enclosure": "R25_One_Piece_Enclosure",
+  "drum_crown_z_mm": 32.0,
+  "enclosure_top_z_mm": 32.0,
+  "rear_roof_front_y_mm": 5.0,
+  "rear_roof_thickness_mm": 1.2,
+  "scope": "exterior visual study"
+}

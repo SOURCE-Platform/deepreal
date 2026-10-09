@@ -1,0 +1,15 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r21/deepreal-side-supported-drums-r21.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r24/deepreal-finished-exterior-r24.blend",
+  "enclosure": "R24_One_Piece_Enclosure",
+  "flat_top_mm": 34.2,
+  "top_underside_mm": 32.8,
+  "lower_rear_corner_radius_y_mm": 12.5,
+  "lower_rear_corner_radius_z_mm": 13.0,
+  "edge_bevel_mm": 0.35,
+  "saved_optical_pose_deg": {
+    "face": 0,
+    "interaction": 22.5
+  },
+  "scope": "exterior visual study"
+}

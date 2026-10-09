@@ -1,0 +1,10 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r25/deepreal-exposed-drum-top-r25.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r26/deepreal-contoured-roof-edge-r26.blend",
+  "enclosure": "R26_One_Piece_Enclosure",
+  "tip_y_mm": 2.8,
+  "inner_curve_end_y_mm": 9.5,
+  "nominal_running_clearance_mm": 0.5,
+  "drum_crown_and_roof_top_z_mm": 32.0,
+  "scope": "appearance concept, not a validated dust seal"
+}

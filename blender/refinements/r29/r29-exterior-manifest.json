@@ -1,0 +1,16 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r26/deepreal-contoured-roof-edge-r26.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r29/deepreal-circular-divider-enclosure-r29.blend",
+  "enclosure": "R29_One_Piece_Enclosure",
+  "drum_and_divider_arc_radius_mm": 12.0,
+  "drum_and_divider_arc_center_yz_mm": [
+    -1.5,
+    20.0
+  ],
+  "divider_arc_segments": 96,
+  "outer_supports_flush_with_housing_x_mm": [
+    -60,
+    60
+  ],
+  "scope": "appearance concept; assembly details deferred"
+}

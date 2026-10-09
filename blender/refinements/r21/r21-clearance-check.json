@@ -1,0 +1,84 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r21/deepreal-side-supported-drums-r21.blend",
+  "drum_shell_end_gap_mm": 5.0,
+  "fixed_housing_and_support_triangle_overlaps_by_pose": {
+    "Face_-45": {
+      "Face_Sensor_Head": {},
+      "Face_Flat_Outer_End_R21": {},
+      "Face_Open_Inner_End_Ring_R21": {},
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Face_Outer_Rotating_Hub_R21": {},
+      "Face_End_Encoder_Magnet_R21": {},
+      "Face_Internal_Ring_Gear_ENV_R21": {}
+    },
+    "Face_+0": {
+      "Face_Sensor_Head": {},
+      "Face_Flat_Outer_End_R21": {},
+      "Face_Open_Inner_End_Ring_R21": {},
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Face_Outer_Rotating_Hub_R21": {},
+      "Face_End_Encoder_Magnet_R21": {},
+      "Face_Internal_Ring_Gear_ENV_R21": {}
+    },
+    "Face_+45": {
+      "Face_Sensor_Head": {},
+      "Face_Flat_Outer_End_R21": {},
+      "Face_Open_Inner_End_Ring_R21": {},
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Face_Outer_Rotating_Hub_R21": {},
+      "Face_End_Encoder_Magnet_R21": {},
+      "Face_Internal_Ring_Gear_ENV_R21": {}
+    },
+    "Interaction_+0": {
+      "Interaction_Sensor_Head": {},
+      "Interaction_Flat_Outer_End_R21": {},
+      "Interaction_Open_Inner_End_Ring_R21": {},
+      "Interaction_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Interaction_Outer_Rotating_Hub_R21": {},
+      "Interaction_End_Encoder_Magnet_R21": {},
+      "Interaction_Internal_Ring_Gear_ENV_R21": {}
+    },
+    "Interaction_+22.5": {
+      "Interaction_Sensor_Head": {},
+      "Interaction_Flat_Outer_End_R21": {},
+      "Interaction_Open_Inner_End_Ring_R21": {},
+      "Interaction_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Interaction_Outer_Rotating_Hub_R21": {},
+      "Interaction_End_Encoder_Magnet_R21": {},
+      "Interaction_Internal_Ring_Gear_ENV_R21": {}
+    },
+    "Interaction_+45": {
+      "Interaction_Sensor_Head": {},
+      "Interaction_Flat_Outer_End_R21": {},
+      "Interaction_Open_Inner_End_Ring_R21": {},
+      "Interaction_Inner_Bearing_Rotating_Race_ENV_R21": {},
+      "Interaction_Outer_Rotating_Hub_R21": {},
+      "Interaction_End_Encoder_Magnet_R21": {},
+      "Interaction_Internal_Ring_Gear_ENV_R21": {}
+    }
+  },
+  "motor_and_optical_proxy_triangle_overlaps": {
+    "Face": {
+      "Internal_Optical_Carrier": 0,
+      "Head_PCBA_Carrier_CONCEPT": 0,
+      "IR_Depth_Module_Body": 0,
+      "SL_Projector_Body": 0,
+      "RGB_Module_Body": 0
+    },
+    "Interaction": {
+      "Internal_Optical_Carrier": 0,
+      "Head_PCBA_Carrier_CONCEPT": 0,
+      "IR_Depth_Module_Body": 0,
+      "SL_Projector_Body": 0
+    },
+    "wide_rgb_vs_old_carrier": {
+      "lens": 57,
+      "assembly": 30
+    }
+  },
+  "limits": [
+    "Triangle intersections only; minimum tolerance clearances are not certified.",
+    "Bearing races, teeth, moving flex, stop tabs and mounts are envelopes.",
+    "The RGB window and optical carrier still require redesign for the wide assembly."
+  ]
+}
