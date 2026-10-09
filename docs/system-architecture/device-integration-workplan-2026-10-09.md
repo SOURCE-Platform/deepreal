@@ -90,6 +90,15 @@ geometry. The study leaves the deforming service loop, shaft/hub coupling,
 cheek wall, selected bearing and interaction drum unresolved; it is evidence
 for packaging direction, not a fabrication-ready mechanism.
 
+The follow-on [R35 motion study](../../blender/refinements/r35/README.md) adds
+an outer rotating web from shaft and hub to drum wall. Its concept geometry
+clears the fixed bearing and enclosure, but the joints and loads are open.
+The moving cable route is blocked in the current package: all eight sampled
+full-width axial-twist candidates intersect the existing bearing supports;
+longer routes also intersect the optical carrier. The immediate integration
+task is to redesign the inner bearing support and cable architecture together
+before assigning a final drum flex or freezing the head-board connectors.
+
 1. Make a shared coordinate and connection drawing for **one drum** using the
    R30 housing and R21 motion envelopes. Mark every fixed support, rotating
    part, cable and board. Include the cheek angle-sensor board option.

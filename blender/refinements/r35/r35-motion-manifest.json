@@ -1,0 +1,23 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r34/deepreal-face-interface-study-r34.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r35/deepreal-face-motion-study-r35.blend",
+  "outer_load_path_objects": [
+    "R35_Face_Outer_Shaft_ENV",
+    "R35_Face_Outer_Hub_ENV",
+    "R35_Face_Outer_Coupling_Web_ENV",
+    "R35_Face_Outer_Drum_Wall_Sleeve_ENV"
+  ],
+  "candidate_flex_object": "R35_Face_Full_Width_Torsion_Candidate_ENV",
+  "flex_width_mm": 15.6,
+  "moving_anchor_x_mm": -22.0,
+  "fixed_anchor_x_mm": -1.2,
+  "status": "FEASIBILITY_STUDY_ONLY",
+  "open": [
+    "actual rotating joints",
+    "bearing selection",
+    "flex termination",
+    "dynamic collision and fatigue proof",
+    "encoder magnet retention",
+    "second drum"
+  ]
+}

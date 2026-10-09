@@ -5,6 +5,10 @@ a centered angle encoder at the **outer cheek** and an optical flex exit through
 the **inner bearing**. It changes only the face drum. The interaction drum
 retains its R30/R21 interface.
 
+The [R35 motion study](../r35/README.md) extends this check and finds that a
+full-width moving twist collides with the existing bearing supports and optical
+carrier. Treat the straight-aperture result below as a limited check.
+
 ## Files
 
 - `deepreal-face-interface-study-r34.blend` is the editable assembly study.
