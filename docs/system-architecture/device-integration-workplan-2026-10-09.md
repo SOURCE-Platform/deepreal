@@ -99,6 +99,15 @@ longer routes also intersect the optical carrier. The immediate integration
 task is to redesign the inner bearing support and cable architecture together
 before assigning a final drum flex or freezing the head-board connectors.
 
+The [R36 bearing-window study](../../blender/refinements/r36/README.md)
+resolves the first geometric obstruction at concept level: an axial fixed
+bearing neck and side webs clear the rotating ring and straight 15.6 mm strip
+over sampled face-drum poses. The service loop and fixed cable exit remain
+unmodeled. A 6–8 mm trunk-width screen and offset screen did not find a
+collision-free simple twist through the current optical-carrier layout, so
+the next pass must reserve a separate moving-cable volume and verify the
+electrical construction before changing the 51-contact interface.
+
 1. Make a shared coordinate and connection drawing for **one drum** using the
    R30 housing and R21 motion envelopes. Mark every fixed support, rotating
    part, cable and board. Include the cheek angle-sensor board option.

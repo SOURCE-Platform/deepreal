@@ -4,6 +4,10 @@ R35 follows [R34](../r34/README.md). It studies the two remaining face-drum
 interfaces: how the outer axle reaches the drum wall, and how a moving optical
 cable might reach the fixed center divider. This is **not** a release model.
 
+The [R36 study](../r36/README.md) replaces the obstructing fixed-bearing tabs
+with an axial neck and side supports. Its straight cable segment clears the
+sampled poses; the moving service loop is still open.
+
 ## Outer end: a geometric load path exists
 
 The new rotating disk/web overlaps the shaft, the rotating hub and a thin

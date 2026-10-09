@@ -1,0 +1,589 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r35/deepreal-face-motion-study-r35.blend",
+  "status": "GEOMETRY_SCREEN_ONLY",
+  "candidates": [
+    {
+      "trunk_width_mm": 6.0,
+      "moving_anchor_x_mm": -22.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_SL_Projector_Body": [
+          -45,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 6.0,
+      "moving_anchor_x_mm": -12.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 6.0,
+      "moving_anchor_x_mm": -8.5,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 6.5,
+      "moving_anchor_x_mm": -22.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_SL_Projector_Body": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 6.5,
+      "moving_anchor_x_mm": -12.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 6.5,
+      "moving_anchor_x_mm": -8.5,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.0,
+      "moving_anchor_x_mm": -22.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_SL_Projector_Body": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.0,
+      "moving_anchor_x_mm": -12.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.0,
+      "moving_anchor_x_mm": -8.5,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.5,
+      "moving_anchor_x_mm": -22.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          45
+        ],
+        "Face_SL_Projector_Body": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.5,
+      "moving_anchor_x_mm": -12.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 7.5,
+      "moving_anchor_x_mm": -8.5,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          -40,
+          -35,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 8.0,
+      "moving_anchor_x_mm": -22.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          -40,
+          40,
+          45
+        ],
+        "Face_SL_Projector_Body": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 8.0,
+      "moving_anchor_x_mm": -12.0,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "trunk_width_mm": 8.0,
+      "moving_anchor_x_mm": -8.5,
+      "fixed_anchor_x_mm": -2.2,
+      "collision_angles_by_part_deg": {
+        "Face_Head_PCBA_Carrier_CONCEPT": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_Internal_Optical_Carrier": [
+          -45,
+          -40,
+          -35,
+          -30,
+          -25,
+          -20,
+          -15,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45
+        ],
+        "Face_RGB_Module_Body": [
+          -45,
+          -40,
+          -35,
+          -30,
+          30,
+          35,
+          40,
+          45
+        ]
+      },
+      "zero_hit_sweep": false
+    }
+  ]
+}

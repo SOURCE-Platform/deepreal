@@ -1,0 +1,18 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r35/deepreal-face-motion-study-r35.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r36/deepreal-inner-bearing-window-r36.blend",
+  "fixed_bearing_axial_neck": "R36_Face_Fixed_Bearing_Axial_Neck_ENV",
+  "new_side_supports": [
+    "R36_Face_Inner_Race_Rear_Side_Web_ENV",
+    "R36_Face_Inner_Race_Front_Side_Web_ENV"
+  ],
+  "moving_straight_flex": "R36_Face_Full_Width_Straight_Exit_ENV",
+  "connector_end_width_mm": 15.6,
+  "status": "BEARING_SUPPORT_GEOMETRY_STUDY_ONLY",
+  "open": [
+    "stationary bearing-support joints and loads",
+    "moving cable path around optical carrier",
+    "center-divider cable opening and fixed termination",
+    "flex electrical stackup and fatigue"
+  ]
+}

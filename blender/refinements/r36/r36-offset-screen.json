@@ -1,0 +1,294 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r35/deepreal-face-motion-study-r35.blend",
+  "status": "GEOMETRY_SCREEN_ONLY",
+  "candidates": [
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 12,
+        "Face_SL_Projector_Body": 2
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 8,
+        "Face_SL_Projector_Body": 2
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 6,
+        "Face_SL_Projector_Body": 2
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 4,
+        "Face_SL_Projector_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 12
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 8
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 2,
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 6
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 10,
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 4
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 12
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 8
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 2,
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 6
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 6.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 10,
+        "Face_Head_PCBA_Carrier_CONCEPT": 2,
+        "Face_Internal_Optical_Carrier": 4
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 8,
+        "Face_Internal_Optical_Carrier": 12,
+        "Face_SL_Projector_Body": 8
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 6,
+        "Face_Internal_Optical_Carrier": 10,
+        "Face_SL_Projector_Body": 4
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 8,
+        "Face_SL_Projector_Body": 3
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -22.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 6,
+        "Face_SL_Projector_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 8,
+        "Face_Internal_Optical_Carrier": 12,
+        "Face_RGB_Module_Body": 2
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 6,
+        "Face_Internal_Optical_Carrier": 10,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 4,
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 8,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -12.0,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 10,
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 6,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 0.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 8,
+        "Face_Internal_Optical_Carrier": 12,
+        "Face_RGB_Module_Body": 2
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 1.0,
+      "collision_pose_counts": {
+        "Face_Head_PCBA_Carrier_CONCEPT": 6,
+        "Face_Internal_Optical_Carrier": 10,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 2.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 4,
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 8,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    },
+    {
+      "width_mm": 7.0,
+      "start_x_mm": -8.5,
+      "end_x_mm": -2.2,
+      "moving_offset_y_mm": 3.0,
+      "collision_pose_counts": {
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 10,
+        "Face_Head_PCBA_Carrier_CONCEPT": 4,
+        "Face_Internal_Optical_Carrier": 6,
+        "Face_RGB_Module_Body": 1
+      },
+      "zero_hit_sweep": false
+    }
+  ]
+}

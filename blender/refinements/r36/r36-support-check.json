@@ -1,0 +1,616 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r36/deepreal-inner-bearing-window-r36.blend",
+  "full_width_flex_mm": 15.6,
+  "support_fixed_contact_triangle_hits": {
+    "Rear": {
+      "axial_neck": 36,
+      "housing": 4
+    },
+    "Front": {
+      "axial_neck": 36,
+      "housing": 4
+    }
+  },
+  "neck_to_fixed_bearing_triangle_hits": 207,
+  "support_vs_rotating_parts_at_5_degree_poses": {
+    "-45": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-40": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-35": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-30": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-25": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-20": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-15": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-10": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "-5": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "0": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "5": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "10": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "15": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "20": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "25": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "30": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "35": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "40": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    },
+    "45": {
+      "Rear": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Front": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      },
+      "Neck": {
+        "moving_race": 0,
+        "rotating_inner_ring": 0,
+        "drum_shell": 0
+      }
+    }
+  },
+  "straight_flex_triangle_hits_at_5_degree_poses": {
+    "-45": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-40": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-35": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-30": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-25": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-20": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-15": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-10": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "-5": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "0": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "5": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "10": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "15": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "20": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "25": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "30": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "35": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "40": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    },
+    "45": {
+      "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+      "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+      "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0,
+      "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+      "Face_Motor_Cantilever_R21": 0,
+      "R30_One_Piece_Enclosure": 0,
+      "Face_Sensor_Head": 0,
+      "Face_Head_PCBA_Carrier_CONCEPT": 0,
+      "Face_Internal_Optical_Carrier": 0,
+      "Face_RGB_Module_Body": 0,
+      "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+      "R36_Face_Inner_Race_Front_Side_Web_ENV": 0
+    }
+  },
+  "support_to_bearing_and_housing_contact": true,
+  "support_vs_rotating_parts_clear": true,
+  "straight_flex_clear": true,
+  "limits": [
+    "This is a straight rotating strip; no deforming service loop or fixed terminal is modeled.",
+    "Triangle contacts at the side webs are only an intended attachment envelope.",
+    "Fastening, bearing load and tolerance are not assessed."
+  ]
+}
