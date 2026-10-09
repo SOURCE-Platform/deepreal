@@ -176,7 +176,7 @@ the flex vendor confirms contact orientation and stack-up:
 | RGB CSI clock/data | 6 signal + 3 return | Clock plus two data lanes |
 | IR CSI clock/data | 6 signal + 3 return | Clock plus two data lanes |
 | RGB MCLK + return | 2 | 24 MHz from clock buffer |
-| IR MCLK + return | 2 | 24 MHz from clock buffer |
+| IR MCLK + return | 2 | Corrected 14 Sep: 38.4 MHz Mira220 reference; distribution open |
 | Shared I2C/CCI | 2 | Confirm non-conflicting addresses; add mux only if required |
 | RGB reset and IR reset | 2 | Independent trusted control |
 | IR trigger and illumination trigger | 2 | Exposure/projector synchronization |
@@ -196,9 +196,10 @@ fallback remains two separate camera flexes plus a power/control flex per drum i
 - i.MX95 uses its manufacturer-required 24 MHz system reference and the required
   power-on reset network. Add a 32.768 kHz RTC reference only if holdover behavior
   justifies it.
-- A separate 24 MHz oscillator drives LMK1C1104. Its four outputs feed RGB and IR
-  sensor clocks. The exact oscillator is chosen during schematic capture after the
-  sensor input-swing and jitter limits are checked together.
+- Correction, 14 September: the proposed common 24 MHz RGB/IR source is withdrawn.
+  Mira220 DS000642 v9 table 3 specifies 38.4 MHz. Y2/U17 remain RGB candidates;
+  IR clock generation/distribution, levels, jitter and gating require their own
+  design decision. See the optical-head `power-clock-evidence.json`.
 - PF09 and both PF53 devices own the i.MX power sequence. Do not create an unrelated
   discrete sequence.
 - Each FPGA gets independent PROGRAMN, INITN, DONE, reset and chip select. i.MX loads

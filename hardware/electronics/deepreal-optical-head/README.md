@@ -21,6 +21,10 @@ face head's J1; J3 goes to the interaction head's J1. See the
 [two-drum interface checkpoint](../../../docs/electrical/head-interface-checkpoint-2026-09-14.md)
 for connector dimensions, placement conflicts, power and dynamic-flex blockers.
 
+`power-clock-evidence.json` records the inspected Mira220 clock, rail peaks and
+startup requirements without claiming a complete head budget. Run the main-board
+`scripts/audit_head_power.py` for source and clock-contract consistency checks.
+
 ## Electrical partition
 
 The head receives filtered/switched 3.3 V, MCLKs, control and triggers over the

@@ -29,8 +29,8 @@ J5,Interaction motor/encoder,TBD 6-position,Top,SELECTION_REQUIRED,"motor/encode
 U18,Face absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
 U19,Interaction absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
 Y1,iMX95 reference oscillator,TBD 24MHz,Top,SELECTION_REQUIRED,"enable/reset timing network",OPEN
-Y2,Sensor reference oscillator,TBD 24MHz,Bottom,SELECTION_REQUIRED,"source damping; enable default",OPEN
-U17,Four-output sensor clock buffer,TI LMK1C1104DQFR,Bottom,VERIFY_LAND_PATTERN,"supply filter; four source resistors",DEFINED
+Y2,RGB reference oscillator candidate,TBD 24MHz,Bottom,SELECTION_REQUIRED,"RGB only; separate 38.4MHz IR clock architecture remains open",OPEN
+U17,RGB clock buffer candidate,TI LMK1C1104DQFR,Bottom,VERIFY_LAND_PATTERN,"Not a common 24MHz RGB/IR source; output allocation and levels open",CLOCK_GATE
 U16,Board identity EEPROM,Microchip AT24C64D-MAHM-T,Bottom,VERIFY_LAND_PATTERN,"address pulls; write protect; decoupling",DEFINED
 U20,Board temperature,TI TMP117AIDRVR,Top,VERIFY_LAND_PATTERN,"address pull; alert pull-up; decoupling",DEFINED
 MK1,PDM microphone,TDK MMICT3902-00-012,Bottom,ACOUSTIC_LAYOUT_REQUIRED,"supply filter; clock/data damping",DEFINED

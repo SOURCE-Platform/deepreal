@@ -31,6 +31,12 @@ including its 12 kilohm 0.1% bias resistor, internal-regulator capacitors, three
 rails, external trigger and illumination-trigger output. MIPI lane polarity cannot
 be swapped casually; any swap must be supported by both sensor and FPGA configuration.
 
+The reviewed DS000642 v9-00 specifies a 38.4 MHz reference, not the old 24 MHz
+shared-clock assumption. Source/distribution and input levels remain unselected.
+`power-clock-evidence.json` separates rail peak currents, minimum startup source
+capability and typical 30 fps power. None is a complete 60 fps head power budget.
+The 350 mA startup requirement is a minimum source capability, not a maximum draw.
+
 ## Projector and fail-safe control
 
 U1, L1, P1 and the pulse capacitors form one compact switching island. Use the AS1170

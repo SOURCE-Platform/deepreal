@@ -1,0 +1,30 @@
+{
+  "sensor_sum_of_table_peak_rail_powers_w": 0.51423,
+  "sensor_sum_of_table_peak_currents_ma": 237.6,
+  "interpretation": "Arithmetic sum at nominal rails; not measured simultaneous peaks, not a continuous rating, excludes conversion losses and every other head load.",
+  "startup_supply_minimum_ma": 350,
+  "head_input_peak_current_a": null,
+  "head_input_average_power_w": null,
+  "open_load_evidence": [
+    "rgb_assembly_run_startup_and_autofocus",
+    "ir_60fps_current_profiles_and_startup_maximum",
+    "regulator_topologies_efficiency_quiescent_and_inrush",
+    "projector_driver_input_pulse_recharge_and_schedule",
+    "clock_logic_identity_sensing_and_interlock",
+    "flex_and_contact_drop_sharing_and_fault_derating",
+    "both_heads_simultaneous_supply_transients"
+  ],
+  "head_power_status": "BLOCKED",
+  "schema": "deepreal.head-power-audit.v1",
+  "source_document_sha256": "cc0048e8c5137516a9e47917112d23b11402253f6d95cef9b298d60c5e80efd5",
+  "source_files_sha256": {
+    "hardware/electronics/deepreal-optical-head/power-clock-evidence.json": "1409265d4b4c870e6f2f687a94f4fc8bb90f80737ce2e6a6089a063ce22b88f9",
+    "hardware/electronics/deepreal-main-pcba/net-registry.csv": "5b3163a4d4f74a6a92b7202237064f283825007cdc4d71bd5f38d357483a485f",
+    "hardware/electronics/deepreal-optical-head/net-registry.csv": "23fad6ac1030372adcde922ec65cf665e3f94aeebd2615a271bd8e765540a952",
+    "hardware/electronics/deepreal-main-pcba/connector-allocation.csv": "556a05646e1d898f54ea4f996241b35fed1e839b838a853529a97ae6831bebd3"
+  },
+  "clock_contract_check": "PASS_FREQUENCY_CONSISTENCY_ONLY",
+  "clock_implementation": "UNSELECTED_SOURCE_DISTRIBUTION_AND_LEVELS",
+  "fabrication_allowed": false,
+  "public_visual_allowed": false
+}

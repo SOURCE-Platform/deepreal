@@ -78,6 +78,12 @@ An open flex, missing head, invalid head identity, open lens-integrity loop or h
 fault must make projector emission impossible. The exact contact numbering remains
 open until the flex orientation and stack-up are frozen.
 
+Camera clock correction (14 September 2026): do not drive Mira220 from the
+earlier common 24 MHz RGB/IR clock. DS000642 v9 table 3 specifies 38.4 MHz for
+CLK_IN. Keep separate RGB and IR clock contracts; select the source/distribution,
+signal levels, jitter, enable sequencing and back-power protection before capture.
+No extra oscillator footprint or clock-buffer output is assigned by this note.
+
 ## Page 13 - motors and absolute angle
 
 U13/U14 are independent DRV8213 bridges. Each has local motor bulk capacitance,

@@ -6,7 +6,7 @@ J2/J3,RGB_CSI_returns,3,"RGB_CLK_GND RGB_D0_GND RGB_D1_GND","One return beside e
 J2/J3,IR_CSI_signals,6,"IR_CLK_P/N IR_D0_P/N IR_D1_P/N","100 ohm differential",TBD_ORIENTATION
 J2/J3,IR_CSI_returns,3,"IR_CLK_GND IR_D0_GND IR_D1_GND","One return beside each differential pair",TBD_ORIENTATION
 J2/J3,RGB_clock,2,"RGB_MCLK RGB_MCLK_GND","24MHz source-terminated",TBD_ORIENTATION
-J2/J3,IR_clock,2,"IR_MCLK IR_MCLK_GND","24MHz source-terminated",TBD_ORIENTATION
+J2/J3,IR_clock,2,"IR_MCLK IR_MCLK_GND","38.4MHz Mira220 reference; source levels and distribution open",TBD_ORIENTATION
 J2/J3,Control_bus,2,"HEAD_I2C_SCL HEAD_I2C_SDA","Open-drain; level/address audit",TBD_ORIENTATION
 J2/J3,Sensor_resets,2,"RGB_RESET_N IR_RESET_N","Hardware default reset",TBD_ORIENTATION
 J2/J3,Timing_triggers,2,"IR_TRIGGER ILLUM_TRIGGER","Bounded skew; default inactive",TBD_ORIENTATION

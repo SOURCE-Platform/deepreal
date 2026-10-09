@@ -16,6 +16,9 @@ The active rebuild plan is
 `../../../docs/electrical/main-pcba-engineering-review-plan-v0.1.md`; requirements
 v0.2 and `design-status.json` supersede older release and FPGA assumptions.
 
+For the plain-language status, solved issues, blockers and next steps, see
+[PCB progress, 14 September](../../../docs/electrical/pcb-progress-2026-09-14.md).
+
 ## Current KiCad artifacts
 
 - `deepreal-main-pcba.kicad_pro` - KiCad project settings.
@@ -85,6 +88,10 @@ manufacturer catalog and lists open closure evidence. Run
 `python3 scripts/validate_flex_interface.py` for an honest audit, or add
 `--require-ready` to reject the currently unapproved interface. The comparison
 image is an internal diagnostic, not an approved replacement layout.
+
+`scripts/audit_head_power.py` checks the partial sensor power evidence and matching
+IR clock contracts. It rejects the old shared 24 MHz assumption; the Mira220
+reference is 38.4 MHz. Clock circuitry and complete head power remain open.
 
 Public rendering is intentionally blocked until `public_visual_allowed` becomes
 true after the engineering and visual gates pass. At that future point, rebuild with:

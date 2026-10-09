@@ -1,0 +1,60 @@
+{
+  "schema": "deepreal.head-power-clock-evidence.v1",
+  "status": "PARTIAL_SENSOR_EVIDENCE_NOT_HEAD_POWER_APPROVAL",
+  "source": {
+    "file": "references/components/datasheets/ams-mira220-ds000642-v9.pdf",
+    "sha256": "cc0048e8c5137516a9e47917112d23b11402253f6d95cef9b298d60c5e80efd5",
+    "url": "https://look.ams-osram.com/m/7591efdbe4af32dc/original/Mira220-1-2-7-2-2-MP-NIR-enhanced-global-shutter-image-sensor.pdf",
+    "revision": "DS000642 v9-00, 2025-Sep-26",
+    "retrieved": "2026-09-14",
+    "pages": [9, 12, 21, 24]
+  },
+  "sensor": "Mira220-2QM1WA Q65114A0087",
+  "reference_clock": {
+    "frequency_mhz": 38.4,
+    "accuracy_ppm_max": 50,
+    "duty_percent_range": [45, 55],
+    "cycle_to_cycle_jitter_ps_max": 200,
+    "rise_fall_ns_max": 10,
+    "source_page": 9,
+    "implementation": "UNSELECTED_SOURCE_DISTRIBUTION_AND_LEVELS",
+    "warning": "The earlier common 24MHz RGB/IR source is not supported by this evidence. A different clock needs vendor-supported mode/PLL evidence."
+  },
+  "rail_peak_currents": [
+    {"rail": "VDD25", "nominal_v": 2.5, "peak_ma": 168},
+    {"rail": "VDD18", "nominal_v": 1.8, "peak_ma": 0.6},
+    {"rail": "VDD13A", "nominal_v": 1.35, "peak_ma": 21},
+    {"rail": "VDD13D", "nominal_v": 1.35, "peak_ma": 42},
+    {"rail": "VDD13P", "nominal_v": 1.35, "peak_ma": 6}
+  ],
+  "rail_peak_interpretation": "Table 3 footnote 1: peak currents, not average currents. AN001031 is needed for profiles. Peak coincidence and DeepReal 60fps mode are not established.",
+  "startup": {
+    "rail": "VDD25",
+    "minimum_source_capability_ma": 350,
+    "maximum_actual_draw_ma": null,
+    "source_page": 21,
+    "sequence": "2.5V, bandgap settling, 1.35V, 1.8V, clock, release reset, check PLL, internal-LDO configuration and OTP calibration",
+    "warning": "350mA is a minimum startup supply capability, not a maximum head-current bound; the prescribed startup differs from run-mode peak values."
+  },
+  "published_typical_example": {
+    "power_mw": 168,
+    "frame_rate_fps": 30,
+    "resolution": [1600, 1400],
+    "external_power_management_required": true,
+    "source_page": 12,
+    "valid_as_deepreal_60fps_maximum": false
+  },
+  "unresolved_head_loads": {
+    "rgb_assembly_run_startup_and_autofocus": null,
+    "ir_60fps_current_profiles_and_startup_maximum": null,
+    "regulator_topologies_efficiency_quiescent_and_inrush": null,
+    "projector_driver_input_pulse_recharge_and_schedule": null,
+    "clock_logic_identity_sensing_and_interlock": null,
+    "flex_and_contact_drop_sharing_and_fault_derating": null,
+    "both_heads_simultaneous_supply_transients": null
+  },
+  "head_input_peak_current_a": null,
+  "head_input_average_power_w": null,
+  "fabrication_allowed": false,
+  "public_visual_allowed": false
+}
