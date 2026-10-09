@@ -4,6 +4,12 @@ Status: engineering work order. The exterior study can support appearance review
 the internal hardware is still an unverified concept. This plan does not approve a
 board, flex, actuator, optical output or fabrication release.
 
+The first [measured drum-interface audit](../electrical/drum-interface-finding-2026-10-09.md)
+found two geometry blockers: the encoder magnet/sensor envelopes sit 6 mm off
+the rotation axis, and the specified optical flex end is 15.6 mm wide while
+the modeled outer spindle bore is 2 mm. Resolve these together before treating
+the R21 mechanism as a cable or encoder layout.
+
 ## Working assembly
 
 The current exterior is the R30 housing with two exposed-top drums, fixed left

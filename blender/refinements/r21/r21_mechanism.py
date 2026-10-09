@@ -9,6 +9,8 @@ from r21_chassis import material
 
 MM = .001
 AXIS = (-1.5, 20.0)
+INNER_BEARING_BORE_RADIUS_MM = 8.45
+OUTER_SPINDLE_BORE_RADIUS_MM = 1.0
 
 
 def remove_superseded():
@@ -87,7 +89,8 @@ def add_mechanisms(scene):
         # rotating annulus attached to the drum's inner lip.
         fixed_inner = tube(side + "_Inner_Bearing_Fixed_Race_ENV_R21",
                            (sign * 3.8, *AXIS), macbook.X,
-                           8.45, 9.05, 1.5, steel, collection, 96)
+                           INNER_BEARING_BORE_RADIUS_MM, 9.05,
+                           1.5, steel, collection, 96)
         moving_inner = tube(side + "_Inner_Bearing_Rotating_Race_ENV_R21",
                             (sign * 3.8, *AXIS), macbook.X,
                             9.30, 10.15, 1.5, steel, collection, 96)
@@ -110,7 +113,8 @@ def add_mechanisms(scene):
         # Outer spindle is hollow; the moving flex meets it near the axis.
         spindle = tube(side + "_Outer_Hollow_Fixed_Spindle_ENV_R21",
                        (sign * 56.5, *AXIS), macbook.X,
-                       1.0, 2.0, 6.2, steel, collection, 64)
+                       OUTER_SPINDLE_BORE_RADIUS_MM, 2.0, 6.2,
+                       steel, collection, 64)
         bearing = tube(side + "_Outer_Bearing_ENV_R21",
                        (sign * 54.9, *AXIS), macbook.X,
                        2.08, 3.50, 1.8, steel, collection, 64)

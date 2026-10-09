@@ -87,7 +87,8 @@
       "blockers": [
         "USB-C receptacle is 41.1 mm from the modeled housing opening",
         "Selected CX90M3-24P lists 0.8 mm maximum recommended PCB thickness versus the 1.6 mm board candidate",
-        "R21 locates stationary angle sensors at outer cheeks while U18/U19 remain in main-board placement (CR-006)"
+        "R21 angle-sensor magnets/ICs are 6 mm off the drum axes and 0.05 mm apart; its 2 mm outer spindle bore cannot pass the specified 15.6 mm FPC end (CR-006)",
+        "U18/U19 remain in main-board placement while R21 locates their stationary sensor envelopes at outer cheeks (CR-006)"
       ]
     },
     {

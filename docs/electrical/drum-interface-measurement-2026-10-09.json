@@ -1,0 +1,316 @@
+{
+  "source_blend": "/Users/adam/Documents/deepreal/blender/refinements/r30/deepreal-monitor-ledge-enclosure-r30.blend",
+  "units": "mm",
+  "drums": {
+    "Face": {
+      "pivot_center_xyz_mm": [
+        -28.750000521540642,
+        -1.500000013038516,
+        19.999999552965164
+      ],
+      "object_bounds_xyz_mm": {
+        "magnet": [
+          [
+            -56.60000070929527,
+            -56.09999969601631
+          ],
+          [
+            3.4999996423721313,
+            5.499999970197678
+          ],
+          [
+            18.99999938905239,
+            20.999999716877937
+          ]
+        ],
+        "sensor_ic_envelope": [
+          [
+            -56.83000013232231,
+            -56.65000155568123
+          ],
+          [
+            3.924999851733446,
+            5.074999760836363
+          ],
+          [
+            19.42499913275242,
+            20.57499997317791
+          ]
+        ],
+        "sensor_board_envelope": [
+          [
+            -57.19999969005585,
+            -56.8000003695488
+          ],
+          [
+            2.79999990016222,
+            6.199999712407589
+          ],
+          [
+            18.299998715519905,
+            21.700000390410423
+          ]
+        ],
+        "outer_fixed_spindle": [
+          [
+            -59.59999933838844,
+            -53.39999869465828
+          ],
+          [
+            -3.5000001080334187,
+            0.5000000819563866
+          ],
+          [
+            17.999999225139618,
+            21.99999988079071
+          ]
+        ],
+        "outer_bearing": [
+          [
+            -55.800002068281174,
+            -54.00000140070915
+          ],
+          [
+            -4.999999888241291,
+            2.0000000949949026
+          ],
+          [
+            16.499999910593033,
+            23.499999195337296
+          ]
+        ],
+        "motor": [
+          [
+            -14.299999922513962,
+            -5.100000184029341
+          ],
+          [
+            1.999999862164259,
+            7.999999448657036
+          ],
+          [
+            16.999999061226845,
+            23.000000044703484
+          ]
+        ],
+        "pinion": [
+          [
+            -16.049999743700027,
+            -14.349999837577343
+          ],
+          [
+            2.599999774247408,
+            7.400000002235174
+          ],
+          [
+            17.59999990463257,
+            22.39999920129776
+          ]
+        ],
+        "ring_gear": [
+          [
+            -16.049999743700027,
+            -14.349999837577343
+          ],
+          [
+            -11.900000274181366,
+            8.899999782443047
+          ],
+          [
+            9.599999524652958,
+            30.400000512599945
+          ]
+        ]
+      },
+      "magnet_center_xyz_mm": [
+        -56.35000020265579,
+        4.4999998062849045,
+        19.999999552965164
+      ],
+      "sensor_package_center_proxy_xyz_mm": [
+        -56.74000084400177,
+        4.4999998062849045,
+        19.999999552965164
+      ],
+      "magnet_radial_offset_from_drum_axis_mm": 5.9999998193234205,
+      "sensor_radial_offset_from_drum_axis_mm": 5.9999998193234205,
+      "magnet_to_ic_axial_surface_gap_mm": 0.05000084638595581,
+      "motor_radial_offset_from_drum_axis_mm": 6.499999668449163,
+      "pinion_radial_offset_from_drum_axis_mm": 6.499999901279807,
+      "moving_flex_object": "Face_Moving_Head_Flex_PROXY_R21",
+      "fixed_harness_object": "Face_Fixed_Harness_PROXY_R21"
+    },
+    "Interaction": {
+      "pivot_center_xyz_mm": [
+        28.750000521540642,
+        -1.500000013038516,
+        19.999999552965164
+      ],
+      "object_bounds_xyz_mm": {
+        "magnet": [
+          [
+            56.09999969601631,
+            56.60000070929527
+          ],
+          [
+            2.7367135044187307,
+            5.3498405031859875
+          ],
+          [
+            16.39733649790287,
+            19.01046372950077
+          ]
+        ],
+        "sensor_ic_envelope": [
+          [
+            56.65000155568123,
+            56.83000013232231
+          ],
+          [
+            3.924999851733446,
+            5.074999760836363
+          ],
+          [
+            19.42499913275242,
+            20.57499997317791
+          ]
+        ],
+        "sensor_board_envelope": [
+          [
+            56.8000003695488,
+            57.19999969005585
+          ],
+          [
+            2.79999990016222,
+            6.199999712407589
+          ],
+          [
+            18.299998715519905,
+            21.700000390410423
+          ]
+        ],
+        "outer_fixed_spindle": [
+          [
+            53.39999869465828,
+            59.59999933838844
+          ],
+          [
+            -3.5000001080334187,
+            0.5000000819563866
+          ],
+          [
+            17.999999225139618,
+            21.99999988079071
+          ]
+        ],
+        "outer_bearing": [
+          [
+            54.00000140070915,
+            55.800002068281174
+          ],
+          [
+            -4.999999888241291,
+            2.0000000949949026
+          ],
+          [
+            16.499999910593033,
+            23.499999195337296
+          ]
+        ],
+        "motor": [
+          [
+            5.100000184029341,
+            14.299999922513962
+          ],
+          [
+            1.999999862164259,
+            7.999999448657036
+          ],
+          [
+            16.999999061226845,
+            23.000000044703484
+          ]
+        ],
+        "pinion": [
+          [
+            14.349999837577343,
+            16.049999743700027
+          ],
+          [
+            2.599999774247408,
+            7.400000002235174
+          ],
+          [
+            17.59999990463257,
+            22.39999920129776
+          ]
+        ],
+        "ring_gear": [
+          [
+            14.349999837577343,
+            16.049999743700027
+          ],
+          [
+            -15.08825458586216,
+            12.088255025446415
+          ],
+          [
+            6.4117456786334515,
+            33.58825668692589
+          ]
+        ]
+      },
+      "magnet_center_xyz_mm": [
+        56.35000020265579,
+        4.043277003802359,
+        17.70390011370182
+      ],
+      "sensor_package_center_proxy_xyz_mm": [
+        56.74000084400177,
+        4.4999998062849045,
+        19.999999552965164
+      ],
+      "magnet_radial_offset_from_drum_axis_mm": 5.999999393368445,
+      "sensor_radial_offset_from_drum_axis_mm": 5.9999998193234205,
+      "magnet_to_ic_axial_surface_gap_mm": 0.05000084638595581,
+      "motor_radial_offset_from_drum_axis_mm": 6.499999668449163,
+      "pinion_radial_offset_from_drum_axis_mm": 6.499999901279807,
+      "moving_flex_object": "Interaction_Moving_Head_Flex_PROXY_R21",
+      "fixed_harness_object": "Interaction_Fixed_Harness_PROXY_R21"
+    }
+  },
+  "outer_exit_screen": {
+    "spindle_bore_diameter_mm": 2.0,
+    "connector_fpc_end_width_mm": 15.6,
+    "minimum_contact_center_span_mm": 15.0,
+    "minimum_width_deficit_mm": 13.6,
+    "source": "R21 mechanism bore and head-interface-evidence.json",
+    "finding": "The specified 15.6 mm FPC connector end cannot pass through the modeled 2 mm bore. A straight 0.3 mm-pitch contact run spans 15 mm. Any narrower moving section requires a new flex construction and verified assembly path."
+  },
+  "inner_exit_screen": {
+    "inner_bearing_bore_diameter_mm": 16.9,
+    "connector_fpc_end_width_mm": 15.6,
+    "nominal_diametral_width_margin_mm": 1.299999999999999,
+    "finding": "The large inner bearing has nominal straight width for the FPC end, but no bend allowance. The center divider remains solid and the motor bracket occupies part of the inner drum volume; this is not a routed cable path."
+  },
+  "as5600l_adapter_guide": {
+    "source": "ams OSRAM UG000345 v2-00, page 5",
+    "url": "https://look.ams-osram.com/m/b03a90ea3dea434a/original/AS5600L_UG000345_2-00.pdf",
+    "magnet_centering": "center over or under the Hall array",
+    "reference_air_gap_mm": [
+      0.5,
+      3.0
+    ],
+    "reference_diametric_magnet_mm": [
+      6.0,
+      2.5
+    ]
+  },
+  "assessment": "BLOCKED: the magnet and sensor package envelopes are about 6 mm off the drum axis. Their nominal axial gap is about 0.05 mm, below the cited adapter-guide range. Hall-array offset inside the package and actual magnetic field remain unmeasured. Moving both parts onto the outer axis would conflict with the proposed hollow flex exit unless the architecture changes. The specified FPC end is also wider than the modeled spindle bore.",
+  "limitations": [
+    "R21 parts are envelopes, not selected bearings, motor, magnet or PCB",
+    "bounding-box center is a proxy for the sensor Hall-array center",
+    "no magnetic simulation, interference test or flex-bend sweep",
+    "no manufacturing tolerance or assembly clearance included"
+  ]
+}
