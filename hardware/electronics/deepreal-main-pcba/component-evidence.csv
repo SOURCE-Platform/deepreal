@@ -13,7 +13,7 @@ U13-U14,TI DRV8213RTER,"RTE land pattern; current/stall calculations","TI produc
 U15,Micron MTFC32GBCAQTC-AAT,"153-ball pin map; land pattern; boot guidance","Production part identified",PINMAP_REQUIRED,"Official pin map not audited"
 U16,Microchip AT24C64D-MAHM-T,"MAHM land pattern and pin audit","Product source identified",REVIEW_REQUIRED,"Generic DFN proxy needs audit"
 U17,TI LMK1C1104DQFR,"DQF land pattern; clock/jitter requirements","Product source identified",REVIEW_REQUIRED,"RGB-only candidate; 38.4MHz IR source/distribution requires separate architecture closure"
-U18-U19,ams OSRAM AS5600L-AWLM,"15-ball pin map and WLCSP land pattern","Datasheet source identified",FOOTPRINT_MISMATCH,"Current KiCad proxy is a 16-ball WLCSP"
+U18-U19,ams OSRAM AS5600L-AWLM,"15-ball pin map and WLCSP land pattern","Datasheet source identified",FOOTPRINT_MISMATCH,"Current KiCad proxy is a 16-ball WLCSP; R21 cheek-board location conflicts with main-board placement (CR-006)"
 U20,TI TMP117AIDRVR,"DRV land pattern and address audit","Product source identified",REVIEW_REQUIRED,"Generic WSON proxy needs pad audit"
 U21-U22,TBD head load switch/current monitor,"Part selection; protection; current monitor range",None,SELECTION_REQUIRED,"No selected device"
 MK1,TDK MMICT3902-00-012,"Exact LGA land pattern; acoustic application note","Product source identified",ACOUSTIC_REVIEW,"Port and keep-out not captured in KiCad"

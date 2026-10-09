@@ -86,7 +86,8 @@
       "evidence": ["docs/design/main-pcba-usb-mechanical-options-v0.1.md", "docs/electrical/main-pcba-schematic-capture-status-v0.1.md"],
       "blockers": [
         "USB-C receptacle is 41.1 mm from the modeled housing opening",
-        "Selected CX90M3-24P lists 0.8 mm maximum recommended PCB thickness versus the 1.6 mm board candidate"
+        "Selected CX90M3-24P lists 0.8 mm maximum recommended PCB thickness versus the 1.6 mm board candidate",
+        "R21 locates stationary angle sensors at outer cheeks while U18/U19 remain in main-board placement (CR-006)"
       ]
     },
     {

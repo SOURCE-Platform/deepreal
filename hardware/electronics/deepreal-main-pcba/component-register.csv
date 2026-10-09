@@ -26,8 +26,8 @@ U13,Face motor driver,TI DRV8213RTER,Bottom,VERIFY_LAND_PATTERN,"bulk cap; charg
 U14,Interaction motor driver,TI DRV8213RTER,Bottom,VERIFY_LAND_PATTERN,"bulk cap; charge pump; IPROPI set; filters",DEFINED
 J4,Face motor/encoder,TBD 6-position,Top,SELECTION_REQUIRED,"motor/encoder ESD and filters",OPEN
 J5,Interaction motor/encoder,TBD 6-position,Top,SELECTION_REQUIRED,"motor/encoder ESD and filters",OPEN
-U18,Face absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
-U19,Interaction absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"local decoupling; address programming pads",DEFINED
+U18,Face absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"R21 fixed cheek-board location conflicts with current main-board Top placement; verify magnet gap and add fixed harness; local decoupling; address programming pads",LOCATION_BLOCKED
+U19,Interaction absolute angle,ams OSRAM AS5600L-AWLM,Top,ORDER_CODE_RECHECK,"R21 fixed cheek-board location conflicts with current main-board Top placement; verify magnet gap and add fixed harness; local decoupling; address programming pads",LOCATION_BLOCKED
 Y1,iMX95 reference oscillator,TBD 24MHz,Top,SELECTION_REQUIRED,"enable/reset timing network",OPEN
 Y2,RGB reference oscillator candidate,TBD 24MHz,Bottom,SELECTION_REQUIRED,"RGB only; separate 38.4MHz IR clock architecture remains open",OPEN
 U17,RGB clock buffer candidate,TI LMK1C1104DQFR,Bottom,VERIFY_LAND_PATTERN,"Not a common 24MHz RGB/IR source; output allocation and levels open",CLOCK_GATE

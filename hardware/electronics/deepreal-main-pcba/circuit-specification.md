@@ -95,6 +95,11 @@ the drums. They provide trusted position after power-up; motor quadrature is use
 velocity and incremental motion. Their programmable addresses and supply behavior
 must be confirmed before sharing `BOARD_I2C`.
 
+Physical placement is open: R21 puts the sensor beside each outer-cheek magnet,
+while the inherited main-board register and placement put U18/U19 on the main
+PCBA. Verify the magnet/sensor geometry and fixed cheek-to-main harness before
+assigning board ownership or routing these nets (CR-006).
+
 ## Page 14 - audio, tamper and temperature
 
 MK1 connects to U1 MICFIL with its supply filter and source damping. Its bottom port
