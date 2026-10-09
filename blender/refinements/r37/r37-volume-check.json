@@ -1,0 +1,113 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r36/deepreal-inner-bearing-window-r36.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r37/deepreal-rear-cable-volume-r37.blend",
+  "units": "mm",
+  "volumes": {
+    "R37_Center_Divider_Passage_RESERVATION": {
+      "bounds_xyz_mm": [
+        [
+          -0.8,
+          1.2
+        ],
+        [
+          -1.7,
+          13.25
+        ],
+        [
+          11.5,
+          28.5
+        ]
+      ],
+      "triangle_hits": {
+        "R30_One_Piece_Enclosure": 0,
+        "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+        "R36_Face_Inner_Race_Rear_Side_Web_ENV": 4,
+        "R36_Face_Inner_Race_Front_Side_Web_ENV": 0,
+        "Face_Internal_Optical_Carrier": 0,
+        "Face_Head_PCBA_Carrier_CONCEPT": 0,
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+        "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+        "Face_Sensor_Head": 0,
+        "Interaction_Sensor_Head": 0
+      },
+      "sampled_inside_points_of_27": {
+        "R30_One_Piece_Enclosure": 27,
+        "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+        "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+        "R36_Face_Inner_Race_Front_Side_Web_ENV": 0,
+        "Face_Internal_Optical_Carrier": 0,
+        "Face_Head_PCBA_Carrier_CONCEPT": 0,
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+        "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+        "Face_Sensor_Head": 0,
+        "Interaction_Sensor_Head": 0
+      }
+    },
+    "R37_Rear_Service_Chamber_RESERVATION": {
+      "bounds_xyz_mm": [
+        [
+          -26.0,
+          -0.2
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          10.5,
+          28.5
+        ]
+      ],
+      "triangle_hits": {
+        "R30_One_Piece_Enclosure": 0,
+        "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+        "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+        "R36_Face_Inner_Race_Front_Side_Web_ENV": 0,
+        "Face_Internal_Optical_Carrier": 0,
+        "Face_Head_PCBA_Carrier_CONCEPT": 0,
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+        "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+        "Face_Sensor_Head": 0,
+        "Interaction_Sensor_Head": 0
+      },
+      "sampled_inside_points_of_27": {
+        "R30_One_Piece_Enclosure": 26,
+        "R36_Face_Fixed_Bearing_Axial_Neck_ENV": 0,
+        "R36_Face_Inner_Race_Rear_Side_Web_ENV": 0,
+        "R36_Face_Inner_Race_Front_Side_Web_ENV": 0,
+        "Face_Internal_Optical_Carrier": 0,
+        "Face_Head_PCBA_Carrier_CONCEPT": 0,
+        "Face_Center_Fed_Motor_Stator_ENV_R21": 0,
+        "Face_Inner_Bearing_Fixed_Race_ENV_R21": 0,
+        "Face_Sensor_Head": 0,
+        "Interaction_Sensor_Head": 0
+      }
+    }
+  },
+  "status": "SPACE_RESERVATION_ONLY",
+  "meaning": "Triangle intersections and 27 interior point samples identify occupied space; no boolean cut or dynamic flex is modeled.",
+  "chamber_points_outside_visual_shell_mm": [
+    [
+      -13.1,
+      18.6,
+      24.9
+    ]
+  ],
+  "passage_chamber_triangle_hits": 8,
+  "supplier_example_not_design_limit": {
+    "source": "https://www.we-online.com/files/pdf1/webinar-rigidflex-flexibility-cbt-en.pdf",
+    "example_stack": "one flex layer, approximately 120 micrometres",
+    "dynamic_inside_bend_radius_mm": ">12",
+    "corresponding_180_degree_turn_diameter_mm": ">24",
+    "chamber_depth_y_mm": 7,
+    "chamber_height_z_mm": 18,
+    "assessment": "A 180-degree rolling return cannot fit in the 7 mm depth or 18 mm height for this supplier example; actual stack and motion are undecided."
+  },
+  "notes": [
+    "The center passage occupies the fixed divider and intersects the existing rear support web.",
+    "The rear chamber mostly occupies the solid visual enclosure; a rear-upper sample lies outside its curved skin, so a rectangular cut would break through.",
+    "The full-width exit strip runs along X with its width along Z. A turn toward rear Y would bend it edgewise unless a new cable topology reorients it.",
+    "Mating-end thickness and width do not define the dynamic flex stack or bend radius.",
+    "No load path, wall thickness, dust seal, dynamic deformation, electrical performance or fatigue has been validated."
+  ]
+}

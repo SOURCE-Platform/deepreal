@@ -108,6 +108,15 @@ collision-free simple twist through the current optical-carrier layout, so
 the next pass must reserve a separate moving-cable volume and verify the
 electrical construction before changing the 51-contact interface.
 
+The [R37 rear-space study](../../blender/refinements/r37/README.md) places a
+test passage through the center divider and a test chamber within the rear
+housing. The passage intersects the current rear bearing support web, while
+the chamber is occupied by the solid visual enclosure. The cable also needs
+a change of orientation to reach that chamber without bending edgewise.
+These are volume reservations, not cutouts or a complete cable path. Design
+the support, flex loop, and fixed termination together before cutting the
+housing or treating the R37 view as an assembly solution.
+
 1. Make a shared coordinate and connection drawing for **one drum** using the
    R30 housing and R21 motion envelopes. Mark every fixed support, rotating
    part, cable and board. Include the cheek angle-sensor board option.
