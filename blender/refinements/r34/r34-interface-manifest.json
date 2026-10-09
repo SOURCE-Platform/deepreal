@@ -1,0 +1,37 @@
+{
+  "source": "/Users/adam/Documents/deepreal/blender/refinements/r30/deepreal-monitor-ledge-enclosure-r30.blend",
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r34/deepreal-face-interface-study-r34.blend",
+  "face_drum_axis_yz_mm": [
+    -1.5,
+    20.0
+  ],
+  "magnet_diameter_thickness_mm": [
+    6.0,
+    2.5
+  ],
+  "nominal_magnet_to_sensor_face_gap_mm": 0.55,
+  "inner_flex_envelope_width_thickness_mm": [
+    15.6,
+    0.2
+  ],
+  "flex_width_source": "/Users/adam/Documents/deepreal/hardware/electronics/deepreal-main-pcba/head-interface-evidence.json",
+  "new_objects": [
+    "R34_Face_Outer_Rotating_Shaft_ENV",
+    "R34_Face_Outer_Bearing_ENV",
+    "R34_Face_Outer_Rotating_Hub_ENV",
+    "R34_Face_Axial_Magnet_ENV",
+    "R34_Face_Axial_Sensor_IC_ENV",
+    "R34_Face_Axial_Sensor_PCB_ENV",
+    "R34_Face_Inner_Flex_Width_ENV"
+  ],
+  "status": "INTERFACE_STUDY_ONLY",
+  "open": [
+    "deforming flex service loop",
+    "real bearing and axle",
+    "shaft-to-hub spokes",
+    "magnet retention",
+    "cheek wall/fasteners",
+    "angle IC pinout and field",
+    "optical head termination"
+  ]
+}

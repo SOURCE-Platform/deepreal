@@ -82,6 +82,14 @@ Packages 6 and 7 depend on the interface and electrical evidence above.
 
 ## Next concrete engineering pass
 
+The [R34 face-drum interface study](../../blender/refinements/r34/README.md)
+now places a rotating magnet on the outer drum axis opposite a stationary
+cheek-board envelope and passes a 15.6 mm straight flex envelope through the
+inner bearing. Its sampled straight-segment sweep clears the current fixed
+geometry. The study leaves the deforming service loop, shaft/hub coupling,
+cheek wall, selected bearing and interaction drum unresolved; it is evidence
+for packaging direction, not a fabrication-ready mechanism.
+
 1. Make a shared coordinate and connection drawing for **one drum** using the
    R30 housing and R21 motion envelopes. Mark every fixed support, rotating
    part, cable and board. Include the cheek angle-sensor board option.

@@ -1,0 +1,190 @@
+{
+  "model": "/Users/adam/Documents/deepreal/blender/refinements/r34/deepreal-face-interface-study-r34.blend",
+  "face_drum_axis_yz_mm": [
+    -1.5,
+    20.0
+  ],
+  "magnet_center_xyz_mm": [
+    -56.94999918341637,
+    -1.4999998966231942,
+    19.999999552965164
+  ],
+  "sensor_package_center_proxy_xyz_mm": [
+    -59.050001204013824,
+    -1.500000013038516,
+    19.999999552965164
+  ],
+  "magnet_to_sensor_axial_surface_gap_mm": 0.550001859664917,
+  "flex_width_mm": 15.6,
+  "flex_max_corner_radius_from_drum_axis_mm": 7.800642518758256,
+  "inner_fixed_bearing_opening_radius_mm": 8.45,
+  "nominal_straight_passage_radial_margin_mm": 0.6493574812417435,
+  "flex_triangle_hits_at_5_degree_poses": {
+    "-45": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-40": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-35": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-30": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-25": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-20": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-15": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-10": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "-5": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "0": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "5": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "10": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "15": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "20": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "25": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "30": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "35": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "40": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    },
+    "45": {
+      "inner_bearing": 0,
+      "motor": 0,
+      "motor_bracket": 0,
+      "housing": 0,
+      "drum_shell": 0
+    }
+  },
+  "other_triangle_hits": {
+    "sensor_board_vs_housing": 0,
+    "sensor_ic_vs_housing": 0,
+    "magnet_vs_housing": 0,
+    "rotating_shaft_vs_fixed_bearing": 0
+  },
+  "flex_vs_rotating_payload_triangle_hits_at_zero": {
+    "Face_Head_PCBA_Carrier_CONCEPT": 0,
+    "Face_Internal_Optical_Carrier": 0,
+    "Face_IR_Depth_Module_Body": 0,
+    "Face_RGB_Module_Body": 0,
+    "Face_SL_Projector_Body": 0,
+    "Face_Inner_Bearing_Rotating_Race_ENV_R21": 0
+  },
+  "drum_shell_topology": {
+    "vertex_components": 1,
+    "non_manifold_edges": 0,
+    "faces": 607
+  },
+  "housing_topology": {
+    "vertex_components": 1,
+    "non_manifold_edges": 0,
+    "faces": 703
+  },
+  "straight_envelope_pass": true,
+  "limits": [
+    "This checks a rigid straight strip only, not a deforming flex service loop.",
+    "Triangle intersection counts do not establish assembly, tolerances or bend life.",
+    "The axial magnet and sensor board are concept envelopes; field strength and Hall-array datum are unverified.",
+    "The outer cheek pocket leaves a thin skin; wall thickness and fastening are not approved.",
+    "The outer rotating shaft has no modeled structural connection to the rotating hub.",
+    "Only the face drum was redesigned; the interaction drum remains R30/R21."
+  ]
+}
