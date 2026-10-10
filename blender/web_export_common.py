@@ -26,6 +26,8 @@ def stage_meshes(objects, label):
             evaluated, preserve_all_data_layers=True, depsgraph=depsgraph)
         if not mesh or not mesh.vertices or not mesh.polygons:
             raise RuntimeError("Empty export mesh: " + original.name)
+        if mesh.validate(verbose=False):
+            print("REPAIRED EXPORT COPY", original.name)
         for index, slot in enumerate(mesh.materials):
             if slot is None:
                 mesh.materials[index] = drum_material

@@ -13,6 +13,7 @@ import bpy
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from web_export_common import export_glb, require_r36_source, stage_meshes, write_manifest
+from web_assembly_cables import create_cables
 
 OUTPUT = Path(os.environ.get(
     "DEEPREAL_WEB_ASSEMBLY_OUT",
@@ -36,10 +37,10 @@ MAIN = (
 )
 
 STATIONARY = (
-    "Shield_Front_Lid", "Shield_Rear_Tray", "Thermal_Spreader",
     "Face_Center_Fed_Motor_Stator_ENV_R21",
     "Interaction_Center_Fed_Motor_Stator_ENV_R21",
     "Face_Motor_Cantilever_R21", "Interaction_Motor_Cantilever_R21",
+    "Face_Motor_Pinion_ENV_R21", "Interaction_Motor_Pinion_ENV_R21",
     "Face_Inner_Bearing_Fixed_Race_ENV_R21",
     "Interaction_Inner_Bearing_Fixed_Race_ENV_R21",
     "R34_Face_Outer_Bearing_ENV", "Interaction_Outer_Bearing_ENV_R21",
@@ -47,6 +48,8 @@ STATIONARY = (
     "Interaction_End_Encoder_PCB_ENV_R21",
     "Interaction_End_Encoder_IC_ENV_R21",
 )
+
+SHIELDS = ("Shield_Front_Lid", "Shield_Rear_Tray", "Thermal_Spreader")
 
 HEAD_PART_SUFFIXES = (
     "Head_PCBA_Carrier_CONCEPT", "Internal_Optical_Carrier",
@@ -56,7 +59,7 @@ HEAD_PART_SUFFIXES = (
     "SL_Projector_Barrel_Pinhole", "SL_Projector_Barrel_ProjA",
     "SL_Projector_Barrel_ProjB", "SL_Projector_Bracket",
     "Inner_Bearing_Rotating_Race_ENV_R21",
-    "Internal_Ring_Gear_ENV_R21", "Motor_Pinion_ENV_R21",
+    "Internal_Ring_Gear_ENV_R21",
     "Open_Inner_End_Ring_R21", "Flat_Outer_End_R21",
 )
 
@@ -69,27 +72,21 @@ EXTRA_HEAD = {
                     "Interaction_RGB_Wide_Lens_6p95mm_ENVELOPE_R20"),
 }
 
-# These are inherited visual cable proxies. The face strip has no fixed end;
-# neither drum has a verified dynamic cable route at the requested travel.
-PARTIAL_CABLES = (
-    "R36_Face_Full_Width_Straight_Exit_ENV",
-    "Interaction_Moving_Head_Flex_PROXY_R21",
-    "Interaction_Fixed_Harness_PROXY_R21",
-)
-
-
 def groups():
-    result = {"main": list(MAIN), "stationary": list(STATIONARY)}
+    result = {"main": list(MAIN), "stationary": list(STATIONARY),
+              "shields": list(SHIELDS)}
     for head in ("Face", "Interaction"):
         result[head.lower()] = [f"{head}_{suffix}" for suffix in HEAD_PART_SUFFIXES]
         result[head.lower()].extend(EXTRA_HEAD[head])
-    result["partial_cables"] = list(PARTIAL_CABLES)
     return result
 
 
 def main():
     source = require_r36_source()
     named_groups = groups()
+    concept_cables = create_cables()
+    named_groups.update({key: [obj.name for obj in value]
+                         for key, value in concept_cables.items()})
     names = [name for group in named_groups.values() for name in group]
     if len(names) != len(set(names)):
         raise RuntimeError("An assembly object belongs to more than one group")

@@ -62,9 +62,11 @@ An initial grouped internal GLB is available for local review. Generate it
 with `blender/export_web_assembly.py`, then copy the resulting GLB and manifest
 from `blender/review-output/web/` into the site's `public/models/` directory.
 The site's development-only `/deepreal/assembly-review` route fades the shell
-and separates the main, stationary, face and interaction groups. Its cable
-group intentionally contains only the existing partial visual proxies. This
-route is a composition and pacing test, not the accepted second milestone.
+and separates the main, stationary, face and interaction groups. For review it
+adds two optical ribbons, two stationary motor leads and two stationary angle
+sensor leads. Those six paths connect visual endpoints, but have not passed
+geometry or electrical checks; they are not approved cable designs. This route
+is a composition and pacing test, not the accepted second milestone.
 
 Acceptance: three board assemblies and their major functional components are
 present, each depicted head cable visibly reaches the main-board area, and
