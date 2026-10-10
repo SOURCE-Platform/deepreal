@@ -1,0 +1,20 @@
+{
+  "source": "deepreal-inner-bearing-window-r36.blend",
+  "model": "deepreal-exterior-mount-r38.blend",
+  "mating_plate_mm": [
+    112,
+    26
+  ],
+  "magnetic_face_mm": [
+    112,
+    26,
+    0.9
+  ],
+  "magnetic_face_center_z_mm": -14,
+  "continuous_inner_leg_face_y_mm": 3.5,
+  "cable_outer_diameter_mm": 3.2,
+  "visual_molded_handle_extension_mm": 8.6,
+  "visual_separate_sleeve_length_mm": 4.5,
+  "plug_mark": "small DeepReal wordmark, appearance only",
+  "status": "appearance study, not a validated magnetic mount or cable"
+}

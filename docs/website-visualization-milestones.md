@@ -7,15 +7,23 @@ The site model must stay traceable to this repository's Blender source.
 ## 1. Exterior model
 
 The `/deepreal` Three.js viewer loads `public/models/deepreal.glb`. Its current
-export uses the R36 assembly because R37 changes only hidden cable-space
-reservations. The visible export includes the R30 enclosure, both exposed-top
-drums, lens details, and the USB plug and cable descending from the right
-underside. It does not include the temporary monitor or laptop references.
+export uses the R38 exterior mount study, based on R36 (R37 changes only
+hidden cable-space reservations). The visible export includes the R30
+enclosure with its old narrow pad absorbed into a continuous inner leg, a
+separate 112 × 26 mm metal-finish magnetic face matching the R32 laptop-side
+plate, both exposed-top
+drums, lens details, and the USB plug with its longer molded handle, separate
+cable sleeve, small logo mark and 3.2 mm visual cable descending from the
+right underside. The website fades
+the free cable end to hide the artificial cut. It does not include the
+temporary monitor or laptop references.
+The magnetic mount's actual material, retention and holding force are open.
 
 Rebuild from the DeepReal repository root with Blender 5.2:
 
 ```sh
-blender -b -t 4 blender/refinements/r36/deepreal-inner-bearing-window-r36.blend \
+blender -b -t 4 --python-exit-code 1 --python blender/refinements/r38/build_r38.py
+blender -b -t 4 blender/refinements/r38/deepreal-exterior-mount-r38.blend \
   --python-exit-code 1 --python blender/export_web_exterior.py
 ```
 

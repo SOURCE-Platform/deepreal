@@ -14,6 +14,13 @@ def require_r36_source():
     return source
 
 
+def require_r38_source():
+    source = Path(bpy.data.filepath)
+    if not source.name.startswith("deepreal-exterior-mount-r38"):
+        raise RuntimeError("Load the R38 exterior mount study before exporting")
+    return source
+
+
 def stage_meshes(objects, label):
     collection = bpy.data.collections.new(label)
     bpy.context.scene.collection.children.link(collection)
