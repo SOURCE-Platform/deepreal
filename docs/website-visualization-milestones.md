@@ -123,13 +123,15 @@ the finished flex less translucent.
 
 `blender/export_web_assembly.py` widens the two web-only head connector
 envelopes from 5 mm to the proposed 16.8 × 3.2 × 1.0 mm body, seats them on
-the underside of each conceptual head board and cuts a local pocket in each
-web-only optical carrier proxy. This avoids overlap with the visible IR and
+the underside of each conceptual head board. The web-only optical carriers
+now have a separate service opening and recessed module seats. This avoids
+overlap with the visible IR and
 projector bodies without moving those optics or changing the R36 `.blend`.
 The interaction-side J1 and ribbon start in the gap behind the IR and
 projector bodies rather than inside the wide RGB camera. The conceptual
-motor lead uses a separate lane. The carrier pockets keep the first short
-arcs clear; the ribbon starts use each head board's actual transform,
+motor lead uses a separate lane. The rear board offsets keep the first short
+arcs clear of the rebuilt carriers; the ribbon starts use each head board's
+actual transform,
 including the interaction board's tilt. The 51-contact connector, its
 footprint, retention, rear-side board access and carrier pocket are **not**
 approved for assembly. Both ribbons leave the head boards above the shield,
@@ -138,17 +140,171 @@ J2/J3 envelopes. The separate motor and angle-sensor leads approach the
 J4/J5 proxy areas in distinct visual lanes; the angle-sensor ends follow the
 cheek boards during the peel.
 
-The green square on the interaction drum is the inherited R20 wide-angle
-RGB assembly envelope. The face drum has a different, smaller RGB module
-proxy. They are not two depictions of the same selected camera. A prior
-rest-pose check omitted the wide RGB board and lens: in the older local GLB,
-both crossed the interaction ribbon, head-board/carrier proxies and J1.
-For this web export only, the interaction head-board and dark optical-carrier
-proxies end before that camera, leaving a visible 2.5 mm lateral gap.
-The camera envelope remains in its original location, visibly separate and
-**without a demonstrated mount or connection to the head board**. The cutaway
-removes the overlap; it does not solve the camera mount, shared PCB, electrical
-connection or optical package. R36 and the public exterior GLB are unchanged.
+The green camera squares are 10.8 × 10.8 mm sensor assembly envelopes,
+not complete Raspberry Pi camera PCBs. The face head now uses the standard
+SA31VA30P envelope (Ø5.75 × 6.98 mm lens, 66° × 41° field axes), replacing
+its smaller placeholder at the retained visual lens-nose datum. The
+interaction head retains the wide SA36VA30P envelope (Ø6.95 × 8.3 mm lens,
+102° × 67° field axes). Their 0.6 mm sensor plates are display assumptions,
+not complete manufacturer CAD. R36 and the public exterior GLB are
+unchanged. This is not a released camera mount or PCB.
+
+### Two-head camera support and common-board proposal
+
+`blender/web_camera_mount.py` applies the proposal to evaluated web meshes,
+without saving the R36 source. Each head has
+an insulating rear saddle, four provisional bonded seats against the sensor
+rear face, two carrier-contact anchors and four head-board spacers. Board
+keepouts let the saddle posts pass without intersecting the board. No screw
+holes are invented in the sensor, and no clamp touches the lens or autofocus
+mechanism. The bond sites and carrier/board retention remain unapproved.
+
+Both board proxies use one 47.3 × 12 × 0.6 mm outline and shared keepouts,
+shortened from 48.05 mm to clear the face outer hub. They represent two
+physical boards intended to share one controlled PCB design, not two
+released layouts. The face board sits 1.72–2.32 mm behind its camera datum
+to clear its optical carrier; the interaction board sits 1.0–1.6 mm behind
+its datum. J1 uses the same staged mesh and local position on both boards.
+The face long-FPC departure moves to that common J1 position and leaves
+straight in world X; the interaction expanded route is unchanged.
+A shared 7.6 × 2.6 × 0.98 mm rear J2 keepout represents a proposed
+sensor-to-board mating stack, **not** manufacturer connector CAD.
+DF37NC-30DS-0.4V remains the electrical baseline; the standard sensor
+drawing names HLM-033M-3002-76. Compatibility with that plug and the exact
+wide assembly is not established.
+
+Each illustrated sensor tail uses the product brief's 8.9 mm width and
+7.3 mm flat length as a centerline budget, with a 0.13 mm display thickness.
+It exits the upper edge and folds behind the sensor toward rear J2, at
+nominal radii of 1.565 mm for face and 1.205 mm for interaction. A proposed
+180° sensor orientation around each optical axis retains its horizontal
+and vertical field axes; a 90° turn would swap them. Image orientation
+and calibration still need review. Both short tails now use physical-distance
+UVs and the long FPCs' translucent amber color/normal artwork, with 30
+illustrative conductor bands at a 0.28 mm display pitch. That artwork is
+not an actual contact pitch, copper layout, pin map or shielding design.
+The terminal notch, exact tail/plug geometry and formed stacks are omitted.
+The standard drawing's 0.8 mm bend-radius / 20-assembly-bend note does not
+qualify either illustrated formed stack, the wide tail or dynamic head flex.
+
+#### Optical-carrier and module-seat proposal
+
+Both black optical carriers are rebuilt as 33.85 × 12 × 1 mm envelopes
+with a separate 14.1 × 7.8 mm service window between the depth module and
+projector. The window stops before the projector footprint. The carrier
+rear planes, PCB-spacer contacts and RGB-saddle anchors are retained.
+No optical module, lens, aperture or optical direction moves.
+
+The old projector bracket intersected the carrier while leaving a 0.3 mm
+gap to the projector body. Its web mesh is now a 6.6 × 7 × 0.5 mm seat
+in a matching 0.5 mm carrier recess, rather than a penetrating rear block.
+Each depth module has an 8.15 × 8.8 × 1 mm rear seat in its own recess.
+Separate 0.1 mm provisional bond layers meet the module rear faces and
+seat fronts. No module screw holes or lens clamps are invented. The depth
+body retains a 0.25 mm left overhang, supported by an inset rear bond area.
+This is a nominal contact/layout proposal: seat retention, allowable bond
+sites, adhesive, joint strength, loads, thermal paths, serviceability,
+materials and tolerances remain unapproved.
+
+The exported proposal was checked with
+`blender/audit_web_camera_mount.py`. The GLB hash is
+`fee55af0d30db02b063da30bad8aaa623ffc2aa04243b936750122384538d004`
+(1,555,328 bytes), installed with its matching manifest in both repositories.
+Against the immutable preceding `160ab430d25e10c1…` export, 108 retained
+meshes have unchanged world-space vertex inventories. Only the two optical
+carriers and two projector-bracket web meshes may change. All optical
+modules, boards, cables and RGB supports are preserved. Six added seat/bond
+meshes belong to their respective head groups. Checks found:
+
+- No unintended surface crossings in 5,420 proposed-part/board/carrier
+  pairs against the exported rest hardware and exterior.
+- 54 declared mating pairs, sampled at vertices and triangle centers,
+  with maximum gap 0.000009 mm and zero sampled intrusion. These are
+  intentional contacts, not collision failures.
+- No inherited carrier/bracket overlap exemption. Both seat/carrier
+  interfaces must pass the same sampled contact checks as the new bonds.
+  Seven named optical-envelope or conceptual connector-insertion overlaps
+  remain classified separately.
+- Common board, J1 and J2 local surfaces match within 0.001 mm after GLB
+  roundtrip. This establishes conditional proxy fit, not electrical
+  interchangeability or a routed common PCB.
+- No surface crossings between the rigid proposal and tested fixed
+  hardware/exterior at nine face poses from −45° to +45° in 11.25° steps
+  and five interaction poses from 0° to 45° down. Dynamic head, motor and
+  encoder cables are excluded from this pose study.
+- Sampled rest gaps to the rotating shell for tail/board/saddle of
+  3.056/4.278/4.575 mm (face) and 3.596/4.406/4.575 mm (interaction).
+- No hits in 45 face and 27 interaction ideal chief rays. Rays start at
+  the provisional lens noses, not optical pupils. This does **not** validate
+  window clipping, glazing, refraction, focus or optical performance.
+
+The audit uses millimetre-scale BVH triangle intersections, double-precision
+point-to-triangle distances and bounded odd/even containment samples at
+mating interfaces. Ten numerical regressions cover distances, thin
+triangles, touching, intrusion, separation and both heads' six module-seat
+interfaces, including unchanged module geometry. It does not compute exact
+solid intersection volumes, continuous minimum clearance, full swept
+volumes or tolerance stacks. All four conceptual cable landings passed.
+The rest-pair checks include both rebuilt carriers and new seats against
+the expanded cables. The prior sampled ribbon curvature and 50/82 mm final
+reveal spacing remain applicable to the unchanged cables and rear layers;
+they were not rerun for this carrier-only change.
+
+Four material-aware Cycles JPEG views were reviewed, front and oblique for
+each head. All are intact. They show the projector over a solid carrier
+region, its separate seat margin, the depth-module rear seat and a service
+window clear of either module footprint. The larger interaction lens,
+RGB support and textured short tails remain visible. These offline renders
+are not live WebGL or mobile visual verification.
+
+Regenerate the four views in an empty Blender process:
+
+```sh
+DEEPREAL_WEB_ASSEMBLY_OUT=/absolute/path/deepreal-assembly-review.glb \
+  blender -b -t 4 --python-exit-code 1 \
+  --python blender/render_web_optical_support.py
+```
+
+Ten Blender regression tests and Python syntax checks passed for this
+candidate, along with both repositories' diff checks. The installed
+GLB/manifest hash was verified through the local server and embedded
+browser. Both head filters show their titles and proposal badges with an
+active WebGL context. At 390 × 844, viewport/toolbar/notch assertions passed
+for both filters without document overflow. Both new mobile JPEG captures
+are intact and show the separate module seats and service window; their
+small scale does not supply detailed material or tolerance verification.
+
+The preceding viewer version passed ten tests, focused
+TypeScript, scoped ESLint, all stage/filter assertions and viewport checks
+at 1600 × 900, 1280 × 800 and 390 × 844. No viewer code changes are needed
+for the added head-group meshes. Its desktop captures repeated image
+sections and were rejected as evidence; desktop visual signoff remains
+open. The full-site typecheck was not repeated after earlier unrelated
+failures. The route retains its production `notFound()` guard.
+
+Run the audit with the same R36 file loaded as the exporter:
+
+```sh
+blender -b -t 4 blender/refinements/r36/deepreal-inner-bearing-window-r36.blend \
+  --python-exit-code 1 --python blender/audit_web_camera_mount.py
+```
+
+`DEEPREAL_WEB_ASSEMBLY_OUT` selects an isolated candidate GLB. The audit
+writes `camera-mount-audit.json` beside it. Optionally set
+`DEEPREAL_WEB_ASSEMBLY_BASELINE` to a saved preceding GLB to check preservation;
+it does not assume the site's installed asset is an immutable baseline.
+The audit also reads the sibling site's unchanged public exterior GLB.
+
+One common controlled head-PCB design/population remains the target.
+The two-head shape proposal does not release a PCB architecture.
+Native schematic/PCB routing, wide-camera
+connector/pinout/autofocus support, allowable bond sites, materials,
+adhesive loads, anchoring, service access and thermal paths remain gates.
+So do full optical validation and a housed moving flex. The development
+viewer identifies both heads' camera support as a proposal; its reveal choreography
+does not rotate the head or demonstrate a physical teardown.
+
+### Expanded head-flex study
 
 The FPC mesh uses a 16 mm head departure arc, a short rearward stem above the
 shield, a rounded rear sweep with quintic lateral easing, and a nominal 16 mm
@@ -173,10 +329,8 @@ separate broad interaction-side audit found no crossings between the wide
 RGB board, lens, J1 or ribbon and 32 nearby exported meshes (excluding
 interactions among those four). J1 does not cross either camera envelope;
 the ribbon does not cross either one or J1's neighboring optics.
-Sampled vertex-to-surface gaps include approximately 1.15 mm at the
-interaction ring gear, 2.685 mm at its optical carrier, 3.25 mm at its
-head board, and 10 mm from the camera board to the ribbon. These samples
-are **not** exact continuous minimum clearances. Rest-pose checks do not
+These samples are **not** exact continuous minimum clearances.
+Rest-pose checks do not
 establish a mounted camera, safe drum motion, enclosure clearance,
 acceptable dynamic bends, fatigue life, electrical function or
 manufacturability. The full-width motion studies in R35–R37 still block
@@ -217,3 +371,23 @@ present, each depicted head cable visibly reaches the main-board area, and
 motor/angle-sensor wiring is distinguishable. The reveal and explosion can be
 paused, reversed, and viewed on mobile. The presentation does not claim that
 the PCB layout, cable bend life, or manufacturability is validated.
+
+### Development-only detailed main-board view
+
+All parts again uses the earlier R36 mechanical board proposal, including its
+right-side USB wing and original connector envelopes. The attempted native
+board overlay was withdrawn after component clashes and interface mismatches
+were confirmed.
+
+The Main board filter keeps the retained native layout separate: 234 component
+bodies, native pads, solder mask and silkscreen, with 18 missing-model envelopes
+identified. It is labeled **Native PCB layout, known clashes**, not shown as
+the assembled device's board. Its component placement, footprints, connectors
+and package fit need correction before reuse in the assembly. It adds no routing.
+The detailed GLB
+stays outside site `public/` and is served only in development, without
+changing publication or fabrication permissions.
+
+See the [PCB viewer detail checkpoint](design/pcb-viewer-detail-checkpoint-2026-10-13.md)
+for source hashes, transport checks, accepted desktop/mobile captures,
+browser-test limitations and the pre-existing native-import status mismatch.

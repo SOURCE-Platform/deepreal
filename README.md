@@ -9,6 +9,9 @@ System architecture: [Source of Truth v0.2](docs/system-architecture/system-arch
 Current physical concept and visual BOM:
 [Blender reference model](docs/design/blender-reference-model.md)
 
+Engineering roadmap and next bounded optical-head phase:
+[Device integration workplan](docs/system-architecture/device-integration-workplan-2026-10-09.md)
+
 Project page: https://sourceovcourse.com/deepreal
 
 ---

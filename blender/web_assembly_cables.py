@@ -24,9 +24,10 @@ def head_local_path(side, points):
 
 def optical_path(side):
     """Rest-pose loop with broad bends through the film's thin dimension."""
-    start = head_local_path(side, [
-        ((-34 if side == "Face" else 23), -3.55 if side == "Face" else -1.05, 20),
-    ])[0]
+    # Face uses the new world-space J1 position, not the old board's R36
+    # outward offset. The retained tilted interaction start is unchanged.
+    start = (-33, -1.65, 20) if side == "Face" else head_local_path(
+        side, [(23, -1.05, 20)])[0]
     board = bpy.data.objects[f"{side}_Head_PCBA_Carrier_CONCEPT"]
     entry = board.matrix_world.to_quaternion() @ Vector((0, 0, -1))
     tilt = math.atan2(entry.y, -entry.z)
@@ -43,7 +44,9 @@ def optical_path(side):
     height = head_arc[-1][2]
     rear = 41.55
     exit_y = head_arc[-1][1]
-    departure_x = 36 if side == "Face" else 25
+    # Keep the revised face departure straight through the thin-dimension
+    # bend; a short lateral jog here makes the broad ribbon edge double back.
+    departure_x = 33 if side == "Face" else 25
     stem = [(sign * departure_x, exit_y + distance, height)
             for distance in (2, 4, 6)]
     sweep_start = stem[-1][1]
@@ -110,17 +113,17 @@ def smooth_path(control, steps=6):
     return out
 
 
-def flex_images():
+def flex_images(contacts=FPC_CONTACTS, width_mm=FPC_END_WIDTH_MM,
+                pitch_mm=FPC_CONTACT_PITCH_MM, prefix="WEB_FPC"):
     """Translucent film with contact-density artwork, not a routed pin map."""
     width, height = 1024, 256
-    color = bpy.data.images.new("WEB_FPC_Amber_51_Contacts", width=width, height=height, alpha=True)
-    normal = bpy.data.images.new("WEB_FPC_Fine_Trace_Normal", width=width, height=height, alpha=True)
+    color = bpy.data.images.new(f"{prefix}_Amber_{contacts}_Contacts", width=width, height=height, alpha=True)
+    normal = bpy.data.images.new(f"{prefix}_Fine_Trace_Normal", width=width, height=height, alpha=True)
     normal.colorspace_settings.name = "Non-Color"
     colors, normals = [], []
     # The 51 fine bands depict contact density only. Continuity, shielding and
     # the dynamic copper stack still require a numbered flex design and SI review.
-    lanes = [(FPC_CONTACT_PITCH_MM * (index + 1)) / FPC_END_WIDTH_MM
-             for index in range(FPC_CONTACTS)]
+    lanes = [(pitch_mm * (index + 1)) / width_mm for index in range(contacts)]
     cross_section = []
     for column in range(width):
         u = (column + 0.5) / width
@@ -154,12 +157,13 @@ def flex_images():
     return color, normal
 
 
-def flex_material():
-    result = material("WEB_FPC_Amber_Film", (0.72, 0.39, 0.105))
+def flex_material(contacts=FPC_CONTACTS, width_mm=FPC_END_WIDTH_MM,
+                  pitch_mm=FPC_CONTACT_PITCH_MM, prefix="WEB_FPC"):
+    result = material(f"{prefix}_Amber_Film", (0.72, 0.39, 0.105))
     result.surface_render_method = "BLENDED"
     shader = result.node_tree.nodes.get("Principled BSDF")
     shader.inputs["Roughness"].default_value = 0.42
-    color, normal = flex_images()
+    color, normal = flex_images(contacts, width_mm, pitch_mm, prefix)
     color_node = result.node_tree.nodes.new("ShaderNodeTexImage")
     color_node.image = color
     result.node_tree.links.new(color_node.outputs["Color"], shader.inputs["Base Color"])

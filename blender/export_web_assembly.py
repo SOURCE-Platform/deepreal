@@ -15,6 +15,7 @@ from mathutils.bvhtree import BVHTree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from web_export_common import export_glb, require_r36_source, stage_meshes, write_manifest
 from web_assembly_cables import create_cables
+from web_camera_mount import create_camera_mounts, create_optical_supports
 
 OUTPUT = Path(os.environ.get(
     "DEEPREAL_WEB_ASSEMBLY_OUT",
@@ -246,16 +247,31 @@ def main():
     size_web_head_connectors(staged)
     pocket_web_carriers(staged)
     relieve_wide_rgb_envelope(staged)
+    mounts, mount_review = create_camera_mounts(staged, cut_web_proxy)
+    for mount in mounts.values():
+        staged.extend(mount)
+    supports, support_review = create_optical_supports(staged, cut_web_proxy)
+    for group, support in supports.items():
+        staged.extend(support)
+        mounts[group].extend(support)
     verify_camera_route_separation(staged)
     export_glb(OUTPUT, staged)
     write_manifest(MANIFEST, source, OUTPUT, {
         "milestone": "internal reveal source inventory",
         "groups": {key: [name + "_WEB" for name in value]
+                   + [obj.name for obj in mounts.get(key, [])]
                    for key, value in named_groups.items()},
-        "status": "review-only concept; moving cables, head boards, and wide RGB mount unresolved",
-        "wide_rgb_review": (
-            "interaction camera retained as a separate R20 envelope; web-only "
-            "carrier and head-board relief exposes missing mount/PCB fit"),
+        "status": "review-only concept; two camera supports/shared board outline, moving cables and electronics unvalidated",
+        "wide_rgb_review": mount_review["interaction"],
+        "head_mount_review": mount_review,
+        "optical_support_review": support_review,
+        "common_head_board_review": {
+            "status": "shared outline and keepouts only, not an approved common PCB",
+            "board_envelope_mm": [47.3, 12, .6],
+            "face_rear_offset_mm": 1.72,
+            "interaction_rear_offset_mm": 1,
+            "shared_projector_bracket_keepout_mm": [[-16.45, -12.95], [-.95, 2.55]],
+        },
         "excluded": "native KiCad board import marked PCBA_PublicAllowed=False",
     })
 

@@ -4,6 +4,59 @@ Status: engineering work order. The exterior study can support appearance review
 the internal hardware is still an unverified concept. This plan does not approve a
 board, flex, actuator, optical output or fabrication release.
 
+## Optical-head roadmap, updated 13 October 2026
+
+Keep all five stages below, but execute one bounded phase at a time. Review
+its deliverable and blockers before starting the next phase. These stages
+cover the optical heads and their mechanical/electrical interfaces; they do
+not replace the device-wide work packages below or the main-PCBA gate record.
+
+The current [website assembly proposal](../website-visualization-milestones.md)
+shows two physical head boards with one shared outline, different RGB lens
+variants, rear camera saddles and recessed projector/depth-module seats.
+Sampled contacts and motion checks passed at concept level. Module retention,
+bond sites, actual optical packages, housed moving flex and routed head
+electronics remain unapproved. The displayed expanded flex loops do not fit
+the current enclosure.
+
+| Stage | Status | Bounded deliverable and completion gate |
+| --- | --- | --- |
+| 1. Module mounting and connectors | Audit delivered; approvals open | [13 October module/interface checkpoint](../electrical/optical-module-interface-checkpoint-2026-10-13.md) records retained source facts, standard drawing pinout/AF evidence, mounting assumptions and missing manufacturer information. Wide mating, approved bond sites, the complete IR receiver and end-to-end continuity remain open. Review the checkpoint before further geometry changes. |
+| 2. Housed moving-flex feasibility | Conditional screen delivered; routing blocked | [13 October face-flex checkpoint](../electrical/face-housed-flex-checkpoint-2026-10-13.md) measures current proxy endpoints, records the missing bearing transition, screens a thin-dimension rolling return and defines supplier/motion/life requirements. The R37 reservation fails the recorded supplier example and is not an available cavity. A developed route, real stack and protected bearing/loop load path remain open; the interaction drum is not validated. |
+| 3. Mechanical interface freeze | Queued after stages 1–2 | Reviewed coordinate/interface drawings for both heads, carriers, board outlines, connector access, service clearances, tolerances and retention load paths. Freeze only the interfaces supported by evidence; reopen affected gates when an assumption changes. |
+| 4. Controlled common head PCB | Queued after interface closure | One controlled head schematic and PCB design populated twice with verified per-head variants/configuration. Include actual pin maps, regulators, load/startup budgets, clocks, projector interlock, test access and routing rules. Require reviewed ERC/DRC and mechanical/export parity, not illustrative traces or a blank board. |
+| 5. Prototype and physical validation | Future, separately authorized | Prepare a BOM, assembly instructions and test protocols, then bench one head/drum before full-device integration. Measure retention, motion under cable load, flex life, power/clock behavior, optics/calibration and thermal behavior. Physical completion requires parts, equipment and recorded results; digital checks cannot close this stage. |
+
+### Stage 1 evidence and stage 2 checkpoint
+
+The [stage 1 audit](../electrical/optical-module-interface-checkpoint-2026-10-13.md)
+is delivered without geometry, connector-position, schematic, PCB or gate
+changes. It reviews the retained manufacturer drawings against the
+[optical-head capture](../../hardware/electronics/deepreal-optical-head/README.md),
+[head-interface checkpoint](../electrical/head-interface-checkpoint-2026-09-14.md)
+and [wide-RGB decision](../optics/interaction-wide-rgb-decision-2026-10-06.md).
+The web depth-module body and projector apertures remain concept envelopes,
+not selected complete optical packages or permitted mounting surfaces.
+
+The [stage 2 conditional screen](../electrical/face-housed-flex-checkpoint-2026-10-13.md)
+is now delivered for the face drum only, without model, connector, electronics
+or gate changes. It does not qualify a housed cable or permit stage 3 interface
+freeze. The next bounded decision is a supplier-supported dynamic stack and
+protected bearing/loop space with a stationary load path, before developing
+an isolated moving-lead/return/fixed-tail model.
+
+Review the stage 1 vendor questions, travel conflict, mating/orientation gaps
+and stage 2 flex requirements before that work. If the retained interfaces
+cannot accommodate the route, review the needed bearing, connector or housing
+changes explicitly. Missing evidence stays open; it does not become an assumed
+approval. Do not combine the next pass with a carrier redesign, PCB layout or
+fabrication.
+
+No fabrication, ordering, publication or deployment is authorized by this
+roadmap. A future fabrication program needs separate authorization. Powered
+projector testing also requires the applicable qualified safety review and
+hardware-default-off interlock evidence.
+
 The first [measured drum-interface audit](../electrical/drum-interface-finding-2026-10-09.md)
 found two geometry blockers: the encoder magnet/sensor envelopes sit 6 mm off
 the rotation axis, and the specified optical flex end is 15.6 mm wide while
@@ -80,7 +133,7 @@ Packages 1, 3 and 4 can advance together. Package 5 can run in parallel once
 its camera and mechanical connector assumptions are explicitly recorded.
 Packages 6 and 7 depend on the interface and electrical evidence above.
 
-## Next concrete engineering pass
+## Previous integration studies and remaining device work
 
 The [R34 face-drum interface study](../../blender/refinements/r34/README.md)
 now places a rotating magnet on the outer drum axis opposite a stationary

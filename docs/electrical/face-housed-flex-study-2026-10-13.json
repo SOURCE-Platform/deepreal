@@ -1,0 +1,439 @@
+{
+  "schema": "deepreal.face-housed-flex-screen.v1",
+  "status": "CONDITIONAL_SPACE_SCREEN_ROUTE_BLOCKED",
+  "units": "mm",
+  "source_blend": "blender/refinements/r36/deepreal-inner-bearing-window-r36.blend",
+  "source_sha256": "fbf64915d3866eadc90cd1af54d6684d622be53f49ed581389672b84078dc7a0",
+  "installed_assembly": "blender/review-output/web/deepreal-assembly-review.glb",
+  "installed_assembly_sha256": "fee55af0d30db02b063da30bad8aaa623ffc2aa04243b936750122384538d004",
+  "manifest_sha256": "68b2a4eb0653d11d0873d9e1bbda7ece6002042cd4678533751f88be397ff80f",
+  "historical_reservation_source": "blender/refinements/r37/r37-volume-check.json",
+  "historical_reservation_sha256": "ab0e28c763bf2ae3412f901b1b3c72faccc25816acb1dfe4cbec20a3aaf7912a",
+  "reference": {
+    "drum": "Face",
+    "pivot_world_mm": [
+      -28.750000521540642,
+      -1.500000013038516,
+      19.999999552965164
+    ],
+    "rotation_axis_world": [
+      1,
+      0,
+      0
+    ],
+    "provisional_travel_degrees": [
+      -45,
+      45
+    ],
+    "sample_step_degrees": 5
+  },
+  "installed_proxy_bounds_xyz_mm": {
+    "Face_Head_Flex_Connector_PROXY_WEB": [
+      [
+        -41.400015354156494,
+        -24.600010365247726
+      ],
+      [
+        -2.5000078603625298,
+        -1.500000711530447
+      ],
+      [
+        18.400002270936966,
+        21.60000242292881
+      ]
+    ],
+    "J2_Face_Optical_Head_Connector_ENVELOPE_WEB": [
+      [
+        -30.400000512599945,
+        -13.60000018030405
+      ],
+      [
+        9.595000185072422,
+        10.595000348985195
+      ],
+      [
+        -25.099998340010643,
+        -21.900000050663948
+      ]
+    ],
+    "Face_Head_PCBA_Carrier_CONCEPT_WEB": [
+      [
+        -51.750000566244125,
+        -4.4500017538666725
+      ],
+      [
+        -3.1000010203570127,
+        -2.499999478459358
+      ],
+      [
+        13.999994844198227,
+        25.999996811151505
+      ]
+    ],
+    "Face_Internal_Optical_Carrier_WEB": [
+      [
+        -51.750000566244125,
+        -17.900001257658005
+      ],
+      [
+        -4.400000907480717,
+        -3.3999995794147253
+      ],
+      [
+        13.999994844198227,
+        25.999996811151505
+      ]
+    ],
+    "WEB_Face_Optical_Flex_CONCEPT_WEB": [
+      [
+        -40.80052301287651,
+        -14.19947948306799
+      ],
+      [
+        -1.7498310189694166,
+        41.6514053940773
+      ],
+      [
+        -45.93000188469887,
+        20.005814731121063
+      ]
+    ]
+  },
+  "source_exit_and_support_bounds_xyz_mm": {
+    "R36_Face_Full_Width_Straight_Exit_ENV": [
+      [
+        -8.500000461935997,
+        -2.2000002209097147
+      ],
+      [
+        -1.5999999595806003,
+        -1.4000000664964318
+      ],
+      [
+        12.199999764561653,
+        27.799999341368675
+      ]
+    ],
+    "R36_Face_Fixed_Bearing_Axial_Neck_ENV": [
+      [
+        -3.0999998562037945,
+        -1.0000000474974513
+      ],
+      [
+        -10.400000028312206,
+        7.399999536573887
+      ],
+      [
+        11.099999770522118,
+        28.89999933540821
+      ]
+    ],
+    "R36_Face_Inner_Race_Rear_Side_Web_ENV": [
+      [
+        -1.500000013038516,
+        -0.10000000474974513
+      ],
+      [
+        6.99999975040555,
+        8.599999360740185
+      ],
+      [
+        18.99999938905239,
+        20.999999716877937
+      ]
+    ],
+    "Face_Open_Inner_End_Ring_R21": [
+      [
+        -3.2999999821186066,
+        -2.199999988079071
+      ],
+      [
+        -13.439999893307686,
+        10.439999401569366
+      ],
+      [
+        8.059999905526638,
+        31.939998269081116
+      ]
+    ]
+  },
+  "endpoints": {
+    "moving_web_entry_world_mm": [
+      -32.99999885,
+      -1.6500001,
+      20.0000014
+    ],
+    "stationary_web_main_J2_landing_world_mm": [
+      -22.00000175,
+      9.85000095,
+      -23.50000105
+    ],
+    "entry_width_major_axis": "X",
+    "entry_radius_about_drum_axis_mm": 0.15000008697285572,
+    "entry_at_sampled_poses_world_mm": {
+      "-45": [
+        -32.99999885,
+        -1.6060647856566965,
+        20.106066937685057
+      ],
+      "-40": [
+        -32.99999885,
+        -1.614905558871618,
+        20.096419165226678
+      ],
+      "-35": [
+        -32.99999885,
+        -1.622871831500884,
+        20.086037581299237
+      ],
+      "-30": [
+        -32.99999885,
+        -1.6299029753996188,
+        20.075001196024996
+      ],
+      "-25": [
+        -32.99999885,
+        -1.6359454793172326,
+        20.063394002959832
+      ],
+      "-20": [
+        -32.99999885,
+        -1.6409533561503484,
+        20.051304339851598
+      ],
+      "-15": [
+        -32.99999885,
+        -1.6448884929324274,
+        20.03882421633648
+      ],
+      "-10": [
+        -32.99999885,
+        -1.6477209408964577,
+        20.026048613690133
+      ],
+      "-5": [
+        -32.99999885,
+        -1.6494291434031543,
+        20.013074761962816
+      ],
+      "0": [
+        -32.99999885,
+        -1.6500001,
+        20.0000014
+      ],
+      "5": [
+        -32.99999885,
+        -1.64942946536254,
+        19.98692802398013
+      ],
+      "10": [
+        -32.99999885,
+        -1.647721582364924,
+        19.97395413018865
+      ],
+      "15": [
+        -32.99999885,
+        -1.6448894490280115,
+        19.96117845779115
+      ],
+      "20": [
+        -32.99999885,
+        -1.6409546195965858,
+        19.94869823736874
+      ],
+      "25": [
+        -32.99999885,
+        -1.6359470404985346,
+        19.9366084509346
+      ],
+      "30": [
+        -32.99999885,
+        -1.6299048224344532,
+        19.925001109063512
+      ],
+      "35": [
+        -32.99999885,
+        -1.6228739503322003,
+        19.91396455063581
+      ],
+      "40": [
+        -32.99999885,
+        -1.6149079333738305,
+        19.90358277052519
+      ],
+      "45": [
+        -32.99999885,
+        -1.6060673977584097,
+        19.89393478034698
+      ]
+    },
+    "entry_extreme_to_extreme_displacement_mm": 0.21213215735415758,
+    "entry_orientation_change_degrees": 90,
+    "gap_along_x_to_historical_straight_segment_mm": 24.499998388064,
+    "historical_straight_segment_width_major_axis": "Z at zero pose",
+    "mechanical_strain_relief_and_contact_datum_verified": false
+  },
+  "nominal_bearing_screen": {
+    "measured_axial_neck_inner_radius_mm": 8.44999892308394,
+    "measured_axial_neck_outer_radius_mm": 8.900001333536325,
+    "measured_rotating_lip_inner_radius_mm": 9.149999062421031,
+    "neck_to_lip_nominal_radial_space_mm": 0.24999772888470595,
+    "assumed_rectangular_15p6_by_0p2_mm_corner_radius_mm": 7.800640999302557,
+    "bore_minus_rectangular_strip_corner_radius_mm": 0.649357923781384,
+    "tolerance_or_dynamic_clearance_approval": false
+  },
+  "conditional_architecture": {
+    "candidate": "one continuous flex: moving head lead, planar rolling return, stationary strain relief, fixed tail to main J2",
+    "return_width_axis": "X",
+    "return_bending_plane": "YZ, through the thin dimension",
+    "bearing_transition": "Unrouted; the R36 axial strip and current J1 do not share a developed cable frame",
+    "moving_and_stationary_anchor_hardware": null,
+    "developed_constant_length_shape": null,
+    "continuous_motion_collision_result": null
+  },
+  "historical_rear_reservation": {
+    "bounds_xyz_mm": [
+      [
+        -26.0,
+        -0.2
+      ],
+      [
+        13,
+        20
+      ],
+      [
+        10.5,
+        28.5
+      ]
+    ],
+    "sampled_points_inside_visual_enclosure_of_27": 26,
+    "outside_visual_shell_points_mm": [
+      [
+        -13.1,
+        18.6,
+        24.9
+      ]
+    ],
+    "divider_passage_rear_web_triangle_contacts": 4,
+    "occupancy_is_historical_not_new_mesh_test": true,
+    "actual_available_cavity": false
+  },
+  "radius_sensitivity_not_vendor_limits": [
+    {
+      "inside_radius_mm": 2,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 4.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": true,
+      "necessary_bounds_satisfied": true,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    },
+    {
+      "inside_radius_mm": 3,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 6.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": true,
+      "necessary_bounds_satisfied": true,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    },
+    {
+      "inside_radius_mm": 4,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 8.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": true,
+      "necessary_bounds_satisfied": true,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    },
+    {
+      "inside_radius_mm": 6,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 12.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": true,
+      "necessary_bounds_satisfied": true,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    },
+    {
+      "inside_radius_mm": 8,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 16.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": true,
+      "necessary_bounds_satisfied": true,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    },
+    {
+      "inside_radius_mm": 12,
+      "assumed_dynamic_thickness_mm": 0.12,
+      "assumed_clearance_per_side_mm": 0.25,
+      "assumed_full_trunk_width_mm": 15.6,
+      "outside_return_diameter_mm": 24.24,
+      "usable_yz_diagonal_mm": 18.66815470259447,
+      "axial_width_bound_satisfied": true,
+      "diameter_bound_satisfied": false,
+      "necessary_bounds_satisfied": false,
+      "maximum_inside_radius_from_chord_bound_mm": 9.214077351297236,
+      "route_qualified": false
+    }
+  ],
+  "historical_supplier_example_lower_boundary_screen": {
+    "inside_radius_mm": 12,
+    "assumed_dynamic_thickness_mm": 0.12,
+    "assumed_clearance_per_side_mm": 0,
+    "assumed_full_trunk_width_mm": 15.6,
+    "outside_return_diameter_mm": 24.24,
+    "usable_yz_diagonal_mm": 19.313207915827967,
+    "axial_width_bound_satisfied": true,
+    "diameter_bound_satisfied": false,
+    "necessary_bounds_satisfied": false,
+    "maximum_inside_radius_from_chord_bound_mm": 9.536603957913984,
+    "route_qualified": false
+  },
+  "supplier_example_caveat": "R37 records >12 mm inside radius for approximately 120 um single-layer flex. Testing 12 mm is a more permissive lower boundary, not a newly audited source or a DeepReal limit.",
+  "unapproved_requirements": {
+    "supplier": null,
+    "dynamic_stack": null,
+    "dynamic_trunk_width": null,
+    "minimum_dynamic_inside_radius_mm": null,
+    "minimum_straight_entry_mm": null,
+    "numbered_continuity": null,
+    "six_pair_signal_integrity": null,
+    "load_and_voltage_drop": null,
+    "cycle_life": null,
+    "speed_and_acceleration": null,
+    "tolerance_stack": null,
+    "cable_torque_budget": null
+  },
+  "housed_route_qualified": false,
+  "interface_freeze_allowed": false,
+  "source_or_installed_assets_written": false,
+  "limits": [
+    "Endpoint poses describe rigid motion only, not cable deformation or fatigue.",
+    "Necessary return diameter/width bounds never establish a routed cable.",
+    "The historical chamber is occupied visual solid, not an available cavity.",
+    "No connector, bearing, carrier, housing, PCB or gate is modified.",
+    "Face-only screen; interaction is not validated by symmetry."
+  ]
+}
